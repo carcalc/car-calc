@@ -53,7 +53,7 @@ export default {
 </script>
 
 <style scoped>
-.wrapper {
+/* .wrapper {
   padding: 50px;
 }
 .wrapper div {
@@ -63,5 +63,5 @@ export default {
 .compareBtn {
   padding: 20px 70px;
   background: lightseagreen;
-}
+} */
 </style>

@@ -24,19 +24,13 @@
         >Submit</button>
       </form>
       <div>
-        <!-- <br>
-        <h2>Dina val:</h2>
-        <p>{{car.price}} SEK</p>
-        <p>{{car.type}}</p>
-        <p>{{car.distance}} mil</p>
-        <p>{{car.consumtion}} /mil</p>-->
         <br>
         <h2>Kostnader drivmedel</h2>
-        <h4 v-if="tenKmCost">Milkostnad: {{ tenKmCost }} SEK</h4>
-        <h4 v-if="yearCost">Årskostnad {{ yearCost }} SEK</h4>
+        <h4 v-if="tenKmCost">Milkostnad: {{ tenKmCost }} kr</h4>
+        <h4 v-if="yearCost">Årskostnad {{ yearCost }} kr</h4>
         <br>
         <h2>Totalkostand</h2>
-        <h4 v-if="oneYearCostTotal">Totalkostnad för ett år: {{ oneYearCostTotal }} SEK</h4>
+        <h4 v-if="oneYearCostTotal">Totalkostnad första året: {{ oneYearCostTotal }} kr</h4>
       </div>
     </div>
   </div>
@@ -85,9 +79,11 @@ export default {
 .wrapper {
   display: flex;
   padding: 50px;
+  border: 1px solid #333;
+  width: 30em;
 }
 .form-container {
-  width: 400px;
+  width: 100%;
 }
 .submitBtn {
   width: 50%;
