@@ -1,6 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="form-container">
+      <h1>{{ title }}</h1>
       <form>
         <h2>Inköpspris SEK</h2>
         <input type="number" v-model.number="car.price">
@@ -39,6 +40,7 @@
 <script>
 export default {
   name: "BaseForm",
+  props: ["title"],
   data() {
     return {
       car: {
