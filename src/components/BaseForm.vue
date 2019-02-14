@@ -24,12 +24,6 @@
         >Submit</button>
       </form>
       <div>
-        <!-- <br>
-        <h2>Dina val:</h2>
-        <p>{{car.price}} SEK</p>
-        <p>{{car.type}}</p>
-        <p>{{car.distance}} mil</p>
-        <p>{{car.consumtion}} /mil</p>-->
         <br>
         <h2>Kostnader drivmedel</h2>
         <h4 v-if="tenKmCost">Milkostnad: {{ tenKmCost }} SEK</h4>
