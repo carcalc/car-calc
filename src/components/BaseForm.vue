@@ -2,7 +2,9 @@
   <div class="wrapper">
     <div class="form-container">
       <h1>{{ title }}</h1>
-      <form>
+      <form
+        @submit.prevent="handleSubmit(car.price, car.type, car.electricityPrice, car.gasPrice, car.distance, car.consumtion)"
+      >
         <h2>Inköpspris SEK</h2>
         <input type="number" v-model.number="car.price">
 
@@ -27,10 +29,7 @@
         <input type="number" v-model.number="car.consumtion">
 
         <br>
-        <button
-          class="submitBtn"
-          @click.prevent="handleSubmit(car.price, car.type, car.electricityPrice, car.gasPrice, car.distance, car.consumtion)"
-        >Submit</button>
+        <input class="submitBtn" type="submit">
       </form>
       <div>
         <br>
