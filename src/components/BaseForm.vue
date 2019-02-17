@@ -9,8 +9,16 @@
         <h2>Drivmedel</h2>
         <input type="radio" name="electric" v-model="car.type" value="electric">
         <label for="electric">El</label>
+        <input type="radio" name="hybrid" v-model="car.type" value="hybrid">
+        <label for="hybrid">Laddhybrid</label>
         <input type="radio" name="gasoline" v-model="car.type" value="gasoline">
         <label for="gasoline">Bensin/diesel</label>
+        <br>
+        <label for="electricityPrice">Elkostnad öre/kWh</label>
+        <input type="number" v-model.number="car.electricityPrice" placeholder="75">
+        <br>
+        <label for="gasPrice">Bensin-/dieselpris kr/liter</label>
+        <input type="number" v-model.number="car.gasPrice" placeholder="14.80">
 
         <h2>Körsträcka mil/år</h2>
         <input type="number" v-model.number="car.distance">
@@ -21,7 +29,7 @@
         <br>
         <button
           class="submitBtn"
-          v-on:click.prevent="handleSubmit(car.price, car.type, car.distance, car.consumtion)"
+          @click.prevent="handleSubmit(car.price, car.type, car.electricityPrice, car.gasPrice, car.distance, car.consumtion)"
         >Submit</button>
       </form>
       <div>
@@ -46,6 +54,8 @@ export default {
       car: {
         price: "",
         type: "",
+        electricityPrice: "",
+        gasPrice: "",
         distance: "",
         consumtion: ""
       },
@@ -55,17 +65,36 @@ export default {
     };
   },
   methods: {
-    handleSubmit(price, type, distance, consumtion) {
-      const gasPrice = 15;
-      const electricityPrice = 0.75;
-      const premie = 50000;
+    handleSubmit(
+      price,
+      type,
+      electricityPrice,
+      gasPrice,
+      distance,
+      consumtion
+    ) {
+      if (electricityPrice === "") {
+        electricityPrice = 7.5;
+      } else {
+        electricityPrice = electricityPrice / 10;
+      }
+      if (gasPrice === "") {
+        gasPrice = 14.8;
+      } else {
+        gasPrice = gasPrice;
+      }
+
+      const premieElectric = 40000;
+      const premieHybrid = 20000;
+      console.log(gasPrice);
+      console.log(electricityPrice);
 
       if (type === "gasoline") {
         this.tenKmCost = gasPrice * consumtion;
         this.yearCost = distance * consumtion * gasPrice;
         this.oneYearCostTotal = distance * consumtion * gasPrice + price;
         this.$emit("dataToParent", this.oneYearCostTotal);
-      } else {
+      } else if (type === "electric") {
         this.tenKmCost = electricityPrice * consumtion;
         this.yearCost = distance * consumtion * electricityPrice;
         this.oneYearCostTotal =

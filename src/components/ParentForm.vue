@@ -1,11 +1,9 @@
 <template>
   <div class="wrapper">
-    <div>
-      <BaseForm title="Bil 1" v-on:dataToParent="childClicked1"/>
-    </div>
-    <div>
-      <BaseForm title="Bil 2" v-on:dataToParent="childClicked2"/>
-    </div>
+    <BaseForm title="Bil 1" v-on:dataToParent="childClicked1"/>
+
+    <BaseForm title="Bil 2" v-on:dataToParent="childClicked2"/>
+
     <button @click="compare" class="compareBtn">Jämför</button>
     <br>
     <br>
