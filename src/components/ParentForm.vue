@@ -1,9 +1,11 @@
 <template>
-  <div class="wrapper">
-    <BaseForm title="Bil 1" v-on:dataToParent="childClicked1"/>
+  <div class="parentWrapper">
+    <div class="formWrapper">
+      <BaseForm title="Bil 1" v-on:dataToParent="childClicked1"/>
 
-    <BaseForm title="Bil 2" v-on:dataToParent="childClicked2"/>
-
+      <BaseForm title="Bil 2" v-on:dataToParent="childClicked2"/>
+    </div>
+    <br>
     <button @click="compare" class="compareBtn">Jämför</button>
     <br>
     <br>
@@ -39,7 +41,7 @@ export default {
         this.output = `Bil 1 är' ${result} kr dyrare än bil 2`;
       } else {
         const result = this.formDataTwo - this.formDataOne;
-        this.output = `Bil 2 är ${result} kr dyrare än bil 1`;
+        this.output = `Bil 2 är ${result} kr dyrare än bil 1 första året`;
       }
     }
   }
@@ -47,4 +49,16 @@ export default {
 </script>
 
 <style scoped>
+.parentWrapper {
+  width: 100%;
+}
+.formWrapper {
+  display: flex;
+  width: 100%;
+  margin: auto;
+}
+.compareBtn {
+  padding: 15px 60px;
+  background: rgb(245, 120, 75);
+}
 </style>
