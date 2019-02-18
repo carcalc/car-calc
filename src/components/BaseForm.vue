@@ -88,8 +88,6 @@ export default {
 
       const premieElectric = 40000;
       const premieHybrid = 20000;
-      console.log(gasPrice);
-      console.log(electricityPrice);
 
       if (type === "gasoline") {
         this.tenKmCost = gasPrice * consumtion;
@@ -98,9 +96,11 @@ export default {
         this.$emit("dataToParent", this.oneYearCostTotal);
       } else if (type === "electric") {
         this.tenKmCost = (electricityPrice / 10) * consumtion;
-        this.yearCost = distance * consumtion * electricityPrice;
+        this.yearCost = distance * consumtion * (electricityPrice / 10);
         this.oneYearCostTotal =
-          distance * consumtion * gasPrice + price - premieElectric;
+          distance * consumtion * (electricityPrice / 10) +
+          price -
+          premieElectric;
         this.$emit("dataToParent", this.oneYearCostTotal);
       }
     }
