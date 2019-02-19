@@ -1,8 +1,9 @@
 <template>
   <div class="form-container">
     <h1>{{ title }}</h1>
+
     <form
-      @submit.prevent="handleSubmit(car.price, car.type, car.electricityPrice, car.gasPrice, car.distance, car.consumtion)"
+      @submit.prevent="handleSubmit(car.price, car.type, car.electricityPrice, car.gasPrice, car.distance, car.consumption)"
     >
       <h2>Inköpspris SEK</h2>
       <input type="number" v-model.number="car.price">
@@ -22,10 +23,10 @@
       <input type="number" step="any" v-model.number="car.gasPrice" placeholder="14.80">
 
       <h2>Körsträcka mil/år</h2>
-      <input type="number" v-model.number="car.distance" placeholder="1200">
+      <input type="number" v-model.number="car.distance" placeholder="2000">
 
       <h2>Förbrukning/mil</h2>
-      <input type="number" step="any" v-model.number="car.consumtion">
+      <input type="number" step="any" v-model.number="car.consumption">
 
       <br>
       <input class="submitBtn" type="submit">
@@ -54,13 +55,22 @@ export default {
         electricityPrice: "",
         gasPrice: "",
         distance: "",
-        consumtion: ""
+        consumption: ""
       },
       tenKmCost: "",
       yearCost: "",
       oneYearCostTotal: ""
     };
   },
+
+  // computed: {
+  //   tenKmCost: function() {
+  //     return gasPrice * consumption;
+  //   },
+  //   yearCost: function() {
+  //     return gasPrice * consumption;
+  //   }
+  // },
   methods: {
     handleSubmit(
       price,
@@ -68,7 +78,7 @@ export default {
       electricityPrice,
       gasPrice,
       distance,
-      consumtion
+      consumption
     ) {
       if (electricityPrice === "") {
         electricityPrice = 7.5;
@@ -81,7 +91,7 @@ export default {
         gasPrice = gasPrice;
       }
       if (distance === "") {
-        distance = 1200;
+        distance = 2000;
       } else {
         distance = distance;
       }
@@ -90,15 +100,15 @@ export default {
       const premieHybrid = 20000;
 
       if (type === "gasoline") {
-        this.tenKmCost = gasPrice * consumtion;
-        this.yearCost = distance * consumtion * gasPrice;
-        this.oneYearCostTotal = distance * consumtion * gasPrice + price;
+        this.tenKmCost = gasPrice * consumption;
+        this.yearCost = distance * consumption * gasPrice;
+        this.oneYearCostTotal = distance * consumption * gasPrice + price;
         this.$emit("dataToParent", this.oneYearCostTotal);
       } else if (type === "electric") {
-        this.tenKmCost = (electricityPrice / 10) * consumtion;
-        this.yearCost = distance * consumtion * (electricityPrice / 10);
+        this.tenKmCost = (electricityPrice / 10) * consumption;
+        this.yearCost = distance * consumption * (electricityPrice / 10);
         this.oneYearCostTotal =
-          distance * consumtion * (electricityPrice / 10) +
+          distance * consumption * (electricityPrice / 10) +
           price -
           premieElectric;
         this.$emit("dataToParent", this.oneYearCostTotal);
@@ -109,10 +119,7 @@ export default {
 </script>
 
 <style scoped>
-.wrapper {
-}
 .form-container {
-  /* display: flex; */
   padding: 50px;
   margin: auto;
   border: 1px solid #333;
