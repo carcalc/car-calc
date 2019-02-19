@@ -1,5 +1,8 @@
 <template>
   <div class="parentWrapper">
+    <CarsFromDb/>
+    <br>
+    <br>
     <div class="formWrapper">
       <BaseForm title="Bil 1" v-on:dataToParent="childClicked1"/>
 
@@ -15,10 +18,12 @@
 
 <script>
 import BaseForm from "./BaseForm";
+import CarsFromDb from "./CarsFromDb";
 export default {
   name: "ParentForm",
   components: {
-    BaseForm
+    BaseForm,
+    CarsFromDb
   },
   data() {
     return {
