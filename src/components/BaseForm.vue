@@ -114,6 +114,11 @@ export default {
         this.$emit("dataToParent", this.oneYearCostTotal);
       }
     }
+  },
+  mounted() {
+    this.$root.$on("selected", selectedCar => {
+      this.car.price = selectedCar.price;
+    });
   }
 };
 </script>
