@@ -1,8 +1,11 @@
 <template>
-  <div class="parentWrapper">
-    <CarsFromDb/>
+  <div class="carsCompareWrapper">
     <br>
     <br>
+    <div class="carSelected">
+      <CarSelected v-bind:cars="cars"/>
+      <CarSelected v-bind:cars="cars"/>
+    </div>
     <div class="formWrapper">
       <BaseForm title="Bil 1" v-on:dataToParent="childClicked1"/>
 
@@ -18,19 +21,34 @@
 
 <script>
 import BaseForm from "./BaseForm";
-import CarsFromDb from "./CarsFromDb";
+import CarSelected from "./CarSelected";
+import db from "@/firebase/init";
+
 export default {
-  name: "ParentForm",
+  name: "CarsCompare",
   components: {
     BaseForm,
-    CarsFromDb
+    CarSelected
   },
   data() {
     return {
+      cars: [],
       formDataOne: "",
       formDataTwo: "",
       output: ""
     };
+  },
+  created() {
+    // fetch data from firestore
+    db.collection("cars")
+      .get()
+      .then(snapshot => {
+        snapshot.forEach(doc => {
+          let car = doc.data();
+          car.id = doc.id;
+          this.cars.push(car);
+        });
+      });
   },
   methods: {
     childClicked1(data) {
@@ -54,7 +72,11 @@ export default {
 </script>
 
 <style scoped>
-.parentWrapper {
+.carsCompareWrapper {
+  width: 100%;
+}
+.carSelected {
+  display: flex;
   width: 100%;
 }
 .formWrapper {

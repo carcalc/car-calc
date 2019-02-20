@@ -1,17 +1,17 @@
 <template>
   <div class="home">
-    <ParentForm/>
+    <CarsCompare/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import ParentForm from "@/components/ParentForm.vue";
+import CarsCompare from "@/components/CarsCompare.vue";
 
 export default {
   name: "home",
   components: {
-    ParentForm
+    CarsCompare
   }
 };
 </script>
