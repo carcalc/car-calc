@@ -2,8 +2,13 @@
   <div>
     <form class="formWrapper">
       <h1>CarsFromDb</h1>
-      <select name id>
-        <option v-for="car in cars" :key="car.id" value>{{car.name}}</option>
+      <select v-model="selectedCar" @change="selected">
+        <option
+          v-for="car in cars"
+          :key="car.id"
+          :value="car"
+          :selected="selectedCar === car"
+        >{{car.name}}</option>
       </select>
     </form>
   </div>
@@ -15,7 +20,12 @@ export default {
   name: "CarsFromDb",
   data() {
     return {
-      cars: []
+      cars: [],
+      selectedCar: {
+        price: null,
+        electricConsumption: null,
+        gasConsumption: null
+      }
     };
   },
   created() {
@@ -29,6 +39,14 @@ export default {
           this.cars.push(car);
         });
       });
+  },
+  methods: {
+    selected(e) {
+      this.$root.$emit("selected", this.selectedCar);
+      // this.price = this.selectedCar.price;
+      // this.electricConsumption = this.selectedCar.electricConsumption;
+      // this.gasConsumption = this.selectedCar.gasConsumption;
+    }
   }
 };
 </script>
