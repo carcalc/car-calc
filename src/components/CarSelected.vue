@@ -1,6 +1,6 @@
 <template>
   <form class="formWrapper">
-    <h1>CarSelected</h1>
+    <h1>Välj bil</h1>
     <select v-model="selectedCar" @change="selected">
       <option
         v-for="car in cars"
