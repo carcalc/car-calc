@@ -4,7 +4,7 @@
       <h1>Välj bil</h1>
       <select v-model="selected" @change="selectCar">
         <option disabled value>Välj en bil</option>
-        <option v-for="car in allCars" :key="car.id" :value="car">{{ car.name }}</option>
+        <option v-for="car in allCars" :key="car.id" :value="car.name">{{ car.name }}</option>
         <!-- :value shouldn't be an object; we need to change this but I don't know how yet -->
       </select>
     </div>
@@ -44,7 +44,7 @@ export default {
   methods: {
     selectCar() {
       console.log(this.selected);
-      this.$emit('selected', { id: this.selected.id, index: this.$vnode.key - 1 });
+      this.$emit('selected', { name: this.selected, index: this.$vnode.key - 1 });
     },
     // Move all user behavior data to UsageForm, savings data to CostComparison
     // handleSubmit(price, type, electricityPrice, gasPrice, distance, consumption) {
