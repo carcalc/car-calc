@@ -1,6 +1,6 @@
 <template>
   <div class="cars-compare-wrapper">
-    <UsageDetails v-bind:usageDetails="usageDetails"/>
+    <UsageDetails v-bind:usageDetails="usageDetails" />
     <div class="car-wrapper" v-for="(car, index) in currentCars" v-bind:key="car.id">
       <CarDetails
         @selected="setNewCar"
@@ -10,7 +10,7 @@
       />
     </div>
 
-    <CostComparison :usageDetails="usageDetails" :car1="currentCars[0]" :car2="currentCars[1]"/>
+    <CostComparison :usageDetails="usageDetails" :car1="currentCars[0]" :car2="currentCars[1]" />
   </div>
 </template>
 

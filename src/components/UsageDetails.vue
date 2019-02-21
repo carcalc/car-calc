@@ -7,7 +7,7 @@
       step="any"
       v-model.number="usageDetails.kWhPrice"
       v-bind:placeholder="usageDetails.kWhPrice"
-    >
+    />
     <label for="gas-price">Bensin-/dieselpris (kr/liter)</label>
     <input
       type="number"
@@ -15,15 +15,15 @@
       step="any"
       v-model.number="usageDetails.gasPrice"
       v-bind:placeholder="usageDetails.gasPrice"
-    >
-    
+    />
+
     <label for="distance">Körsträcka (km/år)</label>
     <input
       name="distance"
       type="number"
       v-model.number="usageDetails.distance"
       v-bind:placeholder="usageDetails.distance"
-    >
+    />
   </form>
 </template>
 
