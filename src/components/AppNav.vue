@@ -1,13 +1,7 @@
 <template>
   <nav id="nav">
-    <ul>
-      <li>
-        <router-link :to="{ name: 'home' }">Home</router-link>
-      </li>
-      <li>
-        <router-link :to="{ name: 'about' }">About</router-link>
-      </li>
-    </ul>
+    <router-link :to="{ name: 'home' }">Home</router-link>
+    <router-link :to="{ name: 'about' }">About</router-link>
   </nav>
 </template>
 
@@ -22,6 +16,7 @@ export default {
   padding: 30px;
 
   a {
+    padding: 0.5rem;
     font-weight: bold;
     color: #2c3e50;
 
