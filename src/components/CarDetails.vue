@@ -1,15 +1,15 @@
 <template>
-  <div class="car-specs-wrapper">
+  <div class="car-wrapper">
     <div class="cars-selector">
       <h1>Välj bil</h1>
-      <select v-model="selected" @change="selectCar">
+      <select v-model="selected" @change="handleChange">
         <option disabled value>Välj en bil</option>
         <option v-for="car in allCars" :key="car.id" :value="car.name">{{ car.name }}</option>
       </select>
     </div>
     <h1>{{ currentCar.name }}</h1>
 
-    <form @submit.prevent="handleSubmit">
+    <form @submit.prevent class="car-details">
       <h2>Inköpspris (SEK)</h2>
       <input type="number" v-model.number="currentCar.price">
       <h2>Drivmedel</h2>
@@ -20,11 +20,7 @@
       <input type="radio" name="gasoline" v-model="currentCar.type" value="gasoline">
       <label for="gasoline">Bensin/diesel</label>
 
-      <h2>
-        Förbrukning
-        <span v-if="currentCar.type === 'electric'">(kWh/100 km)</span>
-        <span v-else>(liter/100 km)</span>
-      </h2>
+      <h2>Förbrukning {{ fuelUnit }}</h2>
       <input type="number" step="any" v-model.number="currentCar.consumption">
     </form>
     <!-- <div>
@@ -44,27 +40,18 @@ export default {
   data() {
     return { selected: this.currentCar.name };
   },
+  computed: {
+    fuelUnit() {
+      return this.currentCar.type === 'electric' ? '(kWh/100 km)' : '(liter/100 km)';
+    },
+  },
   methods: {
-    selectCar() {
+    handleChange() {
       this.$emit('selected', { name: this.selected, index: this.$vnode.key - 1 });
     },
-    // Move all user behavior data to UsageForm, savings data to CostComparison
+
+    // Move all user behavior data to UsageDetails, savings data to CostComparison
     // handleSubmit(price, type, electricityPrice, gasPrice, distance, consumption) {
-    //   if (electricityPrice === '') {
-    //     electricityPrice = 7.5;
-    //   } else {
-    //     electricityPrice = electricityPrice;
-    //   }
-    //   if (gasPrice === '') {
-    //     gasPrice = 14.8;
-    //   } else {
-    //     gasPrice = gasPrice;
-    //   }
-    //   if (distance === '') {
-    //     distance = 2000;
-    //   } else {
-    //     distance = distance;
-    //   }
 
     //   const premieElectric = 40000;
     //   const premieHybrid = 20000;
@@ -93,15 +80,12 @@ export default {
   padding: 20px;
   margin: auto;
 }
-.car-specs-wrapper {
+.car-wrapper {
   padding: 50px;
   margin: auto;
   border: 1px solid #333;
   width: 30em;
 }
-.submit-btn {
-  width: 50%;
-  padding: 10px 40px;
-  margin: 10px auto;
+.car-details {
 }
 </style>
