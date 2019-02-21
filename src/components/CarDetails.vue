@@ -5,7 +5,6 @@
       <select v-model="selected" @change="selectCar">
         <option disabled value>Välj en bil</option>
         <option v-for="car in allCars" :key="car.id" :value="car.name">{{ car.name }}</option>
-        <!-- :value shouldn't be an object; we need to change this but I don't know how yet -->
       </select>
     </div>
     <h1>{{ currentCar.name }}</h1>
@@ -39,7 +38,7 @@ export default {
   name: 'CarDetails',
   props: ['currentCar', 'allCars'],
   data() {
-    return { selected: '' };
+    return { selected: this.currentCar.name };
   },
   methods: {
     selectCar() {
