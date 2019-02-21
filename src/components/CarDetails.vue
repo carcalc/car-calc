@@ -43,7 +43,6 @@ export default {
   },
   methods: {
     selectCar() {
-      console.log(this.selected);
       this.$emit('selected', { name: this.selected, index: this.$vnode.key - 1 });
     },
     // Move all user behavior data to UsageForm, savings data to CostComparison
