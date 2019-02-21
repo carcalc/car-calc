@@ -2,12 +2,12 @@
   <div class="car-specs-wrapper">
     <div class="cars-selector">
       <h1>Välj bil</h1>
-      <select v-model="selectedCar" @change="selectCar">
+      <select v-model="newCar" @change="selectCar">
         <option
           v-for="car in allCars"
           :key="car.id"
           :value="car"
-          :selectCar="selectedCar === car"
+          :selectCar="newCar === car"
         >{{ car.name }}</option>
       </select>
     </div>
@@ -41,9 +41,12 @@
 export default {
   name: 'CarDetails',
   props: ['currentCar', 'allCars'],
+  data() {
+    return { newCar: '' };
+  },
   methods: {
     selectCar() {
-      this.$root.$emit('selected', { carId: this.selectedCar.id });
+      this.$emit('selected', { id: this.newCar.id, index: this.$vnode.key - 1 });
     },
     // Move all user behavior data to UsageForm, savings data to CostComparison
     // handleSubmit(price, type, electricityPrice, gasPrice, distance, consumption) {

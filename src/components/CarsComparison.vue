@@ -2,7 +2,12 @@
   <div class="cars-compare-wrapper">
     <UsageForm v-bind:pricing="pricing" v-bind:distance="distance"/>
     <div class="car-wrapper" v-for="(car, index) in currentCars" v-bind:key="car.id">
-      <CarDetails v-bind:key="index + 1" v-bind:currentCar="car" v-bind:allCars="allCars"/>
+      <CarDetails
+        @selected="setNewCar"
+        v-bind:key="index + 1"
+        v-bind:currentCar="car"
+        v-bind:allCars="allCars"
+      />
     </div>
 
     <CostComparison/>
@@ -44,15 +49,10 @@ export default {
         this.currentCars = this.allCars.slice(2);
       });
   },
-  mounted() {
-    this.$root.$on('selected', payload => {
-      this.setCarFromDb(payload);
-    });
-  },
   methods: {
-    setCarFromDb({ carId }) {
-      // This does not work for some reason
-      const selectedCar = this.allCars.filter(car => car.id === carId)[0];
+    setNewCar({ id, index }) {
+      const newCar = this.allCars.find(car => car.id === id);
+      this.$set(this.currentCars, index, newCar);
     },
   },
 };
