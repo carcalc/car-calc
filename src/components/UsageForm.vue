@@ -1,4 +1,5 @@
-// Refactor user behavior (travel distance etc) and gas/electric price to here (from CarsSpecificationsForm)
+// Refactor user behavior (travel distance etc) and gas/electric price to here (from
+CarsSpecificationsForm)
 
 <template></template>
 

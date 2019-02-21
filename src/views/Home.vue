@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <CarsComparison/>
+    <CarsComparison />
   </div>
 </template>
 

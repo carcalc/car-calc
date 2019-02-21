@@ -3,11 +3,12 @@
     <div class="cars-selector">
       <h1>Välj bil</h1>
       <select v-model="selectedCar" @change="selectCar">
-        <option v-for="car in allCars" :key="car.id" :value="car" :selectCar="selectedCar === car">
-          {{
-          car.name
-          }}
-        </option>
+        <option
+          v-for="car in allCars"
+          :key="car.id"
+          :value="car"
+          :selectCar="selectedCar === car"
+        >{{ car.name }}</option>
       </select>
     </div>
     <h1>{{ currentCar.name }}</h1>
@@ -49,7 +50,7 @@
 <script>
 export default {
   name: 'CarDetails',
-  props: ['currentCar', 'allCars'],
+  props: ['currentCar', 'allCars', 'carNo'],
   data() {
     return {
       tenKmCost: '',
@@ -60,7 +61,7 @@ export default {
 
   methods: {
     selectCar() {
-      this.$root.$emit('selected', this.selectedCar.id);
+      this.$root.$emit('selected', { carId: this.selectedCar.id, carNo: this.carNo });
     },
     // Move all user behavior data to UsageForm, savings data to CostComparison
     handleSubmit(price, type, electricityPrice, gasPrice, distance, consumption) {

@@ -2,7 +2,12 @@
   <div class="cars-compare-wrapper">
     <!-- Put UsageForm here -->
     <div class="car-wrapper" v-for="(car, index) in currentCars" v-bind:key="car.id">
-      <CarDetails v-bind:key="index + 1" v-bind:currentCar="car" v-bind:allCars="allCars"/>
+      <CarDetails
+        v-bind:key="index + 1"
+        v-bind:carNo="index"
+        v-bind:currentCar="car"
+        v-bind:allCars="allCars"
+      />
     </div>
 
     <!-- Put CostComparisonResult here -->
@@ -22,6 +27,7 @@ export default {
     return {
       allCars: [],
       currentCars: [], // We should save this to local storage
+      car: {},
     };
   },
   created() {
@@ -39,15 +45,17 @@ export default {
       });
   },
   mounted() {
-    this.$root.$on('selected', selectedCar => {
-      this.setCarFromDb(selectedCar);
+    this.$root.$on('selected', payload => {
+      this.setCarFromDb(payload);
     });
   },
   methods: {
-    setCarFromDb(selectedCar) {
-      this.currentCars[0] = this.allCars.filter(car => car.id === selectedCar);
-      console;
+    setCarFromDb({ carNo, carId }) {
+      // This does not work for some reason
+      const selectedCar = this.allCars.filter(car => car.id === carId)[0];
+      this.currentCars[carNo] = selectedCar;
     },
+
     // compare() {
     //   // Move all this to CostComparisonResult component
     //   if (this.formDataOne > this.formDataTwo) {
