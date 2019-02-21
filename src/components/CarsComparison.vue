@@ -50,8 +50,8 @@ export default {
       });
   },
   methods: {
-    setNewCar({ id, index }) {
-      const newCar = this.allCars.find(car => car.id === id);
+    setNewCar({ name, index }) {
+      const newCar = this.allCars.find(car => car.name === name);
       this.$set(this.currentCars, index, newCar);
     },
   },
