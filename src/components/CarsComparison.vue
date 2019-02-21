@@ -4,9 +4,9 @@
     <div class="car-wrapper" v-for="(car, index) in currentCars" v-bind:key="car.id">
       <CarDetails
         v-bind:key="index + 1"
-        v-bind:carNo="index"
         v-bind:currentCar="car"
         v-bind:allCars="allCars"
+        v-bind:pricingAndMileage="pricingAndMileage"
       />
     </div>
 
@@ -27,7 +27,7 @@ export default {
     return {
       allCars: [],
       currentCars: [], // We should save this to local storage
-      car: {},
+      pricingAndMileage: { gasPrice: 14.3, kWhPrice: 1.5, distance: 1500 },
     };
   },
   created() {
@@ -50,10 +50,9 @@ export default {
     });
   },
   methods: {
-    setCarFromDb({ carNo, carId }) {
+    setCarFromDb({ carId }) {
       // This does not work for some reason
       const selectedCar = this.allCars.filter(car => car.id === carId)[0];
-      this.currentCars[carNo] = selectedCar;
     },
 
     // compare() {

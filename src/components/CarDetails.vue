@@ -25,41 +25,43 @@
       <label for="gasoline">Bensin/diesel</label>
       
       <label for="electricityPrice">Elkostnad öre/kWh</label>
-      <input type="number" step="any" v-model.number="currentCar.electricityPrice" placeholder="75">
+      <input
+        type="number"
+        step="any"
+        v-model.number="pricingAndMileage.kWhPrice"
+        v-bind:placeholder="pricingAndMileage.kWhPrice"
+      >
       <label for="gasPrice">Bensin-/dieselpris kr/liter</label>
-      <input type="number" step="any" v-model.number="currentCar.gasPrice" placeholder="14.80">
+      <input
+        type="number"
+        step="any"
+        v-model.number="pricingAndMileage.gasPrice"
+        v-bind:placeholder="pricingAndMileage.gasPrice"
+      >
 
       <h2>Körsträcka mil/år</h2>
-      <input type="number" v-model.number="currentCar.distance" placeholder="2000">
+      <input type="number" v-model.number="pricingAndMileage.distance" placeholder="2000">
 
       <h2>Förbrukning/mil</h2>
       <input type="number" step="any" v-model.number="currentCar.consumption">
     </form>
-    <div>
+    <!-- <div>
       <h2>Kostnader drivmedel</h2>
       <h4 v-if="tenKmCost">Milkostnad: {{ tenKmCost }} kr</h4>
       <h4 v-if="yearCost">Årskostnad {{ yearCost }} kr</h4>
       <h2>Totalkostnad</h2>
       <h4 v-if="oneYearCostTotal">Totalkostnad första året: {{ oneYearCostTotal }} kr</h4>
-    </div>
+    </div>-->
   </div>
 </template>
 
 <script>
 export default {
   name: 'CarDetails',
-  props: ['currentCar', 'allCars', 'carNo'],
-  data() {
-    return {
-      tenKmCost: '',
-      yearCost: '',
-      oneYearCostTotal: '', // Refactor these to computed properties; no need to save?
-    };
-  },
-
+  props: ['currentCar', 'allCars', 'pricingAndMileage'],
   methods: {
     selectCar() {
-      this.$root.$emit('selected', { carId: this.selectedCar.id, carNo: this.carNo });
+      this.$root.$emit('selected', { carId: this.selectedCar.id });
     },
     // Move all user behavior data to UsageForm, savings data to CostComparison
     handleSubmit(price, type, electricityPrice, gasPrice, distance, consumption) {
