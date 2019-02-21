@@ -1,27 +1,25 @@
 <template>
   <div class="cars-compare-wrapper">
-    <!-- vi bör flytta ut körsträcka etc hit!  -->
+    <!-- Put UsageForm here -->
     <div class="car-wrapper" v-for="(car, index) in currentCars" v-bind:key="car.id">
-      <CarsSelector v-bind:key="index + 1" v-bind:cars="allCars"/>
-      <CarSpecificationsForm v-bind:key="index + 1" v-bind:car="car"/>
+      <CarDetails v-bind:key="index + 1" v-bind:currentCar="car" v-bind:allCars="allCars"/>
     </div>
 
     <button @click="compare" class="compare-btn">Jämför</button>
 
+    <!-- Replace with CostComparisonResult -->
     <h2>{{ output }}</h2>
   </div>
 </template>
 
 <script>
-import CarSpecificationsForm from './CarSpecificationsForm';
-import CarsSelector from './CarsSelector';
+import CarDetails from './CarDetails';
 import db from '@/firebase/init';
 
 export default {
   name: 'CarsComparison',
   components: {
-    CarSpecificationsForm,
-    CarsSelector,
+    CarDetails,
   },
   data() {
     return {

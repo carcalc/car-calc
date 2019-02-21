@@ -1,12 +1,14 @@
 <template>
-  <form class="cars-selector">
+  <div class="cars-selector">
     <h1>Välj bil</h1>
     <select v-model="selectedCar" @change="selectCar">
-      <option v-for="car in cars" :key="car.id" :value="car" :selectCar="selectedCar === car">{{
+      <option v-for="car in cars" :key="car.id" :value="car" :selectCar="selectedCar === car">
+        {{
         car.name
-      }}</option>
+        }}
+      </option>
     </select>
-  </form>
+  </div>
 </template>
 
 <script>
@@ -23,12 +25,6 @@ export default {
     selectCar() {
       this.$root.$emit('selected', this.selectedCar);
     },
-    pickRandomCarOnLoad() {
-      return this.cars[Math.floor(Math.random() * this.cars.length)];
-    },
-  },
-  created() {
-    this.selectedCar = this.pickRandomCarOnLoad();
   },
 };
 </script>

@@ -1,34 +1,36 @@
 <template>
   <div class="car-specs-wrapper">
-    <h1 v-if="selectedCarTitle">{{ selectedCarTitle }}</h1>
-    <h1 v-else>{{ title }}</h1>
+    <CarsSelector v-bind:cars="allCars"/>
+
+    <h1>{{ currentCar.name }}</h1>
 
     <form @submit.prevent="handleSubmit">
       <h2>Inköpspris SEK</h2>
-      <input type="number" v-model.number="car.price">
-      <p>{{car.price}}</p>
+      <input type="number" v-model.number="currentCar.price">
+      <p>{{currentCar.price}}</p>
       <h2>Drivmedel</h2>
-      <input type="radio" name="electric" v-model="car.type" value="electric">
+      <input type="radio" name="electric" v-model="currentCar.type" value="electric">
       <label for="electric">El</label>
-      <input type="radio" name="hybrid" v-model="car.type" value="hybrid">
+      <input type="radio" name="hybrid" v-model="currentCar.type" value="hybrid">
       <label for="hybrid">Laddhybrid</label>
-      <input type="radio" name="gasoline" v-model="car.type" value="gasoline">
+      <input type="radio" name="gasoline" v-model="currentCar.type" value="gasoline">
       <label for="gasoline">Bensin/diesel</label>
       
       <label for="electricityPrice">Elkostnad öre/kWh</label>
-      <input type="number" step="any" v-model.number="car.electricityPrice" placeholder="75">
+      <input type="number" step="any" v-model.number="currentCar.electricityPrice" placeholder="75">
       <label for="gasPrice">Bensin-/dieselpris kr/liter</label>
-      <input type="number" step="any" v-model.number="car.gasPrice" placeholder="14.80">
+      <input type="number" step="any" v-model.number="currentCar.gasPrice" placeholder="14.80">
 
       <h2>Körsträcka mil/år</h2>
-      <input type="number" v-model.number="car.distance" placeholder="2000">
+      <input type="number" v-model.number="currentCar.distance" placeholder="2000">
 
       <h2>Förbrukning/mil</h2>
-      <input type="number" step="any" v-model.number="car.consumption">
+      <input type="number" step="any" v-model.number="currentCar.consumption">
       
       <input class="submit-btn" type="submit">
     </form>
     <div>
+      <!-- Move these to new folder -->
       <h2>Kostnader drivmedel</h2>
       <h4 v-if="tenKmCost">Milkostnad: {{ tenKmCost }} kr</h4>
       <h4 v-if="yearCost">Årskostnad {{ yearCost }} kr</h4>
@@ -39,9 +41,11 @@
 </template>
 
 <script>
+import CarsSelector from './CarsSelector';
 export default {
-  name: 'CarSpecificationsForm',
-  props: ['car'],
+  name: 'CarDetails',
+  components: { CarsSelector },
+  props: ['currentCar', 'allCars'],
   data() {
     return {
       tenKmCost: '',
@@ -89,7 +93,7 @@ export default {
   mounted() {
     this.$root.$on('selected', selectedCar => {
       this.selectedCarTitle = selectedCar.name;
-      this.car.price = selectedCar.price;
+      this.currentCar.price = selectedCar.price;
     });
   },
 };
