@@ -46,7 +46,7 @@ export default {
           this.allCars.push(car);
         });
         // Populate forms with first two cars in DB
-        this.currentCars = this.allCars.slice(2);
+        this.currentCars = this.allCars.slice(0, 2);
       });
   },
   methods: {
