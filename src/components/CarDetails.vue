@@ -2,13 +2,10 @@
   <div class="car-specs-wrapper">
     <div class="cars-selector">
       <h1>Välj bil</h1>
-      <select v-model="newCar" @change="selectCar">
-        <option
-          v-for="car in allCars"
-          :key="car.id"
-          :value="car"
-          :selectCar="newCar === car"
-        >{{ car.name }}</option>
+      <select v-model="selected" @change="selectCar">
+        <option disabled value>Välj en bil</option>
+        <option v-for="car in allCars" :key="car.id" :value="car">{{ car.name }}</option>
+        <!-- :value shouldn't be an object; we need to change this but I don't know how yet -->
       </select>
     </div>
     <h1>{{ currentCar.name }}</h1>
@@ -24,7 +21,7 @@
       <input type="radio" name="gasoline" v-model="currentCar.type" value="gasoline">
       <label for="gasoline">Bensin/diesel</label>
 
-      <h2>Förbrukning/mil</h2>
+      <h2>Förbrukning</h2>
       <input type="number" step="any" v-model.number="currentCar.consumption">
     </form>
     <!-- <div>
@@ -42,11 +39,12 @@ export default {
   name: 'CarDetails',
   props: ['currentCar', 'allCars'],
   data() {
-    return { newCar: '' };
+    return { selected: '' };
   },
   methods: {
     selectCar() {
-      this.$emit('selected', { id: this.newCar.id, index: this.$vnode.key - 1 });
+      console.log(this.selected);
+      this.$emit('selected', { id: this.selected.id, index: this.$vnode.key - 1 });
     },
     // Move all user behavior data to UsageForm, savings data to CostComparison
     // handleSubmit(price, type, electricityPrice, gasPrice, distance, consumption) {
