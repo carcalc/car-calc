@@ -1,6 +1,6 @@
 <template>
   <div class="cars-compare-wrapper">
-    <UsageForm v-bind:pricing="pricing" v-bind:distance="distance"/>
+    <UsageDetails v-bind:usageDetails="usageDetails"/>
     <div class="car-wrapper" v-for="(car, index) in currentCars" v-bind:key="car.id">
       <CarDetails
         @selected="setNewCar"
@@ -10,12 +10,12 @@
       />
     </div>
 
-    <CostComparison/>
+    <CostComparison :usageDetails="usageDetails" :car1="currentCars[0]" :car2="currentCars[1]"/>
   </div>
 </template>
 
 <script>
-import UsageForm from './UsageForm';
+import UsageDetails from './UsageDetails';
 import CarDetails from './CarDetails';
 import CostComparison from './CostComparison';
 import db from '@/firebase/init';
@@ -24,15 +24,14 @@ export default {
   name: 'CarsComparison',
   components: {
     CarDetails,
-    UsageForm,
+    UsageDetails,
     CostComparison,
   },
   data() {
     return {
       allCars: [],
-      currentCars: [], // We should save this to local storage
-      pricing: { gasPrice: 14.3, kWhPrice: 1.5 }, // These should be populated from Firebase
-      distance: 1500,
+      currentCars: [],
+      usageDetails: [],
     };
   },
   created() {
@@ -45,14 +44,19 @@ export default {
           car.id = doc.id;
           this.allCars.push(car);
         });
-        // Populate forms with first two cars in DB
-        this.currentCars = this.allCars.slice(0, 2);
+        this.populateOnLoad();
       });
   },
   methods: {
     setNewCar({ name, index }) {
       const newCar = this.allCars.find(car => car.name === name);
       this.$set(this.currentCars, index, newCar);
+      // We should save this to local storage
+    },
+    populateOnLoad() {
+      // Populate forms with first two cars in DB
+      this.currentCars = this.allCars.slice(0, 2);
+      this.usageDetails = { gasPrice: 14.3, kWhPrice: 1.5, distance: 1500 };
     },
   },
 };
