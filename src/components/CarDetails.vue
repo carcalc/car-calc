@@ -8,25 +8,24 @@
           :key="car.id"
           :value="car"
           :selectCar="selectedCar === car"
-          >{{ car.name }}</option
-        >
+        >{{ car.name }}</option>
       </select>
     </div>
     <h1>{{ currentCar.name }}</h1>
 
     <form @submit.prevent="handleSubmit">
       <h2>Inköpspris SEK</h2>
-      <input type="number" v-model.number="currentCar.price" />
+      <input type="number" v-model.number="currentCar.price">
       <h2>Drivmedel</h2>
-      <input type="radio" name="electric" v-model="currentCar.type" value="electric" />
+      <input type="radio" name="electric" v-model="currentCar.type" value="electric">
       <label for="electric">El</label>
-      <input type="radio" name="hybrid" v-model="currentCar.type" value="hybrid" />
+      <input type="radio" name="hybrid" v-model="currentCar.type" value="hybrid">
       <label for="hybrid">Laddhybrid</label>
-      <input type="radio" name="gasoline" v-model="currentCar.type" value="gasoline" />
+      <input type="radio" name="gasoline" v-model="currentCar.type" value="gasoline">
       <label for="gasoline">Bensin/diesel</label>
 
       <h2>Förbrukning/mil</h2>
-      <input type="number" step="any" v-model.number="currentCar.consumption" />
+      <input type="number" step="any" v-model.number="currentCar.consumption">
     </form>
     <!-- <div>
       <h2>Kostnader drivmedel</h2>
@@ -47,39 +46,39 @@ export default {
       this.$root.$emit('selected', { carId: this.selectedCar.id });
     },
     // Move all user behavior data to UsageForm, savings data to CostComparison
-    handleSubmit(price, type, electricityPrice, gasPrice, distance, consumption) {
-      if (electricityPrice === '') {
-        electricityPrice = 7.5;
-      } else {
-        electricityPrice = electricityPrice;
-      }
-      if (gasPrice === '') {
-        gasPrice = 14.8;
-      } else {
-        gasPrice = gasPrice;
-      }
-      if (distance === '') {
-        distance = 2000;
-      } else {
-        distance = distance;
-      }
+    // handleSubmit(price, type, electricityPrice, gasPrice, distance, consumption) {
+    //   if (electricityPrice === '') {
+    //     electricityPrice = 7.5;
+    //   } else {
+    //     electricityPrice = electricityPrice;
+    //   }
+    //   if (gasPrice === '') {
+    //     gasPrice = 14.8;
+    //   } else {
+    //     gasPrice = gasPrice;
+    //   }
+    //   if (distance === '') {
+    //     distance = 2000;
+    //   } else {
+    //     distance = distance;
+    //   }
 
-      const premieElectric = 40000;
-      const premieHybrid = 20000;
+    //   const premieElectric = 40000;
+    //   const premieHybrid = 20000;
 
-      if (type === 'gasoline') {
-        this.tenKmCost = gasPrice * consumption;
-        this.yearCost = distance * consumption * gasPrice;
-        this.oneYearCostTotal = distance * consumption * gasPrice + price;
-        this.$emit('dataToParent', this.oneYearCostTotal);
-      } else if (type === 'electric') {
-        this.tenKmCost = (electricityPrice / 10) * consumption;
-        this.yearCost = distance * consumption * (electricityPrice / 10);
-        this.oneYearCostTotal =
-          distance * consumption * (electricityPrice / 10) + price - premieElectric;
-        this.$emit('dataToParent', this.oneYearCostTotal);
-      }
-    },
+    //   if (type === 'gasoline') {
+    //     this.tenKmCost = gasPrice * consumption;
+    //     this.yearCost = distance * consumption * gasPrice;
+    //     this.oneYearCostTotal = distance * consumption * gasPrice + price;
+    //     this.$emit('dataToParent', this.oneYearCostTotal);
+    //   } else if (type === 'electric') {
+    //     this.tenKmCost = (electricityPrice / 10) * consumption;
+    //     this.yearCost = distance * consumption * (electricityPrice / 10);
+    //     this.oneYearCostTotal =
+    //       distance * consumption * (electricityPrice / 10) + price - premieElectric;
+    //     this.$emit('dataToParent', this.oneYearCostTotal);
+    //   }
+    // },
   },
 };
 </script>

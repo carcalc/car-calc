@@ -1,11 +1,11 @@
 <template>
   <div class="cars-compare-wrapper">
-    <UsageForm v-bind:pricing="pricing" v-bind:distance="distance" />
+    <UsageForm v-bind:pricing="pricing" v-bind:distance="distance"/>
     <div class="car-wrapper" v-for="(car, index) in currentCars" v-bind:key="car.id">
-      <CarDetails v-bind:key="index + 1" v-bind:currentCar="car" v-bind:allCars="allCars" />
+      <CarDetails v-bind:key="index + 1" v-bind:currentCar="car" v-bind:allCars="allCars"/>
     </div>
 
-    <CostComparison />
+    <CostComparison/>
   </div>
 </template>
 
@@ -26,7 +26,7 @@ export default {
     return {
       allCars: [],
       currentCars: [], // We should save this to local storage
-      pricing: { gasPrice: 14.3, kWhPrice: 1.5 },
+      pricing: { gasPrice: 14.3, kWhPrice: 1.5 }, // These should be populated from Firebase
       distance: 1500,
     };
   },
@@ -54,17 +54,6 @@ export default {
       // This does not work for some reason
       const selectedCar = this.allCars.filter(car => car.id === carId)[0];
     },
-
-    // compare() {
-    //   // Move all this to CostComparison component
-    //   if (this.formDataOne > this.formDataTwo) {
-    //     const result = this.formDataOne - this.formDataTwo;
-    //     this.output = `Bil 1 är' ${result} kr dyrare än bil 2`;
-    //   } else {
-    //     const result = this.formDataTwo - this.formDataOne;
-    //     this.output = `Bil 2 är ${result} kr dyrare än bil 1 första året`;
-    //   }
-    // },
   },
 };
 </script>
