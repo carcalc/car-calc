@@ -1,13 +1,20 @@
 <template>
   <div class="car-specs-wrapper">
-    <CarsSelector v-bind:cars="allCars"/>
-
+    <div class="cars-selector">
+      <h1>Välj bil</h1>
+      <select v-model="selectedCar" @change="selectCar">
+        <option v-for="car in allCars" :key="car.id" :value="car" :selectCar="selectedCar === car">
+          {{
+          car.name
+          }}
+        </option>
+      </select>
+    </div>
     <h1>{{ currentCar.name }}</h1>
 
     <form @submit.prevent="handleSubmit">
       <h2>Inköpspris SEK</h2>
       <input type="number" v-model.number="currentCar.price">
-      <p>{{currentCar.price}}</p>
       <h2>Drivmedel</h2>
       <input type="radio" name="electric" v-model="currentCar.type" value="electric">
       <label for="electric">El</label>
@@ -30,7 +37,6 @@
       <input class="submit-btn" type="submit">
     </form>
     <div>
-      <!-- Move these to new folder -->
       <h2>Kostnader drivmedel</h2>
       <h4 v-if="tenKmCost">Milkostnad: {{ tenKmCost }} kr</h4>
       <h4 v-if="yearCost">Årskostnad {{ yearCost }} kr</h4>
@@ -41,20 +47,21 @@
 </template>
 
 <script>
-import CarsSelector from './CarsSelector';
 export default {
   name: 'CarDetails',
-  components: { CarsSelector },
   props: ['currentCar', 'allCars'],
   data() {
     return {
       tenKmCost: '',
       yearCost: '',
-      oneYearCostTotal: '',
+      oneYearCostTotal: '', // Refactor these to computed properties; no need to save?
     };
   },
 
   methods: {
+    selectCar() {
+      this.$root.$emit('selected', this.selectedCar.id);
+    },
     // Move all user behavior data to UsageForm, savings data to CostComparison
     handleSubmit(price, type, electricityPrice, gasPrice, distance, consumption) {
       if (electricityPrice === '') {
@@ -90,16 +97,16 @@ export default {
       }
     },
   },
-  mounted() {
-    this.$root.$on('selected', selectedCar => {
-      this.selectedCarTitle = selectedCar.name;
-      this.currentCar.price = selectedCar.price;
-    });
-  },
 };
 </script>
 
 <style lang="scss" scoped>
+.cars-selector {
+  width: 40%;
+  border: 1px solid #333;
+  padding: 20px;
+  margin: auto;
+}
 .car-specs-wrapper {
   padding: 50px;
   margin: auto;

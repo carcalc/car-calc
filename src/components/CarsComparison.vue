@@ -5,10 +5,7 @@
       <CarDetails v-bind:key="index + 1" v-bind:currentCar="car" v-bind:allCars="allCars"/>
     </div>
 
-    <button @click="compare" class="compare-btn">Jämför</button>
-
-    <!-- Replace with CostComparisonResult -->
-    <h2>{{ output }}</h2>
+    <!-- Put CostComparisonResult here -->
   </div>
 </template>
 
@@ -25,9 +22,6 @@ export default {
     return {
       allCars: [],
       currentCars: [], // We should save this to local storage
-      formDataOne: '', // Remove these; no need to save this data again
-      formDataTwo: '',
-      output: '',
     };
   },
   created() {
@@ -44,24 +38,26 @@ export default {
         this.currentCars = this.allCars.slice(2);
       });
   },
+  mounted() {
+    this.$root.$on('selected', selectedCar => {
+      this.setCarFromDb(selectedCar);
+    });
+  },
   methods: {
-    childClicked1(data) {
-      this.formDataOne = data;
+    setCarFromDb(selectedCar) {
+      this.currentCars[0] = this.allCars.filter(car => car.id === selectedCar);
+      console;
     },
-    childClicked2(data) {
-      this.formDataTwo = data;
-    },
-
-    // Move to CostComparisonResult component
-    compare() {
-      if (this.formDataOne > this.formDataTwo) {
-        const result = this.formDataOne - this.formDataTwo;
-        this.output = `Bil 1 är' ${result} kr dyrare än bil 2`;
-      } else {
-        const result = this.formDataTwo - this.formDataOne;
-        this.output = `Bil 2 är ${result} kr dyrare än bil 1 första året`;
-      }
-    },
+    // compare() {
+    //   // Move all this to CostComparisonResult component
+    //   if (this.formDataOne > this.formDataTwo) {
+    //     const result = this.formDataOne - this.formDataTwo;
+    //     this.output = `Bil 1 är' ${result} kr dyrare än bil 2`;
+    //   } else {
+    //     const result = this.formDataTwo - this.formDataOne;
+    //     this.output = `Bil 2 är ${result} kr dyrare än bil 1 första året`;
+    //   }
+    // },
   },
 };
 </script>
