@@ -34,8 +34,6 @@
 
       <h2>Förbrukning/mil</h2>
       <input type="number" step="any" v-model.number="currentCar.consumption">
-      
-      <input class="submit-btn" type="submit">
     </form>
     <div>
       <h2>Kostnader drivmedel</h2>
