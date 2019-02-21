@@ -3,23 +3,25 @@ CarsSpecificationsForm)
 
 <template>
   <div class="usage-form">
-    <label for="electricityPrice">Elkostnad öre/kWh</label>
+    <label for="electricity-price">Elpris (kr/kWh)</label>
     <input
       type="number"
+      name="electricity-price"
       step="any"
       v-model.number="pricing.kWhPrice"
       v-bind:placeholder="pricing.kWhPrice"
-    />
-    <label for="gasPrice">Bensin-/dieselpris kr/liter</label>
+    >
+    <label for="gas-price">Bensin-/dieselpris (kr/liter)</label>
     <input
       type="number"
+      name="gas-price"
       step="any"
       v-model.number="pricing.gasPrice"
       v-bind:placeholder="pricing.gasPrice"
-    />
-
-    <h2>Körsträcka mil/år</h2>
-    <input type="number" v-model.number="distance" v-bind:placeholder="distance" />
+    >
+    
+    <label for="distance">Körsträcka (km/år)</label>
+    <input name="distance" type="number" v-model.number="distance" v-bind:placeholder="distance">
   </div>
 </template>
 
@@ -32,5 +34,6 @@ export default {
 <style lang="scss" scoped>
 .usage-form {
   grid-column: 1 / -1;
+  padding: 4rem;
 }
 </style>
