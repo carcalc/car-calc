@@ -3,21 +3,10 @@
     <h1 v-if="selectedCarTitle">{{ selectedCarTitle }}</h1>
     <h1 v-else>{{ title }}</h1>
 
-    <form
-      @submit.prevent="
-        handleSubmit(
-          car.price,
-          car.type,
-          car.electricityPrice,
-          car.gasPrice,
-          car.distance,
-          car.consumption
-        )
-      "
-    >
+    <form @submit.prevent="handleSubmit">
       <h2>Inköpspris SEK</h2>
       <input type="number" v-model.number="car.price">
-
+      <p>{{car.price}}</p>
       <h2>Drivmedel</h2>
       <input type="radio" name="electric" v-model="car.type" value="electric">
       <label for="electric">El</label>
@@ -55,15 +44,6 @@ export default {
   props: ['car'],
   data() {
     return {
-      car: {
-        price: '',
-        type: '',
-        electricityPrice: '',
-        gasPrice: '',
-        distance: '',
-        consumption: '',
-      },
-      selectedCarTitle: '',
       tenKmCost: '',
       yearCost: '',
       oneYearCostTotal: '',
@@ -71,6 +51,7 @@ export default {
   },
 
   methods: {
+    // Move all user behavior data to UsageForm, savings data to CostComparison
     handleSubmit(price, type, electricityPrice, gasPrice, distance, consumption) {
       if (electricityPrice === '') {
         electricityPrice = 7.5;

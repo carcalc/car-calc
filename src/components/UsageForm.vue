@@ -1,4 +1,4 @@
-// Refaktorera bensinpris/dieselpris samt användande av bilen hit (från CarsSpecificationsForm)
+// Refactor user behavior (travel distance etc) and gas/electric price to here (from CarsSpecificationsForm)
 
 <template></template>
 
@@ -6,5 +6,4 @@
 export default {};
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

@@ -1,9 +1,9 @@
 <template>
-  <div class="cost-compare-wrapper">
+  <div class="cars-compare-wrapper">
     <!-- vi bör flytta ut körsträcka etc hit!  -->
-    <div class="cars-compare-wrapper" v-for="(car, index) in currentCars" v-bind:key="car.id">
-      <CarsSelector v-bind:key="index" v-bind:cars="allCars"/>
-      <CarSpecificationsForm v-bind:car="car"/>
+    <div class="car-wrapper" v-for="(car, index) in currentCars" v-bind:key="car.id">
+      <CarsSelector v-bind:key="index + 1" v-bind:cars="allCars"/>
+      <CarSpecificationsForm v-bind:key="index + 1" v-bind:car="car"/>
     </div>
 
     <button @click="compare" class="compare-btn">Jämför</button>
@@ -18,7 +18,7 @@ import CarsSelector from './CarsSelector';
 import db from '@/firebase/init';
 
 export default {
-  name: 'CarsCompare',
+  name: 'CarsComparison',
   components: {
     CarSpecificationsForm,
     CarsSelector,
@@ -26,8 +26,8 @@ export default {
   data() {
     return {
       allCars: [],
-      currentCars: [],
-      formDataOne: '',
+      currentCars: [], // We should save this to local storage
+      formDataOne: '', // Remove these; no need to save this data again
       formDataTwo: '',
       output: '',
     };
@@ -54,6 +54,7 @@ export default {
       this.formDataTwo = data;
     },
 
+    // Move to CostComparisonResult component
     compare() {
       if (this.formDataOne > this.formDataTwo) {
         const result = this.formDataOne - this.formDataTwo;
@@ -68,13 +69,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cost-compare-wrapper {
+.cars-compare-wrapper {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
 .cars-selector {
 }
-.cars-compare-wrapper {
+.car-wrapper {
 }
 .compare-btn {
   padding: 15px 60px;

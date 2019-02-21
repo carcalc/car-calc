@@ -1,4 +1,4 @@
-// Refaktorera alla kostnadsjämförelser hit (från CarsSpecificationsForm)
+// Refactor all cost comparisons to here (from CarsSpecificationsForm)
 
 <template></template>
 
@@ -6,5 +6,4 @@
 export default {};
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

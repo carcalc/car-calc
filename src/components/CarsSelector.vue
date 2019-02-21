@@ -2,12 +2,9 @@
   <form class="cars-selector">
     <h1>Välj bil</h1>
     <select v-model="selectedCar" @change="selectCar">
-      <option
-        v-for="car in cars"
-        :key="car.id"
-        :value="car"
-        :selectCar="selectedCar === car"
-      >{{ car.name }}</option>
+      <option v-for="car in cars" :key="car.id" :value="car" :selectCar="selectedCar === car">{{
+        car.name
+      }}</option>
     </select>
   </form>
 </template>
