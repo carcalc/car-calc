@@ -1,5 +1,4 @@
 import firebase from 'firebase';
-import firestore from 'firebase/firestore';
 
 // Initialize Firebase
 var config = {
@@ -8,7 +7,7 @@ var config = {
   databaseURL: 'https://cars-ffed2.firebaseio.com',
   projectId: 'cars-ffed2',
   storageBucket: 'cars-ffed2.appspot.com',
-  messagingSenderId: '768861179345'
+  messagingSenderId: '768861179345',
 };
 const firebaseApp = firebase.initializeApp(config);
 

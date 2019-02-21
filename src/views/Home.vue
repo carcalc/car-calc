@@ -1,20 +1,18 @@
 <template>
   <div class="home">
-    <CarsCompare/>
+    <CarsComparison />
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import CarsCompare from "@/components/CarsCompare.vue";
+import CarsComparison from '@/components/CarsComparison.vue';
 
 export default {
-  name: "home",
+  name: 'home',
   components: {
-    CarsCompare
-  }
+    CarsComparison,
+  },
 };
 </script>
-<style scoped>
-</style>
-
+<style lang="scss" scoped></style>

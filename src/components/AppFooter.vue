@@ -6,11 +6,11 @@
 
 <script>
 export default {
-  name: "AppFooter"
+  name: 'AppFooter',
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 footer {
   width: 100%;
   height: 10rem;
