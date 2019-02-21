@@ -1,33 +1,33 @@
 <template>
   <div class="cars-compare-wrapper">
-    <!-- Put UsageForm here -->
+    <UsageForm v-bind:pricing="pricing" v-bind:distance="distance" />
     <div class="car-wrapper" v-for="(car, index) in currentCars" v-bind:key="car.id">
-      <CarDetails
-        v-bind:key="index + 1"
-        v-bind:currentCar="car"
-        v-bind:allCars="allCars"
-        v-bind:pricingAndMileage="pricingAndMileage"
-      />
+      <CarDetails v-bind:key="index + 1" v-bind:currentCar="car" v-bind:allCars="allCars" />
     </div>
 
-    <!-- Put CostComparisonResult here -->
+    <CostComparison />
   </div>
 </template>
 
 <script>
+import UsageForm from './UsageForm';
 import CarDetails from './CarDetails';
+import CostComparison from './CostComparison';
 import db from '@/firebase/init';
 
 export default {
   name: 'CarsComparison',
   components: {
     CarDetails,
+    UsageForm,
+    CostComparison,
   },
   data() {
     return {
       allCars: [],
       currentCars: [], // We should save this to local storage
-      pricingAndMileage: { gasPrice: 14.3, kWhPrice: 1.5, distance: 1500 },
+      pricing: { gasPrice: 14.3, kWhPrice: 1.5 },
+      distance: 1500,
     };
   },
   created() {
@@ -56,7 +56,7 @@ export default {
     },
 
     // compare() {
-    //   // Move all this to CostComparisonResult component
+    //   // Move all this to CostComparison component
     //   if (this.formDataOne > this.formDataTwo) {
     //     const result = this.formDataOne - this.formDataTwo;
     //     this.output = `Bil 1 är' ${result} kr dyrare än bil 2`;

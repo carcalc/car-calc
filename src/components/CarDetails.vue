@@ -8,42 +8,25 @@
           :key="car.id"
           :value="car"
           :selectCar="selectedCar === car"
-        >{{ car.name }}</option>
+          >{{ car.name }}</option
+        >
       </select>
     </div>
     <h1>{{ currentCar.name }}</h1>
 
     <form @submit.prevent="handleSubmit">
       <h2>Inköpspris SEK</h2>
-      <input type="number" v-model.number="currentCar.price">
+      <input type="number" v-model.number="currentCar.price" />
       <h2>Drivmedel</h2>
-      <input type="radio" name="electric" v-model="currentCar.type" value="electric">
+      <input type="radio" name="electric" v-model="currentCar.type" value="electric" />
       <label for="electric">El</label>
-      <input type="radio" name="hybrid" v-model="currentCar.type" value="hybrid">
+      <input type="radio" name="hybrid" v-model="currentCar.type" value="hybrid" />
       <label for="hybrid">Laddhybrid</label>
-      <input type="radio" name="gasoline" v-model="currentCar.type" value="gasoline">
+      <input type="radio" name="gasoline" v-model="currentCar.type" value="gasoline" />
       <label for="gasoline">Bensin/diesel</label>
-      
-      <label for="electricityPrice">Elkostnad öre/kWh</label>
-      <input
-        type="number"
-        step="any"
-        v-model.number="pricingAndMileage.kWhPrice"
-        v-bind:placeholder="pricingAndMileage.kWhPrice"
-      >
-      <label for="gasPrice">Bensin-/dieselpris kr/liter</label>
-      <input
-        type="number"
-        step="any"
-        v-model.number="pricingAndMileage.gasPrice"
-        v-bind:placeholder="pricingAndMileage.gasPrice"
-      >
-
-      <h2>Körsträcka mil/år</h2>
-      <input type="number" v-model.number="pricingAndMileage.distance" placeholder="2000">
 
       <h2>Förbrukning/mil</h2>
-      <input type="number" step="any" v-model.number="currentCar.consumption">
+      <input type="number" step="any" v-model.number="currentCar.consumption" />
     </form>
     <!-- <div>
       <h2>Kostnader drivmedel</h2>
@@ -58,7 +41,7 @@
 <script>
 export default {
   name: 'CarDetails',
-  props: ['currentCar', 'allCars', 'pricingAndMileage'],
+  props: ['currentCar', 'allCars'],
   methods: {
     selectCar() {
       this.$root.$emit('selected', { carId: this.selectedCar.id });
