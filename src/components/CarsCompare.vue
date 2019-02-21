@@ -1,19 +1,13 @@
 <template>
-  <div class="carsCompareWrapper">
-    <br>
-    <br>
-    <div class="CarsSelector">
-      <CarsSelector key="1" v-bind:cars="cars"/>
-      <CarsSelector key="2" v-bind:cars="cars"/>
+  <div class="cost-compare-wrapper">
+    <!-- vi bör flytta ut körsträcka etc hit!  -->
+    <div class="cars-compare-wrapper" v-for="(car, index) in currentCars" v-bind:key="car.id">
+      <CarsSelector v-bind:key="index" v-bind:cars="allCars"/>
+      <CarSpecificationsForm v-bind:car="car"/>
     </div>
-    <div class="formWrapper">
-      <CarSpecificationsForm key="1" title="Bil 1" v-on:dataToParent="childClicked1"/>
-      <CarSpecificationsForm key="2" title="Bil 2" v-on:dataToParent="childClicked2"/>
-    </div>
-    <br>
-    <button @click="compare" class="compareBtn">Jämför</button>
-    <br>
-    <br>
+
+    <button @click="compare" class="compare-btn">Jämför</button>
+
     <h2>{{ output }}</h2>
   </div>
 </template>
@@ -31,7 +25,8 @@ export default {
   },
   data() {
     return {
-      cars: [],
+      allCars: [],
+      currentCars: [],
       formDataOne: '',
       formDataTwo: '',
       output: '',
@@ -45,8 +40,10 @@ export default {
         snapshot.forEach(doc => {
           let car = doc.data();
           car.id = doc.id;
-          this.cars.push(car);
+          this.allCars.push(car);
         });
+        // Populate forms with first two cars in DB
+        this.currentCars = this.allCars.slice(2);
       });
   },
   methods: {
@@ -71,19 +68,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.carsCompareWrapper {
-  width: 100%;
+.cost-compare-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }
-.CarsSelector {
-  display: flex;
-  width: 100%;
+.cars-selector {
 }
-.formWrapper {
-  display: flex;
-  width: 100%;
-  margin: auto;
+.cars-compare-wrapper {
 }
-.compareBtn {
+.compare-btn {
   padding: 15px 60px;
   background: rgb(245, 120, 75);
 }

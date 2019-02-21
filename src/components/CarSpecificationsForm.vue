@@ -1,5 +1,5 @@
 <template>
-  <div class="form-container">
+  <div class="car-specs-wrapper">
     <h1 v-if="selectedCarTitle">{{ selectedCarTitle }}</h1>
     <h1 v-else>{{ title }}</h1>
 
@@ -25,10 +25,9 @@
       <label for="hybrid">Laddhybrid</label>
       <input type="radio" name="gasoline" v-model="car.type" value="gasoline">
       <label for="gasoline">Bensin/diesel</label>
-      <br>
+      
       <label for="electricityPrice">Elkostnad öre/kWh</label>
       <input type="number" step="any" v-model.number="car.electricityPrice" placeholder="75">
-      <br>
       <label for="gasPrice">Bensin-/dieselpris kr/liter</label>
       <input type="number" step="any" v-model.number="car.gasPrice" placeholder="14.80">
 
@@ -37,17 +36,14 @@
 
       <h2>Förbrukning/mil</h2>
       <input type="number" step="any" v-model.number="car.consumption">
-
-      <br>
-      <input class="submitBtn" type="submit">
+      
+      <input class="submit-btn" type="submit">
     </form>
     <div>
-      <br>
       <h2>Kostnader drivmedel</h2>
       <h4 v-if="tenKmCost">Milkostnad: {{ tenKmCost }} kr</h4>
       <h4 v-if="yearCost">Årskostnad {{ yearCost }} kr</h4>
-      <br>
-      <h2>Totalkostand</h2>
+      <h2>Totalkostnad</h2>
       <h4 v-if="oneYearCostTotal">Totalkostnad första året: {{ oneYearCostTotal }} kr</h4>
     </div>
   </div>
@@ -56,7 +52,7 @@
 <script>
 export default {
   name: 'CarSpecificationsForm',
-  props: ['title'],
+  props: ['car'],
   data() {
     return {
       car: {
@@ -74,14 +70,6 @@ export default {
     };
   },
 
-  // computed: {
-  //   tenKmCost: function() {
-  //     return gasPrice * consumption;
-  //   },
-  //   yearCost: function() {
-  //     return gasPrice * consumption;
-  //   }
-  // },
   methods: {
     handleSubmit(price, type, electricityPrice, gasPrice, distance, consumption) {
       if (electricityPrice === '') {
@@ -127,13 +115,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form-container {
+.car-specs-wrapper {
   padding: 50px;
   margin: auto;
   border: 1px solid #333;
   width: 30em;
 }
-.submitBtn {
+.submit-btn {
   width: 50%;
   padding: 10px 40px;
   margin: 10px auto;

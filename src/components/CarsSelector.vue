@@ -1,12 +1,12 @@
 <template>
-  <form class="formWrapper">
+  <form class="cars-selector">
     <h1>Välj bil</h1>
-    <select v-model="selectedCar" @change="selected">
+    <select v-model="selectedCar" @change="selectCar">
       <option
         v-for="car in cars"
         :key="car.id"
         :value="car"
-        :selected="selectedCar === car"
+        :selectCar="selectedCar === car"
       >{{ car.name }}</option>
     </select>
   </form>
@@ -17,25 +17,27 @@ export default {
   name: 'CarsSelector',
   data() {
     return {
-      selectedCar: {
-        price: null,
-        electricConsumption: null,
-        gasConsumption: null,
-      },
+      selectedCar: {},
     };
   },
   props: ['cars'],
 
   methods: {
-    selected(e) {
+    selectCar() {
       this.$root.$emit('selected', this.selectedCar);
     },
+    pickRandomCarOnLoad() {
+      return this.cars[Math.floor(Math.random() * this.cars.length)];
+    },
+  },
+  created() {
+    this.selectedCar = this.pickRandomCarOnLoad();
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.formWrapper {
+.cars-selector {
   width: 40%;
   border: 1px solid #333;
   padding: 20px;
