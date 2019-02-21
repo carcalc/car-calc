@@ -7,34 +7,34 @@
         :key="car.id"
         :value="car"
         :selected="selectedCar === car"
-      >{{car.name}}</option>
+      >{{ car.name }}</option>
     </select>
   </form>
 </template>
 
 <script>
 export default {
-  name: "CarSelected",
+  name: 'CarsSelector',
   data() {
     return {
       selectedCar: {
         price: null,
         electricConsumption: null,
-        gasConsumption: null
-      }
+        gasConsumption: null,
+      },
     };
   },
-  props: ["cars"],
+  props: ['cars'],
 
   methods: {
     selected(e) {
-      this.$root.$emit("selected", this.selectedCar);
-    }
-  }
+      this.$root.$emit('selected', this.selectedCar);
+    },
+  },
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .formWrapper {
   width: 40%;
   border: 1px solid #333;

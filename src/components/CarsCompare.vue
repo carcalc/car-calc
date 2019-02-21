@@ -2,44 +2,44 @@
   <div class="carsCompareWrapper">
     <br>
     <br>
-    <div class="carSelected">
-      <CarSelected key="1" v-bind:cars="cars"/>
-      <CarSelected key="2" v-bind:cars="cars"/>
+    <div class="CarsSelector">
+      <CarsSelector key="1" v-bind:cars="cars"/>
+      <CarsSelector key="2" v-bind:cars="cars"/>
     </div>
     <div class="formWrapper">
-      <BaseForm key="1" title="Bil 1" v-on:dataToParent="childClicked1"/>
-      <BaseForm key="2" title="Bil 2" v-on:dataToParent="childClicked2"/>
+      <CarSpecificationsForm key="1" title="Bil 1" v-on:dataToParent="childClicked1"/>
+      <CarSpecificationsForm key="2" title="Bil 2" v-on:dataToParent="childClicked2"/>
     </div>
     <br>
     <button @click="compare" class="compareBtn">Jämför</button>
     <br>
     <br>
-    <h2>{{output}}</h2>
+    <h2>{{ output }}</h2>
   </div>
 </template>
 
 <script>
-import BaseForm from "./BaseForm";
-import CarSelected from "./CarSelected";
-import db from "@/firebase/init";
+import CarSpecificationsForm from './CarSpecificationsForm';
+import CarsSelector from './CarsSelector';
+import db from '@/firebase/init';
 
 export default {
-  name: "CarsCompare",
+  name: 'CarsCompare',
   components: {
-    BaseForm,
-    CarSelected
+    CarSpecificationsForm,
+    CarsSelector,
   },
   data() {
     return {
       cars: [],
-      formDataOne: "",
-      formDataTwo: "",
-      output: ""
+      formDataOne: '',
+      formDataTwo: '',
+      output: '',
     };
   },
   created() {
     // fetch data from firestore
-    db.collection("cars")
+    db.collection('cars')
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
@@ -65,16 +65,16 @@ export default {
         const result = this.formDataTwo - this.formDataOne;
         this.output = `Bil 2 är ${result} kr dyrare än bil 1 första året`;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .carsCompareWrapper {
   width: 100%;
 }
-.carSelected {
+.CarsSelector {
   display: flex;
   width: 100%;
 }

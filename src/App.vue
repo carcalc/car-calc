@@ -1,28 +1,27 @@
 <template>
   <div id="app">
-    <AppHeader/>
-    <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-    <AppFooter/>
+    <AppHeader />
+    <AppNav />
+    <router-view />
+    <AppFooter />
   </div>
 </template>
 <script>
-import AppHeader from "@/components/AppHeader";
-import AppFooter from "@/components/AppFooter";
+import AppHeader from '@/components/AppHeader';
+import AppFooter from '@/components/AppFooter';
+import AppNav from '@/components/AppNav';
 export default {
-  name: "App",
+  name: 'App',
   components: {
     AppHeader,
-    AppFooter
-  }
+    AppNav,
+    AppFooter,
+  },
 };
 </script>
 <style>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

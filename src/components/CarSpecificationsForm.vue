@@ -1,10 +1,19 @@
 <template>
   <div class="form-container">
     <h1 v-if="selectedCarTitle">{{ selectedCarTitle }}</h1>
-    <h1 v-else>{{title}}</h1>
+    <h1 v-else>{{ title }}</h1>
 
     <form
-      @submit.prevent="handleSubmit(car.price, car.type, car.electricityPrice, car.gasPrice, car.distance, car.consumption)"
+      @submit.prevent="
+        handleSubmit(
+          car.price,
+          car.type,
+          car.electricityPrice,
+          car.gasPrice,
+          car.distance,
+          car.consumption
+        )
+      "
     >
       <h2>Inköpspris SEK</h2>
       <input type="number" v-model.number="car.price">
@@ -46,22 +55,22 @@
 
 <script>
 export default {
-  name: "BaseForm",
-  props: ["title"],
+  name: 'CarSpecificationsForm',
+  props: ['title'],
   data() {
     return {
       car: {
-        price: "",
-        type: "",
-        electricityPrice: "",
-        gasPrice: "",
-        distance: "",
-        consumption: ""
+        price: '',
+        type: '',
+        electricityPrice: '',
+        gasPrice: '',
+        distance: '',
+        consumption: '',
       },
-      selectedCarTitle: "",
-      tenKmCost: "",
-      yearCost: "",
-      oneYearCostTotal: ""
+      selectedCarTitle: '',
+      tenKmCost: '',
+      yearCost: '',
+      oneYearCostTotal: '',
     };
   },
 
@@ -74,25 +83,18 @@ export default {
   //   }
   // },
   methods: {
-    handleSubmit(
-      price,
-      type,
-      electricityPrice,
-      gasPrice,
-      distance,
-      consumption
-    ) {
-      if (electricityPrice === "") {
+    handleSubmit(price, type, electricityPrice, gasPrice, distance, consumption) {
+      if (electricityPrice === '') {
         electricityPrice = 7.5;
       } else {
         electricityPrice = electricityPrice;
       }
-      if (gasPrice === "") {
+      if (gasPrice === '') {
         gasPrice = 14.8;
       } else {
         gasPrice = gasPrice;
       }
-      if (distance === "") {
+      if (distance === '') {
         distance = 2000;
       } else {
         distance = distance;
@@ -101,32 +103,30 @@ export default {
       const premieElectric = 40000;
       const premieHybrid = 20000;
 
-      if (type === "gasoline") {
+      if (type === 'gasoline') {
         this.tenKmCost = gasPrice * consumption;
         this.yearCost = distance * consumption * gasPrice;
         this.oneYearCostTotal = distance * consumption * gasPrice + price;
-        this.$emit("dataToParent", this.oneYearCostTotal);
-      } else if (type === "electric") {
+        this.$emit('dataToParent', this.oneYearCostTotal);
+      } else if (type === 'electric') {
         this.tenKmCost = (electricityPrice / 10) * consumption;
         this.yearCost = distance * consumption * (electricityPrice / 10);
         this.oneYearCostTotal =
-          distance * consumption * (electricityPrice / 10) +
-          price -
-          premieElectric;
-        this.$emit("dataToParent", this.oneYearCostTotal);
+          distance * consumption * (electricityPrice / 10) + price - premieElectric;
+        this.$emit('dataToParent', this.oneYearCostTotal);
       }
-    }
+    },
   },
   mounted() {
-    this.$root.$on("selected", selectedCar => {
+    this.$root.$on('selected', selectedCar => {
       this.selectedCarTitle = selectedCar.name;
       this.car.price = selectedCar.price;
     });
-  }
+  },
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .form-container {
   padding: 50px;
   margin: auto;

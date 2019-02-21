@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "firebase": "^5.8.3",
+    "prettier": "^1.16.4",
+    "save-dev": "^2.0.0",
     "vue": "^2.5.22",
     "vue-router": "^3.0.1"
   },
