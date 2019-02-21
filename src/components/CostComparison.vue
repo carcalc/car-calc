@@ -20,9 +20,11 @@ export default {
   computed: {
     taxCredit() {
       // if possible, calculate tax credit for green cars; otherwise make sure the database has this info
+      return '';
     },
     pricePerKm() {
       // Put all calculations in computed properties like these
+      return '';
     },
   },
 };
