@@ -3,13 +3,12 @@
     <br>
     <br>
     <div class="carSelected">
-      <CarSelected v-bind:cars="cars"/>
-      <CarSelected v-bind:cars="cars"/>
+      <CarSelected key="1" v-bind:cars="cars"/>
+      <CarSelected key="2" v-bind:cars="cars"/>
     </div>
     <div class="formWrapper">
-      <BaseForm title="Bil 1" v-on:dataToParent="childClicked1"/>
-
-      <BaseForm title="Bil 2" v-on:dataToParent="childClicked2"/>
+      <BaseForm key="1" title="Bil 1" v-on:dataToParent="childClicked1"/>
+      <BaseForm key="2" title="Bil 2" v-on:dataToParent="childClicked2"/>
     </div>
     <br>
     <button @click="compare" class="compareBtn">Jämför</button>

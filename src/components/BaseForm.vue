@@ -1,7 +1,7 @@
 <template>
   <div class="form-container">
-    <h1 v-if="title">{{ title }}</h1>
-    <h1 v-else>Bil 1</h1>
+    <h1 v-if="selectedCarTitle">{{ selectedCarTitle }}</h1>
+    <h1 v-else>{{title}}</h1>
 
     <form
       @submit.prevent="handleSubmit(car.price, car.type, car.electricityPrice, car.gasPrice, car.distance, car.consumption)"
@@ -47,7 +47,7 @@
 <script>
 export default {
   name: "BaseForm",
-  // props: ["title"],
+  props: ["title"],
   data() {
     return {
       car: {
@@ -58,7 +58,7 @@ export default {
         distance: "",
         consumption: ""
       },
-      title: "",
+      selectedCarTitle: "",
       tenKmCost: "",
       yearCost: "",
       oneYearCostTotal: ""
@@ -119,7 +119,7 @@ export default {
   },
   mounted() {
     this.$root.$on("selected", selectedCar => {
-      this.title = selectedCar.name;
+      this.selectedCarTitle = selectedCar.name;
       this.car.price = selectedCar.price;
     });
   }
