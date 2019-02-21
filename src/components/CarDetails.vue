@@ -10,7 +10,7 @@
     <h1>{{ currentCar.name }}</h1>
 
     <form @submit.prevent="handleSubmit">
-      <h2>Inköpspris SEK</h2>
+      <h2>Inköpspris (SEK)</h2>
       <input type="number" v-model.number="currentCar.price">
       <h2>Drivmedel</h2>
       <input type="radio" name="electric" v-model="currentCar.type" value="electric">
@@ -20,7 +20,11 @@
       <input type="radio" name="gasoline" v-model="currentCar.type" value="gasoline">
       <label for="gasoline">Bensin/diesel</label>
 
-      <h2>Förbrukning</h2>
+      <h2>
+        Förbrukning
+        <span v-if="currentCar.type === 'electric'">(kWh/100 km)</span>
+        <span v-else>(liter/100 km)</span>
+      </h2>
       <input type="number" step="any" v-model.number="currentCar.consumption">
     </form>
     <!-- <div>
