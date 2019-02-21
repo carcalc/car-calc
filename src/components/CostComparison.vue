@@ -7,12 +7,15 @@
     <p>{{usageDetails.distance}} körsträcka</p>
     <p>{{usageDetails.gasPrice}} bensin/dieselpris</p>
     <p>{{usageDetails.kWhPrice}} elpris</p>
+    <p>Pris {{car1.name}}: {{car1.price}} SEK</p>
+    <p>Pris {{car2.name}}: {{car2.price}} SEK</p>
+    <!-- Replace all of the above with output from computed properties -->
   </div>
 </template>
 
 <script>
 export default {
-  props: ['usageDetails', 'currentCars'],
+  props: ['usageDetails', 'car1', 'car2'],
   computed: {
     pricePerKm() {
       // Put all calculations in computed properties like these

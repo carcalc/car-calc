@@ -10,7 +10,7 @@
       />
     </div>
 
-    <CostComparison :usageDetails="usageDetails" :currentCars="currentCars"/>
+    <CostComparison :usageDetails="usageDetails" :car1="currentCars[0]" :car2="currentCars[1]"/>
   </div>
 </template>
 
