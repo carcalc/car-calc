@@ -1,16 +1,17 @@
 <template>
   <div class="cars-compare-wrapper">
-    <UsageDetails v-bind:usageDetails="usageDetails"/>
+    <UsageDetails v-bind:usageDetails="usageDetails" />
     <div class="car-wrapper" v-for="(car, index) in currentCars" v-bind:key="car.id">
       <CarDetails
         @selected="setNewCar"
         v-bind:key="index + 1"
         v-bind:currentCar="car"
         v-bind:allCars="allCars"
+        v-bind:usageDetails="usageDetails"
       />
     </div>
 
-    <CostComparison :usageDetails="usageDetails" :car1="currentCars[0]" :car2="currentCars[1]"/>
+    <CostComparison :usageDetails="usageDetails" :car1="currentCars[0]" :car2="currentCars[1]" />
   </div>
 </template>
 
@@ -56,7 +57,7 @@ export default {
     populateOnLoad() {
       // Populate forms with first two cars in DB
       this.currentCars = this.allCars.slice(0, 2);
-      this.usageDetails = { gasPrice: 14.3, kWhPrice: 1.5, distance: 1500 };
+      this.usageDetails = { gasPrice: 14.3, kwhPrice: 1.5, distance: 1500, ownership: 3 };
     },
   },
 };
