@@ -11,7 +11,7 @@
 
     <form @submit.prevent class="car-details">
       <h2>Inköpspris (kr)</h2>
-      <input type="number" v-model.number="currentCar.price" />
+      <input type="number" min="0" v-model.number="currentCar.price" />
       <h2>Drivmedel</h2>
       <input type="radio" name="electric" v-model="currentCar.type" value="electric" />
       <label for="electric">El</label>
@@ -21,7 +21,7 @@
       <label for="gasoline">Bensin/diesel</label>
 
       <h2>Förbrukning {{ fuelUnit }}</h2>
-      <input type="number" step="any" v-model.number="currentCar.consumption" />
+      <input type="number" step="any" min="0" v-model.number="currentCar.consumption" />
     </form>
     <h2>Kostnader</h2>
     <p>Bränslekostnad: {{ fuelCosts }} (kr/mil)</p>
