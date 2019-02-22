@@ -6,15 +6,15 @@
     <p>{{ usageDetails.distance }} körsträcka</p>
     <p>{{ usageDetails.gasPrice }} bensin/dieselpris</p>
     <p>{{ usageDetails.kwhPrice }} elpris</p>
-    <p>Pris {{ car1.name }}: {{ car1.price }} kr</p>
-    <p>Pris {{ car2.name }}: {{ car2.price }} kr</p>
+    <p>Pris {{ selectedCars[0].name }}: {{ selectedCars[0].price }} kr</p>
+    <p>Pris {{ selectedCars[1].name }}: {{ selectedCars[1].price }} kr</p>
     <!-- Replace all of the above with output from computed properties -->
   </div>
 </template>
 
 <script>
 export default {
-  props: ['usageDetails', 'car1', 'car2'],
+  props: ['usageDetails', 'selectedCars'],
   computed: {
     taxCredit() {
       // if possible, calculate tax credit for green cars; otherwise make sure the database has this info
