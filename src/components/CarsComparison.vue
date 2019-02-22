@@ -1,12 +1,11 @@
 <template>
   <div class="cars-compare-wrapper">
-    <UsageDetails v-bind:usageDetails="usageDetails" />
+    <UsageDetails v-bind:usageDetails="usageDetails"/>
     <div class="car-wrapper" v-for="(car, index) in selectedCars" v-bind:key="car.id">
       <CarSelector v-bind:allCars="allCars" v-bind:key="index + 1" @selected="setNewCar" />
       <CarDetails v-bind:car="car" v-bind:key="index + car.id" v-bind:usageDetails="usageDetails" />
     </div>
-
-    <CostComparison :usageDetails="usageDetails" :selectedCars="selectedCars" />
+    <CostComparison :usageDetails="usageDetails" :selectedCars="selectedCars"/>
   </div>
 </template>
 
@@ -19,12 +18,12 @@ import CostComparison from '@/components/CostComparison';
 import db from '@/firebase/init';
 
 export default {
-  name: 'CarsComparison',
+  name: "CarsComparison",
   components: {
     UsageDetails,
     CarSelector,
     CarDetails,
-    CostComparison,
+    CostComparison
   },
   data() {
     return {
@@ -35,7 +34,7 @@ export default {
   },
   created() {
     // fetch data from firestore
-    db.collection('cars')
+    db.collection("cars")
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
@@ -51,8 +50,8 @@ export default {
     setNewCar({ car, index }) {
       this.$set(this.selectedCars, index, car);
       // We should save this to local storage
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -64,6 +63,10 @@ export default {
 .cars-selector {
 }
 .car-wrapper {
+  border-radius: 8px;
+  box-shadow: 2px 2px 12px 0 rgba(0, 0, 80, 0.15);
+  transition: all 300ms;
+  margin: 2rem;
 }
 .compare-btn {
   padding: 15px 60px;
