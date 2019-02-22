@@ -1,7 +1,7 @@
 <template>
   <div class="cars-selector">
     <h1>Välj bil</h1>
-    <select v-model="selected" @change="handleChange">
+    <select v-model="selected" @change="handleChange" @input="$emit('change')">
       <option disabled value>Välj en bil</option>
       <option v-for="car in allCars" :key="car.id" :value="car">
         {{ car.name }}

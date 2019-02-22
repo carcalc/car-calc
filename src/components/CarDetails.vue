@@ -1,11 +1,10 @@
 <template>
   <div class="car-details-wrapper">
-    <h1 v-if="this.car.customized && !this.car.id.includes('generic')">{{ car.name }}*</h1>
-    <h1 v-else-if="this.car.id.includes('generic') && this.car.type === 'electric'">Elbil</h1>
+    <h1 v-if="this.car.id.includes('generic') && this.car.type === 'electric'">Elbil</h1>
     <h1 v-else-if="this.car.id.includes('generic')">Vanlig bil</h1>
     <h1 v-else>{{ car.name }}</h1>
 
-    <form @submit.prevent class="car-details" @change="car.customized = true">
+    <form @submit.prevent class="car-details" @input="$emit('change')">
       <h2>Inköpspris</h2>
       <input type="number" min="0" v-model.number="car.price" />
       <span>(kr)</span>
