@@ -4,8 +4,8 @@
     <div class="car-wrapper" v-for="(car, index) in currentCars" v-bind:key="car.id">
       <CarDetails
         @selected="setNewCar"
-        v-bind:key="index + 1"
         v-bind:currentCar="car"
+        v-bind:key="index + 1"
         v-bind:allCars="allCars"
         v-bind:usageDetails="usageDetails"
       />
@@ -49,9 +49,8 @@ export default {
       });
   },
   methods: {
-    setNewCar({ name, index }) {
-      const newCar = this.allCars.find(car => car.name === name);
-      this.$set(this.currentCars, index, newCar);
+    setNewCar({ car, index }) {
+      this.$set(this.currentCars, index, car);
       // We should save this to local storage
     },
     populateOnLoad() {
