@@ -1,8 +1,8 @@
 <template>
   <div class="car-details-wrapper">
-    <h1>{{ car.name }}</h1>
+    <h1>{{ carName }}</h1>
 
-    <form @submit.prevent class="car-details">
+    <form @submit.prevent class="car-details" @change="car.customized = true">
       <h2>Inköpspris</h2>
       <input type="number" min="0" v-model.number="car.price" />
       <span>(kr)</span>
@@ -43,6 +43,9 @@ export default {
       return (
         this.car.price + this.fuelCosts * this.usageDetails.distance * this.usageDetails.ownership
       );
+    },
+    carName() {
+      return this.car.customized ? `${this.car.name} (ändrad)` : this.car.name;
     },
   },
 };

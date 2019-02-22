@@ -16,5 +16,8 @@ header {
   height: 10rem;
   background: rgb(177, 177, 177);
   text-align: center;
+  h1 {
+    margin: 0;
+  }
 }
 </style>

@@ -3,7 +3,7 @@
     <UsageDetails v-bind:usageDetails="usageDetails" />
     <div class="car-wrapper" v-for="(car, index) in selectedCars" v-bind:key="car.id">
       <CarSelector v-bind:allCars="allCars" v-bind:key="index + 1" @selected="setNewCar" />
-      <CarDetails v-bind:car="car" v-bind:key="car.id" v-bind:usageDetails="usageDetails" />
+      <CarDetails v-bind:car="car" v-bind:key="index + car.id" v-bind:usageDetails="usageDetails" />
     </div>
 
     <CostComparison :usageDetails="usageDetails" :selectedCars="selectedCars" />
@@ -27,7 +27,7 @@ export default {
   },
   data() {
     return {
-      allCars: [],
+      allCars: [], //Maybe move this to CarSelector; this component does not need to be aware of all cars
       selectedCars: [{}, {}],
       usageDetails: [],
     };
@@ -43,6 +43,7 @@ export default {
         snapshot.forEach(doc => {
           let car = doc.data();
           car.id = doc.id;
+          car.customized = false;
           this.allCars.push(car);
         });
         this.selectedCars = this.allCars.slice(0, 2); // Populate forms with first two cars in DB
