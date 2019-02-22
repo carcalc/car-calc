@@ -7,6 +7,7 @@
         v-bind:key="index + 1"
         v-bind:currentCar="car"
         v-bind:allCars="allCars"
+        v-bind:usageDetails="usageDetails"
       />
     </div>
 
@@ -56,7 +57,7 @@ export default {
     populateOnLoad() {
       // Populate forms with first two cars in DB
       this.currentCars = this.allCars.slice(0, 2);
-      this.usageDetails = { gasPrice: 14.3, kWhPrice: 1.5, distance: 1500 };
+      this.usageDetails = { gasPrice: 14.3, kwhPrice: 1.5, distance: 1500, ownership: 1 };
     },
   },
 };

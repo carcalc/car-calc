@@ -1,5 +1,3 @@
-// Refactor all cost comparisons to here (from CarsSpecificationsForm)
-
 <template>
   <div class="cost-comparison">
     -här hamnar besparingar och grafer-
@@ -7,9 +5,9 @@
     <!-- remove all this crap once we have proper computed properties to display -->
     <p>{{ usageDetails.distance }} körsträcka</p>
     <p>{{ usageDetails.gasPrice }} bensin/dieselpris</p>
-    <p>{{ usageDetails.kWhPrice }} elpris</p>
-    <p>Pris {{ car1.name }}: {{ car1.price }} SEK</p>
-    <p>Pris {{ car2.name }}: {{ car2.price }} SEK</p>
+    <p>{{ usageDetails.kwhPrice }} elpris</p>
+    <p>Pris {{ car1.name }}: {{ car1.price }} kr</p>
+    <p>Pris {{ car2.name }}: {{ car2.price }} kr</p>
     <!-- Replace all of the above with output from computed properties -->
   </div>
 </template>

@@ -5,8 +5,8 @@
       type="number"
       name="electricity-price"
       step="any"
-      v-model.number="usageDetails.kWhPrice"
-      v-bind:placeholder="usageDetails.kWhPrice"
+      v-model.number="usageDetails.kwhPrice"
+      v-bind:placeholder="usageDetails.kwhPrice"
     />
     <label for="gas-price">Bensin-/dieselpris (kr/liter)</label>
     <input
@@ -23,6 +23,13 @@
       type="number"
       v-model.number="usageDetails.distance"
       v-bind:placeholder="usageDetails.distance"
+    />
+    <label for="years">Planerat ägande (år)</label>
+    <input
+      name="years"
+      type="number"
+      v-model.number="usageDetails.ownership"
+      v-bind:placeholder="usageDetails.ownership"
     />
   </form>
 </template>

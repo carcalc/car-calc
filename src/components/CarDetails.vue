@@ -10,7 +10,7 @@
     <h1>{{ currentCar.name }}</h1>
 
     <form @submit.prevent class="car-details">
-      <h2>Inköpspris (SEK)</h2>
+      <h2>Inköpspris (kr)</h2>
       <input type="number" v-model.number="currentCar.price" />
       <h2>Drivmedel</h2>
       <input type="radio" name="electric" v-model="currentCar.type" value="electric" />
@@ -23,26 +23,35 @@
       <h2>Förbrukning {{ fuelUnit }}</h2>
       <input type="number" step="any" v-model.number="currentCar.consumption" />
     </form>
-    <!-- <div>
-      <h2>Kostnader drivmedel</h2>
-      <h4 v-if="tenKmCost">Milkostnad: {{ tenKmCost }} kr</h4>
-      <h4 v-if="yearCost">Årskostnad {{ yearCost }} kr</h4>
-      <h2>Totalkostnad</h2>
-      <h4 v-if="oneYearCostTotal">Totalkostnad första året: {{ oneYearCostTotal }} kr</h4>
-    </div>-->
+    <h2>Kostnader</h2>
+    <p>Bränslekostnad: {{ fuelCosts }} (kr/mil)</p>
+    <p>Totalkostnad: {{ totalCosts }} kr (över {{ usageDetails.ownership }} år)</p>
   </div>
 </template>
 
 <script>
 export default {
   name: 'CarDetails',
-  props: ['currentCar', 'allCars'],
+  props: ['currentCar', 'allCars', 'usageDetails'],
   data() {
     return { selected: this.currentCar.name };
   },
   computed: {
     fuelUnit() {
       return this.currentCar.type === 'electric' ? '(kWh/100 km)' : '(liter/100 km)';
+    },
+    fuelCosts() {
+      return Math.round(
+        this.currentCar.type === 'electric'
+          ? (this.usageDetails.kwhPrice * this.currentCar.consumption) / 10
+          : (this.usageDetails.gasPrice * this.currentCar.consumption) / 10
+      );
+    },
+    totalCosts() {
+      return (
+        this.currentCar.price +
+        this.fuelCosts * this.usageDetails.distance * this.usageDetails.ownership
+      );
     },
   },
   methods: {
