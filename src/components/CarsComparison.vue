@@ -1,17 +1,17 @@
 <template>
   <div class="cars-compare-wrapper">
     <UsageDetails v-bind:usageDetails="usageDetails" />
-    <div class="car-wrapper" v-for="(car, index) in currentCars" v-bind:key="car.id">
+    <div class="car-wrapper" v-for="(car, index) in selectedCars" v-bind:key="car.id">
       <CarDetails
         @selected="setNewCar"
-        v-bind:key="index + 1"
         v-bind:currentCar="car"
+        v-bind:key="index + 1"
         v-bind:allCars="allCars"
         v-bind:usageDetails="usageDetails"
       />
     </div>
 
-    <CostComparison :usageDetails="usageDetails" :car1="currentCars[0]" :car2="currentCars[1]" />
+    <CostComparison :usageDetails="usageDetails" :selectedCars="selectedCars" />
   </div>
 </template>
 
@@ -31,11 +31,14 @@ export default {
   data() {
     return {
       allCars: [],
-      currentCars: [],
+      selectedCars: [{}, {}],
       usageDetails: [],
     };
   },
   created() {
+    // usage details defaults, should probably be a db item too
+    this.usageDetails = { gasPrice: 14.3, kwhPrice: 1.5, distance: 1500, ownership: 3 };
+
     // fetch data from firestore
     db.collection('cars')
       .get()
@@ -45,19 +48,13 @@ export default {
           car.id = doc.id;
           this.allCars.push(car);
         });
-        this.populateOnLoad();
+        this.selectedCars = this.allCars.slice(0, 2); // Populate forms with first two cars in DB
       });
   },
   methods: {
-    setNewCar({ name, index }) {
-      const newCar = this.allCars.find(car => car.name === name);
-      this.$set(this.currentCars, index, newCar);
+    setNewCar({ car, index }) {
+      this.$set(this.selectedCars, index, car);
       // We should save this to local storage
-    },
-    populateOnLoad() {
-      // Populate forms with first two cars in DB
-      this.currentCars = this.allCars.slice(0, 2);
-      this.usageDetails = { gasPrice: 14.3, kwhPrice: 1.5, distance: 1500, ownership: 3 };
     },
   },
 };
