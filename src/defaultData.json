@@ -1,0 +1,27 @@
+{
+	"usage": {
+		"gasPrice": 14.3,
+		"kwhPrice": 1.5,
+		"distance": 1500,
+		"ownership": 3
+	},
+	"cars": [{
+			"consumption": 18.1,
+			"customized": false,
+			"id": "generic-1",
+			"name": "Personbil #2",
+			"price": 200000,
+			"type": "electric",
+			"verified": false
+		},
+		{
+			"consumption": 18.1,
+			"customized": false,
+			"id": "generic-2",
+			"name": "Personbil #1",
+			"price": 230000,
+			"type": "gasoline",
+			"verified": false
+		}
+	]
+}
