@@ -2,13 +2,8 @@
   <div class="cars-compare-wrapper">
     <UsageDetails v-bind:usageDetails="usageDetails" />
     <div class="car-wrapper" v-for="(car, index) in selectedCars" v-bind:key="car.id">
-      <CarDetails
-        @selected="setNewCar"
-        v-bind:currentCar="car"
-        v-bind:key="index + 1"
-        v-bind:allCars="allCars"
-        v-bind:usageDetails="usageDetails"
-      />
+      <CarSelector v-bind:allCars="allCars" v-bind:key="index + 1" @selected="setNewCar" />
+      <CarDetails v-bind:car="car" v-bind:key="car.id" v-bind:usageDetails="usageDetails" />
     </div>
 
     <CostComparison :usageDetails="usageDetails" :selectedCars="selectedCars" />
@@ -17,6 +12,7 @@
 
 <script>
 import UsageDetails from './UsageDetails';
+import CarSelector from './CarSelector';
 import CarDetails from './CarDetails';
 import CostComparison from './CostComparison';
 import db from '@/firebase/init';
@@ -24,8 +20,9 @@ import db from '@/firebase/init';
 export default {
   name: 'CarsComparison',
   components: {
-    CarDetails,
     UsageDetails,
+    CarSelector,
+    CarDetails,
     CostComparison,
   },
   data() {
