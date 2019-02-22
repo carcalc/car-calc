@@ -11,10 +11,11 @@
 </template>
 
 <script>
-import UsageDetails from './UsageDetails';
-import CarSelector from './CarSelector';
-import CarDetails from './CarDetails';
-import CostComparison from './CostComparison';
+import defaultData from '@/defaultData.json';
+import UsageDetails from '@/components/UsageDetails';
+import CarSelector from '@/components/CarSelector';
+import CarDetails from '@/components/CarDetails';
+import CostComparison from '@/components/CostComparison';
 import db from '@/firebase/init';
 
 export default {
@@ -28,14 +29,11 @@ export default {
   data() {
     return {
       allCars: [], //Maybe move this to CarSelector; this component does not need to be aware of all cars
-      selectedCars: [{}, {}],
-      usageDetails: [],
+      selectedCars: defaultData.cars,
+      usageDetails: defaultData.usage,
     };
   },
   created() {
-    // usage details defaults, should probably be a db item too
-    this.usageDetails = { gasPrice: 14.3, kwhPrice: 1.5, distance: 1500, ownership: 3 };
-
     // fetch data from firestore
     db.collection('cars')
       .get()
@@ -46,7 +44,7 @@ export default {
           car.customized = false;
           this.allCars.push(car);
         });
-        this.selectedCars = this.allCars.slice(0, 2); // Populate forms with first two cars in DB
+        this.selectedCars.forEach(car => this.allCars.unshift(car));
       });
   },
   methods: {

@@ -1,6 +1,8 @@
 <template>
   <div class="car-details-wrapper">
-    <h1>{{ carName }}</h1>
+    <h1>{{ car.name }}</h1>
+
+    <small v-if="this.car.customized && !this.car.id.includes('generic')">(ändrad)</small>
 
     <form @submit.prevent class="car-details" @change="car.customized = true">
       <h2>Inköpspris</h2>
@@ -43,9 +45,6 @@ export default {
       return (
         this.car.price + this.fuelCosts * this.usageDetails.distance * this.usageDetails.ownership
       );
-    },
-    carName() {
-      return this.car.customized ? `${this.car.name} (ändrad)` : this.car.name;
     },
   },
 };
