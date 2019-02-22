@@ -1,43 +1,48 @@
 <template>
   <div class="cars-compare-wrapper">
-    <UsageDetails v-bind:usageDetails="usageDetails" />
+    <UsageDetails v-bind:usageDetails="usageDetails"/>
     <div class="car-wrapper" v-for="(car, index) in selectedCars" v-bind:key="car.id">
-      <CarSelector v-bind:allCars="allCars" v-bind:key="index + 1" @selected="setNewCar" />
-      <CarDetails v-bind:car="car" v-bind:key="car.id" v-bind:usageDetails="usageDetails" />
+      <CarSelector v-bind:allCars="allCars" v-bind:key="index + 1" @selected="setNewCar"/>
+      <CarDetails v-bind:car="car" v-bind:key="car.id" v-bind:usageDetails="usageDetails"/>
     </div>
 
-    <CostComparison :usageDetails="usageDetails" :selectedCars="selectedCars" />
+    <CostComparison :usageDetails="usageDetails" :selectedCars="selectedCars"/>
   </div>
 </template>
 
 <script>
-import UsageDetails from './UsageDetails';
-import CarSelector from './CarSelector';
-import CarDetails from './CarDetails';
-import CostComparison from './CostComparison';
-import db from '@/firebase/init';
+import UsageDetails from "./UsageDetails";
+import CarSelector from "./CarSelector";
+import CarDetails from "./CarDetails";
+import CostComparison from "./CostComparison";
+import db from "@/firebase/init";
 
 export default {
-  name: 'CarsComparison',
+  name: "CarsComparison",
   components: {
     UsageDetails,
     CarSelector,
     CarDetails,
-    CostComparison,
+    CostComparison
   },
   data() {
     return {
       allCars: [],
       selectedCars: [{}, {}],
-      usageDetails: [],
+      usageDetails: []
     };
   },
   created() {
     // usage details defaults, should probably be a db item too
-    this.usageDetails = { gasPrice: 14.3, kwhPrice: 1.5, distance: 1500, ownership: 3 };
+    this.usageDetails = {
+      gasPrice: 14.3,
+      kwhPrice: 1.5,
+      distance: 1500,
+      ownership: 3
+    };
 
     // fetch data from firestore
-    db.collection('cars')
+    db.collection("cars")
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
@@ -52,8 +57,8 @@ export default {
     setNewCar({ car, index }) {
       this.$set(this.selectedCars, index, car);
       // We should save this to local storage
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -65,6 +70,10 @@ export default {
 .cars-selector {
 }
 .car-wrapper {
+  border-radius: 8px;
+  box-shadow: 2px 2px 12px 0 rgba(0, 0, 80, 0.15);
+  transition: all 300ms;
+  margin: 2rem;
 }
 .compare-btn {
   padding: 15px 60px;
