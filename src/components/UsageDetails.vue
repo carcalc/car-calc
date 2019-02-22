@@ -1,5 +1,5 @@
 <template>
-  <form class="usage-form" @submit.prevent @input="$emit('change')">
+  <form class="usage-form" @submit.prevent>
     <label for="electricity-price">Elpris (kr/kWh)</label>
     <input
       type="number"
@@ -46,6 +46,9 @@
 <script>
 export default {
   props: ['usageDetails'],
+  updated() {
+    localStorage.setItem('usageDetails', JSON.stringify(this.usageDetails));
+  },
 };
 </script>
 

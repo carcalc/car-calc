@@ -1,22 +1,17 @@
 <template>
   <div class="cars-compare-wrapper">
-    <UsageDetails v-bind:usageDetails="usageDetails" @change="updateStoredData" />
+    <UsageDetails v-bind:usageDetails="usageDetails" />
     <div class="car-wrapper" v-for="(car, index) in selectedCars" v-bind:key="car.id">
-      <CarSelector
-        v-bind:allCars="allCars"
-        v-bind:key="index + 1"
-        @selected="setNewCar"
-        @change="updateStoredData"
-      />
+      <CarSelector v-bind:allCars="allCars" v-bind:key="index + '-select'" @selected="setNewCar" />
       <CarDetails
         v-bind:car="car"
-        v-bind:key="index + car.id"
+        v-bind:key="index + '-details'"
         v-bind:usageDetails="usageDetails"
-        @change="updateStoredData"
       />
     </div>
 
     <CostComparison :usageDetails="usageDetails" :selectedCars="selectedCars" />
+    <input type="button" value="Återställ" @click="resetStoredData" />
   </div>
 </template>
 
@@ -58,9 +53,6 @@ export default {
         this.addDefaultsToList();
       });
   },
-  updated() {
-    console.log('carscomparison updated');
-  },
   methods: {
     setNewCar({ car, index }) {
       this.$set(this.selectedCars, index, car);
@@ -70,18 +62,26 @@ export default {
     },
 
     getStoredData() {
-      const selectedCars = JSON.parse(localStorage.getItem('selectedCars'));
-      if (selectedCars !== null) {
+      // Fetch data from localStorage that is saved by the components themselves.
+      let selectedCars = [];
+      const usageDetails = JSON.parse(localStorage.getItem('usageDetails'));
+
+      this.selectedCars.forEach((car, index) => {
+        selectedCars.push(JSON.parse(localStorage.getItem(`car${index}`)));
+      });
+
+      if (!selectedCars.includes(null)) {
         this.selectedCars = selectedCars;
       }
-      const usageDetails = JSON.parse(localStorage.getItem('usageDetails'));
+
       if (usageDetails !== null) {
         this.usageDetails = usageDetails;
       }
     },
-    updateStoredData() {
-      localStorage.setItem('selectedCars', JSON.stringify(this.selectedCars));
-      localStorage.setItem('usageDetails', JSON.stringify(this.usageDetails));
+    resetStoredData() {
+      localStorage.clear();
+
+      // Implement reset here. Currently only clears local storage
     },
   },
 };

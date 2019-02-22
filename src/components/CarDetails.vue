@@ -1,7 +1,9 @@
 <template>
   <div class="car-details-wrapper">
-    <h1 v-if="this.car.id.includes('generic') && this.car.type === 'electric'">Elbil</h1>
-    <h1 v-else-if="this.car.id.includes('generic')">Vanlig bil</h1>
+    <h1 v-if="this.car.id.includes('generic') && this.car.type === 'electric'">
+      {{ car.name }} (elektrisk)
+    </h1>
+    <h1 v-else-if="this.car.id.includes('generic')">{{ car.name }} (vanlig)</h1>
     <h1 v-else>{{ car.name }}</h1>
 
     <form @submit.prevent class="car-details" @input="$emit('change')">
@@ -46,6 +48,10 @@ export default {
         this.car.price + this.fuelCosts * this.usageDetails.distance * this.usageDetails.ownership
       );
     },
+  },
+  updated() {
+    const index = this.$vnode.key.charAt(0);
+    localStorage.setItem(`car${index}`, JSON.stringify(this.car));
   },
 };
 </script>
