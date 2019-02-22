@@ -17,8 +17,10 @@ header {
   width: 100%;
   height: 10rem;
   background: rgb(177, 177, 177);
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
+  text-align: center;
+  h1 {
+    margin: 0;
+  }
 }
 </style>
