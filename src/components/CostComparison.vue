@@ -15,6 +15,7 @@
     <h1>Första året total bil 1: {{firstYearTotalCarOne}} kr</h1>
     <h1>Första året total bil 2: {{firstYearTotalCarTwo}} kr</h1>
     <h1>{{ cheapestCar }} är {{ comparisonFirstYear }} kr billigare första året</h1>
+    <h1>{{ cheapestCar }} är {{ comparisonAllYears }} kr billigare alla åren</h1>
     <!-- Replace all of the above with output from computed properties -->
   </div>
 </template>
@@ -82,6 +83,13 @@ export default {
       this.firstYearTotalCarOne < this.firstYearTotalCarTwo
         ? (result = this.firstYearTotalCarTwo - this.firstYearTotalCarOne)
         : (result = this.firstYearTotalCarOne - this.firstYearTotalCarTwo);
+      return result;
+    },
+    comparisonAllYears() {
+      let result = 0;
+      this.allYearTotalCarOne < this.allYearTotalCarTwo
+        ? (result = this.allYearTotalCarTwo - this.allYearTotalCarOne)
+        : (result = this.allYearTotalCarOne - this.allYearTotalCarTwo);
       return result;
     },
     cheapestCar() {
