@@ -1,109 +1,117 @@
 <template>
-  <div class="cost-comparison">-här hamnar besparingar och grafer-
+  <div class="cost-comparison">
     <!-- This is just bullshit output to make sure data is where it's supposed to be -->
     <!-- remove all this crap once we have proper computed properties to display -->
-    <p>{{ usageDetails.distance }} körsträcka</p>
+    <!-- <p>{{ usageDetails.distance }} körsträcka</p>
     <p>{{ usageDetails.gasPrice }} bensin/dieselpris</p>
     <p>{{ usageDetails.kwhPrice }} elpris</p>
 
     <p>Pris {{ selectedCars[0].name }}: {{ selectedCars[0].price }} kr</p>
-    <p>Pris {{ selectedCars[1].name }}: {{ selectedCars[1].price }} kr</p>
-    <!-- <h1>Pris/km bil 1: {{pricePerKmCarOne}}</h1>
-    <h1>Pris/km bil 2: {{pricePerKmCarTwo}}</h1>-->
-    <h1>Alla år bil 1: {{allYearTotalCarOne}} kr</h1>
-    <h1>Alla år bil 2: {{allYearTotalCarTwo}} kr</h1>
-    <h1>Första året total bil 1: {{firstYearTotalCarOne}} kr</h1>
-    <h1>Första året total bil 2: {{firstYearTotalCarTwo}} kr</h1>
-    <h1>{{ cheapestCar }} är {{ comparisonFirstYear }} kr billigare första året</h1>
-    <h1>{{ cheapestCar }} är {{ comparisonAllYears }} kr billigare alla åren</h1>
-    <!-- Replace all of the above with output from computed properties -->
+    <p>Pris {{ selectedCars[1].name }}: {{ selectedCars[1].price }} kr</p>-->
+    <h1>
+      <span>Totalkostnad för</span>
+      {{ selectedCars[0].name }}
+      <span>är</span>
+      {{ allYearsTotalCarOne }} kr
+    </h1>
+    <h1>
+      <span>Totalkostnad för</span>
+      {{ selectedCars[1].name }}
+      <span>är</span>
+      {{ allYearsTotalCarTwo }} kr
+    </h1>
+    <h1>
+      {{ cheapest }}
+      <span>är</span>
+      {{comparisonFirstYearResult}}
+      <span>kr billigare första året.</span>
+    </h1>
+    <h1>
+      {{ cheapest }}
+      <span>är</span>
+      {{ comparisonAllYearsResult }}
+      <span>kr billigare beräknat på {{ usageDetails.ownership }} år.</span>
+    </h1>
   </div>
 </template>
 
 <script>
 export default {
   props: ["usageDetails", "selectedCars"],
+  methods: {
+    electricPremie(car) {
+      return car === "electric" ? 60000 : 0;
+    },
+    pricePerTenKm(car) {
+      let result = 0;
+      let { kwhPrice, gasPrice } = this.usageDetails;
+      let { type, consumption } = car;
+      type === "electric"
+        ? (result = (consumption * kwhPrice) / 10)
+        : (result = (consumption * gasPrice) / 10);
+      return result;
+    },
+    firstYearTotal(car) {
+      let { price, type } = car;
+      let { distance } = this.usageDetails;
+      return Math.round(
+        this.pricePerTenKm(car) * distance + price - this.electricPremie(type)
+      );
+    },
+    allYearsTotal(car) {
+      let { distance, ownership } = this.usageDetails;
+      let { price, type } = car;
+      return Math.round(
+        this.pricePerTenKm(car) * distance * ownership +
+          price -
+          this.electricPremie(type)
+      );
+    },
+    comparisonFirstYear(carOne, carTwo) {
+      let result = 0;
+      carOne < carTwo ? (result = carTwo - carOne) : (result = carOne - carTwo);
+      return result;
+    },
+    comparisonAllYears(carOne, carTwo) {
+      let result = 0;
+      carOne < carTwo ? (result = carTwo - carOne) : (result = carOne - carTwo);
+      return result;
+    },
+    cheapestCar(carOne, carTwo) {
+      let cheapest = "";
+      carOne < carTwo ? (cheapest = carOne.name) : (cheapest = carTwo.name);
+      return cheapest;
+    }
+  },
   computed: {
     taxCredit() {
       // if possible, calculate tax credit for green cars; otherwise make sure the database has this info
       return "";
     },
-    pricePerTenKmCarOne() {
-      let result = 0;
-      let { kwhPrice, gasPrice } = this.usageDetails;
-      let { type, consumption } = this.selectedCars[0];
-      type === "electric"
-        ? (result = (consumption * kwhPrice) / 10)
-        : (result = (consumption * gasPrice) / 10);
-      return result;
-    },
-    pricePerTenKmCarTwo() {
-      let result = 0;
-      let { kwhPrice, gasPrice } = this.usageDetails;
-      let { type, consumption } = this.selectedCars[1];
-      type === "electric"
-        ? (result = (consumption * kwhPrice) / 10)
-        : (result = (consumption * gasPrice) / 10);
-      return result;
-    },
     firstYearTotalCarOne() {
-      let { distance } = this.usageDetails;
-      let { price } = this.selectedCars[0];
-      return Math.round(
-        this.pricePerTenKmCarOne * distance + price - this.electricPremieCarOne
-      );
+      return this.firstYearTotal(this.selectedCars[0]).toLocaleString();
     },
     firstYearTotalCarTwo() {
-      let { distance } = this.usageDetails;
-      let { price } = this.selectedCars[1];
-      return Math.round(
-        this.pricePerTenKmCarTwo * distance + price - this.electricPremieCarTwo
-      );
+      return this.firstYearTotal(this.selectedCars[1]).toLocaleString();
     },
-    allYearTotalCarOne() {
-      let { distance, ownership } = this.usageDetails;
-      let { price } = this.selectedCars[0];
-      return (
-        this.pricePerTenKmCarOne * distance * ownership +
-        price -
-        this.electricPremieCarOne
-      );
+    allYearsTotalCarOne() {
+      return this.allYearsTotal(this.selectedCars[0]).toLocaleString();
     },
-    allYearTotalCarTwo() {
-      let { distance, ownership } = this.usageDetails;
-      let { price } = this.selectedCars[1];
-      return (
-        this.pricePerTenKmCarTwo * distance * ownership +
-        price -
-        this.electricPremieCarTwo
-      );
+    allYearsTotalCarTwo() {
+      return this.allYearsTotal(this.selectedCars[1]).toLocaleString();
     },
-    comparisonFirstYear() {
-      let result = 0;
-      this.firstYearTotalCarOne < this.firstYearTotalCarTwo
-        ? (result = this.firstYearTotalCarTwo - this.firstYearTotalCarOne)
-        : (result = this.firstYearTotalCarOne - this.firstYearTotalCarTwo);
-      return result.toLocaleString();
+    comparisonFirstYearResult() {
+      const carOne = this.firstYearTotal(this.selectedCars[0]);
+      const carTwo = this.firstYearTotal(this.selectedCars[1]);
+      return this.comparisonFirstYear(carOne, carTwo).toLocaleString();
     },
-    comparisonAllYears() {
-      let result = 0;
-      this.allYearTotalCarOne < this.allYearTotalCarTwo
-        ? (result = this.allYearTotalCarTwo - this.allYearTotalCarOne)
-        : (result = this.allYearTotalCarOne - this.allYearTotalCarTwo);
-      return result.toLocaleString();
+    comparisonAllYearsResult() {
+      const carOne = this.allYearsTotal(this.selectedCars[0]);
+      const carTwo = this.allYearsTotal(this.selectedCars[1]);
+      return this.comparisonAllYears(carOne, carTwo).toLocaleString();
     },
-    cheapestCar() {
-      let cheapest = "";
-      this.firstYearTotalCarOne < this.firstYearTotalCarTwo
-        ? (cheapest = this.selectedCars[0].name)
-        : (cheapest = this.selectedCars[1].name);
-      return cheapest;
-    },
-    electricPremieCarOne() {
-      return this.selectedCars[0].type === "electric" ? 60000 : 0;
-    },
-    electricPremieCarTwo() {
-      return this.selectedCars[1].type === "electric" ? 60000 : 0;
+    cheapest() {
+      return this.cheapestCar(this.selectedCars[0], this.selectedCars[1]);
     }
   }
 };
@@ -116,7 +124,14 @@ export default {
   box-shadow: 2px 2px 12px 0 rgba(0, 0, 80, 0.15);
   transition: all 300ms;
   max-width: 80%;
-  margin: auto;
+  margin: 2rem auto;
   padding: 2rem;
+  h1 {
+    color: orangered;
+  }
+}
+span {
+  font-size: 1.5rem;
+  color: #333;
 }
 </style>
