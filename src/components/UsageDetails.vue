@@ -7,7 +7,7 @@
       step="any"
       min="0"
       v-model.number="usageDetails.kwhPrice"
-      v-bind:placeholder="usageDetails.kwhPrice"
+      :placeholder="usageDetails.kwhPrice"
     >
     <label for="gas-price">Bensin-/dieselpris (kr/liter)</label>
     <input
@@ -16,10 +16,10 @@
       step="any"
       min="0"
       v-model.number="usageDetails.gasPrice"
-      v-bind:placeholder="usageDetails.gasPrice"
+      :placeholder="usageDetails.gasPrice"
     >
     
-    <label for="distance">Körsträcka (km/år)</label>
+    <label for="distance">Körsträcka (mil/år)</label>
     <input
       name="distance"
       type="range"
@@ -27,9 +27,9 @@
       step="100"
       max="5000"
       v-model.number="usageDetails.distance"
-      v-bind:placeholder="usageDetails.distance"
+      :placeholder="usageDetails.distance"
     >
-    <span>{{ usageDetails.distance }} km</span>
+    <span>{{ usageDetails.distance }}mil</span>
     <label for="years">Planerat ägande (år)</label>
     <input
       name="years"
@@ -37,7 +37,7 @@
       min="1"
       max="10"
       v-model.number="usageDetails.ownership"
-      v-bind:placeholder="usageDetails.ownership"
+      :placeholder="usageDetails.ownership"
     >
     <span>{{ usageDetails.ownership }} år</span>
   </form>
