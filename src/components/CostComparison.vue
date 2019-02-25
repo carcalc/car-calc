@@ -83,14 +83,14 @@ export default {
       this.firstYearTotalCarOne < this.firstYearTotalCarTwo
         ? (result = this.firstYearTotalCarTwo - this.firstYearTotalCarOne)
         : (result = this.firstYearTotalCarOne - this.firstYearTotalCarTwo);
-      return result;
+      return result.toLocaleString();
     },
     comparisonAllYears() {
       let result = 0;
       this.allYearTotalCarOne < this.allYearTotalCarTwo
         ? (result = this.allYearTotalCarTwo - this.allYearTotalCarOne)
         : (result = this.allYearTotalCarOne - this.allYearTotalCarTwo);
-      return result;
+      return result.toLocaleString();
     },
     cheapestCar() {
       let cheapest = "";
@@ -112,5 +112,11 @@ export default {
 <style lang="scss" scoped>
 .cost-comparison {
   grid-column: 1 / -1;
+  border-radius: 8px;
+  box-shadow: 2px 2px 12px 0 rgba(0, 0, 80, 0.15);
+  transition: all 300ms;
+  max-width: 80%;
+  margin: auto;
+  padding: 2rem;
 }
 </style>
