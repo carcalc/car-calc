@@ -10,18 +10,18 @@
 
 <script>
 export default {
-  props: ["allCars"],
+  props: ['allCars'],
   data() {
-    return { selected: "" };
+    return { selected: '' };
   },
   methods: {
     handleChange() {
-      this.$emit("selected", {
+      this.$emit('selected', {
         car: this.selected,
-        index: this.$vnode.key - 1
+        index: this.$vnode.key - 1,
       });
-    }
-  }
+    },
+  },
 };
 </script>
 

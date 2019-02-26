@@ -8,7 +8,7 @@
       min="0"
       v-model.number="usageDetails.kwhPrice"
       :placeholder="usageDetails.kwhPrice"
-    >
+    />
     <label for="gas-price">Bensin-/dieselpris (kr/liter)</label>
     <input
       type="number"
@@ -17,8 +17,8 @@
       min="0"
       v-model.number="usageDetails.gasPrice"
       :placeholder="usageDetails.gasPrice"
-    >
-    
+    />
+
     <label for="distance">Körsträcka (mil/år)</label>
     <input
       name="distance"
@@ -28,7 +28,7 @@
       max="5000"
       v-model.number="usageDetails.distance"
       :placeholder="usageDetails.distance"
-    >
+    />
     <span>{{ usageDetails.distance }}mil</span>
     <label for="years">Planerat ägande (år)</label>
     <input
@@ -38,14 +38,14 @@
       max="10"
       v-model.number="usageDetails.ownership"
       :placeholder="usageDetails.ownership"
-    >
+    />
     <span>{{ usageDetails.ownership }} år</span>
   </form>
 </template>
 
 <script>
 export default {
-  props: ["usageDetails"]
+  props: ['usageDetails'],
 };
 </script>
 

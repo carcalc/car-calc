@@ -1,40 +1,40 @@
 <template>
   <div class="cars-compare-wrapper">
-    <UsageDetails :usageDetails="usageDetails"/>
+    <UsageDetails :usageDetails="usageDetails" />
     <div class="car-wrapper" v-for="(car, index) in selectedCars" :key="car.id">
-      <CarSelector :allCars="allCars" :key="index + 1" @selected="setNewCar"/>
-      <CarDetails :car="car" :key="index + car.id" :usageDetails="usageDetails"/>
+      <CarSelector :allCars="allCars" :key="index + 1" @selected="setNewCar" />
+      <CarDetails :car="car" :key="index + car.id" :usageDetails="usageDetails" />
     </div>
-    <CostComparison :usageDetails="usageDetails" :selectedCars="selectedCars"/>
+    <CostComparison :usageDetails="usageDetails" :selectedCars="selectedCars" />
   </div>
 </template>
 
 <script>
-import defaultData from "@/defaultData.json";
-import UsageDetails from "@/components/UsageDetails";
-import CarSelector from "@/components/CarSelector";
-import CarDetails from "@/components/CarDetails";
-import CostComparison from "@/components/CostComparison";
-import db from "@/firebase/init";
+import defaultData from '@/defaultData.json';
+import UsageDetails from '@/components/UsageDetails';
+import CarSelector from '@/components/CarSelector';
+import CarDetails from '@/components/CarDetails';
+import CostComparison from '@/components/CostComparison';
+import db from '@/firebase/init';
 
 export default {
-  name: "CarsComparison",
+  name: 'CarsComparison',
   components: {
     UsageDetails,
     CarSelector,
     CarDetails,
-    CostComparison
+    CostComparison,
   },
   data() {
     return {
       allCars: [], //Maybe move this to CarSelector; this component does not need to be aware of all cars
       selectedCars: defaultData.cars,
-      usageDetails: defaultData.usage
+      usageDetails: defaultData.usage,
     };
   },
   created() {
     // fetch data from firestore
-    db.collection("cars")
+    db.collection('cars')
       .get()
       .then(snapshot => {
         snapshot.forEach(doc => {
@@ -50,8 +50,8 @@ export default {
     setNewCar({ car, index }) {
       this.$set(this.selectedCars, index, car);
       // We should save this to local storage
-    }
-  }
+    },
+  },
 };
 </script>
 

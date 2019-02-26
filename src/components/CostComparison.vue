@@ -23,7 +23,7 @@
     <h1>
       {{ cheapest }}
       <span>är</span>
-      {{comparisonFirstYearResult}}
+      {{ comparisonFirstYearResult }}
       <span>kr billigare första året.</span>
     </h1>
     <h1>
@@ -37,16 +37,16 @@
 
 <script>
 export default {
-  props: ["usageDetails", "selectedCars"],
+  props: ['usageDetails', 'selectedCars'],
   methods: {
     electricPremie(car) {
-      return car === "electric" ? 60000 : 0;
+      return car === 'electric' ? 60000 : 0;
     },
     pricePerTenKm(car) {
       let result = 0;
       let { kwhPrice, gasPrice } = this.usageDetails;
       let { type, consumption } = car;
-      type === "electric"
+      type === 'electric'
         ? (result = (consumption * kwhPrice) / 10)
         : (result = (consumption * gasPrice) / 10);
       return result;
@@ -54,17 +54,13 @@ export default {
     firstYearTotal(car) {
       let { price, type } = car;
       let { distance } = this.usageDetails;
-      return Math.round(
-        this.pricePerTenKm(car) * distance + price - this.electricPremie(type)
-      );
+      return Math.round(this.pricePerTenKm(car) * distance + price - this.electricPremie(type));
     },
     allYearsTotal(car) {
       let { distance, ownership } = this.usageDetails;
       let { price, type } = car;
       return Math.round(
-        this.pricePerTenKm(car) * distance * ownership +
-          price -
-          this.electricPremie(type)
+        this.pricePerTenKm(car) * distance * ownership + price - this.electricPremie(type)
       );
     },
     comparisonFirstYear(carOne, carTwo) {
@@ -78,15 +74,15 @@ export default {
       return result;
     },
     cheapestCar(carOne, carTwo) {
-      let cheapest = "";
+      let cheapest = '';
       carOne < carTwo ? (cheapest = carOne.name) : (cheapest = carTwo.name);
       return cheapest;
-    }
+    },
   },
   computed: {
     taxCredit() {
       // if possible, calculate tax credit for green cars; otherwise make sure the database has this info
-      return "";
+      return '';
     },
     firstYearTotalCarOne() {
       return this.firstYearTotal(this.selectedCars[0]).toLocaleString();
@@ -112,8 +108,8 @@ export default {
     },
     cheapest() {
       return this.cheapestCar(this.selectedCars[0], this.selectedCars[1]);
-    }
-  }
+    },
+  },
 };
 </script>
 
