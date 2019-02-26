@@ -19,7 +19,7 @@
       :placeholder="usage.gasPrice"
     />
 
-    <label for="distance">Körsträcka (mil/år)</label>
+    <label for="distance">Körsträcka</label>
     <input
       name="distance"
       type="range"
@@ -29,8 +29,8 @@
       v-model.number="usage.distance"
       :placeholder="usage.distance"
     />
-    <span>{{ usage.distance }}mil</span>
-    <label for="years">Planerat ägande (år)</label>
+    <span>{{ usage.distance }} km/år</span>
+    <label for="years">Planerat ägande</label>
     <input
       name="years"
       type="range"
