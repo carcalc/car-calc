@@ -11,7 +11,7 @@
     </div>
 
     <CostComparison :usageDetails="usageDetails" :selectedCars="selectedCars" />
-    <input type="button" value="Återställ" @click="resetAllData" />
+    <input type="button" value="Återställ" @click="resetStoredData" />
   </div>
 </template>
 
@@ -78,7 +78,7 @@ export default {
         this.usageDetails = usageDetails;
       }
     },
-    resetAllData() {
+    resetStoredData() {
       localStorage.clear();
 
       // Implement reset here. Currently only clears local storage
