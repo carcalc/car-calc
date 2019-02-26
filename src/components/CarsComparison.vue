@@ -65,7 +65,6 @@ export default {
 .car-wrapper {
   border-radius: 8px;
   box-shadow: 2px 2px 12px 0 rgba(0, 0, 80, 0.15);
-  transition: all 300ms;
   margin: 2rem;
 }
 .compare-btn {

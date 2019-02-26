@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <AppHeader/>
-    <AppNav/>
+    <div>
+      <AppHeader/>
+      <AppNav/>
+    </div>
     <router-view/>
     <AppFooter/>
   </div>
@@ -57,7 +59,7 @@ img {
 }
 body,
 html {
-  min-height: 100%;
+  width: 100%;
   height: 100%;
 }
 #app {
