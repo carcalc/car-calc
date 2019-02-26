@@ -1,7 +1,8 @@
 <template>
   <nav id="nav">
     <router-link :to="{ name: 'home' }">Start</router-link>
-    <router-link :to="{ name: 'about' }">Information</router-link>
+    <router-link :to="{ name: 'information' }">Information</router-link>
+    <router-link :to="{ name: 'about' }">Om oss</router-link>
   </nav>
 </template>
 
@@ -15,7 +16,6 @@ export default {
 #nav {
   padding: 10px;
   background-color: rgb(95, 95, 197);
-  max-height: 3rem;
 
   a {
     padding: 0.5rem;

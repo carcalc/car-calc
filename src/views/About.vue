@@ -1,48 +1,37 @@
 <template>
   <div class="about">
-    <h1>Information</h1>
-    <h2>Källkritik</h2>
-    <p>Vi kan inte garantera att den data vi presenterar på vår site stämmer till punkt och pricka. Det kan skilja sig beroende på källa. Vi har dock försökt vara grundliga och hållt oss till så oberoende källor som möjligt. Specifikation på bilarna i vår databas kommer främst från www.bilsvar.se. Bilarnas förbrukning avser blandad körning.</p>
-    <h2>Beräkningar</h2>
-    <p>Vi har inte tagit hänsyn till skatteskillnader i miljöbil vs icke miljöbil. Ej heller data som värdeminskning, underhåll/reparationer m.m. Vi har tagit med bonusen om upp till 60 000 kr som betalas ut till ägare av bilar med låga utsläpp (https://transportstyrelsen.se/sv/vagtrafik/Fordon/bonus-malus/). Vi har också räknat på att man som bilägare av elbil betalar 100% av bilens laddning</p>
-    <ul>
-      <li>
-        <span>Bilens bränslekostnader:</span> bränslekostnad * förbrukning
-      </li>
-      <li>
-        <span>Totalkostnad första året:</span> bränslekostnader * mil/år + inköpspris (- ev. bonus)
-      </li>
-      <li>
-        <span>Totalkostnad valt antal år:</span> bränslekostnader * mil/år * antal år + inköpspris (- ev. bonus)
-      </li>
-      <li></li>
-      <li></li>
-    </ul>
-    <h2>Källor</h2>
-    <ul>
-      <a href="www.bilsvar.se">
-        <li>1. Bilsvar</li>
-      </a>
-      
-      <a href="https://transportstyrelsen.se/sv/vagtrafik/Fordon/bonus-malus/">
-        <li>2. Transportstyrelsen</li>
-      </a>
-      
-      <a href="..">
-        <li>3. Other link</li>
-      </a>
-    </ul>
+    <div class="about-wrapper">
+      <h2>Om Oss</h2>
+      <p>Vi som gjort denna site är Andreas och Gabriel. Det är vårat ex-jobb på vår utbildning till frontendutvecklare på Nackademin. Syftet är främst för oss att lära oss jobba i projekt "från ax till limpa", men även leverera en användbar produkt. Vi har valt att jobba i ramverket vue, vilket för oss var helt outforskad mark. Stora delar av projekttiden har gått till att lära oss ramverket. Vi har försökt använda oss av "best practice" när det kommer till upplägg och kodning.</p>
+    </div>
+    <hr>
+    <div class="contact-wrapper">
+      <h2>Kontakt</h2>
+      <p>Vid frågor kan ni nå oss via Linkedin!</p>
+      <h4>
+        Andreas:
+        <i class="fab fa-linkedin-in fa-lg"></i>
+      </h4>
+      <h4>
+        Gabriel:
+        <i class="fab fa-linkedin-in fa-lg"></i>
+      </h4>
+    </div>
   </div>
 </template>
 <style lang="scss" scoped>
-ul {
-  list-style: circle;
-  li {
-    padding: 10px;
-  }
-  span {
-    font-size: 1.2rem;
-    color: orangered;
-  }
+.about-wrapper,
+.contact-wrapper {
+  margin: 0 auto;
+  padding: 2rem;
+  width: 80%;
+}
+i.fab {
+  color: #0077b5;
+  cursor: pointer;
+}
+hr {
+  width: 50%;
+  margin: auto;
 }
 </style>
