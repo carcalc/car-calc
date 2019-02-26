@@ -4,7 +4,7 @@
     <select v-model="selected" @change="handleChange">
       <option disabled value>Välj en bil</option>
       <option v-for="car in allCars" :key="car.id" :value="car">
-        {{ car.name }}
+        {{ car.name }} — {{ car.specs }}
       </option>
     </select>
   </div>
