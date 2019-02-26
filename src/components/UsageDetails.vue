@@ -1,6 +1,5 @@
 <template>
   <form class="usage-form" @submit.prevent @input="$emit('change')">
-    //listen to this
     <label for="electricity-price">Elpris (kr/kWh)</label>
     <input
       type="number"
