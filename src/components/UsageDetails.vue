@@ -1,5 +1,6 @@
 <template>
   <form class="usage-form" @submit.prevent @input="$emit('change')">
+    //listen to this
     <label for="electricity-price">Elpris (kr/kWh)</label>
     <input
       type="number"
@@ -46,6 +47,11 @@
 <script>
 export default {
   props: ['usageDetails'],
+  data() {
+    // we need to store state here and NOT manipulate props directly
+    // Use the change event!
+    return {};
+  },
   updated() {
     localStorage.setItem('usageDetails', JSON.stringify(this.usageDetails));
   },
