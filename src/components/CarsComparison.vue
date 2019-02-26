@@ -1,11 +1,16 @@
 <template>
   <div class="cars-compare-wrapper">
-    <UsageDetails :usageDetails="usageDetails" />
-    <div class="car-wrapper" v-for="(car, index) in selectedCars" :key="car.id">
-      <CarSelector :allCars="allCars" :key="index + 1" @selected="setNewCar" />
-      <CarDetails :car="car" :key="index + car.id" :usageDetails="usageDetails" />
+    <UsageDetails v-bind:usageDetails="usageDetails" />
+    <div class="car-wrapper" v-for="(car, index) in selectedCars" v-bind:key="car.id">
+      <CarSelector v-bind:allCars="allCars" v-bind:key="index + '-select'" @selected="setNewCar" />
+      <CarDetails
+        v-bind:car="car"
+        v-bind:key="index + '-details'"
+        v-bind:usageDetails="usageDetails"
+      />
     </div>
     <CostComparison :usageDetails="usageDetails" :selectedCars="selectedCars" />
+    <input type="button" value="Återställ" @click="resetAllData" />
   </div>
 </template>
 
@@ -33,6 +38,8 @@ export default {
     };
   },
   created() {
+    this.getStoredData();
+
     // fetch data from firestore
     db.collection('cars')
       .get()
@@ -40,16 +47,40 @@ export default {
         snapshot.forEach(doc => {
           let car = doc.data();
           car.id = doc.id;
-          car.customized = false;
           this.allCars.push(car);
         });
-        this.selectedCars.forEach(car => this.allCars.unshift(car));
+        this.addDefaultsToList();
       });
   },
   methods: {
     setNewCar({ car, index }) {
       this.$set(this.selectedCars, index, car);
-      // We should save this to local storage
+    },
+    addDefaultsToList() {
+      defaultData.cars.forEach(car => this.allCars.unshift(car));
+    },
+
+    getStoredData() {
+      // Fetch data from localStorage that is saved by the components themselves.
+      let selectedCars = [];
+      const usageDetails = JSON.parse(localStorage.getItem('usageDetails'));
+
+      this.selectedCars.forEach((car, index) => {
+        selectedCars.push(JSON.parse(localStorage.getItem(`car${index}`)));
+      });
+
+      if (!selectedCars.includes(null)) {
+        this.selectedCars = selectedCars;
+      }
+
+      if (usageDetails !== null) {
+        this.usageDetails = usageDetails;
+      }
+    },
+    resetAllData() {
+      localStorage.clear();
+
+      // Implement reset here. Currently only clears local storage
     },
   },
 };

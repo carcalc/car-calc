@@ -49,6 +49,10 @@ export default {
       );
     },
   },
+  updated() {
+    const index = this.$vnode.key.charAt(0);
+    localStorage.setItem(`car${index}`, JSON.stringify(this.car));
+  },
 };
 </script>
 

@@ -46,6 +46,9 @@
 <script>
 export default {
   props: ['usageDetails'],
+  updated() {
+    localStorage.setItem('usageDetails', JSON.stringify(this.usageDetails));
+  },
 };
 </script>
 
