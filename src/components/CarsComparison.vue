@@ -28,36 +28,37 @@ export default {
   },
   data() {
     return {
-      allCars: [], //Maybe move this to CarSelector; this component does not need to be aware of all cars
+      allCars: defaultData.cars, //Maybe move this to CarSelector; this component does not need to be aware of all cars
       selectedCars: defaultData.cars,
       usageDetails: defaultData.usage,
     };
   },
   created() {
     this.getStoredData();
-
-    // fetch data from firestore
-    db.collection('cars')
-      .get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
-          let car = doc.data();
-          car.id = doc.id;
-          this.allCars.push(car);
-        });
-        this.addDefaultsToList();
-      });
+    this.fetchCars();
   },
   methods: {
+    fetchCars() {
+      let cars = [];
+      db.collection('cars')
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            let car = doc.data();
+            car.id = doc.id;
+            cars.push(car);
+          });
+          this.allCars.push(...this.sortCars(cars));
+        });
+    },
+    sortCars(cars) {
+      return cars.sort((a, b) => a.name.localeCompare(b.name));
+    },
     setNewCar({ car, index }) {
       this.$set(this.selectedCars, index, car);
     },
-    addDefaultsToList() {
-      defaultData.cars.forEach(car => this.allCars.unshift(car));
-    },
-
     getStoredData() {
-      // Fetch data from localStorage that is saved by the components themselves.
+      // Put these in the respecive components!
       let selectedCars = [];
       const usageDetails = JSON.parse(localStorage.getItem('usageDetails'));
 

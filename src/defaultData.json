@@ -8,7 +8,7 @@
 	"cars": [{
 			"consumption": 18.1,
 			"id": "generic-1",
-			"name": "Personbil 2",
+			"name": "Personbil 1",
 			"price": 200000,
 			"type": "electric",
 			"verified": false
@@ -16,7 +16,7 @@
 		{
 			"consumption": 18.1,
 			"id": "generic-2",
-			"name": "Personbil 1",
+			"name": "Personbil 2",
 			"price": 230000,
 			"type": "gasoline",
 			"verified": false
