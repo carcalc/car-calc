@@ -1,21 +1,27 @@
 <template>
   <header>
-    <h1>Header Title</h1>
+    <h1>Elbil eller Fossildriven?</h1>
+    <h4>- jämför snabbt och enkelt kostnaderna -</h4>
   </header>
 </template>
 
 <script>
 export default {
-  name: 'AppHeader',
+  name: "AppHeader"
 };
 </script>
 
 <style lang="scss" scoped>
 header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 10rem;
-  background: rgb(177, 177, 177);
-  text-align: center;
+  background: rgb(42, 42, 97);
+  color: #fff;
+
   h1 {
     margin: 0;
   }

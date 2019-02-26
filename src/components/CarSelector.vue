@@ -3,34 +3,31 @@
     <h1>Välj bil</h1>
     <select v-model="selected" @change="handleChange">
       <option disabled value>Välj en bil</option>
-      <option v-for="car in allCars" :key="car.id" :value="car">
-        {{ car.name }}
-      </option>
+      <option v-for="car in allCars" :key="car.id" :value="car">{{ car.name }}</option>
     </select>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['allCars'],
+  props: ["allCars"],
   data() {
-    return { selected: '' };
+    return { selected: "" };
   },
   methods: {
     handleChange() {
-      const index = this.$vnode.key.charAt(0);
-      this.$emit('selected', { car: this.selected, index: index });
-      localStorage.setItem(`car${index}`, JSON.stringify(this.selected));
-    },
-  },
+      this.$emit("selected", {
+        car: this.selected,
+        index: this.$vnode.key - 1
+      });
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 .cars-selector {
-  width: 40%;
-  border: 1px solid #333;
-  padding: 20px;
+  padding: 1rem;
   margin: auto;
 }
 </style>

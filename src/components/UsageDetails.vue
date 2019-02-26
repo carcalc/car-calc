@@ -1,5 +1,5 @@
 <template>
-  <form class="usage-form" @submit.prevent>
+  <form class="usage-form" @submit.prevent @input="$emit('change')">
     <label for="electricity-price">Elpris (kr/kWh)</label>
     <input
       type="number"
@@ -7,8 +7,8 @@
       step="any"
       min="0"
       v-model.number="usageDetails.kwhPrice"
-      v-bind:placeholder="usageDetails.kwhPrice"
-    />
+      :placeholder="usageDetails.kwhPrice"
+    >
     <label for="gas-price">Bensin-/dieselpris (kr/liter)</label>
     <input
       type="number"
@@ -16,10 +16,10 @@
       step="any"
       min="0"
       v-model.number="usageDetails.gasPrice"
-      v-bind:placeholder="usageDetails.gasPrice"
-    />
-
-    <label for="distance">Körsträcka (km/år)</label>
+      :placeholder="usageDetails.gasPrice"
+    >
+    
+    <label for="distance">Körsträcka (mil/år)</label>
     <input
       name="distance"
       type="range"
@@ -27,9 +27,9 @@
       step="100"
       max="5000"
       v-model.number="usageDetails.distance"
-      v-bind:placeholder="usageDetails.distance"
-    />
-    <span>{{ usageDetails.distance }} km</span>
+      :placeholder="usageDetails.distance"
+    >
+    <span>{{ usageDetails.distance }}mil</span>
     <label for="years">Planerat ägande (år)</label>
     <input
       name="years"
@@ -37,18 +37,15 @@
       min="1"
       max="10"
       v-model.number="usageDetails.ownership"
-      v-bind:placeholder="usageDetails.ownership"
-    />
+      :placeholder="usageDetails.ownership"
+    >
     <span>{{ usageDetails.ownership }} år</span>
   </form>
 </template>
 
 <script>
 export default {
-  props: ['usageDetails'],
-  updated() {
-    localStorage.setItem('usageDetails', JSON.stringify(this.usageDetails));
-  },
+  props: ["usageDetails"]
 };
 </script>
 
@@ -56,5 +53,6 @@ export default {
 .usage-form {
   grid-column: 1 / -1;
   padding: 4rem;
+  margin: 2rem;
 }
 </style>

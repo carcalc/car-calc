@@ -1,27 +1,29 @@
 <template>
   <nav id="nav">
-    <router-link :to="{ name: 'home' }">Home</router-link>
-    <router-link :to="{ name: 'about' }">About</router-link>
+    <router-link :to="{ name: 'home' }">Start</router-link>
+    <router-link :to="{ name: 'information' }">Information</router-link>
+    <router-link :to="{ name: 'about' }">Om oss</router-link>
   </nav>
 </template>
 
 <script>
 export default {
-  name: 'AppNav',
+  name: "AppNav"
 };
 </script>
 
 <style lang="scss" scoped>
 #nav {
-  padding: 30px;
+  padding: 10px;
+  background-color: rgb(95, 95, 197);
 
   a {
     padding: 0.5rem;
     font-weight: bold;
-    color: #2c3e50;
+    color: #ffffff;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: #8fbaf3;
     }
   }
 }
