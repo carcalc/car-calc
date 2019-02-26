@@ -7,18 +7,32 @@
     <hr>
     <div class="contact-wrapper">
       <h2>Kontakt</h2>
-      <p>Vid frågor kan ni nå oss via Linkedin!</p>
+      <p>Vid frågor kan ni nå oss via Linkedin</p>
       <h4>
         Andreas:
-        <i class="fab fa-linkedin-in fa-lg"></i>
+        <a :href="linkedInAndreas">
+          <i class="fab fa-linkedin-in fa-lg"></i>
+        </a>
       </h4>
       <h4>
         Gabriel:
-        <i class="fab fa-linkedin-in fa-lg"></i>
+        <a :href="linkedInGabriel">
+          <i class="fab fa-linkedin-in fa-lg"></i>
+        </a>
       </h4>
     </div>
   </div>
 </template>
+<script>
+export default {
+  data() {
+    return {
+      linkedInAndreas: "http://www.linkedin.com/in/andreas-hansson-",
+      linkedInGabriel: "http://www.linkedin.com/in/andreas-hansson-"
+    };
+  }
+};
+</script>
 <style lang="scss" scoped>
 .about-wrapper,
 .contact-wrapper {
@@ -33,5 +47,8 @@ i.fab {
 hr {
   width: 50%;
   margin: auto;
+}
+h2 {
+  margin-bottom: 1rem;
 }
 </style>
