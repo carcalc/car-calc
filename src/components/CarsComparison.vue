@@ -1,16 +1,12 @@
 <template>
   <div class="cars-compare-wrapper">
-    <UsageDetails v-bind:usageDetails="usageDetails" />
-    <div class="car-wrapper" v-for="(car, index) in selectedCars" v-bind:key="car.id">
-      <CarSelector v-bind:allCars="allCars" v-bind:key="index + '-select'" @selected="setNewCar" />
-      <CarDetails
-        v-bind:car="car"
-        v-bind:key="index + '-details'"
-        v-bind:usageDetails="usageDetails"
-      />
+    <UsageDetails :usageDetails="usageDetails" />
+    <div class="car-wrapper" v-for="(car, index) in selectedCars" :key="index">
+      <CarSelector :allCars="allCars" :key="index + '-select'" @selected="setNewCar" />
+      <CarDetails :car="car" :key="index + '-details'" :usageDetails="usageDetails" />
     </div>
     <CostComparison :usageDetails="usageDetails" :selectedCars="selectedCars" />
-    <input type="button" value="Återställ" @click="resetAllData" />
+    <input type="button" value="Återställ" @click="resetStoredData" />
   </div>
 </template>
 
@@ -77,7 +73,7 @@ export default {
         this.usageDetails = usageDetails;
       }
     },
-    resetAllData() {
+    resetStoredData() {
       localStorage.clear();
 
       // Implement reset here. Currently only clears local storage

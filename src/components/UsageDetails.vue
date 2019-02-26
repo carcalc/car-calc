@@ -1,13 +1,13 @@
 <template>
-  <form class="usage-form" @submit.prevent @input="$emit('change')">
+  <form class="usage-form" @submit.prevent>
     <label for="electricity-price">Elpris (kr/kWh)</label>
     <input
       type="number"
       name="electricity-price"
       step="any"
       min="0"
-      v-model.number="usageDetails.kwhPrice"
-      :placeholder="usageDetails.kwhPrice"
+      v-model.number="usage.kwhPrice"
+      :placeholder="usage.kwhPrice"
     />
     <label for="gas-price">Bensin-/dieselpris (kr/liter)</label>
     <input
@@ -15,8 +15,8 @@
       name="gas-price"
       step="any"
       min="0"
-      v-model.number="usageDetails.gasPrice"
-      :placeholder="usageDetails.gasPrice"
+      v-model.number="usage.gasPrice"
+      :placeholder="usage.gasPrice"
     />
 
     <label for="distance">Körsträcka (mil/år)</label>
@@ -26,20 +26,20 @@
       min="500"
       step="100"
       max="5000"
-      v-model.number="usageDetails.distance"
-      :placeholder="usageDetails.distance"
+      v-model.number="usage.distance"
+      :placeholder="usage.distance"
     />
-    <span>{{ usageDetails.distance }}mil</span>
+    <span>{{ usage.distance }}mil</span>
     <label for="years">Planerat ägande (år)</label>
     <input
       name="years"
       type="range"
       min="1"
       max="10"
-      v-model.number="usageDetails.ownership"
-      :placeholder="usageDetails.ownership"
+      v-model.number="usage.ownership"
+      :placeholder="usage.ownership"
     />
-    <span>{{ usageDetails.ownership }} år</span>
+    <span>{{ usage.ownership }} år</span>
   </form>
 </template>
 
@@ -47,9 +47,7 @@
 export default {
   props: ['usageDetails'],
   data() {
-    // we need to store state here and NOT manipulate props directly
-    // Use the change event!
-    return {};
+    return { usage: this.usageDetails };
   },
   updated() {
     localStorage.setItem('usageDetails', JSON.stringify(this.usageDetails));

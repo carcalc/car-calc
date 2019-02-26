@@ -7,7 +7,6 @@
 	},
 	"cars": [{
 			"consumption": 18.1,
-			"customized": false,
 			"id": "generic-1",
 			"name": "Personbil 2",
 			"price": 200000,
@@ -16,7 +15,6 @@
 		},
 		{
 			"consumption": 18.1,
-			"customized": false,
 			"id": "generic-2",
 			"name": "Personbil 1",
 			"price": 230000,
