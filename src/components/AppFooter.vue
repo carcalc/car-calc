@@ -1,20 +1,24 @@
 <template>
   <footer>
-    <h1>Footer</h1>
+    <p>&copy; 2019 Andreas & Gabriel</p>
   </footer>
 </template>
 
 <script>
 export default {
-  name: 'AppFooter',
+  name: "AppFooter"
 };
 </script>
 
 <style lang="scss" scoped>
 footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-  height: 10rem;
-  background: rgb(177, 177, 177);
-  text-align: center;
+  height: 5rem;
+  background: rgb(42, 42, 97);
+  color: #fff;
 }
 </style>
