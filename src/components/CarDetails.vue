@@ -59,15 +59,15 @@ export default {
       return Math.round(
         this.car.type === 'electric'
           ? (this.usageDetails.kwhPrice * this.car.consumption) / 10
-          : (this.usageDetails.gasPrice * this.car.consumption) / 10
+          : (this.usageDetails.gasPrice * this.car.consumption) / 10,
       );
     },
     totalCosts() {
       return (
         this.car.price + this.fuelCosts * this.usageDetails.distance * this.usageDetails.ownership
       );
-    }
-  }
+    },
+  },
 };
 </script>
 
