@@ -2,16 +2,16 @@
   <div class="cost-comparison">
     <p>
       Totalkostnad för
-      <span>{{ selectedCars[0].name }}</span>
+      <span>{{ firstCar.name }}</span>
       är
-      <span>{{ allYearsTotalCarOne }}</span> kr och kostnaden/mil är
+      <span>{{ allYearsTotalCarOne }}</span> kr och kostnad per mil är
       <span>{{ pricePerTenKmCarOne }}</span> kr
     </p>
     <p>
       Totalkostnad för
-      <span>{{ selectedCars[1].name }}</span>
+      <span>{{ secondCar.name }}</span>
       är
-      <span>{{ allYearsTotalCarTwo }}</span> kr och kostnaden/mil är
+      <span>{{ allYearsTotalCarTwo }}</span> kr och kostnad per mil är
       <span>{{ pricePerTenKmCarTwo }}</span> kr
     </p>
     <p>
@@ -26,9 +26,9 @@
 </template>
 <script>
 export default {
-  props: ['usageDetails', 'selectedCars'],
+  props: ['usageDetails', 'firstCar', 'secondCar'],
   methods: {
-    electricPremie(car) {
+    evBonus(car) {
       return car === 'electric' ? 60000 : 0;
     },
     pricePerTenKm(car) {
@@ -51,7 +51,7 @@ export default {
       let { distance, ownership } = this.usageDetails;
       let { price, type } = car;
       return Math.round(
-        this.pricePerTenKm(car) * distance * ownership + price - this.electricPremie(type)
+        this.pricePerTenKm(car) * distance * ownership + price - this.evBonus(type)
       );
     },
     comparisonAllYears(carOne, carTwo) {
@@ -64,28 +64,28 @@ export default {
         ? (result = carTwoResult - carOneResult)
         : (result = carOneResult - carTwoResult);
       return result;
-    },
+    }
   },
   computed: {
     pricePerTenKmCarOne() {
-      return this.pricePerTenKm(this.selectedCars[0]).toFixed(1);
+      return this.pricePerTenKm(this.firstCar).toFixed(1);
     },
     pricePerTenKmCarTwo() {
-      return this.pricePerTenKm(this.selectedCars[1]).toFixed(1);
+      return this.pricePerTenKm(this.secondCar).toFixed(1);
     },
     allYearsTotalCarOne() {
-      return this.allYearsTotal(this.selectedCars[0]).toLocaleString();
+      return this.allYearsTotal(this.firstCar).toLocaleString();
     },
     allYearsTotalCarTwo() {
-      return this.allYearsTotal(this.selectedCars[1]).toLocaleString();
+      return this.allYearsTotal(this.secondCar).toLocaleString();
     },
     comparisonAllYearsResult() {
-      return this.comparisonAllYears(this.selectedCars[0], this.selectedCars[1]).toLocaleString();
+      return this.comparisonAllYears(this.firstCar, this.secondCar).toLocaleString();
     },
     cheapest() {
-      return this.cheapestCar(this.selectedCars[0], this.selectedCars[1]);
-    },
-  },
+      return this.cheapestCar(this.firstCar, this.secondCar);
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
