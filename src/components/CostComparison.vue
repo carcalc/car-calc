@@ -1,24 +1,20 @@
 <template>
   <div class="cost-comparison">
-    <p>
-      Totalkostnad för
-      <span>{{ firstCar.name }}</span>
-      är
-      <span>{{ allYearsTotalCarOne }}</span> kr och kostnad per mil är
-      <span>{{ pricePerTenKmCarOne }}</span> kr
-    </p>
-    <p>
-      Totalkostnad för
-      <span>{{ secondCar.name }}</span>
-      är
-      <span>{{ allYearsTotalCarTwo }}</span> kr och kostnad per mil är
-      <span>{{ pricePerTenKmCarTwo }}</span> kr
-    </p>
+    <template v-for="(car, index) in cars">
+      <p :key="index">
+        Totalkostnad för
+        <span>{{ car.name }}</span>
+        är
+        <span>{{ totalCost(car).toLocaleString() }}</span> kr och milkostnaden är
+        <span>{{ pricePerTenKm(car).toFixed(1) }}</span> kr
+      </p>
+    </template>
+
     <p>
       Billaste bilen är
       <span>{{ cheapest }}</span>
       och den är
-      <span>{{ comparisonAllYearsResult }}</span>
+      <span>{{ priceDiff }}</span>
       kr billigare för perioden
       <span>{{ this.usageDetails.ownership }}</span> år.
     </p>
@@ -26,64 +22,39 @@
 </template>
 <script>
 export default {
-  props: ['usageDetails', 'firstCar', 'secondCar'],
+  props: ['usageDetails', 'cars'],
   methods: {
     evBonus(car) {
       return car === 'electric' ? 60000 : 0;
     },
     pricePerTenKm(car) {
-      let result = 0;
       let { kwhPrice, gasPrice } = this.usageDetails;
       let { type, consumption } = car;
-      type === 'electric'
-        ? (result = (consumption * kwhPrice) / 10)
-        : (result = (consumption * gasPrice) / 10);
-      return result;
+      return type === 'electric' ? (consumption * kwhPrice) / 10 : (consumption * gasPrice) / 10;
     },
     cheapestCar(carOne, carTwo) {
-      let cheapest = '';
-      let cheapestCarOne = this.allYearsTotal(carOne);
-      let cheapestCarTwo = this.allYearsTotal(carTwo);
-      cheapestCarOne < cheapestCarTwo ? (cheapest = carOne.name) : (cheapest = carTwo.name);
-      return cheapest;
+      return this.totalCost(carOne) < this.totalCost(carTwo) ? carOne.name : carTwo.name;
     },
-    allYearsTotal(car) {
+    totalCost(car) {
       let { distance, ownership } = this.usageDetails;
       let { price, type } = car;
       return Math.round(
         this.pricePerTenKm(car) * distance * ownership + price - this.evBonus(type),
       );
     },
-    comparisonAllYears(carOne, carTwo) {
-      let result = 0;
-
-      const carOneResult = this.allYearsTotal(carOne);
-      const carTwoResult = this.allYearsTotal(carTwo);
-
-      carOneResult < carTwoResult
-        ? (result = carTwoResult - carOneResult)
-        : (result = carOneResult - carTwoResult);
-      return result;
+    compareTotal(carOne, carTwo) {
+      return carOne < carTwo ? carTwo - carOne : carOne - carTwo;
     },
   },
   computed: {
-    pricePerTenKmCarOne() {
-      return this.pricePerTenKm(this.firstCar).toFixed(1);
-    },
-    pricePerTenKmCarTwo() {
-      return this.pricePerTenKm(this.secondCar).toFixed(1);
-    },
-    allYearsTotalCarOne() {
-      return this.allYearsTotal(this.firstCar).toLocaleString();
-    },
-    allYearsTotalCarTwo() {
-      return this.allYearsTotal(this.secondCar).toLocaleString();
-    },
-    comparisonAllYearsResult() {
-      return this.comparisonAllYears(this.firstCar, this.secondCar).toLocaleString();
+    priceDiff() {
+      return this.compareTotal(
+        this.totalCost(this.cars[0]),
+        this.totalCost(this.cars[1]),
+      ).toLocaleString();
     },
     cheapest() {
-      return this.cheapestCar(this.firstCar, this.secondCar);
+      return this.cheapestCar(this.cars[0], this.cars[1]);
     },
   },
 };

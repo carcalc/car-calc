@@ -5,11 +5,7 @@
       <CarSelector :allCars="allCars" :key="index + '-select'" @selected="setNewCar" />
       <CarDetails :car="car" :key="index + '-details'" :usageDetails="usageDetails" />
     </div>
-    <CostComparison
-      :usageDetails="usageDetails"
-      :firstCar="selectedCars[0]"
-      :secondCar="selectedCars[1]"
-    />
+    <CostComparison :usageDetails="usageDetails" :cars="selectedCars" />
     <input type="button" value="Återställ" @click="resetStoredData" />
   </div>
 </template>
