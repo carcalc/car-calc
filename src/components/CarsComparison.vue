@@ -10,7 +10,7 @@
       />
       <CarDetails :car="car" :key="index + '-details'" :usage="usageDetails" :evBonus="evBonus" />
     </div>
-    <CarsResults :usageDetails="usageDetails" :cars="selectedCars" :evBonus="evBonus" />
+    <CarsResults :usage="usageDetails" :cars="selectedCars" :evBonus="evBonus" />
     <input type="button" value="Återställ" @click="resetStoredData" />
   </div>
 </template>

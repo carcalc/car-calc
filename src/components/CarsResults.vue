@@ -5,61 +5,62 @@
         Totalkostnad för
         <span>{{ car.name }}</span>
         är
-        <span>{{ totalCost(car).toLocaleString() }} kr</span> och driftkostnaden är
-        <span>{{ fuelCostPerKm(car).toFixed(1) }} kr per km</span>
+        <span>{{ totalCost(index).toLocaleString() }} kr</span> och driftkostnaden är
+        <span>{{ (fuelCost(index) * 10).toFixed(1).replace('.', ',') }} kr per mil</span>
       </p>
     </template>
 
     <p>
-      <span>{{ cheapest }}</span> är billigare och utgör en
-      <span>besparing på {{ priceDiff }} kr</span>
-      över en period om
-      <span>{{ usageDetails.ownership }} år</span> och <span>{{ totalDistance }} km</span>.
-
+      <span>{{ cheapest }}</span> är billigare totalt sett och utgör en
+      <span>besparing på {{ savings }} kr</span> på <span> {{ usage.ownership }} år</span> och
+      <span>{{ distance }} km</span>.
       <!-- Data we can add: -->
+      <!--X   -->
       <!-- Car X is % cheaper to run-->
     </p>
   </div>
 </template>
 <script>
-
 export default {
-  props: ['usageDetails', 'cars', 'evBonus'],
-
+  props: ['usage', 'cars', 'evBonus'],
+  data() {
+    return {
+      carStats: [{ total: null, fuel: null }, { total: null, fuel: null }],
+    };
+  },
   methods: {
-    isEv(car) {
-      return car.type === 'electric' ? this.evBonus : 0;
+    // Should probably make this total fuel costs
+    fuelCost(index) {
+      const { gasPrice, kwhPrice } = this.usage;
+      const { type, consumption } = this.cars[index];
+      const cost =
+        type === 'electric' ? (consumption * kwhPrice) / 100 : (consumption * gasPrice) / 100;
+      this.carStats[index].fuel = cost;
+      return cost;
     },
-    fuelCostPerKm(car) {
-      let { kwhPrice, gasPrice } = this.usageDetails;
-      let { type, consumption } = car;
-      return type === 'electric' ? (consumption * kwhPrice) / 100 : (consumption * gasPrice) / 100;
-    },
-    cheapestCar(carOne, carTwo) {
-      return this.totalCost(carOne) < this.totalCost(carTwo) ? carOne.name : carTwo.name;
-    },
-    totalCost(car) {
-      let { distance, ownership } = this.usageDetails;
-      return Math.round(
-        this.fuelCostPerKm(car) * distance * ownership + car.price - this.isEv(car),
-      );
-    },
-    compareTotal(carOne, carTwo) {
-      return carOne < carTwo ? carTwo - carOne : carOne - carTwo;
+    totalCost(index) {
+      const { type, price } = this.cars[index];
+      const { fuel } = this.carStats[index];
+      const { distance, ownership } = this.usage;
+      const cost = fuel * distance * ownership + price;
+      this.carStats[index].total = cost;
+      return type === 'electric' ? cost - this.evBonus : cost;
     },
   },
   computed: {
-    totalDistance() {
-      return (this.usageDetails.distance * this.usageDetails.ownership) / 10;
+    distance() {
+      return (this.usage.distance * this.usage.ownership) / 10;
     },
-    priceDiff() {
-      return this.compareTotal(
-        this.totalCost(this.cars[0]),
-        this.totalCost(this.cars[1]),
+    savings() {
+      return (this.carStats[0].total < this.carStats[1].total
+        ? this.carStats[1].total - this.carStats[0].total
+        : this.carStats[0].total - this.carStats[1].total
       ).toLocaleString();
     },
     cheapest() {
-      return this.cheapestCar(this.cars[0], this.cars[1]);
+      return this.carStats[0].total > this.carStats[1].total
+        ? this.cars[0].name
+        : this.cars[1].name;
     },
   },
 };
