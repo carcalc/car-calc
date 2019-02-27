@@ -5,7 +5,11 @@
       <CarSelector :allCars="allCars" :key="index + '-select'" @selected="setNewCar" />
       <CarDetails :car="car" :key="index + '-details'" :usageDetails="usageDetails" />
     </div>
-    <CostComparison :usageDetails="usageDetails" :selectedCars="selectedCars" />
+    <CostComparison
+      :usageDetails="usageDetails"
+      :firstCar="selectedCars[0]"
+      :secondCar="selectedCars[1]"
+    />
     <input type="button" value="Återställ" @click="resetStoredData" />
   </div>
 </template>
@@ -70,8 +74,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
 }
-.cars-selector {
-}
+
 .car-wrapper {
   border-radius: 8px;
   box-shadow: 2px 2px 12px 0 rgba(0, 0, 80, 0.15);
