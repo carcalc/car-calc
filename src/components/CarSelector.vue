@@ -15,7 +15,10 @@ import defaultData from '@/defaultData.json';
 export default {
   props: ['allCars'],
   data() {
-    return { selected: defaultData.cars, selectorId: this.$vnode.key };
+    return {
+      selected: defaultData.cars[this.$vnode.key],
+      selectorId: this.$vnode.key,
+    };
   },
   created() {
     this.getStoredCar();
@@ -33,8 +36,10 @@ export default {
     },
     getStoredCar() {
       const car = JSON.parse(localStorage.getItem(this.selectorId));
-      car !== null ? (this.selected = car) : '';
-      this.handleChange();
+      if (car !== null) {
+        this.selected = car;
+        this.handleChange();
+      }
     },
   },
 };
