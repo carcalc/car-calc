@@ -2,7 +2,6 @@
   <nav id="nav">
     <router-link :to="{ name: 'home' }">Start</router-link>
     <router-link :to="{ name: 'information' }">Information</router-link>
-    <router-link :to="{ name: 'about' }">Om oss</router-link>
   </nav>
 </template>
 
