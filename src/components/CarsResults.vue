@@ -6,7 +6,7 @@
         <span>{{ car.name }}</span>
         är
         <span>{{ totalCost(index).toLocaleString() }} kr</span> och driftkostnaden är
-        <span>{{ (fuelCost(index) * 10).toFixed(1).replace('.', ',') }} kr per mil</span>
+        <span>{{ (fuelCostPerKm(index) * 10).toFixed(1).replace('.', ',') }} kr per mil</span>
       </p>
     </template>
 
@@ -15,7 +15,7 @@
       <span>besparing på {{ savings }} kr</span> på <span> {{ usage.ownership }} år</span> och
       <span>{{ distance }} km</span>.
       <!-- Data we can add: -->
-      <!--X   -->
+      <!-- Display total fuel costs and bonus separately -->
       <!-- Car X is % cheaper to run-->
     </p>
   </div>
@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     // Should probably make this total fuel costs
-    fuelCost(index) {
+    fuelCostPerKm(index) {
       const { gasPrice, kwhPrice } = this.usage;
       const { type, consumption } = this.cars[index];
       const cost =

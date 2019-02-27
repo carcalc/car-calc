@@ -53,11 +53,11 @@ export default {
   name: 'CarDetails',
   props: ['car', 'usage', 'evBonus'],
   methods: {
-    fuelCostKm({ type, consumption }, { gasPrice, kwhPrice }) {
+    fuelCostPerKm({ type, consumption }, { gasPrice, kwhPrice }) {
       return type === 'electric' ? (consumption * kwhPrice) / 100 : (consumption * gasPrice) / 100;
     },
     totalCost({ type, price }, { ownership, distance }) {
-      const cost = this.fuelCostKm(this.car, this.usage) * distance * ownership + price;
+      const cost = this.fuelCostPerKm(this.car, this.usage) * distance * ownership + price;
       return type === 'electric' ? cost - this.evBonus : cost;
     },
   },
@@ -66,7 +66,7 @@ export default {
       return this.car.type === 'electric' ? '(kWh/100 km)' : '(liter/100 km)';
     },
     fuel() {
-      return (this.fuelCostKm(this.car, this.usage) * 10).toFixed(1).replace('.', ',');
+      return (this.fuelCostPerKm(this.car, this.usage) * 10).toFixed(1).replace('.', ',');
     },
     total() {
       return Math.round(this.totalCost(this.car, this.usage)).toLocaleString();
