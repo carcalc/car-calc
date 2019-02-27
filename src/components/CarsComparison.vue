@@ -28,13 +28,11 @@ export default {
   },
   data() {
     return {
-      allCars: defaultData.cars, //Maybe move this to CarSelector; this component does not need to be aware of all cars
       selectedCars: defaultData.cars,
       usageDetails: defaultData.usage,
     };
   },
   created() {
-    this.getStoredData();
     this.fetchCars();
   },
   methods: {
@@ -48,7 +46,8 @@ export default {
             car.id = doc.id;
             cars.push(car);
           });
-          this.allCars.push(...this.sortCars(cars));
+          this.allCars.push(...this.sortCars(cars), ...defaultData.cars);
+          this.allCars.unshift(...defaultData.cars);
         });
     },
     sortCars(cars) {
@@ -57,26 +56,8 @@ export default {
     setNewCar({ car, index }) {
       this.$set(this.selectedCars, index, car);
     },
-    getStoredData() {
-      // Put these in the respecive components!
-      let selectedCars = [];
-      const usageDetails = JSON.parse(localStorage.getItem('usageDetails'));
-
-      this.selectedCars.forEach((car, index) => {
-        selectedCars.push(JSON.parse(localStorage.getItem(`car${index}`)));
-      });
-
-      if (!selectedCars.includes(null)) {
-        this.selectedCars = selectedCars;
-      }
-
-      if (usageDetails !== null) {
-        this.usageDetails = usageDetails;
-      }
-    },
     resetStoredData() {
       localStorage.clear();
-
       // Implement reset here. Currently only clears local storage
     },
   },

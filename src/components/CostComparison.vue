@@ -41,12 +41,10 @@ export default {
       return result;
     },
     cheapestCar(carOne, carTwo) {
-      let cheapest = "";
+      let cheapest = '';
       let cheapestCarOne = this.allYearsTotal(carOne);
       let cheapestCarTwo = this.allYearsTotal(carTwo);
-      cheapestCarOne < cheapestCarTwo
-        ? (cheapest = carOne.name)
-        : (cheapest = carTwo.name);
+      cheapestCarOne < cheapestCarTwo ? (cheapest = carOne.name) : (cheapest = carTwo.name);
       return cheapest;
     },
     allYearsTotal(car) {
@@ -66,7 +64,7 @@ export default {
         ? (result = carTwoResult - carOneResult)
         : (result = carOneResult - carTwoResult);
       return result;
-    }
+    },
   },
   computed: {
     pricePerTenKmCarOne() {
@@ -82,10 +80,7 @@ export default {
       return this.allYearsTotal(this.selectedCars[1]).toLocaleString();
     },
     comparisonAllYearsResult() {
-      return this.comparisonAllYears(
-        this.selectedCars[0],
-        this.selectedCars[1]
-      ).toLocaleString();
+      return this.comparisonAllYears(this.selectedCars[0], this.selectedCars[1]).toLocaleString();
     },
     cheapest() {
       return this.cheapestCar(this.selectedCars[0], this.selectedCars[1]);

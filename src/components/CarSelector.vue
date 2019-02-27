@@ -11,16 +11,31 @@
 </template>
 
 <script>
+import defaultData from '@/defaultData.json';
 export default {
   props: ['allCars'],
   data() {
-    return { selected: '' };
+    return { selected: defaultData.cars, selectorId: this.$vnode.key };
+  },
+  created() {
+    this.getStoredCar();
+  },
+  updated() {
+    this.saveCar();
   },
   methods: {
     handleChange() {
-      const index = this.$vnode.key.charAt(0);
-      this.$emit('selected', { car: this.selected, index: index });
-      localStorage.setItem(`car${index}`, JSON.stringify(this.selected));
+      const index = this.selectorId.charAt(0);
+      this.$emit('selected', { car: this.selected, index });
+    },
+    saveCar() {
+      localStorage.setItem(this.selectorId, JSON.stringify(this.selected));
+      this.handleChange();
+    },
+    getStoredCar() {
+      const car = JSON.parse(localStorage.getItem(this.selectorId));
+      car !== null ? (this.selected = car) : '';
+      this.handleChange();
     },
   },
 };
