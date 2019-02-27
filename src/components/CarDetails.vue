@@ -27,21 +27,21 @@
         Förbrukning
       </h2>
       <input type="number" step="any" min="0" v-model.number="car.consumption" />
-      <span>{{ fuelUnit }}</span>
+      <span>{{ unit }}</span>
     </form>
     <h2>
       Kostnader
     </h2>
     <p>
       Driftkostnad:
-      {{ fuelCost10km.toFixed(1) }}
+      {{ fuel }}
       kr per mil
     </p>
     <p>
       Totalkostnad:
-      {{ totalCost }}
+      {{ total }}
       kr på
-      {{ usageDetails.ownership }}
+      {{ usage.ownership }}
       år
     </p>
   </div>
@@ -50,27 +50,26 @@
 <script>
 export default {
   name: 'CarDetails',
-  props: ['car', 'usageDetails', 'evBonus'],
+  props: ['car', 'usage', 'evBonus'],
   methods: {
-    isEv(car) {
-      return car.type === 'electric' ? this.evBonus : 0;
+    fuelCost({ type, consumption }, { gasPrice, kwhPrice }) {
+      return type === 'electric' ? (consumption * kwhPrice) / 100 : (consumption * gasPrice) / 100;
+    },
+    totalCost({ type, price }, { ownership, distance }) {
+      const cost = this.fuelCost(this.car, this.usage) * distance * ownership + price;
+      console.log('cost: ', cost);
+      return type === 'electric' ? cost - this.evBonus : cost;
     },
   },
   computed: {
-    fuelUnit() {
+    unit() {
       return this.car.type === 'electric' ? '(kWh/100 km)' : '(liter/100 km)';
     },
-    fuelCost10km() {
-      let { kwhPrice, gasPrice } = this.usageDetails;
-      let { type, consumption } = this.car;
-      return type === 'electric' ? (consumption * kwhPrice) / 100 : (consumption * gasPrice) / 100;
+    fuel() {
+      return (this.fuelCost(this.car, this.usage) * 10).toFixed(1).replace('.', ',');
     },
-    totalCost() {
-      return Math.round(
-        this.car.price -
-          this.isEv(this.car) +
-          this.fuelCost10km * this.usageDetails.distance * this.usageDetails.ownership,
-      ).toLocaleString();
+    total() {
+      return Math.round(this.totalCost(this.car, this.usage)).toLocaleString();
     },
   },
 };
