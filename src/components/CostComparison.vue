@@ -5,29 +5,28 @@
         Totalkostnad för
         <span>{{ car.name }}</span>
         är
-        <span>{{ totalCost(car).toLocaleString() }}</span> kr och milkostnaden är
-        <span>{{ pricePerTenKm(car).toFixed(1) }}</span> kr
+        <span>{{ totalCost(car).toLocaleString() }} kr</span> och driftkostnaden är
+        <span>{{ fuelCost10km(car).toFixed(1) }} kr per mil</span>
       </p>
     </template>
 
     <p>
-      Billaste bilen är
       <span>{{ cheapest }}</span>
-      och den är
-      <span>{{ priceDiff }}</span>
-      kr billigare för perioden
+      är billigare och kostar
+      <span>{{ priceDiff }} kr</span>
+      mindre över en period på
       <span>{{ this.usageDetails.ownership }}</span> år.
     </p>
   </div>
 </template>
 <script>
 export default {
-  props: ['usageDetails', 'cars'],
+  props: ['usageDetails', 'cars', 'evBonus'],
   methods: {
-    evBonus(car) {
-      return car === 'electric' ? 60000 : 0;
+    isEv(car) {
+      return car.type === 'electric' ? this.evBonus : 0;
     },
-    pricePerTenKm(car) {
+    fuelCost10km(car) {
       let { kwhPrice, gasPrice } = this.usageDetails;
       let { type, consumption } = car;
       return type === 'electric' ? (consumption * kwhPrice) / 10 : (consumption * gasPrice) / 10;
@@ -37,10 +36,7 @@ export default {
     },
     totalCost(car) {
       let { distance, ownership } = this.usageDetails;
-      let { price, type } = car;
-      return Math.round(
-        this.pricePerTenKm(car) * distance * ownership + price - this.evBonus(type),
-      );
+      return Math.round(this.fuelCost10km(car) * distance * ownership + car.price - this.isEv(car));
     },
     compareTotal(carOne, carTwo) {
       return carOne < carTwo ? carTwo - carOne : carOne - carTwo;

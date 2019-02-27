@@ -3,9 +3,14 @@
     <UsageDetails :usageDetails="usageDetails" />
     <div class="car-wrapper" v-for="(car, index) in selectedCars" :key="index">
       <CarSelector :allCars="allCars" :key="index + '-select'" @selected="setNewCar" />
-      <CarDetails :car="car" :key="index + '-details'" :usageDetails="usageDetails" />
+      <CarDetails
+        :car="car"
+        :key="index + '-details'"
+        :usageDetails="usageDetails"
+        :evBonus="evBonus"
+      />
     </div>
-    <CostComparison :usageDetails="usageDetails" :cars="selectedCars" />
+    <CostComparison :usageDetails="usageDetails" :cars="selectedCars" :evBonus="evBonus" />
     <input type="button" value="Återställ" @click="resetStoredData" />
   </div>
 </template>
@@ -31,6 +36,7 @@ export default {
       allCars: [], //Maybe move this to CarSelector; this component does not need to be aware of all cars
       selectedCars: defaultData.cars,
       usageDetails: defaultData.usage,
+      evBonus: defaultData.evBonus,
     };
   },
   created() {
