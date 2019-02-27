@@ -32,6 +32,22 @@
         </a>
       </ul>
     </div>
+    <div class="contact-wrapper">
+      <h2>Kontakt</h2>
+      <p>Vid frågor kan ni nå oss via Linkedin</p>
+      <h4>
+        Andreas:
+        <a :href="linkedInAndreas">
+          <i class="fab fa-linkedin-in fa-lg"></i>
+        </a>
+      </h4>
+      <h4>
+        Gabriel:
+        <a :href="linkedInGabriel">
+          <i class="fab fa-linkedin-in fa-lg"></i>
+        </a>
+      </h4>
+    </div>
   </div>
 </template>
 <script>
@@ -40,14 +56,17 @@ export default {
     return {
       bilsvar: "http://www.bilsvar.se",
       transportstyrelsen:
-        "https://transportstyrelsen.se/sv/vagtrafik/Miljo/Klimat/Miljobilar1/"
+        "https://transportstyrelsen.se/sv/vagtrafik/Miljo/Klimat/Miljobilar1/",
+      linkedInAndreas: "http://www.linkedin.com/in/andreas-hansson-",
+      linkedInGabriel: "http://www.linkedin.com/in/andreas-hansson-"
     };
   }
 };
 </script>
 <style lang="scss" scoped>
 .text-wrapper,
-.list-wrapper {
+.list-wrapper,
+.contact-wrapper {
   margin: 0 auto;
   padding: 2rem;
   width: 80%;
@@ -69,5 +88,9 @@ ul {
 }
 h2 {
   margin-bottom: 1rem;
+}
+i.fab {
+  color: #0077b5;
+  cursor: pointer;
 }
 </style>
