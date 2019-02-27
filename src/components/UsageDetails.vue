@@ -23,13 +23,13 @@
     <input
       name="distance"
       type="range"
-      min="500"
+      min="5000"
       step="100"
-      max="5000"
+      max="50000"
       v-model.number="usage.distance"
       :placeholder="usage.distance"
     />
-    <span>{{ usage.distance }} km/år</span>
+    <span>{{ usage.distance / 10 }} mil/år</span>
     <label for="years">Planerat ägande</label>
     <input
       name="years"

@@ -63,7 +63,7 @@ export default {
     fuelCost10km() {
       let { kwhPrice, gasPrice } = this.usageDetails;
       let { type, consumption } = this.car;
-      return type === 'electric' ? (consumption * kwhPrice) / 10 : (consumption * gasPrice) / 10;
+      return type === 'electric' ? (consumption * kwhPrice) / 100 : (consumption * gasPrice) / 100;
     },
     totalCost() {
       return Math.round(

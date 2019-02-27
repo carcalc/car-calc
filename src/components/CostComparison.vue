@@ -28,7 +28,7 @@ export default {
     fuelCost10km(car) {
       let { kwhPrice, gasPrice } = this.usageDetails;
       let { type, consumption } = car;
-      return type === 'electric' ? (consumption * kwhPrice) / 10 : (consumption * gasPrice) / 10;
+      return type === 'electric' ? (consumption * kwhPrice) / 100 : (consumption * gasPrice) / 100;
     },
     cheapestCar(carOne, carTwo) {
       return this.totalCost(carOne) < this.totalCost(carTwo) ? carOne.name : carTwo.name;

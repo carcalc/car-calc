@@ -3,7 +3,7 @@
 	"usage": {
 		"gasPrice": 14.3,
 		"kwhPrice": 1.5,
-		"distance": 1500,
+		"distance": 15000,
 		"ownership": 3
 	},
 	"cars": [{
