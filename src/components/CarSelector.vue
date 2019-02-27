@@ -30,7 +30,6 @@ export default {
     },
     saveCar() {
       localStorage.setItem(this.selectorId, JSON.stringify(this.selected));
-      this.handleChange();
     },
     getStoredCar() {
       const car = JSON.parse(localStorage.getItem(this.selectorId));
