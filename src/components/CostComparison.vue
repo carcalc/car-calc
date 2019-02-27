@@ -24,19 +24,18 @@
     </p>
   </div>
 </template>
-
 <script>
 export default {
-  props: ["usageDetails", "selectedCars"],
+  props: ['usageDetails', 'selectedCars'],
   methods: {
     electricPremie(car) {
-      return car === "electric" ? 60000 : 0;
+      return car === 'electric' ? 60000 : 0;
     },
     pricePerTenKm(car) {
       let result = 0;
       let { kwhPrice, gasPrice } = this.usageDetails;
       let { type, consumption } = car;
-      type === "electric"
+      type === 'electric'
         ? (result = (consumption * kwhPrice) / 10)
         : (result = (consumption * gasPrice) / 10);
       return result;
@@ -54,9 +53,7 @@ export default {
       let { distance, ownership } = this.usageDetails;
       let { price, type } = car;
       return Math.round(
-        this.pricePerTenKm(car) * distance * ownership +
-          price -
-          this.electricPremie(type)
+        this.pricePerTenKm(car) * distance * ownership + price - this.electricPremie(type)
       );
     },
     comparisonAllYears(carOne, carTwo) {
@@ -92,11 +89,10 @@ export default {
     },
     cheapest() {
       return this.cheapestCar(this.selectedCars[0], this.selectedCars[1]);
-    }
-  }
+    },
+  },
 };
 </script>
-
 <style lang="scss" scoped>
 .cost-comparison {
   grid-column: 1 / -1;

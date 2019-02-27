@@ -1,57 +1,85 @@
 <template>
   <div class="cars-compare-wrapper">
-    <UsageDetails :usageDetails="usageDetails"/>
-    <div class="car-wrapper" v-for="(car, index) in selectedCars" :key="car.id">
-      <CarSelector :allCars="allCars" :key="index + 1" @selected="setNewCar"/>
-      <CarDetails :car="car" :key="index + car.id" :usageDetails="usageDetails"/>
+    <UsageDetails :usageDetails="usageDetails" />
+    <div class="car-wrapper" v-for="(car, index) in selectedCars" :key="index">
+      <CarSelector :allCars="allCars" :key="index + '-select'" @selected="setNewCar" />
+      <CarDetails :car="car" :key="index + '-details'" :usageDetails="usageDetails" />
     </div>
-    <CostComparison :usageDetails="usageDetails" :selectedCars="selectedCars"/>
+    <CostComparison :usageDetails="usageDetails" :selectedCars="selectedCars" />
+    <input type="button" value="Återställ" @click="resetStoredData" />
   </div>
 </template>
 
 <script>
-import defaultData from "@/defaultData.json";
-import UsageDetails from "@/components/UsageDetails";
-import CarSelector from "@/components/CarSelector";
-import CarDetails from "@/components/CarDetails";
-import CostComparison from "@/components/CostComparison";
-import db from "@/firebase/init";
+import defaultData from '@/defaultData.json';
+import UsageDetails from '@/components/UsageDetails';
+import CarSelector from '@/components/CarSelector';
+import CarDetails from '@/components/CarDetails';
+import CostComparison from '@/components/CostComparison';
+import db from '@/firebase/init';
 
 export default {
-  name: "CarsComparison",
+  name: 'CarsComparison',
   components: {
     UsageDetails,
     CarSelector,
     CarDetails,
-    CostComparison
+    CostComparison,
   },
   data() {
     return {
-      allCars: [], //Maybe move this to CarSelector; this component does not need to be aware of all cars
+      allCars: defaultData.cars, //Maybe move this to CarSelector; this component does not need to be aware of all cars
       selectedCars: defaultData.cars,
-      usageDetails: defaultData.usage
+      usageDetails: defaultData.usage,
     };
   },
   created() {
-    // fetch data from firestore
-    db.collection("cars")
-      .get()
-      .then(snapshot => {
-        snapshot.forEach(doc => {
-          let car = doc.data();
-          car.id = doc.id;
-          car.customized = false;
-          this.allCars.push(car);
-        });
-        this.selectedCars.forEach(car => this.allCars.unshift(car));
-      });
+    this.getStoredData();
+    this.fetchCars();
   },
   methods: {
+    fetchCars() {
+      let cars = [];
+      db.collection('cars')
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            let car = doc.data();
+            car.id = doc.id;
+            cars.push(car);
+          });
+          this.allCars.push(...this.sortCars(cars));
+        });
+    },
+    sortCars(cars) {
+      return cars.sort((a, b) => a.name.localeCompare(b.name));
+    },
     setNewCar({ car, index }) {
       this.$set(this.selectedCars, index, car);
-      // We should save this to local storage
-    }
-  }
+    },
+    getStoredData() {
+      // Put these in the respecive components!
+      let selectedCars = [];
+      const usageDetails = JSON.parse(localStorage.getItem('usageDetails'));
+
+      this.selectedCars.forEach((car, index) => {
+        selectedCars.push(JSON.parse(localStorage.getItem(`car${index}`)));
+      });
+
+      if (!selectedCars.includes(null)) {
+        this.selectedCars = selectedCars;
+      }
+
+      if (usageDetails !== null) {
+        this.usageDetails = usageDetails;
+      }
+    },
+    resetStoredData() {
+      localStorage.clear();
+
+      // Implement reset here. Currently only clears local storage
+    },
+  },
 };
 </script>
 

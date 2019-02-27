@@ -7,18 +7,18 @@
 	},
 	"cars": [{
 			"consumption": 18.1,
-			"customized": false,
 			"id": "generic-1",
-			"name": "Personbil #2",
+			"name": "Bil 1",
+			"specs": "Generisk personbil",
 			"price": 200000,
 			"type": "electric",
 			"verified": false
 		},
 		{
 			"consumption": 18.1,
-			"customized": false,
 			"id": "generic-2",
-			"name": "Personbil #1",
+			"name": "Bil 2",
+			"specs": "Generisk personbil",
 			"price": 230000,
 			"type": "gasoline",
 			"verified": false
