@@ -28,6 +28,7 @@ export default {
   },
   data() {
     return {
+      allCars: [], //Maybe move this to CarSelector; this component does not need to be aware of all cars
       selectedCars: defaultData.cars,
       usageDetails: defaultData.usage,
     };
