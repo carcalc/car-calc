@@ -2,7 +2,12 @@
   <div class="cars-compare-wrapper">
     <UsageDetails :usageDetails="usageDetails" />
     <div class="car-wrapper" v-for="(car, index) in selectedCars" :key="index">
-      <CarSelector :allCars="allCars" :key="index + '-select'" @selected="setNewCar" />
+      <CarSelector
+        :allCars="allCars"
+        :selectedCar="car"
+        :key="index + '-selected'"
+        @selected="setNewCar"
+      />
       <CarDetails
         :car="car"
         :key="index + '-details'"
@@ -40,9 +45,23 @@ export default {
     };
   },
   created() {
+    this.getStores();
     this.fetchCars();
   },
   methods: {
+    getStores() {
+      let selectedCars = [];
+      const usage = JSON.parse(localStorage.getItem('usage'));
+      if (usage !== null) this.usageDetails = usage;
+
+      this.selectedCars.forEach((car, index) => {
+        selectedCars.push(JSON.parse(localStorage.getItem(`car${index}`)));
+      });
+
+      if (!selectedCars.includes(null)) {
+        this.selectedCars = selectedCars;
+      }
+    },
     fetchCars() {
       let cars = [];
       db.collection('cars')
@@ -53,7 +72,7 @@ export default {
             car.id = doc.id;
             cars.push(car);
           });
-          this.allCars.push(...this.sortCars(cars), ...defaultData.cars);
+          this.allCars.push(...this.sortCars(cars));
           this.allCars.unshift(...defaultData.cars);
         });
     },

@@ -49,10 +49,6 @@ export default {
   data() {
     return { usage: this.usageDetails };
   },
-  created() {
-    const saved = JSON.parse(localStorage.getItem('usage'));
-    if (saved !== null) this.usage = saved;
-  },
   updated() {
     localStorage.setItem('usage', JSON.stringify(this.usageDetails));
   },

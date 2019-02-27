@@ -11,11 +11,10 @@
     </template>
 
     <p>
-      <span>{{ cheapest }}</span>
-      är billigare och kostar
-      <span>{{ priceDiff }} kr</span>
-      mindre över en period på
-      <span>{{ this.usageDetails.ownership }}</span> år.
+      <span>{{ cheapest }}</span> är billigare och utgör
+      <span>en besparing på {{ priceDiff }} kr</span>
+      över en period om
+      <span>{{ usageDetails.ownership }} år</span> och <span>{{ totalDistance }} mil</span>.
     </p>
   </div>
 </template>
@@ -43,6 +42,9 @@ export default {
     },
   },
   computed: {
+    totalDistance() {
+      return (this.usageDetails.distance * this.usageDetails.ownership) / 10;
+    },
     priceDiff() {
       return this.compareTotal(
         this.totalCost(this.cars[0]),
