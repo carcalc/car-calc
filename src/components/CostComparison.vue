@@ -51,7 +51,7 @@ export default {
       let { distance, ownership } = this.usageDetails;
       let { price, type } = car;
       return Math.round(
-        this.pricePerTenKm(car) * distance * ownership + price - this.evBonus(type)
+        this.pricePerTenKm(car) * distance * ownership + price - this.evBonus(type),
       );
     },
     comparisonAllYears(carOne, carTwo) {
@@ -64,7 +64,7 @@ export default {
         ? (result = carTwoResult - carOneResult)
         : (result = carOneResult - carTwoResult);
       return result;
-    }
+    },
   },
   computed: {
     pricePerTenKmCarOne() {
@@ -84,8 +84,8 @@ export default {
     },
     cheapest() {
       return this.cheapestCar(this.firstCar, this.secondCar);
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>
