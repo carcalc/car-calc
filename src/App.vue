@@ -1,24 +1,30 @@
 <template>
   <div id="app">
     <div>
-      <AppHeader/>
-      <AppNav/>
+      <AppHeader />
+      <AppNav />
     </div>
-    <router-view/>
-    <AppFooter/>
+    <router-view />
+    <AppFooter :linkedInAndreas="linkedInAndreas" :linkedInGabriel="linkedInGabriel" />
   </div>
 </template>
 <script>
-import AppHeader from "@/components/AppHeader";
-import AppFooter from "@/components/AppFooter";
-import AppNav from "@/components/AppNav";
+import AppHeader from '@/components/AppHeader';
+import AppFooter from '@/components/AppFooter';
+import AppNav from '@/components/AppNav';
 export default {
-  name: "App",
+  name: 'App',
   components: {
     AppHeader,
     AppNav,
-    AppFooter
-  }
+    AppFooter,
+  },
+  data() {
+    return {
+      linkedInAndreas: 'http://www.linkedin.com/in/andreas-hansson-',
+      linkedInGabriel: 'http://www.linkedin.com/in/andreas-hansson-',
+    };
+  },
 };
 </script>
 <style>
@@ -64,7 +70,7 @@ html {
   height: 100%;
 }
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
