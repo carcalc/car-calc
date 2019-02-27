@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import { fuelCosts } from '@/helpers';
+
 export default {
   props: ['usageDetails'],
   data() {

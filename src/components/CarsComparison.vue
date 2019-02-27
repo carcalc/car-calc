@@ -8,14 +8,9 @@
         :key="index + '-selected'"
         @selected="setNewCar"
       />
-      <CarDetails
-        :car="car"
-        :key="index + '-details'"
-        :usageDetails="usageDetails"
-        :evBonus="evBonus"
-      />
+      <CarDetails :car="car" :key="index + '-details'" :usage="usageDetails" :evBonus="evBonus" />
     </div>
-    <CostComparison :usageDetails="usageDetails" :cars="selectedCars" :evBonus="evBonus" />
+    <CarsResults :usage="usageDetails" :cars="selectedCars" :evBonus="evBonus" />
     <input type="button" value="Återställ" @click="resetStoredData" />
   </div>
 </template>
@@ -25,7 +20,7 @@ import defaultData from '@/defaultData.json';
 import UsageDetails from '@/components/UsageDetails';
 import CarSelector from '@/components/CarSelector';
 import CarDetails from '@/components/CarDetails';
-import CostComparison from '@/components/CostComparison';
+import CarsResults from '@/components/CarsResults';
 import db from '@/firebase/init';
 
 export default {
@@ -34,7 +29,7 @@ export default {
     UsageDetails,
     CarSelector,
     CarDetails,
-    CostComparison,
+    CarsResults,
   },
   data() {
     return {
