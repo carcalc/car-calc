@@ -24,7 +24,7 @@ export default {
     this.getStoredCar();
   },
   updated() {
-    this.saveCar();
+    if (this.selected) this.saveCar();
   },
   methods: {
     handleChange() {
@@ -36,7 +36,7 @@ export default {
     },
     getStoredCar() {
       const car = JSON.parse(localStorage.getItem(this.selectorId));
-      if (car !== null) {
+      if (car) {
         this.selected = car;
         this.handleChange();
       }
