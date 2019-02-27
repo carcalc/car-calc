@@ -33,13 +33,13 @@
       Kostnader
     </h2>
     <p>
-      Bränslekostnad:
-      {{ fuelCosts }}
+      Driftkostnad:
+      {{ fuelCost10km.toFixed(1) }}
       kr per mil
     </p>
     <p>
       Totalkostnad:
-      {{ totalCosts }}
+      {{ totalCost }}
       kr på
       {{ usageDetails.ownership }}
       år
@@ -50,22 +50,27 @@
 <script>
 export default {
   name: 'CarDetails',
-  props: ['car', 'usageDetails'],
+  props: ['car', 'usageDetails', 'evBonus'],
+  methods: {
+    isEv(car) {
+      return car.type === 'electric' ? this.evBonus : 0;
+    },
+  },
   computed: {
     fuelUnit() {
       return this.car.type === 'electric' ? '(kWh/100 km)' : '(liter/100 km)';
     },
-    fuelCosts() {
-      return Math.round(
-        this.car.type === 'electric'
-          ? (this.usageDetails.kwhPrice * this.car.consumption) / 10
-          : (this.usageDetails.gasPrice * this.car.consumption) / 10,
-      );
+    fuelCost10km() {
+      let { kwhPrice, gasPrice } = this.usageDetails;
+      let { type, consumption } = this.car;
+      return type === 'electric' ? (consumption * kwhPrice) / 10 : (consumption * gasPrice) / 10;
     },
-    totalCosts() {
-      return (
-        this.car.price + this.fuelCosts * this.usageDetails.distance * this.usageDetails.ownership
-      );
+    totalCost() {
+      return Math.round(
+        this.car.price -
+          this.isEv(this.car) +
+          this.fuelCost10km * this.usageDetails.distance * this.usageDetails.ownership,
+      ).toLocaleString();
     },
   },
 };
