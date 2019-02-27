@@ -3,6 +3,7 @@
     <h1>
       {{ car.name }}
     </h1>
+    <div v-bind:class="co2Index"></div>
     <h4 v-if="!this.car.id.includes('generic')">
       {{ car.specs }}
     </h4>
@@ -72,6 +73,17 @@ export default {
           this.fuelCost10km * this.usageDetails.distance * this.usageDetails.ownership,
       ).toLocaleString();
     },
+    co2Index() {
+      if (this.car.co2 > 90) {
+        return 'green';
+      } else if (this.car.co2 > 80 && this.car.co2 < 91) {
+        return 'yellow';
+      } else if (this.car.co2 > 70 && this.car.co2 < 81) {
+        return 'orange';
+      } else {
+        return 'red';
+      }
+    },
   },
 };
 </script>
@@ -80,5 +92,25 @@ export default {
 .car-details-wrapper {
   padding: 3rem;
   margin: auto;
+}
+.green,
+.yellow,
+.orange,
+.red {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+}
+.green {
+  background: green;
+}
+.yellow {
+  background: yellow;
+}
+.orange {
+  background: orange;
+}
+.red {
+  background: red;
 }
 </style>
