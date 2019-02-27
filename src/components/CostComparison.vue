@@ -28,20 +28,12 @@ export default {
       return car === 'electric' ? 60000 : 0;
     },
     pricePerTenKm(car) {
-      let result = 0;
       let { kwhPrice, gasPrice } = this.usageDetails;
       let { type, consumption } = car;
-      type === 'electric'
-        ? (result = (consumption * kwhPrice) / 10)
-        : (result = (consumption * gasPrice) / 10);
-      return result;
+      return type === 'electric' ? (consumption * kwhPrice) / 10 : (consumption * gasPrice) / 10;
     },
     cheapestCar(carOne, carTwo) {
-      let cheapest = '';
-      let cheapestCarOne = this.totalCost(carOne);
-      let cheapestCarTwo = this.totalCost(carTwo);
-      cheapestCarOne < cheapestCarTwo ? (cheapest = carOne.name) : (cheapest = carTwo.name);
-      return cheapest;
+      return this.totalCost(carOne) < this.totalCost(carTwo) ? carOne.name : carTwo.name;
     },
     totalCost(car) {
       let { distance, ownership } = this.usageDetails;
@@ -51,20 +43,15 @@ export default {
       );
     },
     compareTotal(carOne, carTwo) {
-      let result = 0;
-
-      const carOneResult = this.totalCost(carOne);
-      const carTwoResult = this.totalCost(carTwo);
-
-      carOneResult < carTwoResult
-        ? (result = carTwoResult - carOneResult)
-        : (result = carOneResult - carTwoResult);
-      return result;
+      return carOne < carTwo ? carTwo - carOne : carOne - carTwo;
     },
   },
   computed: {
     priceDiff() {
-      return this.compareTotal(this.cars[0], this.cars[1]).toLocaleString();
+      return this.compareTotal(
+        this.totalCost(this.cars[0]),
+        this.totalCost(this.cars[1]),
+      ).toLocaleString();
     },
     cheapest() {
       return this.cheapestCar(this.cars[0], this.cars[1]);
