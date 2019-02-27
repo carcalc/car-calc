@@ -1,40 +1,29 @@
 <template>
   <div class="cost-comparison">
-    <!-- This is just bullshit output to make sure data is where it's supposed to be -->
-    <!-- remove all this crap once we have proper computed properties to display -->
-    <!-- <p>{{ usageDetails.distance }} körsträcka</p>
-    <p>{{ usageDetails.gasPrice }} bensin/dieselpris</p>
-    <p>{{ usageDetails.kwhPrice }} elpris</p>
-
-    <p>Pris {{ selectedCars[0].name }}: {{ selectedCars[0].price }} kr</p>
-    <p>Pris {{ selectedCars[1].name }}: {{ selectedCars[1].price }} kr</p>-->
-    <h1>
-      <span>Totalkostnad för</span>
-      {{ selectedCars[0].name }}
-      <span>är</span>
-      {{ allYearsTotalCarOne }} kr
-    </h1>
-    <h1>
-      <span>Totalkostnad för</span>
-      {{ selectedCars[1].name }}
-      <span>är</span>
-      {{ allYearsTotalCarTwo }} kr
-    </h1>
-    <h1>
-      {{ cheapest }}
-      <span>är</span>
-      {{ comparisonFirstYearResult }}
-      <span>kr billigare första året.</span>
-    </h1>
-    <h1>
-      {{ cheapest }}
-      <span>är</span>
-      {{ comparisonAllYearsResult }}
-      <span>kr billigare beräknat på {{ usageDetails.ownership }} år.</span>
-    </h1>
+    <p>
+      Totalkostnad för
+      <span>{{ selectedCars[0].name }}</span>
+      är
+      <span>{{ allYearsTotalCarOne }}</span> kr och kostnaden/mil är
+      <span>{{ pricePerTenKmCarOne }}</span> kr
+    </p>
+    <p>
+      Totalkostnad för
+      <span>{{ selectedCars[1].name }}</span>
+      är
+      <span>{{ allYearsTotalCarTwo }}</span> kr och kostnaden/mil är
+      <span>{{ pricePerTenKmCarTwo }}</span> kr
+    </p>
+    <p>
+      Billaste bilen är
+      <span>{{ cheapest }}</span>
+      och den är
+      <span>{{ comparisonAllYearsResult }}</span>
+      kr billigare för perioden
+      <span>{{ this.usageDetails.ownership }}</span> år.
+    </p>
   </div>
 </template>
-
 <script>
 export default {
   props: ['usageDetails', 'selectedCars'],
@@ -51,10 +40,14 @@ export default {
         : (result = (consumption * gasPrice) / 10);
       return result;
     },
-    firstYearTotal(car) {
-      let { price, type } = car;
-      let { distance } = this.usageDetails;
-      return Math.round(this.pricePerTenKm(car) * distance + price - this.electricPremie(type));
+    cheapestCar(carOne, carTwo) {
+      let cheapest = "";
+      let cheapestCarOne = this.allYearsTotal(carOne);
+      let cheapestCarTwo = this.allYearsTotal(carTwo);
+      cheapestCarOne < cheapestCarTwo
+        ? (cheapest = carOne.name)
+        : (cheapest = carTwo.name);
+      return cheapest;
     },
     allYearsTotal(car) {
       let { distance, ownership } = this.usageDetails;
@@ -63,32 +56,24 @@ export default {
         this.pricePerTenKm(car) * distance * ownership + price - this.electricPremie(type)
       );
     },
-    comparisonFirstYear(carOne, carTwo) {
-      let result = 0;
-      carOne < carTwo ? (result = carTwo - carOne) : (result = carOne - carTwo);
-      return result;
-    },
     comparisonAllYears(carOne, carTwo) {
       let result = 0;
-      carOne < carTwo ? (result = carTwo - carOne) : (result = carOne - carTwo);
+
+      const carOneResult = this.allYearsTotal(carOne);
+      const carTwoResult = this.allYearsTotal(carTwo);
+
+      carOneResult < carTwoResult
+        ? (result = carTwoResult - carOneResult)
+        : (result = carOneResult - carTwoResult);
       return result;
-    },
-    cheapestCar(carOne, carTwo) {
-      let cheapest = '';
-      carOne < carTwo ? (cheapest = carOne.name) : (cheapest = carTwo.name);
-      return cheapest;
-    },
+    }
   },
   computed: {
-    taxCredit() {
-      // if possible, calculate tax credit for green cars; otherwise make sure the database has this info
-      return '';
+    pricePerTenKmCarOne() {
+      return this.pricePerTenKm(this.selectedCars[0]).toFixed(1);
     },
-    firstYearTotalCarOne() {
-      return this.firstYearTotal(this.selectedCars[0]).toLocaleString();
-    },
-    firstYearTotalCarTwo() {
-      return this.firstYearTotal(this.selectedCars[1]).toLocaleString();
+    pricePerTenKmCarTwo() {
+      return this.pricePerTenKm(this.selectedCars[1]).toFixed(1);
     },
     allYearsTotalCarOne() {
       return this.allYearsTotal(this.selectedCars[0]).toLocaleString();
@@ -96,15 +81,11 @@ export default {
     allYearsTotalCarTwo() {
       return this.allYearsTotal(this.selectedCars[1]).toLocaleString();
     },
-    comparisonFirstYearResult() {
-      const carOne = this.firstYearTotal(this.selectedCars[0]);
-      const carTwo = this.firstYearTotal(this.selectedCars[1]);
-      return this.comparisonFirstYear(carOne, carTwo).toLocaleString();
-    },
     comparisonAllYearsResult() {
-      const carOne = this.allYearsTotal(this.selectedCars[0]);
-      const carTwo = this.allYearsTotal(this.selectedCars[1]);
-      return this.comparisonAllYears(carOne, carTwo).toLocaleString();
+      return this.comparisonAllYears(
+        this.selectedCars[0],
+        this.selectedCars[1]
+      ).toLocaleString();
     },
     cheapest() {
       return this.cheapestCar(this.selectedCars[0], this.selectedCars[1]);
@@ -112,7 +93,6 @@ export default {
   },
 };
 </script>
-
 <style lang="scss" scoped>
 .cost-comparison {
   grid-column: 1 / -1;
