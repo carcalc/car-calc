@@ -11,7 +11,7 @@
       <CarDetails :car="car" :key="index + '-details'" :usage="usageDetails" :evBonus="evBonus" />
     </div>
     <CarsResults :usage="usageDetails" :cars="selectedCars" :evBonus="evBonus" />
-    <input type="button" value="Återställ" @click="resetStoredData" />
+    <input lang="sv" type="button" value="Återställ" @click="resetStoredData" />
   </div>
 </template>
 

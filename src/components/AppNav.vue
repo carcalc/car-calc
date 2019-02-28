@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: "AppNav"
+  name: 'AppNav',
 };
 </script>
 
