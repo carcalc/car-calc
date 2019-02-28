@@ -5,7 +5,7 @@
         Totalkostnad för
         <span>{{ car.name }}</span>
         är
-        <span>{{ totalCost(index).toLocaleString() }} kr</span> och driftkostnaden är
+        <span>{{ Math.round(totalCost(index)).toLocaleString() }} kr</span> och driftkostnaden är
         <span>{{ (fuelCostPerKm(index) * 10).toFixed(1).replace('.', ',') }} kr per mil</span>
       </p>
     </template>
@@ -25,6 +25,7 @@ export default {
   props: ['usage', 'cars', 'evBonus'],
   data() {
     return {
+      testData: '',
       carStats: [{ total: null, fuel: null }, { total: null, fuel: null }],
     };
   },
@@ -48,16 +49,17 @@ export default {
     },
   },
   computed: {
-    distance() {
+    distance: function() {
       return (this.usage.distance * this.usage.ownership) / 10;
     },
-    savings() {
-      return (this.carStats[0].total < this.carStats[1].total
-        ? this.carStats[1].total - this.carStats[0].total
-        : this.carStats[0].total - this.carStats[1].total
+    savings: function() {
+      return Math.round(
+        this.carStats[0].total < this.carStats[1].total
+          ? this.carStats[1].total - this.carStats[0].total
+          : this.carStats[0].total - this.carStats[1].total,
       ).toLocaleString();
     },
-    cheapest() {
+    cheapest: function() {
       return this.carStats[0].total > this.carStats[1].total
         ? this.cars[0].name
         : this.cars[1].name;

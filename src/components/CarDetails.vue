@@ -13,14 +13,15 @@
         Inköpspris
       </h2>
       <input type="number" min="0" v-model.number="car.price" />
-      <span>(kr)</span>
+      <span>kr</span>
       <h2>
         Drivmedel
       </h2>
       <input type="radio" name="electric" v-model="car.type" value="electric" />
       <label for="electric">El</label>
-      <input type="radio" name="hybrid" v-model="car.type" value="hybrid" />
-      <label for="hybrid">Laddhybrid</label>
+      <!-- Maybe for future use -->
+      <!-- <input type="radio" name="hybrid" v-model="car.type" value="hybrid" />
+      <label for="hybrid">Laddhybrid</label> -->
       <input type="radio" name="gasoline" v-model="car.type" value="gasoline" />
       <label for="gasoline">Bensin/diesel</label>
 
@@ -28,19 +29,19 @@
         Förbrukning
       </h2>
       <input type="number" step="any" min="0" v-model.number="car.consumption" />
-      <span>{{ unit }}</span>
+      <span>{{ fuelUnit }}</span>
     </form>
     <h2>
       Kostnader
     </h2>
     <p>
       Driftkostnad:
-      {{ fuel }}
+      {{ fuelPer10km }}
       kr per mil
     </p>
     <p>
       Totalkostnad:
-      {{ total }}
+      {{ totalOwnership }}
       kr på
       {{ usage.ownership }}
       år
@@ -62,16 +63,16 @@ export default {
     },
   },
   computed: {
-    unit() {
-      return this.car.type === 'electric' ? '(kWh/100 km)' : '(liter/100 km)';
+    fuelUnit: function() {
+      return this.car.type === 'electric' ? 'kWh/100 km' : 'liter/100 km';
     },
-    fuel() {
+    fuelPer10km: function() {
       return (this.fuelCostPerKm(this.car, this.usage) * 10).toFixed(1).replace('.', ',');
     },
-    total() {
+    totalOwnership: function() {
       return Math.round(this.totalCost(this.car, this.usage)).toLocaleString();
     },
-    co2Index() {
+    co2Index: function() {
       if (this.car.co2 > 90) {
         return 'green';
       } else if (this.car.co2 > 80 && this.car.co2 < 91) {
