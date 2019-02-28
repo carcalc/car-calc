@@ -36,12 +36,12 @@
     </h2>
     <p>
       Driftkostnad:
-      {{ fuelPer10km }}
+      {{ fuelFormatted }}
       kr per mil
     </p>
     <p>
       Totalkostnad:
-      {{ totalOwnership }}
+      {{ totalFormatted }}
       kr på
       {{ usage.ownership }}
       år
@@ -53,24 +53,31 @@
 export default {
   name: 'CarDetails',
   props: ['car', 'usage', 'evBonus'],
-  methods: {
-    fuelCostPerKm({ type, consumption }, { gasPrice, kwhPrice }) {
-      return type === 'electric' ? (consumption * kwhPrice) / 100 : (consumption * gasPrice) / 100;
-    },
-    totalCost({ type, price }, { ownership, distance }) {
-      const cost = this.fuelCostPerKm(this.car, this.usage) * distance * ownership + price;
-      return type === 'electric' ? cost - this.evBonus : cost;
-    },
-  },
   computed: {
+    fuelCost: function() {
+      const { gasPrice, kwhPrice } = this.usage;
+      const car = this.car;
+      return car.type === 'electric'
+        ? (car.consumption * kwhPrice) / 100
+        : (car.consumption * gasPrice) / 100;
+    },
+    totalFuelCost: function() {
+      const { distance, ownership } = this.usage;
+      return Math.round(this.fuelCost * distance * ownership);
+    },
+    totalOwnershipCost: function() {
+      const car = this.car;
+      const cost = this.totalFuelCost + car.price;
+      return car.type === 'electric' ? cost - this.evBonus : cost;
+    },
     fuelUnit: function() {
       return this.car.type === 'electric' ? 'kWh/100 km' : 'liter/100 km';
     },
-    fuelPer10km: function() {
-      return (this.fuelCostPerKm(this.car, this.usage) * 10).toFixed(1).replace('.', ',');
+    fuelFormatted: function() {
+      return (this.fuelCost * 10).toFixed(1).replace('.', ',');
     },
-    totalOwnership: function() {
-      return Math.round(this.totalCost(this.car, this.usage)).toLocaleString();
+    totalFormatted: function() {
+      return Math.round(this.totalOwnershipCost).toLocaleString();
     },
     co2Index: function() {
       if (this.car.co2 > 90) {

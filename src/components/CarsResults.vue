@@ -3,18 +3,26 @@
     <template v-for="(car, index) in cars">
       <p :key="index">
         Totalkostnad för
-        <span>{{ car.name }}</span>
-        är
-        <span>{{ Math.round(totalOwnershipCosts[index]).toLocaleString() }} kr</span> och
-        driftkostnaden är
-        <span>{{ (fuelCosts[index] * 10).toFixed(1).replace('.', ',') }} kr per mil</span>
+        <span class="highlight">{{ car.name }}</span> är
+        <span class="highlight">
+          {{ Math.round(totalOwnershipCosts[index]).toLocaleString() }} kr
+        </span>
+        varav {{ totalFuelCosts[index] }} kr i driftkostnad ({{
+          (fuelCosts[index] * 10).toFixed(1).replace('.', ',')
+        }}
+        kr per mil)
+        <span v-if="car.type === 'electric'"> och miljöbilspremie på {{ evBonus }} kr</span>
       </p>
     </template>
 
     <p>
-      <span>{{ cheapest }}</span> är billigare totalt sett och utgör en
-      <span>besparing på {{ savings }} kr</span> på <span> {{ usage.ownership }} år</span> och
-      <span>{{ totalDistance }} km</span>.
+      <span class="highlight">{{ cheapestCar }}</span> är billigast och utgör en
+      <span class="highlight">
+        besparing på {{ Math.round(totalSavings).toLocaleString() }} kr och
+        {{ totalSavingsPercent }}%</span
+      >
+      över {{ usage.ownership }} år och {{ totalDistance }} km jämfört med {{ mostExpensiveCar }}.
+
       <!-- Data we can add: -->
       <!-- Display total fuel costs and bonus separately -->
       <!-- Car X is % cheaper to run-->
@@ -24,17 +32,12 @@
 <script>
 export default {
   props: ['usage', 'cars', 'evBonus'],
-  data() {
-    return {
-      carStats: [{ total: null, fuel: null }, { total: null, fuel: null }],
-    };
-  },
   computed: {
     fuelCosts: function() {
       const { gasPrice, kwhPrice } = this.usage;
       return this.cars.map(car => {
         const cost =
-          car.propstype === 'electric'
+          car.type === 'electric'
             ? (car.consumption * kwhPrice) / 100
             : (car.consumption * gasPrice) / 100;
         return cost;
@@ -55,17 +58,23 @@ export default {
     totalDistance: function() {
       return (this.usage.distance * this.usage.ownership) / 10;
     },
-    savings: function() {
-      return Math.round(
-        this.totalOwnershipCosts[0] < this.totalOwnershipCosts[1]
-          ? this.totalOwnershipCosts[1] - this.totalOwnershipCosts[0]
-          : this.totalOwnershipCosts[0] - this.totalOwnershipCosts[1],
-      );
+    totalSavings: function() {
+      const [carOne, carTwo] = this.totalOwnershipCosts;
+      if (carOne < carTwo) return carTwo - carOne;
+      else return carOne - carTwo;
     },
-    cheapest: function() {
-      return this.carStats[0].total > this.carStats[1].total
-        ? this.cars[0].name
-        : this.cars[1].name;
+    totalSavingsPercent: function() {
+      const [carOne, carTwo] = this.totalOwnershipCosts;
+      const diff = this.totalSavings;
+      return Math.round(carOne > carTwo ? (diff / carOne) * 100 : (diff / carTwo) * 100);
+    },
+    cheapestCar: function() {
+      const [carOne, carTwo] = this.totalOwnershipCosts;
+      return carOne < carTwo ? this.cars[0].name : this.cars[1].name;
+    },
+    mostExpensiveCar: function() {
+      const [carOne, carTwo] = this.totalOwnershipCosts;
+      return carOne > carTwo ? this.cars[0].name : this.cars[1].name;
     },
   },
 };
@@ -83,7 +92,7 @@ export default {
     color: orangered;
   }
 }
-span {
+.highlight {
   font-size: 1.5rem;
   color: #333;
 }

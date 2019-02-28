@@ -11,18 +11,20 @@
 			"id": "generic-1",
 			"name": "Bil 1",
 			"specs": "Generisk personbil",
-			"price": 200000,
+			"price": 320000,
 			"type": "electric",
-			"verified": false
+			"verified": false,
+			"co2":100
 		},
 		{
-			"consumption": 18.1,
+			"consumption": 7.1,
 			"id": "generic-2",
 			"name": "Bil 2",
 			"specs": "Generisk personbil",
-			"price": 230000,
+			"price": 290000,
 			"type": "gasoline",
-			"verified": false
+			"verified": false,
+			"co2": 55
 		}
 	]
 }
