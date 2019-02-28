@@ -9,27 +9,32 @@
     </h4>
 
     <form @submit.prevent class="car-details">
-      <h2>
-        Inköpspris
-      </h2>
-      <input lang="sv" type="number" min="0" v-model.number="car.price" />
-      <span>kr</span>
-      <h2>
-        Drivmedel
-      </h2>
-      <input lang="sv" type="radio" name="electric" v-model="car.type" value="electric" />
-      <label for="electric">El</label>
-      <!-- Maybe for future use -->
-      <!-- <input lang="sv" type="radio" name="hybrid" v-model="car.type" value="hybrid" />
-      <label for="hybrid">Laddhybrid</label> -->
-      <input lang="sv" type="radio" name="gasoline" v-model="car.type" value="gasoline" />
-      <label for="gasoline">Bensin/diesel</label>
-
-      <h2>
-        Förbrukning
-      </h2>
-      <input lang="sv" type="number" step="any" min="0" v-model.number="car.consumption" />
-      <span>{{ fuelUnit }}</span>
+      <fieldset>
+        <legend>Inköpspris</legend>
+        <input lang="sv" type="number" min="0" v-model.number="car.price" />
+        <span>kr</span>
+      </fieldset>
+      <fieldset>
+        <legend>Drivmedel</legend>
+        <label for="electric">
+          El
+          <input lang="sv" type="radio" name="electric" v-model="car.type" value="electric" />
+        </label>
+        <!-- Maybe for future use
+        <label for="hybrid">
+          Laddhybrid
+          <input lang="sv" type="radio" name="hybrid" v-model="car.type" value="hybrid" />
+        </label> -->
+        <label for="gasoline">
+          Bensin/diesel
+          <input lang="sv" type="radio" name="gasoline" v-model="car.type" value="gasoline" />
+        </label>
+      </fieldset>
+      <fieldset>
+        <legend>Förbrukning</legend>
+        <input lang="sv" type="number" step="any" min="0" v-model.number="car.consumption" />
+        <span>{{ fuelUnit }}</span>
+      </fieldset>
     </form>
     <h2>
       Kostnader

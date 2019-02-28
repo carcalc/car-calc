@@ -1,5 +1,6 @@
 <template>
   <div class="information">
+    <!-- Probably refactor this to a separate component that's not in /views -->
     <div class="text-wrapper">
       <h2>Beräkningar</h2>
       <p>
@@ -63,6 +64,6 @@ ul {
 }
 h2 {
   margin-bottom: 1rem;
-  color: orangered;
+  color: var(--headline-color);
 }
 </style>
