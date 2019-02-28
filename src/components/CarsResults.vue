@@ -21,11 +21,8 @@
         besparing på {{ Math.round(totalSavings).toLocaleString() }} kr och
         {{ totalSavingsPercent }}%</span
       >
-      över {{ usage.ownership }} år och {{ totalDistance }} km jämfört med {{ mostExpensiveCar }}.
-
-      <!-- Data we can add: -->
-      <!-- Display total fuel costs and bonus separately -->
-      <!-- Car X is % cheaper to run-->
+      över {{ usage.ownership }} år och {{ totalDistance.toLocaleString() }} km jämfört med
+      {{ mostExpensiveCar }}.
     </p>
   </div>
 </template>
