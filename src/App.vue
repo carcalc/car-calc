@@ -22,12 +22,19 @@ export default {
   data() {
     return {
       linkedInAndreas: 'http://www.linkedin.com/in/andreas-hansson-',
-      linkedInGabriel: 'http://www.linkedin.com/in/andreas-hansson-',
+      linkedInGabriel: 'http://www.linkedin.com/in/gabriellundmark',
     };
   },
 };
 </script>
 <style>
+/* Site-wide styling goes here */
+:root {
+  --accent-color: rgb(42, 42, 97);
+  --main-color: rgb(95, 95, 197);
+  --headline-color: var(--accent-color);
+}
+
 html {
   box-sizing: border-box;
   font-size: 16px;
@@ -64,10 +71,17 @@ img {
   max-width: 100%;
   height: auto;
 }
-body,
-html {
-  width: 100%;
-  height: 100%;
+
+fieldset {
+  border-radius: 0.5rem;
+  border-color: var(--main-color);
+}
+legend {
+  color: var(--main-color);
+  font-weight: bold;
+}
+input {
+  margin: 0 0.5rem;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

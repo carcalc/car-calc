@@ -19,7 +19,7 @@ header {
   align-items: center;
   width: 100%;
   height: 10rem;
-  background: rgb(42, 42, 97);
+  background-color: var(--accent-color);
   color: #fff;
 
   h1 {
