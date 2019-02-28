@@ -2,6 +2,7 @@
   <form class="usage-form" @submit.prevent>
     <label for="electricity-price">Elpris</label>
     <input
+      lang="sv"
       type="number"
       name="electricity-price"
       step="any"
@@ -12,6 +13,7 @@
     <span>kr/kWh</span>
     <label for="gas-price">Bensin-/dieselpris</label>
     <input
+      lang="sv"
       type="number"
       name="gas-price"
       step="any"
@@ -22,6 +24,7 @@
     <span>kr/liter</span>
     <label for="distance">Körsträcka</label>
     <input
+      lang="sv"
       name="distance"
       type="range"
       min="5000"
@@ -33,6 +36,7 @@
     <span>{{ usage.distance / 10 }} mil/år</span>
     <label for="years">Planerat ägande</label>
     <input
+      lang="sv"
       name="years"
       type="range"
       min="1"
