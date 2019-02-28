@@ -1,6 +1,6 @@
 <template>
   <form class="usage-form" @submit.prevent>
-    <label for="electricity-price">Elpris (kr/kWh)</label>
+    <label for="electricity-price">Elpris</label>
     <input
       type="number"
       name="electricity-price"
@@ -9,7 +9,8 @@
       v-model.number="usage.kwhPrice"
       :placeholder="usage.kwhPrice"
     />
-    <label for="gas-price">Bensin-/dieselpris (kr/liter)</label>
+    <span>kr/kWh</span>
+    <label for="gas-price">Bensin-/dieselpris</label>
     <input
       type="number"
       name="gas-price"
@@ -18,7 +19,7 @@
       v-model.number="usage.gasPrice"
       :placeholder="usage.gasPrice"
     />
-
+    <span>kr/liter</span>
     <label for="distance">Körsträcka</label>
     <input
       name="distance"

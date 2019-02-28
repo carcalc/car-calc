@@ -13,14 +13,15 @@
         Inköpspris
       </h2>
       <input type="number" min="0" v-model.number="car.price" />
-      <span>(kr)</span>
+      <span>kr</span>
       <h2>
         Drivmedel
       </h2>
       <input type="radio" name="electric" v-model="car.type" value="electric" />
       <label for="electric">El</label>
-      <input type="radio" name="hybrid" v-model="car.type" value="hybrid" />
-      <label for="hybrid">Laddhybrid</label>
+      <!-- Maybe for future use -->
+      <!-- <input type="radio" name="hybrid" v-model="car.type" value="hybrid" />
+      <label for="hybrid">Laddhybrid</label> -->
       <input type="radio" name="gasoline" v-model="car.type" value="gasoline" />
       <label for="gasoline">Bensin/diesel</label>
 
@@ -28,19 +29,19 @@
         Förbrukning
       </h2>
       <input type="number" step="any" min="0" v-model.number="car.consumption" />
-      <span>{{ unit }}</span>
+      <span>{{ fuelUnit }}</span>
     </form>
     <h2>
       Kostnader
     </h2>
     <p>
       Driftkostnad:
-      {{ fuel }}
+      {{ fuelFormatted }}
       kr per mil
     </p>
     <p>
       Totalkostnad:
-      {{ total }}
+      {{ totalFormatted }}
       kr på
       {{ usage.ownership }}
       år
@@ -52,26 +53,33 @@
 export default {
   name: 'CarDetails',
   props: ['car', 'usage', 'evBonus'],
-  methods: {
-    fuelCostKm({ type, consumption }, { gasPrice, kwhPrice }) {
-      return type === 'electric' ? (consumption * kwhPrice) / 100 : (consumption * gasPrice) / 100;
-    },
-    totalCost({ type, price }, { ownership, distance }) {
-      const cost = this.fuelCostKm(this.car, this.usage) * distance * ownership + price;
-      return type === 'electric' ? cost - this.evBonus : cost;
-    },
-  },
   computed: {
-    unit() {
-      return this.car.type === 'electric' ? '(kWh/100 km)' : '(liter/100 km)';
+    fuelCost: function() {
+      const { gasPrice, kwhPrice } = this.usage;
+      const car = this.car;
+      return car.type === 'electric'
+        ? (car.consumption * kwhPrice) / 100
+        : (car.consumption * gasPrice) / 100;
     },
-    fuel() {
-      return (this.fuelCostKm(this.car, this.usage) * 10).toFixed(1).replace('.', ',');
+    totalFuelCost: function() {
+      const { distance, ownership } = this.usage;
+      return Math.round(this.fuelCost * distance * ownership);
     },
-    total() {
-      return Math.round(this.totalCost(this.car, this.usage)).toLocaleString();
+    totalOwnershipCost: function() {
+      const car = this.car;
+      const cost = this.totalFuelCost + car.price;
+      return car.type === 'electric' ? cost - this.evBonus : cost;
     },
-    co2Index() {
+    fuelUnit: function() {
+      return this.car.type === 'electric' ? 'kWh/100 km' : 'liter/100 km';
+    },
+    fuelFormatted: function() {
+      return (this.fuelCost * 10).toFixed(1).replace('.', ',');
+    },
+    totalFormatted: function() {
+      return Math.round(this.totalOwnershipCost).toLocaleString();
+    },
+    co2Index: function() {
       if (this.car.co2 > 90) {
         return 'green';
       } else if (this.car.co2 > 80 && this.car.co2 < 91) {
