@@ -1,9 +1,7 @@
 <template>
   <div id="app">
-    <div>
-      <AppHeader />
-      <AppNav />
-    </div>
+    <AppHeader />
+    <AppNav />
     <router-view />
     <AppFooter :linkedInAndreas="linkedInAndreas" :linkedInGabriel="linkedInGabriel" />
   </div>
@@ -33,6 +31,9 @@ export default {
   --accent-color: rgb(42, 42, 97);
   --main-color: rgb(95, 95, 197);
   --headline-color: var(--accent-color);
+  --card-padding: 2rem;
+  --card-shadow: 2px 2px 12px 0 rgba(0, 0, 80, 0.15);
+  --card-radius: 5px;
 }
 
 html {
@@ -75,6 +76,7 @@ img {
 fieldset {
   border-radius: 0.5rem;
   border-color: var(--main-color);
+  margin: 0;
 }
 legend {
   color: var(--main-color);
@@ -90,7 +92,5 @@ input {
   text-align: center;
   color: #2c3e50;
   min-height: 100%;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
 }
 </style>

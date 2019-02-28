@@ -1,5 +1,5 @@
 <template>
-  <div class="cars-compare-wrapper">
+  <section class="cars-comparison-wrapper">
     <UsageDetails :usageDetails="usageDetails" />
     <div class="car-wrapper" v-for="(car, index) in selectedCars" :key="index">
       <CarSelector
@@ -11,8 +11,9 @@
       <CarDetails :car="car" :key="index + '-details'" :usage="usageDetails" :evBonus="evBonus" />
     </div>
     <CarsResults :usage="usageDetails" :cars="selectedCars" :evBonus="evBonus" />
-    <input lang="sv" type="button" value="Återställ" @click="resetStoredData" />
-  </div>
+    <!-- Find a place to put this fucker -->
+    <!-- <input lang="sv" type="button" value="Återställ" @click="resetStoredData" /> -->
+  </section>
 </template>
 
 <script>
@@ -86,18 +87,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cars-compare-wrapper {
+.cars-comparison-wrapper {
+  margin: var(--card-padding) 0;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 2rem;
+  justify-content: center;
+  grid-template-columns: repeat(2, minmax(200px, 500px));
+  grid-template-areas: 'usage usage' 'car1 car2' 'results results';
 }
 
 .car-wrapper {
-  border-radius: 8px;
-  box-shadow: 2px 2px 12px 0 rgba(0, 0, 80, 0.15);
-  margin: 2rem;
-}
-.compare-btn {
-  padding: 15px 60px;
-  background: rgb(245, 120, 75);
+  border-radius: var(--card-radius);
+  box-shadow: var(--card-shadow);
+  &:first-of-type {
+    grid-area: car1;
+  }
+  &:last-of-type {
+    grid-area: car2;
+  }
 }
 </style>

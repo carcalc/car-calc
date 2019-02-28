@@ -1,6 +1,6 @@
 <template>
-  <form class="usage-form" @submit.prevent>
-    <fieldset>
+  <form class="usage-details" @submit.prevent>
+    <fieldset class="prices">
       <legend>Priser</legend>
       <label for="electricity-price">
         Elpris
@@ -13,8 +13,8 @@
           v-model.number="usage.kwhPrice"
           :placeholder="usage.kwhPrice"
         />
+        kr/kWh
       </label>
-      <span>kr/kWh</span>
       <label for="gas-price">
         Bensin-/dieselpris
         <input
@@ -26,10 +26,10 @@
           v-model.number="usage.gasPrice"
           :placeholder="usage.gasPrice"
         />
+        kr/liter
       </label>
-      <span>kr/liter</span>
     </fieldset>
-    <fieldset>
+    <fieldset class="usage">
       <legend>Brukande</legend>
       <label for="distance">
         Körsträcka
@@ -43,8 +43,8 @@
           v-model.number="usage.distance"
           :placeholder="usage.distance"
         />
+        {{ usage.distance / 10 }} mil/år
       </label>
-      <span>{{ usage.distance / 10 }} mil/år</span>
       <label for="years">
         Planerat ägande
         <input
@@ -56,8 +56,8 @@
           v-model.number="usage.ownership"
           :placeholder="usage.ownership"
         />
+        {{ usage.ownership }} år
       </label>
-      <span>{{ usage.ownership }} år</span>
     </fieldset>
   </form>
 </template>
@@ -75,9 +75,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.usage-form {
-  grid-column: 1 / -1;
-  padding: 4rem;
-  margin: 2rem;
+.usage-details {
+  grid-area: usage;
+  display: flex;
+  padding: var(--card-padding);
+  box-shadow: var(--card-shadow);
+  border-radius: var(--card-radius);
+}
+fieldset {
+  flex: 1;
+  &:first-of-type {
+    margin-right: var(--card-padding);
+  }
+  label {
+    display: flex;
+  }
+  input[type='range'] {
+    flex: 1;
+  }
+  input[type='number'] {
+    width: 50px;
+  }
+  &.prices {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 </style>

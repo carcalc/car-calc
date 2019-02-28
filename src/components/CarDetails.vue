@@ -101,8 +101,7 @@ export default {
 
 <style lang="scss" scoped>
 .car-details-wrapper {
-  padding: 3rem;
-  margin: auto;
+  padding: var(--card-padding);
 }
 .green,
 .yellow,
