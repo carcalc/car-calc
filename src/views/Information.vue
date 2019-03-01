@@ -1,5 +1,5 @@
 <template>
-  <section class="information">
+  <section class="Om">
     <!-- Probably refactor this to a separate component that's not in /views -->
     <div class="text-wrapper">
       <h2>Beräkningar</h2>

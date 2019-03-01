@@ -13,9 +13,10 @@ export default new Router({
       component: Home,
     },
     {
-      path: '/information',
+      path: '/om',
       name: 'information',
       component: Information,
     },
   ],
+  mode: 'history',
 });

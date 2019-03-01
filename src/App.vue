@@ -26,11 +26,13 @@ export default {
 };
 </script>
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css?family=Fredoka+One');
+
 /* Site-wide styling goes here */
 /* Variables */
 :root {
   --black: #2c3e50;
-  --accent-color: rgb(25, 74, 87);
+  --accent-color: rgb(1, 133, 115);
   --main-color: rgb(131, 228, 172);
   --headline-color: var(--accent-color);
   --light-grey: rgb(240, 240, 240);
