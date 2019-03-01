@@ -20,7 +20,7 @@ header {
   width: 100%;
   height: 10rem;
   background-color: var(--accent-color);
-  color: #fff;
+  color: var(--white);
 
   h1 {
     margin: 0;

@@ -1,5 +1,5 @@
 <template>
-  <div class="cost-comparison">
+  <div class="cars-results">
     <template v-for="(car, index) in cars">
       <p :key="index">
         Totalkostnad för
@@ -85,12 +85,13 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.cost-comparison {
+.cars-results {
   grid-area: results;
-  border-radius: var(--card-radius);
+  padding: var(--card-padding);
+  background-color: var(--white);
   box-shadow: var(--card-shadow);
-  transition: all 300ms;
-  padding: var(--card-gap);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
 }
 .highlight {
   font-size: 1.5rem;

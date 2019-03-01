@@ -2,12 +2,6 @@
   <section class="cars-comparison-wrapper">
     <UsageDetails :usageDetails="usageDetails" />
     <div class="car-wrapper" v-for="(car, index) in selectedCars" :key="index">
-      <h1>
-        {{ car.name }}
-      </h1>
-      <h4 v-if="!car.id.includes('generic')">
-        {{ car.specs }}
-      </h4>
       <CarSelector
         :allCars="allCars"
         :selectedCar="car"
@@ -96,28 +90,38 @@ export default {
 .cars-comparison-wrapper {
   display: grid;
   grid-gap: var(--card-gap);
-  max-width: 1000px;
-  margin: var(--card-gap) auto;
+  padding: var(--card-gap);
+  max-width: 1200px;
+  margin: auto;
   justify-content: center;
 
-  @media screen and (min-width: 600px) {
+  @media screen and (min-width: 650px) {
+    // Tablet layout
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       'usage usage'
       'car1 car2'
       'results results';
   }
-  @media screen and (min-width: 1000px) {
+  @media screen and (min-width: 1200px) {
+    // Desktop layout
+    grid-gap: calc(var(--card-gap) * 2);
     grid-template-columns: 2fr 1fr 2fr;
     grid-template-areas:
       'car1 usage car2'
       'results results results';
+    padding: calc(var(--card-gap) * 2);
   }
 }
-
 .car-wrapper {
-  border-radius: var(--card-radius);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--white);
+  padding: var(--card-padding);
   box-shadow: var(--card-shadow);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
   &:first-of-type {
     grid-area: car1;
   }

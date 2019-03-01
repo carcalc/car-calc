@@ -1,43 +1,70 @@
 <template>
-  <div class="car-details-wrapper">
+  <form class="car-details">
     <span :class="co2Index"></span>
-    <form @submit.prevent class="car-details">
-      <fieldset>
-        <legend class="input-title">Inköpspris</legend>
-        <input lang="sv" type="number" min="0" v-model.number="car.price" />
-        <span class="input-subtext">kr</span>
-      </fieldset>
-      <fieldset>
-        <legend class="input-title">Drivmedel</legend>
-        <label for="electric">
-          El
-          <input lang="sv" type="radio" name="electric" v-model="car.type" value="electric" />
-        </label>
-        <!-- Maybe for future use
-        <label for="hybrid">
-          Laddhybrid
-          <input lang="sv" type="radio" name="hybrid" v-model="car.type" value="hybrid" />
-        </label> -->
-        <label for="gasoline">
-          Bensin/diesel
-          <input lang="sv" type="radio" name="gasoline" v-model="car.type" value="gasoline" />
-        </label>
-      </fieldset>
-      <fieldset>
-        <legend>Förbrukning</legend>
-        <input lang="sv" type="number" step="any" min="0" v-model.number="car.consumption" />
-        <span class="input-subtext">{{ fuelUnit }}</span>
-      </fieldset>
-    </form>
-    <div class="stats">
-      <h3 class="stat-title">Driftkostnad</h3>
-      <span class="stat-number">{{ fuelFormatted }}</span>
-      <span class="stat-subtext"> kr per mil</span>
-      <h3 class="stat-title">Totalkostnad</h3>
-      <span class="stat-number">{{ totalFormatted }}</span>
-      <span class="stat-subtext"> kr på {{ usage.ownership }} år</span>
+
+    <fieldset class="stat-block car-price">
+      <label class="block-title" for="car-price">Inköpspris</label>
+      <input
+        class="big-number"
+        lang="sv"
+        type="number"
+        name="car-price"
+        min="0"
+        maxlength="7"
+        v-model.number="car.price"
+      />
+      <span class="block-desc">kr</span>
+    </fieldset>
+
+    <fieldset class="stat-block fuel-type">
+      <h3 class="block-title">Drivmedel</h3>
+      <label for="electric">
+        El
+      </label>
+      <input
+        class="big-number"
+        lang="sv"
+        type="radio"
+        name="electric"
+        v-model="car.type"
+        value="electric"
+      />
+      <label for="gasoline">
+        Bensin, diesel
+      </label>
+      <input
+        class="big-number"
+        lang="sv"
+        type="radio"
+        name="gasoline"
+        v-model="car.type"
+        value="gasoline"
+      />
+    </fieldset>
+
+    <fieldset class="stat-block consumption">
+      <h3 class="block-title">Förbrukning</h3>
+      <input
+        class="big-number"
+        lang="sv"
+        type="number"
+        step="any"
+        min="0"
+        v-model.number="car.consumption"
+      />
+      <span class="block-desc">{{ fuelUnit }}</span>
+    </fieldset>
+
+    <div class="stat-block operating-cost">
+      <h3 class="block-title">Milkostnad</h3>
+      <span class="big-number">{{ fuelFormatted }} <span class="block-desc"> kr</span> </span>
     </div>
-  </div>
+
+    <div class="stat-block total-cost">
+      <h3 class="block-title">Totalkostnad {{ usage.ownership }} år</h3>
+      <span class="big-number">{{ totalFormatted }} <span class="block-desc"> kr</span></span>
+    </div>
+  </form>
 </template>
 
 <script>
@@ -86,17 +113,35 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.car-details-wrapper {
+.car-details {
   position: relative;
-  padding: var(--card-gap);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: calc(var(--stats-gap));
+
+  .stat-block {
+    &.car-price {
+      grid-column: 1 /-1;
+      input[name='car-price'] {
+        @media screen and (min-width: 1000px) {
+          font-size: 4rem;
+        }
+      }
+    }
+    &.total-cost {
+      .big-number {
+        font-size: 2rem;
+      }
+    }
+  }
 }
 .green,
 .yellow,
 .orange,
 .red {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  top: -95px;
+  right: -14px;
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
