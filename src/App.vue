@@ -1,27 +1,50 @@
 <template>
   <div id="app">
-    <div>
-      <AppHeader/>
-      <AppNav/>
-    </div>
-    <router-view/>
-    <AppFooter/>
+    <AppHeader />
+    <AppNav />
+    <router-view />
+    <AppFooter :linkedInAndreas="linkedInAndreas" :linkedInGabriel="linkedInGabriel" />
   </div>
 </template>
 <script>
-import AppHeader from "@/components/AppHeader";
-import AppFooter from "@/components/AppFooter";
-import AppNav from "@/components/AppNav";
+import AppHeader from '@/components/AppHeader';
+import AppFooter from '@/components/AppFooter';
+import AppNav from '@/components/AppNav';
 export default {
-  name: "App",
+  name: 'App',
   components: {
     AppHeader,
     AppNav,
-    AppFooter
-  }
+    AppFooter,
+  },
+  data() {
+    return {
+      linkedInAndreas: 'http://www.linkedin.com/in/andreas-hansson-',
+      linkedInGabriel: 'http://www.linkedin.com/in/gabriellundmark',
+    };
+  },
 };
 </script>
-<style>
+<style lang="scss">
+/* Site-wide styling goes here */
+/* Variables */
+:root {
+  --black: #2c3e50;
+  --accent-color: rgb(25, 74, 87);
+  --main-color: rgb(131, 228, 172);
+  --headline-color: var(--accent-color);
+  --light-grey: rgb(240, 240, 240);
+  --white: white;
+  --card-gap: 1rem;
+  --card-padding: 1.5rem;
+  --stats-gap: 1rem;
+  // --card-shadow: 2px 2px 12px 3px rgba(0, 0, 80, 0.15);
+  --card-shadow: none;
+  --card-border: 4px dotted var(--light-grey);
+  --card-radius: 15px;
+}
+
+/* Reset */
 html {
   box-sizing: border-box;
   font-size: 16px;
@@ -54,23 +77,74 @@ ul {
   list-style: none;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
 }
-body,
-html {
-  width: 100%;
-  height: 100%;
+
+/* Site-wide card styling */
+.card-title {
+  text-align: center;
 }
+.card-subtitle {
+  text-align: center;
+}
+
+.stat-block {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+
+  .block-title {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: bold;
+    display: block;
+  }
+  .big-number {
+    flex: 1;
+    font-weight: bold;
+    font-size: 2rem;
+    @media screen and (min-width: 650px) {
+      font-size: 3rem;
+    }
+  }
+
+  .block-desc {
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+
+  input {
+    color: var(--black);
+    background-color: var(--light-grey);
+    border-radius: var(--card-radius);
+    padding: 1rem;
+    margin: 0;
+    border: none;
+    font-style: italic;
+
+    &:focus {
+      caret-color: var(--main-color);
+      box-shadow: 0 0 0 3px var(--main-color);
+    }
+    &[type='number'] {
+      width: 100%;
+    }
+    &[type='radio'] {
+      float: right;
+    }
+  }
+}
+
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  min-height: 100%;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+  color: var(--black);
+  min-height: 100vh;
+  min-width: 320px;
 }
 </style>

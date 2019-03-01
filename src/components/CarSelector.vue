@@ -1,10 +1,15 @@
 <template>
-  <div class="cars-selector">
-    <h1>Välj bil</h1>
-    <select v-model="selected" @change="handleChange">
+  <div class="car-intro">
+    <h1 class="card-title">
+      {{ car.name }}
+    </h1>
+    <h3 class="card-subtitle">
+      {{ !car.id.includes('generic') ? car.specs : 'Generisk: anpassa själv' }}
+    </h3>
+    <select class="cars-selector" v-model="car" @change="handleChange">
       <option disabled value>Välj en bil</option>
-      <option v-for="car in allCars" :key="car.id" :value="car">
-        {{ car.name }}
+      <option v-for="(car, index) in allCars" :key="index" :value="car">
+        {{ car.name }} — {{ car.specs }}
       </option>
     </select>
   </div>
@@ -12,15 +17,19 @@
 
 <script>
 export default {
-  props: ['allCars'],
+  props: ['allCars', 'selectedCar'],
   data() {
-    return { selected: '' };
+    return {
+      car: this.selectedCar,
+      carIndex: this.$vnode.key.charAt(0),
+    };
+  },
+  updated() {
+    localStorage.setItem(`car${this.carIndex}`, JSON.stringify(this.car));
   },
   methods: {
     handleChange() {
-      const index = this.$vnode.key.charAt(0);
-      this.$emit('selected', { car: this.selected, index: index });
-      localStorage.setItem(`car${index}`, JSON.stringify(this.selected));
+      this.$emit('selected', { car: this.car, index: this.carIndex });
     },
   },
 };
@@ -28,7 +37,9 @@ export default {
 
 <style lang="scss" scoped>
 .cars-selector {
-  padding: 1rem;
   margin: auto;
+}
+.car-intro {
+  text-align: center;
 }
 </style>

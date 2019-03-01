@@ -1,0 +1,21 @@
+{
+  "editor.formatOnPaste": false,
+  "editor.formatOnSave": false, // keep off to avoid conflicts
+  "prettier.eslintIntegration": true,
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
+    {
+      "language": "vue",
+      "autoFix": true
+    },
+    {
+      "language": "html",
+      "autoFix": true
+    },
+    {
+      "language": "javascript",
+      "autoFix": true
+    }
+  ]
+}

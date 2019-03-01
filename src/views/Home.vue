@@ -1,11 +1,8 @@
 <template>
-  <div class="home">
-    <CarsComparison />
-  </div>
+  <CarsComparison />
 </template>
 
 <script>
-// @ is an alias to /src
 import CarsComparison from '@/components/CarsComparison.vue';
 
 export default {
@@ -15,4 +12,3 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped></style>
