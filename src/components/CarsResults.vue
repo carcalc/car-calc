@@ -90,7 +90,7 @@ export default {
   border-radius: var(--card-radius);
   box-shadow: var(--card-shadow);
   transition: all 300ms;
-  padding: var(--card-padding);
+  padding: var(--card-gap);
 }
 .highlight {
   font-size: 1.5rem;

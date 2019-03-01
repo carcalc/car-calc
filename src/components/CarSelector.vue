@@ -1,12 +1,10 @@
 <template>
-  <div class="cars-selector">
-    <select v-model="car" @change="handleChange">
-      <option disabled value>Välj en bil</option>
-      <option v-for="(car, index) in allCars" :key="index" :value="car">
-        {{ car.name }} — {{ car.specs }}
-      </option>
-    </select>
-  </div>
+  <select class="cars-selector" v-model="car" @change="handleChange">
+    <option disabled value>Välj en bil</option>
+    <option v-for="(car, index) in allCars" :key="index" :value="car">
+      {{ car.name }} — {{ car.specs }}
+    </option>
+  </select>
 </template>
 
 <script>
@@ -33,7 +31,6 @@ export default {
 
 <style lang="scss" scoped>
 .cars-selector {
-  padding: 1rem;
   margin: auto;
 }
 </style>

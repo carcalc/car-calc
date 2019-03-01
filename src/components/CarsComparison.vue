@@ -95,9 +95,9 @@ export default {
 <style lang="scss" scoped>
 .cars-comparison-wrapper {
   display: grid;
-  grid-gap: 2rem;
+  grid-gap: var(--card-gap);
   max-width: 1000px;
-  margin: auto;
+  margin: var(--card-gap) auto;
   justify-content: center;
 
   @media screen and (min-width: 600px) {

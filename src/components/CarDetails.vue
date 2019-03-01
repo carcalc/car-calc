@@ -3,12 +3,12 @@
     <span :class="co2Index"></span>
     <form @submit.prevent class="car-details">
       <fieldset>
-        <legend>Inköpspris</legend>
+        <legend class="input-title">Inköpspris</legend>
         <input lang="sv" type="number" min="0" v-model.number="car.price" />
-        <span>kr</span>
+        <span class="input-subtext">kr</span>
       </fieldset>
       <fieldset>
-        <legend>Drivmedel</legend>
+        <legend class="input-title">Drivmedel</legend>
         <label for="electric">
           El
           <input lang="sv" type="radio" name="electric" v-model="car.type" value="electric" />
@@ -26,24 +26,17 @@
       <fieldset>
         <legend>Förbrukning</legend>
         <input lang="sv" type="number" step="any" min="0" v-model.number="car.consumption" />
-        <span>{{ fuelUnit }}</span>
+        <span class="input-subtext">{{ fuelUnit }}</span>
       </fieldset>
     </form>
-    <h2>
-      Kostnader
-    </h2>
-    <p>
-      Driftkostnad:
-      {{ fuelFormatted }}
-      kr per mil
-    </p>
-    <p>
-      Totalkostnad:
-      {{ totalFormatted }}
-      kr på
-      {{ usage.ownership }}
-      år
-    </p>
+    <div class="stats">
+      <h3 class="stat-title">Driftkostnad</h3>
+      <span class="stat-number">{{ fuelFormatted }}</span>
+      <span class="stat-subtext"> kr per mil</span>
+      <h3 class="stat-title">Totalkostnad</h3>
+      <span class="stat-number">{{ totalFormatted }}</span>
+      <span class="stat-subtext"> kr på {{ usage.ownership }} år</span>
+    </div>
   </div>
 </template>
 
@@ -94,26 +87,30 @@ export default {
 
 <style lang="scss" scoped>
 .car-details-wrapper {
-  padding: var(--card-padding);
+  position: relative;
+  padding: var(--card-gap);
 }
 .green,
 .yellow,
 .orange,
 .red {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
 }
 .green {
-  background: green;
+  background: rgb(42, 192, 92);
 }
 .yellow {
-  background: yellow;
+  background: rgb(255, 241, 40);
 }
 .orange {
-  background: orange;
+  background: rgb(255, 174, 0);
 }
 .red {
-  background: red;
+  background: rgb(248, 54, 20);
 }
 </style>

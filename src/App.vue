@@ -31,7 +31,7 @@ export default {
   --accent-color: rgb(42, 42, 97);
   --main-color: rgb(95, 95, 197);
   --headline-color: var(--accent-color);
-  --card-padding: 2rem;
+  --card-gap: 2rem;
   --card-shadow: 2px 2px 12px 0 rgba(0, 0, 80, 0.15);
   --card-radius: 5px;
 }
@@ -74,13 +74,11 @@ img {
 }
 
 fieldset {
-  border-radius: 0.5rem;
-  border-color: var(--main-color);
+  border: 0;
+  padding: 0;
   margin: 0;
 }
 legend {
-  color: var(--main-color);
-  font-weight: bold;
 }
 input {
   margin: 0 0.5rem;
