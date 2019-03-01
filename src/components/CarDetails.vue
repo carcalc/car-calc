@@ -124,7 +124,7 @@ export default {
       grid-column: 1 /-1;
       input[name='car-price'] {
         font-size: 4rem;
-        @media screen and (min-width: 650px) and (max-width: 1000px) {
+        @media screen and (min-width: 650px) and (max-width: 1200px) {
           font-size: 3rem;
         }
       }

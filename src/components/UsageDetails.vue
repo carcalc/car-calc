@@ -97,7 +97,7 @@ export default {
       'electricity gas distance'
       'electricity gas years';
   }
-  @media screen and (min-width: 1000px) {
+  @media screen and (min-width: 1200px) {
     // Desktop layout
     grid-template-columns: 1fr;
     grid-template-areas:
