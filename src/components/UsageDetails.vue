@@ -77,29 +77,29 @@ export default {
 <style lang="scss" scoped>
 .usage-details {
   grid-area: usage;
-  display: flex;
+  // display: flex;
   padding: var(--card-padding);
   box-shadow: var(--card-shadow);
   border-radius: var(--card-radius);
 }
-fieldset {
-  flex: 1;
-  &:first-of-type {
-    margin-right: var(--card-padding);
-  }
-  label {
-    display: flex;
-  }
-  input[type='range'] {
-    flex: 1;
-  }
-  input[type='number'] {
-    width: 50px;
-  }
-  &.prices {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-}
+// fieldset {
+//   flex: 1;
+//   &:first-of-type {
+//     margin-right: var(--card-padding);
+//   }
+//   label {
+//     display: flex;
+//   }
+//   input[type='range'] {
+//     flex: 1;
+//   }
+//   input[type='number'] {
+//     width: 50px;
+//   }
+//   &.prices {
+//     display: flex;
+//     align-items: center;
+//     justify-content: space-between;
+//   }
+// }
 </style>

@@ -1,13 +1,6 @@
 <template>
   <div class="car-details-wrapper">
-    <h1>
-      {{ car.name }}
-    </h1>
-    <div v-bind:class="co2Index"></div>
-    <h4 v-if="!this.car.id.includes('generic')">
-      {{ car.specs }}
-    </h4>
-
+    <span :class="co2Index"></span>
     <form @submit.prevent class="car-details">
       <fieldset>
         <legend>Inköpspris</legend>

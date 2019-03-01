@@ -1,6 +1,5 @@
 <template>
   <div class="cars-selector">
-    <h1>Välj bil</h1>
     <select v-model="car" @change="handleChange">
       <option disabled value>Välj en bil</option>
       <option v-for="(car, index) in allCars" :key="index" :value="car">

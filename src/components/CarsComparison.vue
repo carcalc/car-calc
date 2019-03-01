@@ -2,6 +2,12 @@
   <section class="cars-comparison-wrapper">
     <UsageDetails :usageDetails="usageDetails" />
     <div class="car-wrapper" v-for="(car, index) in selectedCars" :key="index">
+      <h1>
+        {{ car.name }}
+      </h1>
+      <h4 v-if="!car.id.includes('generic')">
+        {{ car.specs }}
+      </h4>
       <CarSelector
         :allCars="allCars"
         :selectedCar="car"
@@ -88,12 +94,25 @@ export default {
 
 <style lang="scss" scoped>
 .cars-comparison-wrapper {
-  margin: var(--card-padding) 0;
   display: grid;
   grid-gap: 2rem;
+  max-width: 1000px;
+  margin: auto;
   justify-content: center;
-  grid-template-columns: repeat(2, minmax(200px, 500px));
-  grid-template-areas: 'usage usage' 'car1 car2' 'results results';
+
+  @media screen and (min-width: 600px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      'usage usage'
+      'car1 car2'
+      'results results';
+  }
+  @media screen and (min-width: 1000px) {
+    grid-template-columns: 2fr 1fr 2fr;
+    grid-template-areas:
+      'car1 usage car2'
+      'results results results';
+  }
 }
 
 .car-wrapper {
