@@ -1,12 +1,10 @@
 <template>
-  <div class="cost-comparison">
+  <div class="cars-results">
     <template v-for="(car, index) in cars">
       <p :key="index">
         Totalkostnad för
         <span class="highlight">{{ car.name }}</span> är
-        <span class="highlight">
-          {{ Math.round(totalOwnershipCosts[index]).toLocaleString() }} kr
-        </span>
+        <span class="highlight"> {{ formatCost(totalOwnershipCosts[index]) }} kr </span>
         varav {{ totalFuelCosts[index] }} kr i driftkostnad ({{
           (fuelCosts[index] * 10).toFixed(1).replace('.', ',')
         }}
@@ -18,17 +16,27 @@
     <p>
       <span class="highlight">{{ cheapestCar }}</span> är billigast och utgör en
       <span class="highlight">
-        besparing på {{ Math.round(totalSavings).toLocaleString() }} kr och
-        {{ totalSavingsPercent }}%</span
-      >
-      över {{ usage.ownership }} år och {{ totalDistance.toLocaleString() }} km jämfört med
-      {{ mostExpensiveCar }}.
+        besparing på
+        {{ formatCost(totalSavings) }} kr
+      </span>
+      och
+      <span>{{ totalSavingsPercent }}%</span> över {{ usage.ownership }} år och
+      {{ totalDistance }} km jämfört med {{ mostExpensiveCar }}.
+
+      <!-- Data we can add: -->
+      <!-- Display total fuel costs and bonus separately -->
+      <!-- Car X is % cheaper to run-->
     </p>
   </div>
 </template>
 <script>
 export default {
   props: ['usage', 'cars', 'evBonus'],
+  methods: {
+    formatCost(num) {
+      return Math.round(num).toLocaleString();
+    },
+  },
   computed: {
     fuelCosts: function() {
       const { gasPrice, kwhPrice } = this.usage;
@@ -77,17 +85,13 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.cost-comparison {
-  grid-column: 1 / -1;
-  border-radius: 8px;
-  box-shadow: 2px 2px 12px 0 rgba(0, 0, 80, 0.15);
-  transition: all 300ms;
-  max-width: 80%;
-  margin: 2rem auto;
-  padding: 2rem;
-  h1 {
-    color: orangered;
-  }
+.cars-results {
+  grid-area: results;
+  padding: var(--card-padding);
+  background-color: var(--white);
+  box-shadow: var(--card-shadow);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
 }
 .highlight {
   font-size: 1.5rem;

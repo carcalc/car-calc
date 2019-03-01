@@ -1,5 +1,5 @@
 <template>
-  <div class="information">
+  <section class="information">
     <!-- Probably refactor this to a separate component that's not in /views -->
     <div class="text-wrapper">
       <h2>Beräkningar</h2>
@@ -32,7 +32,7 @@
         </a>
       </ul>
     </div>
-  </div>
+  </section>
 </template>
 <script>
 export default {

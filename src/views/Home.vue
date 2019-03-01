@@ -1,7 +1,5 @@
 <template>
-  <div class="home">
-    <CarsComparison />
-  </div>
+  <CarsComparison />
 </template>
 
 <script>

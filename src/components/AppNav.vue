@@ -15,6 +15,7 @@ export default {
 #nav {
   padding: 10px;
   background-color: var(--main-color);
+  text-align: center;
 
   a {
     padding: 0.5rem;
@@ -22,7 +23,7 @@ export default {
     color: #ffffff;
 
     &.router-link-exact-active {
-      color: #8fbaf3;
+      color: var(--accent-color);
     }
   }
 }

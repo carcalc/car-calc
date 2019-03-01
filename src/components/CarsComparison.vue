@@ -1,5 +1,5 @@
 <template>
-  <div class="cars-compare-wrapper">
+  <section class="cars-comparison-wrapper">
     <UsageDetails :usageDetails="usageDetails" />
     <div class="car-wrapper" v-for="(car, index) in selectedCars" :key="index">
       <CarSelector
@@ -11,8 +11,9 @@
       <CarDetails :car="car" :key="index + '-details'" :usage="usageDetails" :evBonus="evBonus" />
     </div>
     <CarsResults :usage="usageDetails" :cars="selectedCars" :evBonus="evBonus" />
-    <input lang="sv" type="button" value="Återställ" @click="resetStoredData" />
-  </div>
+    <!-- Find a place to put this fucker -->
+    <!-- <input lang="sv" type="button" value="Återställ" @click="resetStoredData" /> -->
+  </section>
 </template>
 
 <script>
@@ -86,18 +87,52 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cars-compare-wrapper {
+.cars-comparison-wrapper {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
+  grid-gap: var(--card-gap);
+  padding: var(--card-gap);
+  max-width: 1200px;
+  margin: auto;
+  justify-content: center;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    'usage'
+    'car1'
+    'car2'
+    'results';
 
-.car-wrapper {
-  border-radius: 8px;
-  box-shadow: 2px 2px 12px 0 rgba(0, 0, 80, 0.15);
-  margin: 2rem;
+  @media screen and (min-width: 650px) {
+    // Tablet layout
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      'usage usage'
+      'car1 car2'
+      'results results';
+  }
+  @media screen and (min-width: 1000px) {
+    // Desktop layout
+    padding: calc(var(--card-gap) * 2);
+    grid-gap: calc(var(--card-gap) * 2);
+    grid-template-columns: 2fr 1fr 2fr;
+    grid-template-areas:
+      'car1 usage car2'
+      'results results results';
+  }
 }
-.compare-btn {
-  padding: 15px 60px;
-  background: rgb(245, 120, 75);
+.car-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: var(--white);
+  padding: var(--card-padding);
+  box-shadow: var(--card-shadow);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  &:first-of-type {
+    grid-area: car1;
+  }
+  &:last-of-type {
+    grid-area: car2;
+  }
 }
 </style>

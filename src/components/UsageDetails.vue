@@ -1,10 +1,11 @@
 <template>
-  <form class="usage-form" @submit.prevent>
-    <fieldset>
-      <legend>Priser</legend>
-      <label for="electricity-price">
+  <form class="usage-details" @submit.prevent>
+    <h1 class="card-title">Priser</h1>
+    <fieldset class="stat-block electricity-price">
+      <label class="block-title" for="electricity-price">
         Elpris
         <input
+          class="big-number"
           lang="sv"
           type="number"
           name="electricity-price"
@@ -13,11 +14,14 @@
           v-model.number="usage.kwhPrice"
           :placeholder="usage.kwhPrice"
         />
+        kr/kWh
       </label>
-      <span>kr/kWh</span>
-      <label for="gas-price">
-        Bensin-/dieselpris
+    </fieldset>
+    <fieldset class="stat-block gas-price">
+      <label class="block-title" for="gas-price">
+        Bensin/dieselpris
         <input
+          class="big-number"
           lang="sv"
           type="number"
           name="gas-price"
@@ -26,38 +30,33 @@
           v-model.number="usage.gasPrice"
           :placeholder="usage.gasPrice"
         />
+        kr/liter
       </label>
-      <span>kr/liter</span>
     </fieldset>
-    <fieldset>
-      <legend>Brukande</legend>
-      <label for="distance">
-        Körsträcka
-        <input
-          lang="sv"
-          name="distance"
-          type="range"
-          min="5000"
-          step="100"
-          max="50000"
-          v-model.number="usage.distance"
-          :placeholder="usage.distance"
-        />
-      </label>
-      <span>{{ usage.distance / 10 }} mil/år</span>
-      <label for="years">
-        Planerat ägande
-        <input
-          lang="sv"
-          name="years"
-          type="range"
-          min="1"
-          max="10"
-          v-model.number="usage.ownership"
-          :placeholder="usage.ownership"
-        />
-      </label>
-      <span>{{ usage.ownership }} år</span>
+    <fieldset class="stat-block distance">
+      <label class="block-title" for="distance"> {{ usage.distance / 10 }} mil per år </label>
+      <input
+        lang="sv"
+        name="distance"
+        type="range"
+        min="5000"
+        step="100"
+        max="50000"
+        v-model.number="usage.distance"
+        :placeholder="usage.distance"
+      />
+    </fieldset>
+    <fieldset class="stat-block years">
+      <label class="block-title" for="years"> {{ usage.ownership }} års ägande </label>
+      <input
+        lang="sv"
+        name="years"
+        type="range"
+        min="1"
+        max="10"
+        v-model.number="usage.ownership"
+        :placeholder="usage.ownership"
+      />
     </fieldset>
   </form>
 </template>
@@ -75,9 +74,53 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.usage-form {
-  grid-column: 1 / -1;
-  padding: 4rem;
-  margin: 2rem;
+.usage-details {
+  grid-area: usage;
+  display: grid;
+  grid-gap: var(--stats-gap);
+  padding: var(--card-padding);
+  background-color: var(--white);
+  box-shadow: var(--card-shadow);
+  border: var(--card-border);
+  border-radius: var(--card-radius);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    'title  title'
+    'electricity gas'
+    'distance years';
+
+  @media screen and (min-width: 650px) {
+    // Tablet layout
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+      'title title title'
+      'electricity gas distance'
+      'electricity gas years';
+  }
+  @media screen and (min-width: 1000px) {
+    // Desktop layout
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'title'
+      'electricity'
+      'gas'
+      'distance'
+      'years';
+  }
+
+  .stat-block {
+    &.electricity-price {
+      grid-area: electricity;
+    }
+    &.gas-price {
+      grid-area: gas;
+    }
+    &.distance {
+      grid-area: distance;
+    }
+    &.years {
+      grid-area: years;
+    }
+  }
 }
 </style>

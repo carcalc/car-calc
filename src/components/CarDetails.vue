@@ -1,57 +1,70 @@
 <template>
-  <div class="car-details-wrapper">
-    <h1>
-      {{ car.name }}
-    </h1>
-    <div v-bind:class="co2Index"></div>
-    <h4 v-if="!this.car.id.includes('generic')">
-      {{ car.specs }}
-    </h4>
+  <form class="car-details">
+    <span :class="co2Index"></span>
 
-    <form @submit.prevent class="car-details">
-      <fieldset>
-        <legend>Inköpspris</legend>
-        <input lang="sv" type="number" min="0" v-model.number="car.price" />
-        <span>kr</span>
-      </fieldset>
-      <fieldset>
-        <legend>Drivmedel</legend>
-        <label for="electric">
-          El
-          <input lang="sv" type="radio" name="electric" v-model="car.type" value="electric" />
-        </label>
-        <!-- Maybe for future use
-        <label for="hybrid">
-          Laddhybrid
-          <input lang="sv" type="radio" name="hybrid" v-model="car.type" value="hybrid" />
-        </label> -->
-        <label for="gasoline">
-          Bensin/diesel
-          <input lang="sv" type="radio" name="gasoline" v-model="car.type" value="gasoline" />
-        </label>
-      </fieldset>
-      <fieldset>
-        <legend>Förbrukning</legend>
-        <input lang="sv" type="number" step="any" min="0" v-model.number="car.consumption" />
-        <span>{{ fuelUnit }}</span>
-      </fieldset>
-    </form>
-    <h2>
-      Kostnader
-    </h2>
-    <p>
-      Driftkostnad:
-      {{ fuelFormatted }}
-      kr per mil
-    </p>
-    <p>
-      Totalkostnad:
-      {{ totalFormatted }}
-      kr på
-      {{ usage.ownership }}
-      år
-    </p>
-  </div>
+    <fieldset class="stat-block car-price">
+      <label class="block-title" for="car-price">Inköpspris</label>
+      <input
+        class="big-number"
+        lang="sv"
+        type="number"
+        name="car-price"
+        min="0"
+        maxlength="7"
+        v-model.number="car.price"
+      />
+      <span class="block-desc">kr</span>
+    </fieldset>
+
+    <fieldset class="stat-block fuel-type">
+      <h3 class="block-title">Drivmedel</h3>
+      <label for="electric">
+        El
+      </label>
+      <input
+        class="big-number"
+        lang="sv"
+        type="radio"
+        name="electric"
+        v-model="car.type"
+        value="electric"
+      />
+      <label for="gasoline">
+        Bensin, diesel
+      </label>
+      <input
+        class="big-number"
+        lang="sv"
+        type="radio"
+        name="gasoline"
+        v-model="car.type"
+        value="gasoline"
+      />
+    </fieldset>
+
+    <fieldset class="stat-block consumption">
+      <h3 class="block-title">Förbrukning</h3>
+      <input
+        class="big-number"
+        lang="sv"
+        type="number"
+        step="any"
+        min="0"
+        v-model.number="car.consumption"
+      />
+      <span class="block-desc">{{ fuelUnit }}</span>
+    </fieldset>
+
+    <div class="stat-block operating-cost">
+      <h3 class="block-title">Milkostnad</h3>
+      <span class="big-number">{{ fuelFormatted }} <span class="block-desc"> kr</span> </span>
+    </div>
+
+    <div class="stat-block total-cost">
+      <h3 class="block-title">Totalkostnad {{ usage.ownership }} år</h3>
+      <span class="big-number">{{ totalFormatted }} <span class="block-desc"> kr</span></span>
+    </div>
+  </form>
 </template>
 
 <script>
@@ -100,28 +113,50 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.car-details-wrapper {
-  padding: 3rem;
-  margin: auto;
+.car-details {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: calc(var(--stats-gap));
+
+  .stat-block {
+    &.car-price {
+      grid-column: 1 /-1;
+      input[name='car-price'] {
+        font-size: 4rem;
+        @media screen and (min-width: 650px) and (max-width: 1000px) {
+          font-size: 3rem;
+        }
+      }
+    }
+    &.total-cost {
+      .big-number {
+        font-size: 2rem;
+      }
+    }
+  }
 }
 .green,
 .yellow,
 .orange,
 .red {
+  position: absolute;
+  top: -114px;
+  right: -14px;
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
 }
 .green {
-  background: green;
+  background: rgb(42, 192, 92);
 }
 .yellow {
-  background: yellow;
+  background: rgb(255, 241, 40);
 }
 .orange {
-  background: orange;
+  background: rgb(255, 174, 0);
 }
 .red {
-  background: red;
+  background: rgb(248, 54, 20);
 }
 </style>
