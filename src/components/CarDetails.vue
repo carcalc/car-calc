@@ -123,8 +123,9 @@ export default {
     &.car-price {
       grid-column: 1 /-1;
       input[name='car-price'] {
-        @media screen and (min-width: 1000px) {
-          font-size: 4rem;
+        font-size: 4rem;
+        @media screen and (min-width: 650px) and (max-width: 1000px) {
+          font-size: 3rem;
         }
       }
     }
@@ -140,7 +141,7 @@ export default {
 .orange,
 .red {
   position: absolute;
-  top: -95px;
+  top: -114px;
   right: -14px;
   width: 1rem;
   height: 1rem;

@@ -77,12 +77,36 @@ export default {
 .usage-details {
   grid-area: usage;
   display: grid;
-  grid-gap: calc(var(--stats-gap);
+  grid-gap: var(--stats-gap);
   padding: var(--card-padding);
   background-color: var(--white);
   box-shadow: var(--card-shadow);
   border: var(--card-border);
   border-radius: var(--card-radius);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    'title  title'
+    'electricity gas'
+    'distance years';
+
+  @media screen and (min-width: 650px) {
+    // Tablet layout
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas:
+      'title title title'
+      'electricity gas distance'
+      'electricity gas years';
+  }
+  @media screen and (min-width: 1000px) {
+    // Desktop layout
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'title'
+      'electricity'
+      'gas'
+      'distance'
+      'years';
+  }
 
   .stat-block {
     &.electricity-price {
@@ -97,15 +121,6 @@ export default {
     &.years {
       grid-area: years;
     }
-  }
-
-  @media screen and (min-width: 650px) {
-    // Tablet layout
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-areas:
-      'title title title'
-      'electricity gas distance'
-      'electricity gas years';
   }
 }
 </style>

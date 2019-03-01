@@ -1,11 +1,11 @@
 <template>
   <div class="car-intro">
-    <h1>
+    <h1 class="card-title">
       {{ car.name }}
     </h1>
-    <h4 v-if="!car.id.includes('generic')">
-      {{ car.specs }}
-    </h4>
+    <h3 class="card-subtitle">
+      {{ !car.id.includes('generic') ? car.specs : 'Generisk: anpassa själv' }}
+    </h3>
     <select class="cars-selector" v-model="car" @change="handleChange">
       <option disabled value>Välj en bil</option>
       <option v-for="(car, index) in allCars" :key="index" :value="car">

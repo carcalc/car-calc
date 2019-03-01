@@ -94,6 +94,12 @@ export default {
   max-width: 1200px;
   margin: auto;
   justify-content: center;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    'usage'
+    'car1'
+    'car2'
+    'results';
 
   @media screen and (min-width: 650px) {
     // Tablet layout
@@ -103,14 +109,14 @@ export default {
       'car1 car2'
       'results results';
   }
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: 1000px) {
     // Desktop layout
+    padding: calc(var(--card-gap) * 2);
     grid-gap: calc(var(--card-gap) * 2);
     grid-template-columns: 2fr 1fr 2fr;
     grid-template-areas:
       'car1 usage car2'
       'results results results';
-    padding: calc(var(--card-gap) * 2);
   }
 }
 .car-wrapper {

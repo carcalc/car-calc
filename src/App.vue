@@ -85,6 +85,10 @@ fieldset {
 
 /* Site-wide card styling */
 .card-title {
+  text-align: center;
+}
+.card-subtitle {
+  text-align: center;
 }
 
 .stat-block {
@@ -141,5 +145,6 @@ fieldset {
   -moz-osx-font-smoothing: grayscale;
   color: var(--black);
   min-height: 100vh;
+  min-width: 320px;
 }
 </style>
