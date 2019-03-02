@@ -95,7 +95,7 @@ export default {
       return (this.fuelCost * 10).toFixed(1).replace('.', ',');
     },
     totalFormatted: function() {
-      return Math.round(this.totalOwnershipCost).toLocaleString();
+      return Math.round(this.totalOwnershipCost).toLocaleString('sv-SE');
     },
     co2Index: function() {
       if (this.car.co2 > 90) {

@@ -34,7 +34,7 @@ export default {
   props: ['usage', 'cars', 'evBonus'],
   methods: {
     formatCost(num) {
-      return Math.round(num).toLocaleString();
+      return Math.round(num).toLocaleString('sv-SE');
     },
   },
   computed: {
