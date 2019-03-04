@@ -10,7 +10,7 @@
         type="number"
         name="car-price"
         min="0"
-        maxlength="7"
+        max="9999999"
         v-model.number="car.price"
       />
       <span class="big-number-unit">kr</span>
@@ -61,16 +61,27 @@
     </div>
 
     <div class="stat-block total-cost">
-      <h3 class="block-title">Totalkostnad {{ usage.ownership }} år</h3>
+      <h3 class="block-title">Totalkostnad {{ yearsFormatted }} år</h3>
       <span class="big-number">{{ totalFormatted }} <span class="big-number-unit"> kr</span></span>
     </div>
   </form>
 </template>
 
 <script>
+import { TweenLite } from 'gsap/TweenMax';
+
 export default {
   name: 'CarDetails',
   props: ['car', 'usage', 'evBonus'],
+  data() {
+    return { tweenedTotal: 0, tweenedFuelCost: 0, tweenedOwnership: 0 };
+  },
+  mounted() {
+    // Sets animated values' starting points
+    this.tweenedTotal = this.totalOwnershipCost;
+    this.tweenedFuelCost = this.fuelCost;
+    this.tweenedOwnership = this.usage.ownership;
+  },
   computed: {
     fuelCost: function() {
       const { gasPrice, kwhPrice } = this.usage;
@@ -91,11 +102,17 @@ export default {
     fuelUnit: function() {
       return this.car.type === 'electric' ? 'kWh/100 km' : 'l/100 km';
     },
+    ownershipYears: function() {
+      return this.usage.ownership;
+    },
     fuelFormatted: function() {
-      return (this.fuelCost * 10).toFixed(1).replace('.', ',');
+      return (this.tweenedFuelCost * 10).toFixed(1).replace('.', ',');
     },
     totalFormatted: function() {
-      return Math.round(this.totalOwnershipCost).toLocaleString('sv-SE');
+      return Math.round(this.tweenedTotal).toLocaleString('sv-SE');
+    },
+    yearsFormatted: function() {
+      return this.tweenedOwnership.toFixed(0);
     },
     co2Index: function() {
       if (this.car.co2 > 90) {
@@ -107,6 +124,18 @@ export default {
       } else {
         return 'red';
       }
+    },
+  },
+  watch: {
+    // Animates numbers on change
+    totalOwnershipCost: function(newValue) {
+      TweenLite.to(this.$data, 0.5, { tweenedTotal: newValue });
+    },
+    fuelCost: function(newValue) {
+      TweenLite.to(this.$data, 0.5, { tweenedFuelCost: newValue });
+    },
+    ownershipYears: function(newValue) {
+      TweenLite.to(this.$data, 0.5, { tweenedOwnership: newValue });
     },
   },
 };
