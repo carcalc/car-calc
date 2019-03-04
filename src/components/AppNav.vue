@@ -16,7 +16,6 @@ export default {
 #nav {
   position: relative;
   padding: 10px;
-  background-color: var(--main-color);
   text-align: center;
 
   a {

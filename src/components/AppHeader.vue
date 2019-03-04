@@ -20,7 +20,6 @@ header {
   padding-left: 2rem;
   width: 100%;
   height: 10rem;
-  background-color: var(--accent-color);
   color: var(--white);
 
   h1 {

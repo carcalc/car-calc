@@ -1,28 +1,10 @@
 <template>
   <footer>
-    <div class="wrapper">
-      <div class="copy">
-        <p>&copy; 2019 Andreas & Gabriel</p>
-      </div>
-      <div class="text">
-        <p>Vid kontakt kan ni nå oss på LinkedIn:</p>
-      </div>
-      <div class="links">
-        <h4>
-          Andreas:
-          <a :href="linkedInAndreas">
-            <i class="fab fa-linkedin-in fa-lg"></i>
-          </a>
-        </h4>
-        &nbsp;&nbsp;
-        <h4>
-          Gabriel:
-          <a :href="linkedInGabriel">
-            <i class="fab fa-linkedin-in fa-lg"></i>
-          </a>
-        </h4>
-      </div>
-    </div>
+    <p class="copy">© 2019</p>
+    <div class="links">
+      <a :href="linkedInAndreas">Andreas<i class="fab fa-linkedin-in fa-lg"></i></a>&
+      <a :href="linkedInGabriel">Gabriel<i class="fab fa-linkedin-in fa-lg"></i></a>
+    </div class="links">
   </footer>
 </template>
 
@@ -37,23 +19,18 @@ export default {
 footer {
   width: 100%;
   height: 10rem;
-  background: var(--accent-color);
+  margin: auto;
   color: var(--white);
-}
-.wrapper {
+  text-align: center;
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-direction: column;
-  width: 50%;
-  height: 100%;
-  margin: auto;
-}
-.links {
-  display: flex;
-}
-i.fab {
-  color: #fff;
-  cursor: pointer;
+  align-items: center;
+  a,
+  i {
+    text-decoration: none;
+    color: var(--white);
+    margin: 0.5rem;
+  }
 }
 </style>

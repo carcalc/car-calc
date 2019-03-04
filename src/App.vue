@@ -35,14 +35,15 @@ export default {
   --accent-color: rgb(1, 133, 115);
   --main-color: rgb(131, 228, 172);
   --headline-color: var(--accent-color);
-  --light-grey: rgb(240, 240, 240);
+  --light-grey: rgb(203, 227, 228);
   --white: white;
   --card-gap: 1rem;
   --card-padding: 1.5rem;
   --stats-gap: 1rem;
-  // --card-shadow: 2px 2px 12px 3px rgba(0, 0, 80, 0.15);
-  --card-shadow: none;
-  --card-border: 4px dotted var(--light-grey);
+  --card-shadow: 2px 2px 12px 3px rgba(0, 0, 80, 0.3);
+  --card-bg: rgba(255, 255, 255, 0.9);
+  // --card-shadow: none;
+  // --card-border: 4px dotted var(--light-grey);
   --card-radius: 15px;
 }
 
@@ -153,5 +154,8 @@ fieldset {
   color: var(--black);
   min-height: 100vh;
   min-width: 320px;
+  background: url('./assets/winding-road.jpg');
+  background-size: cover;
+  background-position: center;
 }
 </style>
