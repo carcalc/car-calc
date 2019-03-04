@@ -21,33 +21,20 @@
       <label for="electric">
         El
       </label>
-      <input
-        class="big-number"
-        lang="sv"
-        type="radio"
-        name="electric"
-        v-model="car.type"
-        value="electric"
-      />
+      <input lang="sv" type="radio" name="electric" v-model="car.type" value="electric" />
       <label for="gasoline">
         Bensin, diesel
       </label>
-      <input
-        class="big-number"
-        lang="sv"
-        type="radio"
-        name="gasoline"
-        v-model="car.type"
-        value="gasoline"
-      />
+      <input lang="sv" type="radio" name="gasoline" v-model="car.type" value="gasoline" />
     </fieldset>
 
     <fieldset class="stat-block consumption">
-      <h3 class="block-title">Förbrukning</h3>
+      <label class="block-title" for="consumption">Förbrukning</label>
       <input
         class="big-number"
         lang="sv"
         type="number"
+        name="consumption"
         step="any"
         min="0"
         v-model.number="car.consumption"
@@ -155,10 +142,13 @@ export default {
       grid-column: 1 /-1;
       input[name='car-price'] {
         font-size: 4rem;
-        @media screen and (min-width: 650px) and (max-width: 1200px) {
+        @media screen and (min-width: $size-tablet) and (max-width: $size-desktop) {
           font-size: 3rem;
         }
       }
+    }
+    &.fuel-type {
+      // Need to place radio buttons here
     }
     &.total-cost {
       .big-number {

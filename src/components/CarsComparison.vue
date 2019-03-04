@@ -89,8 +89,6 @@ export default {
 <style lang="scss" scoped>
 .cars-comparison-wrapper {
   display: grid;
-  grid-gap: $card-gap;
-  padding: $card-gap;
   max-width: 1200px;
   margin: auto;
   justify-content: center;
@@ -101,15 +99,17 @@ export default {
     'car2'
     'results';
 
-  @media screen and (min-width: 650px) {
+  @media screen and (min-width: $size-tablet) {
     // Tablet layout
+    padding: $card-gap;
+    grid-gap: $card-gap;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       'usage usage'
       'car1 car2'
       'results results';
   }
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: $size-desktop) {
     // Desktop layout
     padding: calc($card-gap * 2);
     grid-gap: calc($card-gap * 2);

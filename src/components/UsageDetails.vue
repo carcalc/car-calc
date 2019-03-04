@@ -1,41 +1,34 @@
 <template>
   <form class="usage-details" @submit.prevent>
-    <h1 class="card-title">Priser</h1>
     <fieldset class="stat-block electricity-price">
-      <label class="block-title" for="electricity-price">
-        Elpris
-        <input
-          class="big-number"
-          lang="sv"
-          type="number"
-          name="electricity-price"
-          step="any"
-          min="0"
-          v-model.number="usage.kwhPrice"
-          :placeholder="usage.kwhPrice"
-        />
-        <span class="big-number-unit">
-          kr/kWh
-        </span>
-      </label>
+      <label class="block-title" for="electricity-price">Elpris</label>
+      <input
+        class="big-number"
+        lang="sv"
+        type="number"
+        name="electricity-price"
+        step="any"
+        min="0"
+        v-model.number="usage.kwhPrice"
+        :placeholder="usage.kwhPrice"
+      />
+      <span class="big-number-unit">kr/kWh</span>
     </fieldset>
     <fieldset class="stat-block gas-price">
-      <label class="block-title" for="gas-price">
-        Bensin/dieselpris
-        <input
-          class="big-number"
-          lang="sv"
-          type="number"
-          name="gas-price"
-          step="any"
-          min="0"
-          v-model.number="usage.gasPrice"
-          :placeholder="usage.gasPrice"
-        />
-        <span class="big-number-unit">
-          kr/l
-        </span>
-      </label>
+      <label class="block-title" for="gas-price">Bensin/dieselpris</label>
+      <input
+        class="big-number"
+        lang="sv"
+        type="number"
+        name="gas-price"
+        step="any"
+        min="0"
+        v-model.number="usage.gasPrice"
+        :placeholder="usage.gasPrice"
+      />
+      <span class="big-number-unit">
+        kr/l
+      </span>
     </fieldset>
     <fieldset class="stat-block distance">
       <label class="block-title" for="distance"> {{ usage.distance / 10 }} mil per år </label>
@@ -84,23 +77,20 @@ export default {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
-    'title  title'
     'electricity gas'
     'distance years';
 
-  @media screen and (min-width: 650px) {
+  @media screen and (min-width: $size-tablet) {
     // Tablet layout
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr 2fr;
     grid-template-areas:
-      'title title title'
       'electricity gas distance'
       'electricity gas years';
   }
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: $size-desktop) {
     // Desktop layout
     grid-template-columns: 1fr;
     grid-template-areas:
-      'title'
       'electricity'
       'gas'
       'distance'
