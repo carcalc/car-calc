@@ -116,10 +116,12 @@ export default {
 .car-details {
   position: relative;
   display: grid;
+  grid-gap: 1rem;
   grid-template-columns: 1fr 1fr;
-  grid-gap: calc(var(--stats-gap));
 
   .stat-block {
+    @include stat-block;
+
     &.car-price {
       grid-column: 1 /-1;
       input[name='car-price'] {
@@ -141,7 +143,7 @@ export default {
 .orange,
 .red {
   position: absolute;
-  top: -108px;
+  top: -117px;
   right: -14px;
   width: 1rem;
   height: 1rem;

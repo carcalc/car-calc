@@ -1,0 +1,69 @@
+@mixin card-style {
+  grid-gap: 1rem;
+  padding: 1.5rem;
+  background-color:$card-bg;
+  box-shadow: 1px 1px 2px 0px rgba(0, 0, 80, 0.3);
+  border: none;
+  // border: 4px dotted $input-bg;
+  border-radius: 15px;
+
+  .card-title {
+    text-align: center;
+  }
+  .card-subtitle {
+    text-align: center;
+  }
+}
+
+@mixin stat-block {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+
+  .block-title {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: bold;
+    display: block;
+  }
+  .big-number {
+    flex: 1;
+    font-weight: bold;
+    font-size: 2rem;
+    @media screen and (min-width: 650px) {
+      font-size: 3rem;
+    }
+  }
+
+  .big-number-unit {
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+  input + .big-number-unit {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+  }
+
+  input {
+    color: $black;
+    background-color: $input-bg;
+    border-radius: 15px;
+    padding: 1rem;
+    margin: 0;
+    border: none;
+    font-style: italic;
+
+    &:focus {
+      caret-color: $accent-color;
+      box-shadow: 0 0 0 3px $accent-color;
+    }
+    &[type='number'] {
+      width: 100%;
+    }
+    &[type='radio'] {
+      float: right;
+    }
+  }
+}
