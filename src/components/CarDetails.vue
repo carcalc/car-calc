@@ -77,7 +77,7 @@ export default {
     return { tweenedTotal: 0, tweenedFuelCost: 0, tweenedOwnership: 0 };
   },
   mounted() {
-    // Sets animated values' starting points
+    // Sets animation starting points
     this.tweenedTotal = this.totalOwnershipCost;
     this.tweenedFuelCost = this.fuelCost;
     this.tweenedOwnership = this.usage.ownership;
