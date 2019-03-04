@@ -111,8 +111,8 @@ export default {
   }
   @media screen and (min-width: 1200px) {
     // Desktop layout
-    padding: calc($card-gap * 2);
-    grid-gap: calc($card-gap * 2);
+    padding: 2rem;
+    grid-gap: 2rem;
     grid-template-columns: 3fr 2fr 3fr;
     grid-template-areas:
       'car1 usage car2'
