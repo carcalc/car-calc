@@ -114,9 +114,14 @@ fieldset {
     }
   }
 
-  .block-desc {
+  .big-number-unit {
     font-size: 0.8rem;
     font-weight: bold;
+  }
+  input + .big-number-unit {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
   }
 
   input {

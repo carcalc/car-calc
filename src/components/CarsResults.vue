@@ -1,39 +1,40 @@
 <template>
   <div class="cars-results">
-    <template v-for="(car, index) in cars">
+    <!-- Remove this?  -->
+    <!-- <template v-for="(car, index) in cars">
       <p :key="index">
         Totalkostnad för
         <span class="highlight">{{ car.name }}</span> är
-        <span class="highlight"> {{ formatCost(totalOwnershipCosts[index]) }} kr </span>
-        varav {{ totalFuelCosts[index] }} kr i driftkostnad ({{
+        <span class="highlight"> {{ formatNo(totalOwnershipCosts[index]) }} kr </span>
+        varav {{ formatNo(totalFuelCosts[index]) }} kr i driftkostnad ({{
           (fuelCosts[index] * 10).toFixed(1).replace('.', ',')
         }}
         kr per mil)
         <span v-if="car.type === 'electric'"> och miljöbilspremie på {{ evBonus }} kr</span>
       </p>
-    </template>
+    </template> -->
 
     <p>
-      <span class="highlight">{{ cheapestCar }}</span> är billigast och utgör en
+      <span class="highlight">{{ cheapestCar.name }}</span> är billigast och utgör en
       <span class="highlight">
-        besparing på
-        {{ formatCost(totalSavings) }} kr
+        total besparing på
+        {{ formatNo(totalSavings) }} kr
       </span>
       och
       <span>{{ totalSavingsPercent }}%</span> över {{ usage.ownership }} år och
-      {{ totalDistance }} km jämfört med {{ mostExpensiveCar }}.
-
-      <!-- Data we can add: -->
-      <!-- Display total fuel costs and bonus separately -->
-      <!-- Car X is % cheaper to run-->
+      {{ formatNo(totalDistance / 10) }} mil jämfört med {{ mostExpensiveCar.name }}.
     </p>
+    <span v-if="cheapestCar.type === 'electric'">
+      Miljöbilspremien på {{ formatNo(evBonus) }} kr är inräknad.
+    </span>
+    <p>{{ cheapestCar.name }} är</p>
   </div>
 </template>
 <script>
 export default {
   props: ['usage', 'cars', 'evBonus'],
   methods: {
-    formatCost(num) {
+    formatNo(num) {
       return Math.round(num).toLocaleString('sv-SE');
     },
   },
@@ -61,7 +62,7 @@ export default {
       });
     },
     totalDistance: function() {
-      return (this.usage.distance * this.usage.ownership) / 10;
+      return this.usage.distance * this.usage.ownership;
     },
     totalSavings: function() {
       const [carOne, carTwo] = this.totalOwnershipCosts;
@@ -73,13 +74,16 @@ export default {
       const diff = this.totalSavings;
       return Math.round(carOne > carTwo ? (diff / carOne) * 100 : (diff / carTwo) * 100);
     },
+    energyUsed: function() {
+      return this.cars.map(car => (car.consumption / 100) * this.totalDistance);
+    },
     cheapestCar: function() {
       const [carOne, carTwo] = this.totalOwnershipCosts;
-      return carOne < carTwo ? this.cars[0].name : this.cars[1].name;
+      return carOne < carTwo ? this.cars[0] : this.cars[1];
     },
     mostExpensiveCar: function() {
       const [carOne, carTwo] = this.totalOwnershipCosts;
-      return carOne > carTwo ? this.cars[0].name : this.cars[1].name;
+      return carOne > carTwo ? this.cars[0] : this.cars[1];
     },
   },
 };

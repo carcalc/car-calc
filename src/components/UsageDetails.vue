@@ -14,7 +14,9 @@
           v-model.number="usage.kwhPrice"
           :placeholder="usage.kwhPrice"
         />
-        kr/kWh
+        <span class="big-number-unit">
+          kr/kWh
+        </span>
       </label>
     </fieldset>
     <fieldset class="stat-block gas-price">
@@ -30,7 +32,9 @@
           v-model.number="usage.gasPrice"
           :placeholder="usage.gasPrice"
         />
-        kr/liter
+        <span class="big-number-unit">
+          kr/l
+        </span>
       </label>
     </fieldset>
     <fieldset class="stat-block distance">
