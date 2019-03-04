@@ -75,6 +75,7 @@ export default {
   @include card-style;
   grid-area: usage;
   display: grid;
+  align-items: flex-start;
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
     'electricity gas'
