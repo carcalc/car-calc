@@ -22,7 +22,6 @@ export default {
     padding: 0.5rem;
     font-weight: bold;
     color: #ffffff;
-    font-family: 'Fredoka One', cursive;
 
     &.router-link-exact-active {
       color: var(--accent-color);

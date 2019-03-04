@@ -12,7 +12,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css?family=Fredoka+One');
 header {
   display: flex;
   flex-direction: column;
@@ -28,8 +27,7 @@ header {
   .app-title,
   .app-byline {
     margin: 0;
-    color: var(--white);
-    font-family: 'Fredoka One', cursive;
+    color: var(--accent-color);
   }
   .app-title {
     font-size: 5rem;

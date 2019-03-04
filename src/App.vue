@@ -26,24 +26,22 @@ export default {
 };
 </script>
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css?family=Fredoka+One');
-
 /* Site-wide styling goes here */
 /* Variables */
 :root {
   --black: #2c3e50;
-  --accent-color: rgb(1, 133, 115);
-  --main-color: rgb(131, 228, 172);
+  --accent-color: rgb(0, 0, 0);
+  --main-color: rgb(213, 228, 131);
   --headline-color: var(--accent-color);
-  --light-grey: rgb(203, 227, 228);
+  --input-bg: rgb(203, 227, 228);
   --white: white;
   --card-gap: 1rem;
   --card-padding: 1.5rem;
   --stats-gap: 1rem;
-  --card-shadow: 2px 2px 12px 3px rgba(0, 0, 80, 0.3);
+  --card-shadow: 2px 2px 2px 1px rgba(0, 0, 80, 0.3);
   --card-bg: rgba(255, 255, 255, 0.9);
   // --card-shadow: none;
-  // --card-border: 4px dotted var(--light-grey);
+  // --card-border: 4px dotted var(--input-bg);
   --card-radius: 15px;
 }
 
@@ -127,7 +125,7 @@ fieldset {
 
   input {
     color: var(--black);
-    background-color: var(--light-grey);
+    background-color: var(--input-bg);
     border-radius: var(--card-radius);
     padding: 1rem;
     margin: 0;
