@@ -79,14 +79,9 @@ export default {
 
 <style lang="scss" scoped>
 .usage-details {
+  @include card-style;
   grid-area: usage;
   display: grid;
-  grid-gap: var(--stats-gap);
-  padding: var(--card-padding);
-  background-color: var(--card-bg);
-  box-shadow: var(--card-shadow);
-  border: var(--card-border);
-  border-radius: var(--card-radius);
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
     'title  title'
@@ -113,6 +108,8 @@ export default {
   }
 
   .stat-block {
+    @include stat-block;
+
     &.electricity-price {
       grid-area: electricity;
     }

@@ -26,25 +26,6 @@ export default {
 };
 </script>
 <style lang="scss">
-/* Site-wide styling goes here */
-/* Variables */
-:root {
-  --black: #2c3e50;
-  --accent-color: rgb(0, 0, 0);
-  --main-color: rgb(213, 228, 131);
-  --headline-color: var(--accent-color);
-  --input-bg: rgb(203, 227, 228);
-  --white: white;
-  --card-gap: 1rem;
-  --card-padding: 1.5rem;
-  --stats-gap: 1rem;
-  --card-shadow: 2px 2px 2px 1px rgba(0, 0, 80, 0.3);
-  --card-bg: rgba(255, 255, 255, 0.9);
-  // --card-shadow: none;
-  // --card-border: 4px dotted var(--input-bg);
-  --card-radius: 15px;
-}
-
 /* Reset */
 html {
   box-sizing: border-box;
@@ -84,72 +65,11 @@ fieldset {
   margin: 0;
 }
 
-/* Site-wide card styling */
-.card-title {
-  text-align: center;
-}
-.card-subtitle {
-  text-align: center;
-}
-
-.stat-block {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  position: relative;
-
-  .block-title {
-    flex: 1;
-    font-size: 1rem;
-    font-weight: bold;
-    display: block;
-  }
-  .big-number {
-    flex: 1;
-    font-weight: bold;
-    font-size: 2rem;
-    @media screen and (min-width: 650px) {
-      font-size: 3rem;
-    }
-  }
-
-  .big-number-unit {
-    font-size: 0.8rem;
-    font-weight: bold;
-  }
-  input + .big-number-unit {
-    position: absolute;
-    bottom: 5px;
-    right: 10px;
-  }
-
-  input {
-    color: var(--black);
-    background-color: var(--input-bg);
-    border-radius: var(--card-radius);
-    padding: 1rem;
-    margin: 0;
-    border: none;
-    font-style: italic;
-
-    &:focus {
-      caret-color: var(--main-color);
-      box-shadow: 0 0 0 3px var(--main-color);
-    }
-    &[type='number'] {
-      width: 100%;
-    }
-    &[type='radio'] {
-      float: right;
-    }
-  }
-}
-
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: var(--black);
+  color: $black;
   min-height: 100vh;
   min-width: 320px;
   background: url('./assets/winding-road.jpg');

@@ -64,6 +64,6 @@ ul {
 }
 h2 {
   margin-bottom: 1rem;
-  color: var(--headline-color);
+  color: $headline-color;
 }
 </style>

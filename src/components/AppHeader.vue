@@ -19,7 +19,7 @@ header {
   padding-left: 2rem;
   width: 100%;
   height: 10rem;
-  color: var(--white);
+  color: $white;
 
   h1 {
     margin: 0;
@@ -27,7 +27,7 @@ header {
   .app-title,
   .app-byline {
     margin: 0;
-    color: var(--accent-color);
+    color: $accent-color;
   }
   .app-title {
     font-size: 5rem;

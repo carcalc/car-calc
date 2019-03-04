@@ -105,17 +105,13 @@ export default {
 </script>
 <style lang="scss" scoped>
 .cars-results {
+  @include card-style;
   text-align: center;
   grid-area: results;
-  padding: var(--card-padding);
-  background-color: var(--card-bg);
-  box-shadow: var(--card-shadow);
-  border: var(--card-border);
-  border-radius: var(--card-radius);
 }
 .highlight {
   font-size: 1.5rem;
   font-weight: bold;
-  color: var(--highlight-color);
+  color: $accent-color;
 }
 </style>
