@@ -1,7 +1,7 @@
 <template>
   <section class="cars-comparison-wrapper">
     <UsageDetails :usageDetails="usageDetails" />
-    <div class="car-wrapper" v-for="(car, index) in selectedCars" :key="index">
+    <div class="car-wrapper card" v-for="(car, index) in selectedCars" :key="index">
       <CarSelector
         :allCars="allCars"
         :selectedCar="car"
@@ -119,15 +119,17 @@ export default {
       'results results results';
   }
 }
+
 .car-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: var(--white);
+  background-color: var(--card-bg);
   padding: var(--card-padding);
   box-shadow: var(--card-shadow);
   border: var(--card-border);
   border-radius: var(--card-radius);
+
   &:first-of-type {
     grid-area: car1;
   }

@@ -1,5 +1,5 @@
 <template>
-  <form class="usage-details" @submit.prevent>
+  <form class="usage-details card" @submit.prevent>
     <h1 class="card-title">Priser</h1>
     <fieldset class="stat-block electricity-price">
       <label class="block-title" for="electricity-price">
@@ -14,7 +14,9 @@
           v-model.number="usage.kwhPrice"
           :placeholder="usage.kwhPrice"
         />
-        kr/kWh
+        <span class="big-number-unit">
+          kr/kWh
+        </span>
       </label>
     </fieldset>
     <fieldset class="stat-block gas-price">
@@ -30,7 +32,9 @@
           v-model.number="usage.gasPrice"
           :placeholder="usage.gasPrice"
         />
-        kr/liter
+        <span class="big-number-unit">
+          kr/l
+        </span>
       </label>
     </fieldset>
     <fieldset class="stat-block distance">
@@ -79,7 +83,7 @@ export default {
   display: grid;
   grid-gap: var(--stats-gap);
   padding: var(--card-padding);
-  background-color: var(--white);
+  background-color: var(--card-bg);
   box-shadow: var(--card-shadow);
   border: var(--card-border);
   border-radius: var(--card-radius);

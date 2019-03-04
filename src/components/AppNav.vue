@@ -16,14 +16,12 @@ export default {
 #nav {
   position: relative;
   padding: 10px;
-  background-color: var(--main-color);
   text-align: center;
 
   a {
     padding: 0.5rem;
     font-weight: bold;
     color: #ffffff;
-    font-family: 'Fredoka One', cursive;
 
     &.router-link-exact-active {
       color: var(--accent-color);

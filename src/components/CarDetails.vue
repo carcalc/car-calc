@@ -13,7 +13,7 @@
         maxlength="7"
         v-model.number="car.price"
       />
-      <span class="block-desc">kr</span>
+      <span class="big-number-unit">kr</span>
     </fieldset>
 
     <fieldset class="stat-block fuel-type">
@@ -52,17 +52,17 @@
         min="0"
         v-model.number="car.consumption"
       />
-      <span class="block-desc">{{ fuelUnit }}</span>
+      <span class="big-number-unit">{{ fuelUnit }}</span>
     </fieldset>
 
     <div class="stat-block operating-cost">
       <h3 class="block-title">Milkostnad</h3>
-      <span class="big-number">{{ fuelFormatted }} <span class="block-desc"> kr</span> </span>
+      <span class="big-number">{{ fuelFormatted }} <span class="big-number-unit"> kr</span> </span>
     </div>
 
     <div class="stat-block total-cost">
       <h3 class="block-title">Totalkostnad {{ usage.ownership }} år</h3>
-      <span class="big-number">{{ totalFormatted }} <span class="block-desc"> kr</span></span>
+      <span class="big-number">{{ totalFormatted }} <span class="big-number-unit"> kr</span></span>
     </div>
   </form>
 </template>
@@ -89,13 +89,13 @@ export default {
       return car.type === 'electric' ? cost - this.evBonus : cost;
     },
     fuelUnit: function() {
-      return this.car.type === 'electric' ? 'kWh/100 km' : 'liter/100 km';
+      return this.car.type === 'electric' ? 'kWh/100 km' : 'l/100 km';
     },
     fuelFormatted: function() {
       return (this.fuelCost * 10).toFixed(1).replace('.', ',');
     },
     totalFormatted: function() {
-      return Math.round(this.totalOwnershipCost).toLocaleString();
+      return Math.round(this.totalOwnershipCost).toLocaleString('sv-SE');
     },
     co2Index: function() {
       if (this.car.co2 > 90) {
@@ -141,7 +141,7 @@ export default {
 .orange,
 .red {
   position: absolute;
-  top: -114px;
+  top: -108px;
   right: -14px;
   width: 1rem;
   height: 1rem;

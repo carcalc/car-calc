@@ -1,31 +1,34 @@
 <template>
-  <div class="cars-results">
-    <template v-for="(car, index) in cars">
+  <div class="cars-results card">
+    <!-- Remove this?  -->
+    <!-- <template v-for="(car, index) in cars">
       <p :key="index">
         Totalkostnad för
         <span class="highlight">{{ car.name }}</span> är
-        <span class="highlight"> {{ formatCost(totalOwnershipCosts[index]) }} kr </span>
-        varav {{ totalFuelCosts[index] }} kr i driftkostnad ({{
+        <span class="highlight"> {{ formatNo(totalOwnershipCosts[index]) }} kr </span>
+        varav {{ formatNo(totalFuelCosts[index]) }} kr i driftkostnad ({{
           (fuelCosts[index] * 10).toFixed(1).replace('.', ',')
         }}
         kr per mil)
         <span v-if="car.type === 'electric'"> och miljöbilspremie på {{ evBonus }} kr</span>
       </p>
-    </template>
+    </template> -->
 
     <p>
-      <span class="highlight">{{ cheapestCar }}</span> är billigast och utgör en
+      <span class="highlight">{{ cheapestInTotal.name }}</span> är billigast och utgör en
       <span class="highlight">
-        besparing på
-        {{ formatCost(totalSavings) }} kr
+        total besparing på
+        {{ formatNo(totalSavings) }} kr
       </span>
-      och
-      <span>{{ totalSavingsPercent }}%</span> över {{ usage.ownership }} år och
-      {{ totalDistance }} km jämfört med {{ mostExpensiveCar }}.
-
-      <!-- Data we can add: -->
-      <!-- Display total fuel costs and bonus separately -->
-      <!-- Car X is % cheaper to run-->
+      (eller {{ totalSavingsPercent }}%) jämfört med {{ mostExpensiveIntotal.name }}.
+      <span v-if="cheapestInTotal.type === 'electric'">
+        Miljöbilspremien på {{ formatNo(evBonus) }} kr är inräknad.
+      </span>
+    </p>
+    <p>
+      {{ cheapestToRun.name }} {{ cheapestInTotal === cheapestToRun ? 'är också' : 'är dock' }}
+      {{ formatNo(fuelSavings) }} kr billigare i drift över {{ usage.ownership }} år och
+      {{ formatNo(totalDistance / 10) }} mil.
     </p>
   </div>
 </template>
@@ -33,8 +36,8 @@
 export default {
   props: ['usage', 'cars', 'evBonus'],
   methods: {
-    formatCost(num) {
-      return Math.round(num).toLocaleString();
+    formatNo(num) {
+      return Math.round(num).toLocaleString('sv-SE');
     },
   },
   computed: {
@@ -61,7 +64,12 @@ export default {
       });
     },
     totalDistance: function() {
-      return (this.usage.distance * this.usage.ownership) / 10;
+      return this.usage.distance * this.usage.ownership;
+    },
+    fuelSavings: function() {
+      const [carOne, carTwo] = this.totalFuelCosts;
+      if (carOne < carTwo) return carTwo - carOne;
+      else return carOne - carTwo;
     },
     totalSavings: function() {
       const [carOne, carTwo] = this.totalOwnershipCosts;
@@ -73,28 +81,41 @@ export default {
       const diff = this.totalSavings;
       return Math.round(carOne > carTwo ? (diff / carOne) * 100 : (diff / carTwo) * 100);
     },
-    cheapestCar: function() {
-      const [carOne, carTwo] = this.totalOwnershipCosts;
-      return carOne < carTwo ? this.cars[0].name : this.cars[1].name;
+    cheapestToRun: function() {
+      const [carOne, carTwo] = this.totalFuelCosts;
+      return carOne < carTwo ? this.cars[0] : this.cars[1];
     },
-    mostExpensiveCar: function() {
+    cheapestInTotal: function() {
       const [carOne, carTwo] = this.totalOwnershipCosts;
-      return carOne > carTwo ? this.cars[0].name : this.cars[1].name;
+      return carOne < carTwo ? this.cars[0] : this.cars[1];
+    },
+    mostExpensiveToRun: function() {
+      const [carOne, carTwo] = this.totalFuelCosts;
+      return carOne > carTwo ? this.cars[0] : this.cars[1];
+    },
+    mostExpensiveIntotal: function() {
+      const [carOne, carTwo] = this.totalOwnershipCosts;
+      return carOne > carTwo ? this.cars[0] : this.cars[1];
+    },
+    energySaved: function() {
+      return (this.mostExpensiveToRun.consumption / 100) * this.usage.distance;
     },
   },
 };
 </script>
 <style lang="scss" scoped>
 .cars-results {
+  text-align: center;
   grid-area: results;
   padding: var(--card-padding);
-  background-color: var(--white);
+  background-color: var(--card-bg);
   box-shadow: var(--card-shadow);
   border: var(--card-border);
   border-radius: var(--card-radius);
 }
 .highlight {
   font-size: 1.5rem;
-  color: #333;
+  font-weight: bold;
+  color: var(--highlight-color);
 }
 </style>
