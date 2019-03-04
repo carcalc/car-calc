@@ -1,7 +1,7 @@
 <template>
   <section class="cars-comparison-wrapper">
     <UsageDetails :usageDetails="usageDetails" />
-    <div class="car-wrapper card" v-for="(car, index) in selectedCars" :key="index">
+    <div class="car-wrapper" v-for="(car, index) in selectedCars" :key="index">
       <CarSelector
         :allCars="allCars"
         :selectedCar="car"

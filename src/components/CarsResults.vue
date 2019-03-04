@@ -1,5 +1,5 @@
 <template>
-  <div class="cars-results card">
+  <div class="cars-results">
     <!-- Remove this?  -->
     <!-- <template v-for="(car, index) in cars">
       <p :key="index">

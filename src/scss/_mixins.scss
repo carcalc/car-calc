@@ -1,7 +1,7 @@
 @mixin card-style {
   grid-gap: 1rem;
   padding: 1.5rem;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color:$card-bg;
   box-shadow: 1px 1px 2px 0px rgba(0, 0, 80, 0.3);
   border: none;
   // border: 4px dotted $input-bg;

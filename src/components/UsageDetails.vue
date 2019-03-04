@@ -1,5 +1,5 @@
 <template>
-  <form class="usage-details card" @submit.prevent>
+  <form class="usage-details" @submit.prevent>
     <h1 class="card-title">Priser</h1>
     <fieldset class="stat-block electricity-price">
       <label class="block-title" for="electricity-price">

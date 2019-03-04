@@ -30,7 +30,7 @@ header {
     color: $accent-color;
   }
   .app-title {
-    font-size: 5rem;
+    font-size: 3rem;
   }
 }
 </style>

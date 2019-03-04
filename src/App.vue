@@ -26,45 +26,6 @@ export default {
 };
 </script>
 <style lang="scss">
-/* Reset */
-html {
-  box-sizing: border-box;
-  font-size: 16px;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-ol,
-ul {
-  margin: 0;
-  padding: 0;
-  font-weight: normal;
-  line-height: 1.5;
-}
-
-ol,
-ul {
-  list-style: none;
-}
-
-fieldset {
-  border: 0;
-  padding: 0;
-  margin: 0;
-}
-
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -74,6 +35,7 @@ fieldset {
   min-width: 320px;
   background: url('./assets/winding-road.jpg');
   background-size: cover;
-  background-position: center;
+  background-position: top;
+  background-attachment: fixed;
 }
 </style>

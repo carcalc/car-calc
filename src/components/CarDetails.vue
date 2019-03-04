@@ -116,6 +116,7 @@ export default {
 .car-details {
   position: relative;
   display: grid;
+  grid-gap: 1rem;
   grid-template-columns: 1fr 1fr;
 
   .stat-block {
@@ -142,7 +143,7 @@ export default {
 .orange,
 .red {
   position: absolute;
-  top: -138px;
+  top: -117px;
   right: -14px;
   width: 1rem;
   height: 1rem;
