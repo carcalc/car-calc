@@ -135,8 +135,7 @@ export default {
   position: relative;
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: 1fr 1fr;
-
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   .stat-block {
     position: relative;
 
@@ -169,11 +168,11 @@ export default {
     &.consumption {
       @include number-stat-block();
     }
-    &.operating-cost {
-      @include stat-block-commons();
-    }
+    &.operating-cost,
     &.total-cost {
       @include stat-block-commons();
+      word-wrap: break-word;
+      max-width: 300px;
     }
   }
 }

@@ -48,7 +48,7 @@
     min-height: 90px;
     display: block;
     border-radius: 15px;
-    padding: 13px 15px 7px 10px;
+    padding: 17px 15px 3px 10px;
     line-height: 0;
     background-color: $input-bg;
     font-style: italic;
@@ -62,6 +62,7 @@
   .stat-display-unit {
     font-style: italic;
     position: absolute;
+    margin: 0;
     bottom: 3px;
     right: 10px;
   }
