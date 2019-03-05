@@ -136,6 +136,8 @@ export default {
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: max-content;
+
   .stat-block {
     position: relative;
 
