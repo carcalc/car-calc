@@ -92,7 +92,7 @@ export default {
   max-width: 1200px;
   margin: auto;
   justify-content: center;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: 1fr;
   grid-template-areas:
     'usage'
     'car1'
@@ -111,9 +111,9 @@ export default {
   }
   @media screen and (min-width: $size-desktop) {
     // Desktop layout
-    padding: calc($card-gap * 2);
-    grid-gap: calc($card-gap * 2);
-    grid-template-columns: minmax(auto, 500px) 1fr minmax(auto, 500px);
+    padding: $card-gap * 2;
+    grid-gap: $card-gap * 2;
+    grid-template-columns: 1fr auto 1fr;
     grid-template-areas:
       'car1 usage car2'
       'results results results';
@@ -123,6 +123,7 @@ export default {
 .car-wrapper {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   @include card-style;
 
   &:first-of-type {
