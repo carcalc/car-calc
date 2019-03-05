@@ -24,7 +24,7 @@ export default {
     color: #ffffff;
 
     &.router-link-exact-active {
-      color: var(--accent-color);
+      color: $accent-color;
     }
   }
 }

@@ -1,0 +1,71 @@
+@mixin card-style {
+  grid-gap: 1rem;
+  padding: 1.5rem;
+  border: none;
+  // border: 4px dotted $input-bg;
+  @media screen and (min-width: $size-tablet) {
+    // Card layout for tablet and desktop
+    box-shadow: 1px 1px 2px 0px rgba(0, 0, 80, 0.3);
+    background-color: $card-bg;
+    border-radius: 15px;
+  }
+}
+
+@mixin stat-block-base() {
+  display: block;
+  width: 100%;
+  height: 100%;
+  .stat-title {
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  .stat-display {
+    width: 100%;
+    height: 100%;
+    font-weight: bold;
+    color: $black;
+    margin: 0;
+    border: none;
+    font-size: 2rem;
+  }
+  .stat-display-unit {
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+}
+
+@mixin number-stat-block() {
+  @include stat-block-base();
+  position: relative;
+  font-size: 2rem;
+  height: 90px;
+
+  .stat-title {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    font-style: italic;
+
+  }
+  .stat-display {
+    display: block;
+    border-radius: 15px;
+    padding: 17px 15px 3px 10px;
+    line-height: 0;
+    background-color: $input-bg;
+    font-style: italic;
+    font-size: 2.5rem;
+
+    &:focus {
+      caret-color: $accent-color;
+      box-shadow: 0 0 0 3px $accent-color;
+    }
+  }
+  .stat-display-unit {
+    font-style: italic;
+    position: absolute;
+    margin: 0;
+    bottom: 3px;
+    right: 10px;
+  }
+}

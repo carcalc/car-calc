@@ -1,7 +1,7 @@
 <template>
   <section class="cars-comparison-wrapper">
     <UsageDetails :usageDetails="usageDetails" />
-    <div class="car-wrapper card" v-for="(car, index) in selectedCars" :key="index">
+    <div class="car-wrapper" v-for="(car, index) in selectedCars" :key="index">
       <CarSelector
         :allCars="allCars"
         :selectedCar="car"
@@ -89,31 +89,31 @@ export default {
 <style lang="scss" scoped>
 .cars-comparison-wrapper {
   display: grid;
-  grid-gap: var(--card-gap);
-  padding: var(--card-gap);
   max-width: 1200px;
   margin: auto;
   justify-content: center;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   grid-template-areas:
     'usage'
     'car1'
     'car2'
     'results';
 
-  @media screen and (min-width: 650px) {
+  @media screen and (min-width: $size-tablet) {
     // Tablet layout
+    padding: $card-gap;
+    grid-gap: $card-gap;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       'usage usage'
       'car1 car2'
       'results results';
   }
-  @media screen and (min-width: 1200px) {
+  @media screen and (min-width: $size-desktop) {
     // Desktop layout
-    padding: calc(var(--card-gap) * 2);
-    grid-gap: calc(var(--card-gap) * 2);
-    grid-template-columns: 3fr 2fr 3fr;
+    padding: calc($card-gap * 2);
+    grid-gap: calc($card-gap * 2);
+    grid-template-columns: minmax(auto, 500px) 1fr minmax(auto, 500px);
     grid-template-areas:
       'car1 usage car2'
       'results results results';
@@ -123,12 +123,7 @@ export default {
 .car-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  background-color: var(--card-bg);
-  padding: var(--card-padding);
-  box-shadow: var(--card-shadow);
-  border: var(--card-border);
-  border-radius: var(--card-radius);
+  @include card-style;
 
   &:first-of-type {
     grid-area: car1;

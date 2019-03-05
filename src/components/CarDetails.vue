@@ -3,74 +3,74 @@
     <span :class="co2Index"></span>
 
     <fieldset class="stat-block car-price">
-      <label class="block-title" for="car-price">Inköpspris</label>
+      <label class="stat-title" for="car-price">Inköpspris</label>
       <input
-        class="big-number"
         lang="sv"
+        class="stat-display"
         type="number"
         name="car-price"
         min="0"
-        maxlength="7"
+        max="9999999"
         v-model.number="car.price"
       />
-      <span class="big-number-unit">kr</span>
+      <span class="stat-display-unit">kr</span>
     </fieldset>
 
     <fieldset class="stat-block fuel-type">
-      <h3 class="block-title">Drivmedel</h3>
-      <label for="electric">
-        El
-      </label>
-      <input
-        class="big-number"
-        lang="sv"
-        type="radio"
-        name="electric"
-        v-model="car.type"
-        value="electric"
-      />
-      <label for="gasoline">
-        Bensin, diesel
-      </label>
-      <input
-        class="big-number"
-        lang="sv"
-        type="radio"
-        name="gasoline"
-        v-model="car.type"
-        value="gasoline"
-      />
+      <h3 class="stat-title">Drivmedel</h3>
+      <input lang="sv" type="radio" name="electric" v-model="car.type" value="electric" />
+      <label for="electric"><i class="fas fa-bolt fa-lg"></i></label>
+      <input lang="sv" type="radio" name="gasoline" v-model="car.type" value="gasoline" />
+      <label for="gasoline"><i class="fas fa-gas-pump fa-lg"></i></label>
     </fieldset>
 
     <fieldset class="stat-block consumption">
-      <h3 class="block-title">Förbrukning</h3>
+      <label class="stat-title" for="consumption">Förbrukning</label>
       <input
-        class="big-number"
+        class="stat-display"
         lang="sv"
         type="number"
+        name="consumption"
         step="any"
         min="0"
         v-model.number="car.consumption"
       />
-      <span class="big-number-unit">{{ fuelUnit }}</span>
+      <span class="stat-display-unit">{{ fuelUnit }}</span>
     </fieldset>
 
     <div class="stat-block operating-cost">
-      <h3 class="block-title">Milkostnad</h3>
-      <span class="big-number">{{ fuelFormatted }} <span class="big-number-unit"> kr</span> </span>
+      <h3 class="stat-title">Milkostnad</h3>
+      <span class="stat-display">
+        {{ fuelFormatted }}
+        <span class="stat-display-unit">kr</span>
+      </span>
     </div>
 
     <div class="stat-block total-cost">
-      <h3 class="block-title">Totalkostnad {{ usage.ownership }} år</h3>
-      <span class="big-number">{{ totalFormatted }} <span class="big-number-unit"> kr</span></span>
+      <h3 class="stat-title">Totalkostnad {{ yearsFormatted }} år</h3>
+      <div class="stat-display">
+        {{ totalFormatted }}
+        <span class="stat-display-unit">kr</span>
+      </div>
     </div>
   </form>
 </template>
 
 <script>
+import { TweenLite } from 'gsap/TweenMax';
+
 export default {
   name: 'CarDetails',
   props: ['car', 'usage', 'evBonus'],
+  data() {
+    return { tweenedTotal: 0, tweenedFuelCost: 0, tweenedOwnership: 0 };
+  },
+  mounted() {
+    // Sets animation starting points
+    this.tweenedTotal = this.totalOwnershipCost;
+    this.tweenedFuelCost = this.fuelCost;
+    this.tweenedOwnership = this.usage.ownership;
+  },
   computed: {
     fuelCost: function() {
       const { gasPrice, kwhPrice } = this.usage;
@@ -91,11 +91,17 @@ export default {
     fuelUnit: function() {
       return this.car.type === 'electric' ? 'kWh/100 km' : 'l/100 km';
     },
+    ownershipYears: function() {
+      return this.usage.ownership;
+    },
     fuelFormatted: function() {
-      return (this.fuelCost * 10).toFixed(1).replace('.', ',');
+      return (this.tweenedFuelCost * 10).toFixed(1).replace('.', ',');
     },
     totalFormatted: function() {
-      return Math.round(this.totalOwnershipCost).toLocaleString('sv-SE');
+      return Math.round(this.tweenedTotal).toLocaleString('sv-SE');
+    },
+    yearsFormatted: function() {
+      return this.tweenedOwnership.toFixed(0);
     },
     co2Index: function() {
       if (this.car.co2 > 90) {
@@ -109,6 +115,18 @@ export default {
       }
     },
   },
+  watch: {
+    // Animates numbers on change
+    totalOwnershipCost: function(newValue) {
+      TweenLite.to(this.$data, 0.5, { tweenedTotal: newValue });
+    },
+    fuelCost: function(newValue) {
+      TweenLite.to(this.$data, 0.5, { tweenedFuelCost: newValue });
+    },
+    ownershipYears: function(newValue) {
+      TweenLite.to(this.$data, 0.5, { tweenedOwnership: newValue });
+    },
+  },
 };
 </script>
 
@@ -116,23 +134,48 @@ export default {
 .car-details {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: calc(var(--stats-gap));
-
+  grid-gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   .stat-block {
+    position: relative;
+
     &.car-price {
+      @include number-stat-block();
       grid-column: 1 /-1;
-      input[name='car-price'] {
-        font-size: 4rem;
-        @media screen and (min-width: 650px) and (max-width: 1200px) {
-          font-size: 3rem;
-        }
+      .stat-display {
+        font-size: 3.5rem;
       }
     }
-    &.total-cost {
-      .big-number {
-        font-size: 2rem;
+    &.fuel-type {
+      @include stat-block-base();
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      font-size: 1rem;
+      font-style: italic;
+      background-color: $input-bg;
+      border-radius: 15px;
+      min-width: 100px;
+
+      input,
+      label {
+        margin: 15px 0 0 0;
       }
+      .stat-title {
+        position: absolute;
+        top: 5px;
+        left: 10px;
+      }
+    }
+
+    &.consumption {
+      @include number-stat-block();
+    }
+    &.operating-cost,
+    &.total-cost {
+      @include stat-block-base();
+      word-wrap: break-word;
+      max-width: 300px;
     }
   }
 }
@@ -141,7 +184,7 @@ export default {
 .orange,
 .red {
   position: absolute;
-  top: -108px;
+  top: -117px;
   right: -14px;
   width: 1rem;
   height: 1rem;

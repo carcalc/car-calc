@@ -4,7 +4,7 @@
     <div class="links">
       <a :href="linkedInAndreas">Andreas<i class="fab fa-linkedin-in fa-lg"></i></a>&
       <a :href="linkedInGabriel">Gabriel<i class="fab fa-linkedin-in fa-lg"></i></a>
-    </div class="links">
+    </div>
   </footer>
 </template>
 
@@ -20,7 +20,7 @@ footer {
   width: 100%;
   height: 10rem;
   margin: auto;
-  color: var(--white);
+  color: $white;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -29,7 +29,7 @@ footer {
   a,
   i {
     text-decoration: none;
-    color: var(--white);
+    color: $white;
     margin: 0.5rem;
   }
 }
