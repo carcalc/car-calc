@@ -2,7 +2,7 @@
   <section class="sources">
     <h2>Beräkningar</h2>
     <p>
-      Det har inte tagit hänsyn till skatteskillnader i miljöbil vs icke miljöbil. Ej heller data
+      Det har inte tagits hänsyn till skatteskillnader i miljöbil vs icke miljöbil. Ej heller data
       som värdeminskning, underhåll/reparationer m.m. Bonusen om 60 000 kr som betalas ut till ägare
       av bilar med låga utsläpp är medräknad när det är relevant.
       <sup>1</sup>.
@@ -37,11 +37,12 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-ul {
-  li {
-    padding: 10px;
-  }
+a {
+  padding: 0.5rem;
+  font-weight: bold;
+  color: $accent-color;
 }
+
 h2,
 p {
   margin-bottom: 1rem;
