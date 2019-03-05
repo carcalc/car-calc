@@ -141,44 +141,38 @@ export default {
     position: relative;
 
     &.car-price {
-      @include input-stat-block();
-      width: 300px;
+      @include number-stat-block();
+      width: 100%;
       grid-column: 1 /-1;
     }
     &.fuel-type {
-      @include input-stat-block();
+      @include stat-block-commons();
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      font-size: 1rem;
       background-color: $input-bg;
       border-radius: 15px;
 
-      label,
-      input {
+      input,
+      label {
+        margin: 15px 0 0 0;
+      }
+      .stat-title {
         position: absolute;
-        font-weight: bold;
-        top: 41px;
-      }
-      label[for='gasoline'] {
-        left: 14px;
-      }
-      input[name='gasoline'] {
-        left: 42px;
-      }
-
-      label[for='electric'] {
-        left: 74px;
-      }
-      input[name='electric'] {
-        left: 98px;
+        top: 5px;
+        left: 10px;
       }
     }
 
     &.consumption {
-      @include input-stat-block();
+      @include number-stat-block();
     }
     &.operating-cost {
-      @include fixed-stat-block();
+      @include stat-block-commons();
     }
     &.total-cost {
-      @include fixed-stat-block();
+      @include stat-block-commons();
     }
   }
 }

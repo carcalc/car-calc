@@ -93,7 +93,7 @@ export default {
   }
   @media screen and (min-width: $size-desktop) {
     // Desktop layout
-    grid-template-columns: 1fr;
+    grid-template-columns: 200px;
     grid-template-areas:
       'electricity'
       'gas'
@@ -102,20 +102,27 @@ export default {
   }
 
   .stat-block {
-    &.electricity-price {
-      @include input-stat-block();
-      grid-area: electricity;
+    &.electricity-price,
+    &.gas-price {
+      @include number-stat-block();
+    }
+    &.years,
+    &.distance {
+      @include stat-block-commons();
+      display: block;
+      width: 100%;
+      height: 100%;
     }
     &.gas-price {
-      @include input-stat-block();
       grid-area: gas;
     }
+    &.electricity-price {
+      grid-area: electricity;
+    }
     &.distance {
-      @include fixed-stat-block();
       grid-area: distance;
     }
     &.years {
-      @include fixed-stat-block();
       grid-area: years;
     }
   }
