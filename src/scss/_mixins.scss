@@ -11,7 +11,7 @@
   }
 }
 
-@mixin stat-block-commons() {
+@mixin stat-block-base() {
   display: block;
   width: 100%;
   height: 100%;
@@ -35,7 +35,7 @@
 }
 
 @mixin number-stat-block() {
-  @include stat-block-commons();
+  @include stat-block-base();
   position: relative;
   font-size: 2rem;
   height: 90px;
@@ -44,6 +44,8 @@
     position: absolute;
     top: 5px;
     left: 10px;
+    font-style: italic;
+
   }
   .stat-display {
     display: block;

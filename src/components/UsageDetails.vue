@@ -106,7 +106,8 @@ export default {
     }
     &.years,
     &.distance {
-      @include stat-block-commons();
+      @include stat-block-base();
+      font-style: italic;
       display: block;
       width: 100%;
       height: 100%;

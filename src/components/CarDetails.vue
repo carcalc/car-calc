@@ -141,15 +141,18 @@ export default {
 
     &.car-price {
       @include number-stat-block();
-      width: 100%;
       grid-column: 1 /-1;
+      .stat-display {
+        font-size: 3.5rem;
+      }
     }
     &.fuel-type {
-      @include stat-block-commons();
+      @include stat-block-base();
       display: flex;
       justify-content: space-evenly;
       align-items: center;
       font-size: 1rem;
+      font-style: italic;
       background-color: $input-bg;
       border-radius: 15px;
       min-width: 100px;
@@ -170,7 +173,7 @@ export default {
     }
     &.operating-cost,
     &.total-cost {
-      @include stat-block-commons();
+      @include stat-block-base();
       word-wrap: break-word;
       max-width: 300px;
     }
