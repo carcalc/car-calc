@@ -18,10 +18,17 @@
       <span class="highlight">{{ cheapestInTotal.name }}</span> är billigast och utgör en
       <span class="highlight"> total besparing på {{ savingsFormatted }} kr </span>
       (eller {{ percentFormatted }}%) jämfört med {{ mostExpensiveIntotal.name }}.
-      <span v-if="cheapestInTotal.type === 'electric'">
-        Miljöbilspremien på {{ formatNo(evBonus) }} kr är inräknad.
-      </span>
     </p>
+
+    <p v-if="cheapestInTotal.type === 'electric'">
+      Miljöbilspremien på {{ formatNo(evBonus) }} kr är inräknad och {{ cheapestInTotal.name }} är
+      ett utmärkt miljöval!
+    </p>
+
+    <p v-if="cheapestInTotal.co2 < 90">
+      Dessvärre är det inget bra miljöval.
+    </p>
+
     <p>
       {{ cheapestToRun.name }} {{ cheapestInTotal === cheapestToRun ? 'är också' : 'är dock' }}
       {{ fuelSavingsFormatted }} kr billigare i drift över {{ usage.ownership }} år och
