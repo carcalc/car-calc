@@ -1,9 +1,9 @@
 <template>
   <form class="usage-details" @submit.prevent>
     <fieldset class="stat-block electricity-price">
-      <label class="block-title" for="electricity-price">Elpris</label>
+      <label class="stat-title" for="electricity-price">Elpris</label>
       <input
-        class="big-number"
+        class="stat-display"
         lang="sv"
         type="number"
         name="electricity-price"
@@ -12,12 +12,12 @@
         v-model.number="usage.kwhPrice"
         :placeholder="usage.kwhPrice"
       />
-      <span class="big-number-unit">kr/kWh</span>
+      <span class="stat-display-unit">kr/kWh</span>
     </fieldset>
     <fieldset class="stat-block gas-price">
-      <label class="block-title" for="gas-price">Bensin/dieselpris</label>
+      <label class="stat-title" for="gas-price">Bensin/dieselpris</label>
       <input
-        class="big-number"
+        class="stat-display"
         lang="sv"
         type="number"
         name="gas-price"
@@ -26,16 +26,17 @@
         v-model.number="usage.gasPrice"
         :placeholder="usage.gasPrice"
       />
-      <span class="big-number-unit">
+      <span class="stat-display-unit">
         kr/l
       </span>
     </fieldset>
     <fieldset class="stat-block distance">
-      <label class="block-title" for="distance"> {{ usage.distance / 10 }} mil per år </label>
+      <label class="stat-title" for="distance"> {{ usage.distance / 10 }} mil per år </label>
       <input
         lang="sv"
         name="distance"
         type="range"
+        class="stat-display"
         min="5000"
         step="100"
         max="50000"
@@ -44,11 +45,12 @@
       />
     </fieldset>
     <fieldset class="stat-block years">
-      <label class="block-title" for="years"> {{ usage.ownership }} års ägande </label>
+      <label class="stat-title" for="years"> {{ usage.ownership }} års ägande </label>
       <input
         lang="sv"
         name="years"
         type="range"
+        class="stat-display"
         min="1"
         max="10"
         v-model.number="usage.ownership"
@@ -72,7 +74,8 @@ export default {
 
 <style lang="scss" scoped>
 .usage-details {
-  @include card-style;
+  @include card-style();
+
   grid-area: usage;
   display: grid;
   align-items: flex-start;
@@ -99,18 +102,20 @@ export default {
   }
 
   .stat-block {
-    @include stat-block;
-
     &.electricity-price {
+      @include input-stat-block();
       grid-area: electricity;
     }
     &.gas-price {
+      @include input-stat-block();
       grid-area: gas;
     }
     &.distance {
+      @include fixed-stat-block();
       grid-area: distance;
     }
     &.years {
+      @include fixed-stat-block();
       grid-area: years;
     }
   }

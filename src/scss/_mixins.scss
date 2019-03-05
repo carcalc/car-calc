@@ -9,64 +9,67 @@
     background-color: $card-bg;
     border-radius: 15px;
   }
-
-  .card-title {
-    text-align: center;
-  }
-  .card-subtitle {
-    text-align: center;
-  }
 }
 
-@mixin stat-block {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  position: relative;
-
-  .block-title {
-    flex: 1;
+@mixin stat-block-commons() {
+  display: block;
+  .stat-title {
+    font-weight: bold;
     font-size: 1rem;
-    font-weight: bold;
-    display: block;
   }
-  .big-number {
-    flex: 1;
+  .stat-display {
     font-weight: bold;
+    color: $black;
     font-size: 2rem;
-    @media screen and (min-width: $size-tablet) {
-      font-size: 3rem;
-    }
+    margin: 0;
+    border: none;
   }
-
-  .big-number-unit {
+  .stat-display-unit {
     font-size: 0.8rem;
     font-weight: bold;
   }
-  input + .big-number-unit {
-    position: absolute;
-    bottom: 5px;
-    right: 10px;
-  }
+}
 
-  input:not([type="range"]) {
-    color: $black;
-    background-color: $input-bg;
+@mixin input-stat-block() {
+  @include stat-block-commons();
+  width: 150px;
+  height: 90px;
+  position: relative;
+
+  .stat-title {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    // font-size: .9rem;
+    // font-style: italic;
+  }
+  .stat-display {
+    display: block;
+    width: 100%;
+    height: 100%;
     border-radius: 15px;
-    padding: 1rem;
-    margin: 0;
-    border: none;
+    padding: 15px 15px 5px 10px;
+    line-height: 0;
+    background-color: $input-bg;
     font-style: italic;
+    font-size: 2.5rem;
 
     &:focus {
       caret-color: $accent-color;
       box-shadow: 0 0 0 3px $accent-color;
     }
-    &[type='number'] {
-      width: 100%;
-    }
-    &[type='radio'] {
+  }
+  .stat-display-unit {
+    font-style: italic;
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+  }
+}
 
-    }
+@mixin fixed-stat-block() {
+  @include stat-block-commons();
+  .stat-display-unit {
+    margin: 0.4rem;
   }
 }
