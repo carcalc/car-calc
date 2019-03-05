@@ -41,7 +41,7 @@
     <div class="stat-block operating-cost">
       <h3 class="stat-title">Milkostnad</h3>
       <span class="stat-display">
-        <span>{{ fuelFormatted }}</span>
+        {{ fuelFormatted }}
         <span class="stat-display-unit">kr</span>
       </span>
     </div>
@@ -49,7 +49,7 @@
     <div class="stat-block total-cost">
       <h3 class="stat-title">Totalkostnad {{ yearsFormatted }} år</h3>
       <div class="stat-display">
-        <span>{{ totalFormatted }}</span>
+        {{ totalFormatted }}
         <span class="stat-display-unit">kr</span>
       </div>
     </div>
@@ -135,22 +135,24 @@ export default {
   position: relative;
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: 1fr 1fr;
-
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   .stat-block {
     position: relative;
 
     &.car-price {
       @include number-stat-block();
-      width: 100%;
       grid-column: 1 /-1;
+      .stat-display {
+        font-size: 3.5rem;
+      }
     }
     &.fuel-type {
-      @include stat-block-commons();
+      @include stat-block-base();
       display: flex;
       justify-content: space-evenly;
       align-items: center;
       font-size: 1rem;
+      font-style: italic;
       background-color: $input-bg;
       border-radius: 15px;
       min-width: 100px;
@@ -169,11 +171,11 @@ export default {
     &.consumption {
       @include number-stat-block();
     }
-    &.operating-cost {
-      @include stat-block-commons();
-    }
+    &.operating-cost,
     &.total-cost {
-      @include stat-block-commons();
+      @include stat-block-base();
+      word-wrap: break-word;
+      max-width: 300px;
     }
   }
 }

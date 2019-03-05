@@ -78,7 +78,7 @@ export default {
 
   grid-area: usage;
   display: grid;
-  align-items: flex-start;
+  // align-content: flex-start;
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
     'electricity gas'
@@ -86,10 +86,8 @@ export default {
 
   @media screen and (min-width: $size-tablet) {
     // Tablet layout
-    grid-template-columns: 1fr 1fr 2fr;
-    grid-template-areas:
-      'electricity gas distance'
-      'electricity gas years';
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-areas: 'electricity gas distance years';
   }
   @media screen and (min-width: $size-desktop) {
     // Desktop layout
@@ -108,7 +106,8 @@ export default {
     }
     &.years,
     &.distance {
-      @include stat-block-commons();
+      @include stat-block-base();
+      font-style: italic;
       display: block;
       width: 100%;
       height: 100%;

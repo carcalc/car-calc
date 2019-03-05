@@ -11,7 +11,7 @@
   }
 }
 
-@mixin stat-block-commons() {
+@mixin stat-block-base() {
   display: block;
   width: 100%;
   height: 100%;
@@ -26,29 +26,31 @@
     color: $black;
     margin: 0;
     border: none;
+    font-size: 2rem;
   }
   .stat-display-unit {
-    margin: 0.4rem;
     font-size: 0.8rem;
     font-weight: bold;
   }
 }
 
 @mixin number-stat-block() {
-  @include stat-block-commons();
+  @include stat-block-base();
   position: relative;
   font-size: 2rem;
+  height: 90px;
 
   .stat-title {
     position: absolute;
     top: 5px;
     left: 10px;
+    font-style: italic;
+
   }
   .stat-display {
-    min-height: 90px;
     display: block;
     border-radius: 15px;
-    padding: 13px 15px 7px 10px;
+    padding: 17px 15px 3px 10px;
     line-height: 0;
     background-color: $input-bg;
     font-style: italic;
@@ -62,6 +64,7 @@
   .stat-display-unit {
     font-style: italic;
     position: absolute;
+    margin: 0;
     bottom: 3px;
     right: 10px;
   }

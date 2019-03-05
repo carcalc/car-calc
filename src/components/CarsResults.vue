@@ -154,5 +154,6 @@ export default {
   font-size: 1.5rem;
   font-weight: bold;
   color: $accent-color;
+  word-wrap: break-word;
 }
 </style>
