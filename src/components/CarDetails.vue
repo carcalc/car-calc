@@ -153,6 +153,7 @@ export default {
       font-size: 1rem;
       background-color: $input-bg;
       border-radius: 15px;
+      min-width: 100px;
 
       input,
       label {
