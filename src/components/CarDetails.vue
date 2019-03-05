@@ -41,7 +41,7 @@
     <div class="stat-block operating-cost">
       <h3 class="stat-title">Milkostnad</h3>
       <span class="stat-display">
-        <span>{{ fuelFormatted }}</span>
+        {{ fuelFormatted }}
         <span class="stat-display-unit">kr</span>
       </span>
     </div>
@@ -49,7 +49,7 @@
     <div class="stat-block total-cost">
       <h3 class="stat-title">Totalkostnad {{ yearsFormatted }} år</h3>
       <div class="stat-display">
-        <span>{{ totalFormatted }}</span>
+        {{ totalFormatted }}
         <span class="stat-display-unit">kr</span>
       </div>
     </div>

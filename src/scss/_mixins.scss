@@ -26,9 +26,9 @@
     color: $black;
     margin: 0;
     border: none;
+    font-size: 2rem;
   }
   .stat-display-unit {
-    margin: 0.4rem;
     font-size: 0.8rem;
     font-weight: bold;
   }
@@ -38,6 +38,7 @@
   @include stat-block-commons();
   position: relative;
   font-size: 2rem;
+  height: 90px;
 
   .stat-title {
     position: absolute;
@@ -45,7 +46,6 @@
     left: 10px;
   }
   .stat-display {
-    min-height: 90px;
     display: block;
     border-radius: 15px;
     padding: 17px 15px 3px 10px;

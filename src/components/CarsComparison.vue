@@ -123,7 +123,6 @@ export default {
 .car-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   @include card-style;
 
   &:first-of-type {
