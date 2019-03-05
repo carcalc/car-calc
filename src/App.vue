@@ -33,9 +33,14 @@ export default {
   color: $black;
   min-height: 100vh;
   min-width: 320px;
-  background: url('./assets/winding-road.jpg');
-  background-size: cover;
-  background-position: top;
-  background-attachment: fixed;
+  background: $white;
+
+  @media screen and (min-width: $size-tablet) {
+    // Tablet & desktop layout
+    background: url('./assets/winding-road.jpg');
+    background-size: cover;
+    background-position: top;
+    background-attachment: fixed;
+  }
 }
 </style>

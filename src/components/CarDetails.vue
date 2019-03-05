@@ -3,66 +3,55 @@
     <span :class="co2Index"></span>
 
     <fieldset class="stat-block car-price">
-      <label class="block-title" for="car-price">Inköpspris</label>
+      <label class="stat-title" for="car-price">Inköpspris</label>
       <input
-        class="big-number"
         lang="sv"
+        class="stat-display"
         type="number"
         name="car-price"
         min="0"
         max="9999999"
         v-model.number="car.price"
       />
-      <span class="big-number-unit">kr</span>
+      <span class="stat-display-unit">kr</span>
     </fieldset>
 
     <fieldset class="stat-block fuel-type">
-      <h3 class="block-title">Drivmedel</h3>
-      <label for="electric">
-        El
-      </label>
-      <input
-        class="big-number"
-        lang="sv"
-        type="radio"
-        name="electric"
-        v-model="car.type"
-        value="electric"
-      />
-      <label for="gasoline">
-        Bensin, diesel
-      </label>
-      <input
-        class="big-number"
-        lang="sv"
-        type="radio"
-        name="gasoline"
-        v-model="car.type"
-        value="gasoline"
-      />
+      <h3 class="stat-title">Drivmedel</h3>
+      <input lang="sv" type="radio" name="electric" v-model="car.type" value="electric" />
+      <label for="electric"><i class="fas fa-bolt fa-lg"></i></label>
+      <input lang="sv" type="radio" name="gasoline" v-model="car.type" value="gasoline" />
+      <label for="gasoline"><i class="fas fa-gas-pump fa-lg"></i></label>
     </fieldset>
 
     <fieldset class="stat-block consumption">
-      <h3 class="block-title">Förbrukning</h3>
+      <label class="stat-title" for="consumption">Förbrukning</label>
       <input
-        class="big-number"
+        class="stat-display"
         lang="sv"
         type="number"
+        name="consumption"
         step="any"
         min="0"
         v-model.number="car.consumption"
       />
-      <span class="big-number-unit">{{ fuelUnit }}</span>
+      <span class="stat-display-unit">{{ fuelUnit }}</span>
     </fieldset>
 
     <div class="stat-block operating-cost">
-      <h3 class="block-title">Milkostnad</h3>
-      <span class="big-number">{{ fuelFormatted }} <span class="big-number-unit"> kr</span> </span>
+      <h3 class="stat-title">Milkostnad</h3>
+      <span class="stat-display">
+        <span>{{ fuelFormatted }}</span>
+        <span class="stat-display-unit">kr</span>
+      </span>
     </div>
 
     <div class="stat-block total-cost">
-      <h3 class="block-title">Totalkostnad {{ yearsFormatted }} år</h3>
-      <span class="big-number">{{ totalFormatted }} <span class="big-number-unit"> kr</span></span>
+      <h3 class="stat-title">Totalkostnad {{ yearsFormatted }} år</h3>
+      <div class="stat-display">
+        <span>{{ totalFormatted }}</span>
+        <span class="stat-display-unit">kr</span>
+      </div>
     </div>
   </form>
 </template>
@@ -149,21 +138,42 @@ export default {
   grid-template-columns: 1fr 1fr;
 
   .stat-block {
-    @include stat-block;
+    position: relative;
 
     &.car-price {
+      @include number-stat-block();
+      width: 100%;
       grid-column: 1 /-1;
-      input[name='car-price'] {
-        font-size: 4rem;
-        @media screen and (min-width: 650px) and (max-width: 1200px) {
-          font-size: 3rem;
-        }
+    }
+    &.fuel-type {
+      @include stat-block-commons();
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      font-size: 1rem;
+      background-color: $input-bg;
+      border-radius: 15px;
+      min-width: 100px;
+
+      input,
+      label {
+        margin: 15px 0 0 0;
+      }
+      .stat-title {
+        position: absolute;
+        top: 5px;
+        left: 10px;
       }
     }
+
+    &.consumption {
+      @include number-stat-block();
+    }
+    &.operating-cost {
+      @include stat-block-commons();
+    }
     &.total-cost {
-      .big-number {
-        font-size: 2rem;
-      }
+      @include stat-block-commons();
     }
   }
 }
