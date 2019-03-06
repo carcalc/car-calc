@@ -78,10 +78,10 @@ export default {
 
   grid-area: usage;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-areas:
-    'electricity gas'
-    'distance years';
+  grid-template:
+    'electricity gas' auto
+    'distance years' auto
+    / 1fr 1fr;
 
   @media screen and (min-width: $size-tablet) {
     // Tablet layout

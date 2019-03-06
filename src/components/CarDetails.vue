@@ -134,13 +134,13 @@ export default {
 .car-details {
   position: relative;
   display: grid;
-  grid-template-areas:
-    'price price'
-    'fuel consumption'
-    'operating total';
+  grid-template:
+    'price price' auto
+    'fuel consumption' auto
+    'operating total' auto
+    / minmax(0, 1fr) minmax(0, 1fr);
 
   grid-gap: 1rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-auto-rows: max-content;
 
   .stat-block {
