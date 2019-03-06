@@ -101,8 +101,8 @@ export default {
 
   @media screen and (min-width: $size-tablet) {
     // Tablet layout
-    padding: $card-gap;
-    grid-gap: $card-gap;
+    padding: $grid-gap;
+    grid-gap: $grid-gap;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       'usage usage'
@@ -111,8 +111,8 @@ export default {
   }
   @media screen and (min-width: $size-desktop) {
     // Desktop layout
-    padding: $card-gap * 2;
-    grid-gap: $card-gap * 2;
+    padding: $grid-gap * 2;
+    grid-gap: $grid-gap * 2;
     grid-template-columns: 1fr auto 1fr;
     grid-template-areas:
       'car1 usage car2'
@@ -121,10 +121,10 @@ export default {
 }
 
 .car-wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  @include card-style;
+  @include card-style();
+
+  display: grid;
+  grid-template-areas: 'selector' 'details';
 
   &:first-of-type {
     grid-area: car1;

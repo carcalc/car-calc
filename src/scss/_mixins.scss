@@ -7,7 +7,8 @@
     // Card layout for tablet and desktop
     box-shadow: 1px 1px 2px 0px rgba(0, 0, 80, 0.3);
     background-color: $card-bg;
-    border-radius: 15px;
+    border-radius: $border-radius;
+
   }
 }
 
@@ -26,7 +27,7 @@
     color: $black;
     margin: 0;
     border: none;
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   .stat-display-unit {
     font-size: 0.8rem;
@@ -49,7 +50,8 @@
   }
   .stat-display {
     display: block;
-    border-radius: 15px;
+    border-radius: $border-radius;
+
     padding: 17px 15px 3px 10px;
     line-height: 0;
     background-color: $input-bg;
@@ -58,7 +60,7 @@
 
     &:focus {
       caret-color: $accent-color;
-      box-shadow: 0 0 0 3px $accent-color;
+      box-shadow: $input-focus-border;
     }
   }
   .stat-display-unit {

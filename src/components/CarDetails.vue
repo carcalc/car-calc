@@ -134,27 +134,35 @@ export default {
 .car-details {
   position: relative;
   display: grid;
+  grid-template-areas:
+    'price price'
+    'fuel consumption'
+    'operating total';
+
   grid-gap: 1rem;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: max-content;
+
   .stat-block {
     position: relative;
 
     &.car-price {
       @include number-stat-block();
-      grid-column: 1 /-1;
+      grid-area: price;
       .stat-display {
         font-size: 3.5rem;
       }
     }
     &.fuel-type {
       @include stat-block-base();
+      grid-area: fuel;
       display: flex;
       justify-content: space-evenly;
       align-items: center;
       font-size: 1rem;
       font-style: italic;
       background-color: $input-bg;
-      border-radius: 15px;
+      border-radius: $border-radius;
       min-width: 100px;
 
       input,
@@ -167,13 +175,21 @@ export default {
         left: 10px;
       }
     }
-
     &.consumption {
       @include number-stat-block();
+      grid-area: consumption;
     }
-    &.operating-cost,
+    &.operating-cost {
+      @include stat-block-base();
+      grid-area: operating;
+
+      word-wrap: break-word;
+      max-width: 300px;
+    }
     &.total-cost {
       @include stat-block-base();
+      grid-area: total;
+
       word-wrap: break-word;
       max-width: 300px;
     }
@@ -184,7 +200,7 @@ export default {
 .orange,
 .red {
   position: absolute;
-  top: -142px;
+  top: -160px;
   right: -14px;
   width: 1rem;
   height: 1rem;

@@ -78,7 +78,6 @@ export default {
 
   grid-area: usage;
   display: grid;
-  // align-content: flex-start;
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
     'electricity gas'
