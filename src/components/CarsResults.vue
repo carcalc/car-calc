@@ -1,36 +1,23 @@
 <template>
   <div class="cars-results">
-    <!-- Remove this?  -->
-    <!-- <template v-for="(car, index) in cars">
-      <p :key="index">
-        Totalkostnad för
-        <span class="highlight">{{ car.name }}</span> är
-        <span class="highlight"> {{ formatNo(totalOwnershipCosts[index]) }} kr </span>
-        varav {{ formatNo(totalFuelCosts[index]) }} kr i driftkostnad ({{
-          (fuelCosts[index] * 10).toFixed(1).replace('.', ',')
-        }}
-        kr per mil)
-        <span v-if="car.type === 'electric'"> och miljöbilspremie på {{ evBonus }} kr</span>
-      </p>
-    </template> -->
-
     <p>
-      <span class="highlight">{{ cheapestInTotal.name }}</span> är billigast och utgör en
+      <span class="highlight">{{ cars[cheapestTotalIndex].name }}</span> är billigast och utgör en
       <span class="highlight"> total besparing på {{ savingsFormatted }} kr </span>
-      (eller {{ percentFormatted }}%) jämfört med {{ mostExpensiveIntotal.name }}.
+      (eller {{ percentFormatted }}%) jämfört med {{ cars[mostExpensiveIntotalIndex].name }}.
     </p>
 
-    <p v-if="cheapestInTotal.type === 'electric'">
-      Miljöbilspremien på {{ formatNo(evBonus) }} kr är inräknad och {{ cheapestInTotal.name }} är
-      ett utmärkt miljöval!
+    <p v-if="cars[cheapestTotalIndex].type === 'electric'">
+      Miljöbilspremien på {{ formatNo(evBonus) }} kr är inräknad och
+      {{ cars[cheapestTotalIndex].name }} är ett utmärkt miljöval!
     </p>
 
-    <p v-if="cheapestInTotal.co2 < 90">
+    <p v-if="cars[cheapestTotalIndex].co2 < 90">
       Dessvärre är det inget bra miljöval.
     </p>
 
     <p>
-      {{ cheapestToRun.name }} {{ cheapestInTotal === cheapestToRun ? 'är också' : 'är dock' }}
+      {{ cars[cheapestToRunIndex].name }}
+      {{ cars[cheapestTotalIndex] === cars[cheapestToRunIndex] ? 'är också' : 'är dock' }}
       {{ fuelSavingsFormatted }} kr billigare i drift över {{ usage.ownership }} år och
       {{ distanceFormatted }} mil.
     </p>
@@ -101,26 +88,27 @@ export default {
       const diff = this.totalSavings;
       return Math.round(carOne > carTwo ? (diff / carOne) * 100 : (diff / carTwo) * 100);
     },
-    cheapestToRun: function() {
+    // Below returns indexes to select corresponding car from array
+    cheapestToRunIndex: function() {
       const [carOne, carTwo] = this.totalFuelCosts;
-      return carOne < carTwo ? this.cars[0] : this.cars[1];
+      return carOne < carTwo ? 0 : 1;
     },
-    cheapestInTotal: function() {
+    cheapestTotalIndex: function() {
       const [carOne, carTwo] = this.totalOwnershipCosts;
-      return carOne < carTwo ? this.cars[0] : this.cars[1];
+      return carOne < carTwo ? 0 : 1;
     },
-    mostExpensiveToRun: function() {
+    mostExpensiveToRunIndex: function() {
       const [carOne, carTwo] = this.totalFuelCosts;
-      return carOne > carTwo ? this.cars[0] : this.cars[1];
+      return carOne > carTwo ? 0 : 1;
     },
-    mostExpensiveIntotal: function() {
+    mostExpensiveIntotalIndex: function() {
       const [carOne, carTwo] = this.totalOwnershipCosts;
-      return carOne > carTwo ? this.cars[0] : this.cars[1];
+      return carOne > carTwo ? 0 : 1;
     },
     energySaved: function() {
       return (this.mostExpensiveToRun.consumption / 100) * this.usage.distance;
     },
-    // Formatted and tweened numbers for output below
+    // Below returns formatted and tweened numbers for DOM output
     savingsFormatted: function() {
       return this.formatNo(this.tweenedSavings);
     },
