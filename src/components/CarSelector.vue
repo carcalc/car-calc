@@ -47,7 +47,7 @@ export default {
   padding: 5px 40px 5px 10px;
   font-weight: bold;
   font-style: italic;
-  font-size: 16px;
+  font-size: 0.8rem;
   border: none;
   height: 40px;
   width: 100%;
