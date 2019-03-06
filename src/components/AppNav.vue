@@ -12,7 +12,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css?family=Fredoka+One');
 #nav {
   position: relative;
   padding: 10px;
@@ -22,9 +21,10 @@ export default {
     padding: 0.5rem;
     font-weight: bold;
     color: $white;
+    text-decoration: none;
 
     &.router-link-exact-active {
-      color: $main-color;
+      color: $accent-color;
     }
   }
 }
