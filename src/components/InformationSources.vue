@@ -18,14 +18,14 @@
       <sup>2</sup>. Bilarnas förbrukning avser blandad körning. I beräkningarna antas det att man
       som bilägare av elbil betalar 100% av bilens laddning.
     </p>
-    <ul>
-      <a :href="transportstyrelsen">
-        <li>1. Transportstyrelsen</li>
-      </a>
-      <a :href="bilsvar">
-        <li>2. Bilsvar</li>
-      </a>
-    </ul>
+    <ol>
+      <li>
+        <a :href="transportstyrelsen">Transportstyrelsen</a>
+      </li>
+      <li>
+        <a :href="bilsvar">Bilsvar</a>
+      </li>
+    </ol>
   </section>
 </template>
 
@@ -40,10 +40,16 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-a {
-  padding: 0.5rem;
-  font-weight: bold;
-  color: $main-color;
+ol {
+  color: $accent-color;
+  li {
+    font-size: 0.8rem;
+    padding: 0.5rem 0;
+    a {
+      font-weight: bold;
+      color: $accent-color;
+    }
+  }
 }
 
 h2,
