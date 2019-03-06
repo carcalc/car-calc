@@ -16,16 +16,11 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 100%;
-  color: $white;
 
-  h1 {
-    margin: 0;
-  }
   .app-title,
   .app-byline {
     margin: 0;
-    color: $accent-color;
+    color: $white;
   }
   .app-title {
     font-size: 3rem;

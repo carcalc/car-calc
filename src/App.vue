@@ -34,13 +34,13 @@ export default {
   min-height: 100vh;
   background: $white;
   display: grid;
-  grid-template-columns: (minmax(320px, 1100px));
   justify-content: center;
-  grid-template-areas:
-    'header'
-    'nav'
-    'content'
-    'footer';
+  grid-template:
+    'header' 120px
+    'nav' auto
+    'content' 1fr
+    'footer' auto
+    / minmax(320px, 1100px);
 
   @media screen and (min-width: $size-tablet) {
     // Tablet & desktop layout
