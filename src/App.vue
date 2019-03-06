@@ -1,11 +1,9 @@
 <template>
   <div id="app">
-    <div class="main-wrapper">
-      <AppHeader />
-      <AppNav />
-      <router-view />
-      <AppFooter :linkedInAndreas="linkedInAndreas" :linkedInGabriel="linkedInGabriel" />
-    </div>
+    <AppHeader />
+    <AppNav />
+    <router-view />
+    <AppFooter :linkedInAndreas="linkedInAndreas" :linkedInGabriel="linkedInGabriel" />
   </div>
 </template>
 <script>
@@ -34,8 +32,15 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: $black;
   min-height: 100vh;
-  min-width: 320px;
   background: $white;
+  display: grid;
+  grid-template-columns: (minmax(320px, 1100px));
+  justify-content: center;
+  grid-template-areas:
+    'header'
+    'nav'
+    'content'
+    'footer';
 
   @media screen and (min-width: $size-tablet) {
     // Tablet & desktop layout
@@ -44,9 +49,5 @@ export default {
     background-position: top;
     background-attachment: fixed;
   }
-}
-.main-wrapper {
-  max-width: 1100px;
-  margin: auto;
 }
 </style>

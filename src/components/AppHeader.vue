@@ -16,9 +16,7 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-left: 2rem;
   width: 100%;
-  height: 10rem;
   color: $white;
 
   h1 {

@@ -89,7 +89,6 @@ export default {
 <style lang="scss" scoped>
 .cars-comparison-wrapper {
   display: grid;
-  max-width: 1200px;
   margin: auto;
   justify-content: center;
   grid-template-columns: 1fr;
@@ -101,7 +100,6 @@ export default {
 
   @media screen and (min-width: $size-tablet) {
     // Tablet layout
-    padding: $grid-gap;
     grid-gap: $grid-gap;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
@@ -111,7 +109,6 @@ export default {
   }
   @media screen and (min-width: $size-desktop) {
     // Desktop layout
-    padding: $grid-gap * 2;
     grid-gap: $grid-gap * 2;
     grid-template-columns: 1fr auto 1fr;
     grid-template-areas:
