@@ -148,7 +148,7 @@ export default {
 .highlight {
   font-size: 1.5rem;
   font-weight: bold;
-  color: $accent-color;
+  color: $main-color;
   word-wrap: break-word;
 }
 </style>
