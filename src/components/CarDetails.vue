@@ -2,7 +2,7 @@
   <form class="car-details">
     <span :class="co2Index"></span>
 
-    <fieldset class="stat-block car-price">
+    <div class="stat-block car-price">
       <label class="stat-title" for="car-price">Inköpspris</label>
       <input
         lang="sv"
@@ -14,17 +14,17 @@
         v-model.number="car.price"
       />
       <span class="stat-display-unit">kr</span>
-    </fieldset>
+    </div>
 
-    <fieldset class="stat-block fuel-type">
+    <div class="stat-block fuel-type">
       <h3 class="stat-title">Drivmedel</h3>
       <input lang="sv" type="radio" name="electric" v-model="car.type" value="electric" />
       <label for="electric"><i class="fas fa-bolt fa-lg"></i></label>
       <input lang="sv" type="radio" name="gasoline" v-model="car.type" value="gasoline" />
       <label for="gasoline"><i class="fas fa-gas-pump fa-lg"></i></label>
-    </fieldset>
+    </div>
 
-    <fieldset class="stat-block consumption">
+    <div class="stat-block consumption">
       <label class="stat-title" for="consumption">Förbrukning</label>
       <input
         class="stat-display"
@@ -36,7 +36,7 @@
         v-model.number="car.consumption"
       />
       <span class="stat-display-unit">{{ fuelUnit }}</span>
-    </fieldset>
+    </div>
 
     <div class="stat-block operating-cost">
       <h3 class="stat-title">Milkostnad</h3>
@@ -135,8 +135,8 @@ export default {
   position: relative;
   display: grid;
   grid-template:
-    'price price' auto
-    'fuel consumption' auto
+    'price price' 90px
+    'fuel consumption' 90px
     'operating total' auto
     / minmax(0, 1fr) minmax(0, 1fr);
 
