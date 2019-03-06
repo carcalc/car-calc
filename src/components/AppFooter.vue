@@ -2,8 +2,8 @@
   <footer>
     <p class="copy">© 2019</p>
     <div class="links">
-      <a :href="linkedInAndreas">Andreas<i class="fab fa-linkedin-in fa-lg"></i></a>&
-      <a :href="linkedInGabriel">Gabriel<i class="fab fa-linkedin-in fa-lg"></i></a>
+      <a :href="linkedInAndreas">Andreas<i class="fab fa-linkedin-in"></i></a>&
+      <a :href="linkedInGabriel">Gabriel<i class="fab fa-linkedin-in"></i></a>
     </div>
   </footer>
 </template>

@@ -92,7 +92,7 @@ export default {
   max-width: 1200px;
   margin: auto;
   justify-content: center;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: 1fr;
   grid-template-areas:
     'usage'
     'car1'
@@ -101,8 +101,8 @@ export default {
 
   @media screen and (min-width: $size-tablet) {
     // Tablet layout
-    padding: $card-gap;
-    grid-gap: $card-gap;
+    padding: $grid-gap;
+    grid-gap: $grid-gap;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
       'usage usage'
@@ -111,9 +111,9 @@ export default {
   }
   @media screen and (min-width: $size-desktop) {
     // Desktop layout
-    padding: calc($card-gap * 2);
-    grid-gap: calc($card-gap * 2);
-    grid-template-columns: minmax(auto, 500px) 1fr minmax(auto, 500px);
+    padding: $grid-gap * 2;
+    grid-gap: $grid-gap * 2;
+    grid-template-columns: 1fr auto 1fr;
     grid-template-areas:
       'car1 usage car2'
       'results results results';
@@ -121,9 +121,10 @@ export default {
 }
 
 .car-wrapper {
-  display: flex;
-  flex-direction: column;
-  @include card-style;
+  @include card-style();
+
+  display: grid;
+  grid-template-areas: 'selector' 'details';
 
   &:first-of-type {
     grid-area: car1;

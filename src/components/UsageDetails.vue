@@ -78,7 +78,6 @@ export default {
 
   grid-area: usage;
   display: grid;
-  // align-content: flex-start;
   grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
     'electricity gas'
@@ -106,7 +105,8 @@ export default {
     }
     &.years,
     &.distance {
-      @include stat-block-commons();
+      @include stat-block-base();
+      font-style: italic;
       display: block;
       width: 100%;
       height: 100%;
