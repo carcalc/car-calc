@@ -11,7 +11,10 @@
     <p>
       Det kan inte garanteras att den data som presenteras på denna site stämmer till punkt och
       pricka. Det kan skilja sig beroende på källa. Dock har det använts så oberoende källor som
-      möjligt. Specifikation på bilarna i databasen kommer främst från bilsvar.se
+      möjligt. De färgade markörerna bredvid bilnamnen anger vilken klimatpåverkan bilen har. De
+      finns i färgerna grön, gul, orange samt röd, där grön är den som gör minst klimatpåverkan och
+      röd störst. Detta klimatindex samt övriga specifikationer på bilarna i databasen kommer främst
+      från bilsvar.se
       <sup>2</sup>. Bilarnas förbrukning avser blandad körning. I beräkningarna antas det att man
       som bilägare av elbil betalar 100% av bilens laddning.
     </p>
