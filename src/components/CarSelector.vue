@@ -44,10 +44,12 @@ export default {
 }
 .cars-dropdown {
   @include number-stat-block();
-  padding: 5px 35px 5px 5px;
+  padding: 5px 40px 5px 10px;
+  font-weight: bold;
+  font-style: italic;
   font-size: 16px;
   border: none;
-  height: 34px;
+  height: 40px;
   width: 100%;
   background-color: $input-bg;
   border-radius: $border-radius / 2;
@@ -55,7 +57,7 @@ export default {
   background-image: url('../assets/select-arrow.svg');
   background-size: 28px;
   background-repeat: no-repeat;
-  background-position: right 6px bottom 8px;
+  background-position: right 6px bottom 10px;
   &:focus {
     box-shadow: 0 0 0 3px $accent-color;
   }
