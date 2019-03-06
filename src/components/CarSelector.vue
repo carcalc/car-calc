@@ -58,8 +58,10 @@ export default {
   background-size: 28px;
   background-repeat: no-repeat;
   background-position: right 6px bottom 10px;
+  border: 3px solid transparent;
+
   &:focus {
-    box-shadow: 0 0 0 3px $accent-color;
+    border: $input-focus-border;
   }
 }
 </style>

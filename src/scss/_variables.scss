@@ -4,11 +4,11 @@ $accent-color: rgb(255, 94, 0);
 $main-color: rgb(10, 155, 223);
 $input-bg: rgb(203, 227, 228);
 $white: white;
-$card-bg: rgba(255, 255, 255, 0.9);
+$card-bg: rgba(255, 255, 255, 0.95);
 
 // Other
 $border-radius: 15px;
-$input-focus-border: 0 0 0 3px $accent-color;
+$input-focus-border: 3px solid $accent-color;
 $grid-gap: 1.5rem;
 
 // Media queries

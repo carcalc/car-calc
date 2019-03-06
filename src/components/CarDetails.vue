@@ -163,11 +163,12 @@ export default {
       font-style: italic;
       background-color: $input-bg;
       border-radius: $border-radius;
+      border: 3px solid transparent;
       min-width: 100px;
 
       input,
       label {
-        margin: 15px 0 0 0;
+        margin: 20px 0 0 0;
       }
       .stat-title {
         position: absolute;
