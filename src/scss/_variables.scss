@@ -6,9 +6,11 @@ $headline-color: $accent-color;
 $input-bg: rgb(203, 227, 228);
 $white: white;
 $card-bg: rgba(255, 255, 255, 0.9);
+$border-radius: 15px;
+$input-focus-border: 0 0 0 3px $accent-color;
 
 // Measurements
-$card-gap: 1.5rem;
+$grid-gap: 1.5rem;
 
 // Media queries
 $size-tablet: 650px;

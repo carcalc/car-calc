@@ -1,12 +1,12 @@
 <template>
-  <div class="car-intro">
+  <div class="car-selector">
     <h1 class="card-title">
       {{ car.name }}
     </h1>
     <h3 class="card-subtitle">
       {{ !car.id.includes('generic') ? car.specs : 'Generisk: anpassa själv' }}
     </h3>
-    <select class="cars-selector" v-model="car" @change="handleChange">
+    <select class="cars-dropdown" v-model="car" @change="handleChange">
       <option disabled value>Välj en bil</option>
       <option v-for="(car, index) in allCars" :key="index" :value="car">
         {{ car.name }} — {{ car.specs }}
@@ -36,16 +36,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.car-intro {
+.car-selector {
   text-align: center;
+  display: grid;
+  grid-template-areas: 'title' 'subtitle' 'selector';
+  grid-gap: 1rem;
 }
-select {
+.cars-dropdown {
+  @include number-stat-block();
   padding: 5px 35px 5px 5px;
-  margin: 1rem auto;
   font-size: 16px;
   border: none;
   height: 34px;
   width: 100%;
   background-color: $input-bg;
+  border-radius: $border-radius / 2;
+  appearance: none;
+  background-image: url('../assets/select-arrow.svg');
+  background-size: 28px;
+  background-repeat: no-repeat;
+  background-position: right 6px bottom 8px;
+  &:focus {
+    box-shadow: 0 0 0 3px $accent-color;
+  }
 }
 </style>
