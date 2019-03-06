@@ -19,7 +19,7 @@ export default {
 
 <style lang="scss" scoped>
 .information {
-  max-width: 800px;
+  max-width: 600px;
   margin: auto;
 }
 </style>
