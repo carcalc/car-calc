@@ -184,7 +184,7 @@ export default {
 .orange,
 .red {
   position: absolute;
-  top: -117px;
+  top: -142px;
   right: -14px;
   width: 1rem;
   height: 1rem;

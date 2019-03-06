@@ -36,10 +36,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cars-selector {
-  margin: auto;
-}
 .car-intro {
   text-align: center;
+}
+select {
+  padding: 5px 35px 5px 5px;
+  margin: 1rem auto;
+  font-size: 16px;
+  border: none;
+  height: 34px;
+  width: 100%;
+  background-color: $input-bg;
 }
 </style>
