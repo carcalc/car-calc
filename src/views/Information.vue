@@ -19,8 +19,7 @@ export default {
 
 <style lang="scss" scoped>
 .information {
-  @include card-style;
-  max-width: 500px;
+  max-width: 800px;
   margin: auto;
 }
 </style>

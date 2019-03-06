@@ -43,12 +43,12 @@ export default {
 a {
   padding: 0.5rem;
   font-weight: bold;
-  color: $accent-color;
+  color: $main-color;
 }
 
 h2,
 p {
   margin-bottom: 1rem;
-  color: $headline-color;
+  color: $white;
 }
 </style>

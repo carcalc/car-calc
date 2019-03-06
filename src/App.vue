@@ -36,7 +36,7 @@ export default {
   display: grid;
   justify-content: center;
   grid-template:
-    'header' 100px
+    'header' 120px
     'nav' auto
     'content' 1fr
     'footer' auto

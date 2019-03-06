@@ -21,10 +21,10 @@ export default {
   a {
     padding: 0.5rem;
     font-weight: bold;
-    color: #ffffff;
+    color: $white;
 
     &.router-link-exact-active {
-      color: $accent-color;
+      color: $main-color;
     }
   }
 }

@@ -2,13 +2,13 @@
   grid-gap: 1rem;
   padding: 1.5rem;
   border: none;
+  background-color: $card-bg;
+  backdrop-filter: blur(3px);
   // border: 4px dotted $input-bg;
   @media screen and (min-width: $size-tablet) {
     // Card layout for tablet and desktop
     box-shadow: 1px 1px 2px 0px rgba(0, 0, 80, 0.3);
-    background-color: $card-bg;
     border-radius: $border-radius;
-
   }
 }
 
