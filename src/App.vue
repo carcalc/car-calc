@@ -1,9 +1,11 @@
 <template>
   <div id="app">
-    <AppHeader />
-    <AppNav />
-    <router-view />
-    <AppFooter :linkedInAndreas="linkedInAndreas" :linkedInGabriel="linkedInGabriel" />
+    <div class="main-wrapper">
+      <AppHeader />
+      <AppNav />
+      <router-view />
+      <AppFooter :linkedInAndreas="linkedInAndreas" :linkedInGabriel="linkedInGabriel" />
+    </div>
   </div>
 </template>
 <script>
@@ -37,10 +39,14 @@ export default {
 
   @media screen and (min-width: $size-tablet) {
     // Tablet & desktop layout
-    background: url('./assets/winding-road.jpg');
+    background: url('./assets/dark-cars.jpg');
     background-size: cover;
     background-position: top;
     background-attachment: fixed;
   }
+}
+.main-wrapper {
+  max-width: 1100px;
+  margin: auto;
 }
 </style>
