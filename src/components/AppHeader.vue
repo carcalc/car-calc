@@ -23,7 +23,9 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+  @media screen and (min-width: $size-tablet) {
+    padding: 2rem;
+  }
   .app-title,
   .app-byline {
     margin: 0;
