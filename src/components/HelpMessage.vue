@@ -31,8 +31,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 button {
-  width: 10rem;
-  height: 1.5rem;
+  width: 7rem;
+  height: 1.2rem;
   background: $accent-color;
   z-index: 15;
   border: none;
@@ -41,23 +41,33 @@ button {
   transform-origin: bottom right;
   position: fixed;
   right: 0;
-  top: 0;
+  top: 6px;
   font-size: 1rem;
+  @media screen and (min-width: $size-tablet) {
+    width: 10rem;
+    height: 1.5rem;
+    top: 0;
+  }
 }
 .btn-active {
   opacity: 0.5;
 }
 .message {
-  width: 25rem;
+  width: 80%;
   background: $card-bg;
   color: $black;
   position: fixed;
   top: 25px;
-  right: -30rem;
+  right: -38rem;
+  font-size: 0.75rem;
   transition: all 300ms;
   padding: 0.5rem 1.5rem 0.5rem 0.5rem;
   border-radius: 15px 0 0 15px;
   box-shadow: 1px 1px 2px 0px rgba(0, 0, 80, 0.3);
+  @media screen and (min-width: $size-tablet) {
+    width: 25rem;
+    font-size: 1rem;
+  }
 }
 .active {
   right: 0;

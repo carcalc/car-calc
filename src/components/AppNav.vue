@@ -22,7 +22,6 @@ export default {
     font-weight: bold;
     color: $white;
     text-decoration: none;
-
     &.router-link-exact-active {
       color: $accent-color;
     }
