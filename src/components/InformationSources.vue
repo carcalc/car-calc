@@ -42,6 +42,7 @@ export default {
 <style lang="scss" scoped>
 ol {
   color: $accent-color;
+  padding: 1rem;
   li {
     font-size: 0.8rem;
     padding: 0.5rem 0;

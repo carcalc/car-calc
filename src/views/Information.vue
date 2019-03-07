@@ -21,5 +21,6 @@ export default {
 .information {
   max-width: 600px;
   margin: auto;
+  padding: 1rem;
 }
 </style>
