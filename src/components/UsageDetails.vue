@@ -78,10 +78,9 @@ export default {
 
   grid-area: usage;
   display: grid;
-  grid-template:
-    'electricity gas' auto
-    'distance years' auto
-    / 1fr 1fr;
+  grid-template-areas:
+    'electricity gas'
+    'distance years';
 
   @media screen and (min-width: $size-tablet) {
     // Tablet layout

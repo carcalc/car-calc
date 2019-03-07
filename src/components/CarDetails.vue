@@ -206,6 +206,7 @@ export default {
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
+  z-index: 5;
 }
 .green {
   background: rgb(42, 192, 92);
