@@ -23,14 +23,21 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
-
+  align-items: center;
+  padding: 2rem;
+  margin: 0;
+  .app-title {
+    font-size: 2.5rem;
+  }
   .app-title,
   .app-byline {
-    margin: 0;
     color: $white;
   }
-  .app-title {
-    font-size: 3rem;
+  @media screen and (min-width: $size-tablet) {
+    align-items: stretch;
+    .app-title {
+      font-size: 3rem;
+    }
   }
 }
 </style>
