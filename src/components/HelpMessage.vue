@@ -3,13 +3,13 @@
     <button @click="showMessage" :class="[message ? 'btn-active' : '']">Hjälp</button>
     <div :class="[message ? 'message active' : 'message']">
       <p>
-        Med denna applikation kan du jämföra kostnaderna mellan två bilar. Du kan välja att jämföra
-        de bilar vi har inlagt i dropdown-menyn eller fylla i alla uppgifter själv. I rutan i mitten
-        fylls uppgifter i som berör ditt ägande samt bränslekostnader, de gäller således för båda
-        bilarna. Vi har fyllt i default-värden för bränslekostnader m.m. men dessa kan du ändra vid
-        behov. Uppe i högra hörnet på respektive bil ser du en färgd prick, den visar vilken
-        klimatpåverkan bilen har. Grön = minst påverkan, röd mest påverkan. I rutan längre ner ser
-        du sedan resultatet.
+        Med denna applikation kan du jämföra kostnaderna - både inköp och drift - mellan två bilar.
+        Du kan välja att jämföra de bilar vi har inlagt i dropdown-menyn eller fylla i alla
+        uppgifter själv. I rutan i mitten fylls uppgifter i som berör ditt ägande samt
+        bränslekostnader, de gäller således för båda bilarna. Default-värden är ifyllda för
+        bränslekostnader m.m. men dessa kan du ändra vid behov. Uppe i högra hörnet på respektive
+        bil ser du en färgd prick, den visar vilken klimatpåverkan bilen har. Grön = minst påverkan,
+        röd mest påverkan. I rutan längre ner ser du sedan resultatet.
       </p>
     </div>
   </div>
