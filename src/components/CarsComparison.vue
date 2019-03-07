@@ -106,6 +106,7 @@ export default {
       'usage usage'
       'car1 car2'
       'results results';
+    padding: 1rem;
   }
   @media screen and (min-width: $size-desktop) {
     // Desktop layout
