@@ -18,12 +18,12 @@ export default {
 .information {
   max-width: 600px;
   margin: 0 auto;
+
   h2,
   p {
     margin-bottom: 1rem;
     color: $white;
   }
-
   ol {
     color: $accent-color;
     li {

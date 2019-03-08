@@ -23,7 +23,7 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .help-popover {
   button {
     width: 10rem;
@@ -53,7 +53,6 @@ export default {
     padding: 0.5rem 1.5rem 0.5rem 0.5rem;
     border-radius: 15px 0 0 15px;
     box-shadow: 1px 1px 2px 0px rgba(0, 0, 80, 0.3);
-    padding: 1rem;
   }
   .active {
     right: 0;
@@ -62,8 +61,12 @@ export default {
       z-index: 15;
     }
   }
-  .help-message {
+  .help-text {
+    padding: 1rem;
     color: $black;
+    h2 {
+      display: none;
+    }
   }
 }
 </style>
