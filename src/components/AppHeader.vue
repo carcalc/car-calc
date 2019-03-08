@@ -24,7 +24,6 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
   margin: 0;
   .app-title {
     font-size: 2.5rem;
