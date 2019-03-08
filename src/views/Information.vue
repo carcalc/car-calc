@@ -18,6 +18,7 @@ export default {
 .information {
   max-width: 600px;
   margin: 0 auto;
+  padding: 1rem;
 
   h2,
   p {

@@ -25,6 +25,11 @@ export default {
 </script>
 <style lang="scss">
 .help-popover {
+  display: none;
+  @media screen and (min-width: $size-tablet) {
+    // Hide popover on small screens
+    display: initial;
+  }
   button {
     width: 10rem;
     height: 1.5rem;

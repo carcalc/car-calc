@@ -32,7 +32,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: $black;
   min-height: 100vh;
-  background: $white;
+  background: $black;
   display: grid;
   justify-content: center;
   grid-template:
