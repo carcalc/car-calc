@@ -57,10 +57,11 @@
     background-color: $input-bg;
     font-style: italic;
     font-size: 2.5rem;
+    border: 3px solid transparent;
 
     &:focus {
       caret-color: $accent-color;
-      box-shadow: $input-focus-border;
+      border: $input-focus-border;
     }
   }
   .stat-display-unit {
