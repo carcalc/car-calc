@@ -4,7 +4,7 @@
       {{ car.name }}
     </h1>
     <h3 class="card-subtitle">
-      {{ !car.id.includes('generic') ? car.specs : 'Generisk: anpassa själv' }}
+      {{ !car.id.includes('generic') ? car.specs : 'Anpassa själv efter önskemål' }}
     </h3>
     <select class="cars-dropdown" v-model="car" @change="handleChange">
       <option disabled value>Välj en bil</option>
@@ -47,7 +47,7 @@ export default {
   padding: 5px 40px 5px 10px;
   font-weight: bold;
   font-style: italic;
-  font-size: 0.8rem;
+  font-size: 1rem;
   border: none;
   height: 40px;
   width: 100%;

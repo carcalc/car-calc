@@ -1,18 +1,15 @@
 <template>
   <div class="information">
-    <InformationSources />
-    <InformationAbout />
+    <About />
   </div>
 </template>
 <script>
-import InformationAbout from '@/components/InformationAbout.vue';
-import InformationSources from '@/components/InformationSources.vue';
+import About from '@/components/About.vue';
 
 export default {
   name: 'home',
   components: {
-    InformationAbout,
-    InformationSources,
+    About,
   },
 };
 </script>
