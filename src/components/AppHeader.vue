@@ -2,17 +2,17 @@
   <header>
     <h1 class="app-title">CarCalc</h1>
     <h4 class="app-byline">Jämför snabbt och enkelt kostnaderna</h4>
-    <HelpMessage />
+    <HelpPopOver />
   </header>
 </template>
 
 <script>
-import HelpMessage from '@/components/HelpMessage';
+import HelpPopOver from '@/components/HelpPopOver';
 export default {
   name: 'AppHeader',
 
   components: {
-    HelpMessage,
+    HelpPopOver,
   },
 };
 </script>

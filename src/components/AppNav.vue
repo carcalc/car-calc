@@ -1,6 +1,7 @@
 <template>
   <nav id="nav">
-    <router-link class="app-byline" :to="{ name: 'home' }">Jämför</router-link>
+    <router-link class="app-byline" :to="{ name: 'compare' }">Jämför</router-link>
+    <router-link :to="{ name: 'help' }">Hjälp</router-link>
     <router-link :to="{ name: 'information' }">Om</router-link>
   </nav>
 </template>

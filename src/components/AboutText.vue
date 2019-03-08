@@ -1,5 +1,5 @@
 <template>
-  <section class="about">
+  <section class="about-text">
     <h2>Syfte</h2>
     <p>
       Syftet med applikationen är att bidra till en positiv klimatpåverkan genom att tydliggöra de
@@ -62,23 +62,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-h2,
-p {
-  margin-bottom: 1rem;
-  color: $white;
-}
-
-ol {
-  color: $accent-color;
-  li {
-    font-size: 0.8rem;
-    padding: 0.5rem 0;
-    a {
-      font-weight: bold;
-      color: $accent-color;
-    }
-  }
-}
-</style>
