@@ -1,12 +1,12 @@
 <template>
   <section class="about-text">
-    <h2>Syfte</h2>
+    <h2>Om</h2>
     <p>
-      Syftet med applikationen är att bidra till en positiv klimatpåverkan genom att tydliggöra de
-      besparingar som en elbil innebär sett över tid och därigenom motivera fler att välja att köra
-      miljövänligt. De är för närvarande ofta dyra i inköp, men har istället väldigt låga
-      driftkostnader. Vi anser att drivkraften bakom övergången till fossilfria transporter främst
-      kommer att vara ekonomiska, även om det finns många andra goda skäl till att köra elektriskt!
+      Vi tror att drivkraften bakom övergången till fossilfria transporter främst kommer att vara
+      ekonomiska, även om det finns många andra goda skäl till att köra elektriskt. Därför vill vi
+      göra det enkelt att räkna ut besparingar i driftkostnad och ställa dem i relation till
+      elbilens högre inköpspris. Förhoppningsvis kan vi därigenom motivera fler människor att köra
+      miljövänligt!
     </p>
     <h2>Om oss</h2>
     <p>

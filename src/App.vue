@@ -46,7 +46,7 @@ export default {
     // Tablet & desktop layout
     background: url('./assets/dark-cars.jpg');
     background-size: cover;
-    background-position: top;
+    background-position: bottom;
     background-attachment: fixed;
   }
 }
