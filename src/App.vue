@@ -44,7 +44,7 @@ export default {
 
   @media screen and (min-width: $size-tablet) {
     // Tablet & desktop layout
-    background: url('./assets/autumn-road3.jpg');
+    background: url('./assets/dark-cars.jpg');
     background-size: cover;
     background-position: bottom;
     background-attachment: fixed;
