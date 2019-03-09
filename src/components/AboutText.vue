@@ -6,7 +6,7 @@
       ekonomiska, även om det finns många andra goda skäl till att köra elektriskt. Därför vill vi
       göra det enkelt att räkna ut besparingar i driftkostnad och ställa dem i relation till
       elbilens högre inköpspris. Förhoppningsvis kan vi därigenom motivera fler människor att köra
-      miljövänligt!
+      miljövänligt! Men självklart går det bra att jämföra andra sorters bilar också.
     </p>
     <h2>Om oss</h2>
     <p>
