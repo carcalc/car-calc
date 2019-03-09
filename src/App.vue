@@ -27,12 +27,13 @@ export default {
 </script>
 <style lang="scss">
 #app {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(42, 42, 42, 1) 100%);
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $black;
   min-height: 100vh;
-  background: $black;
   display: grid;
   justify-content: center;
   grid-template:
@@ -41,13 +42,5 @@ export default {
     'content' 1fr
     'footer' auto
     / minmax(320px, 1100px);
-
-  @media screen and (min-width: $size-tablet) {
-    // Tablet & desktop layout
-    background: url('./assets/dark-cars.jpg');
-    background-size: cover;
-    background-position: bottom;
-    background-attachment: fixed;
-  }
 }
 </style>
