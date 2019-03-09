@@ -27,6 +27,11 @@ header {
   margin: 0;
   .app-title {
     font-size: 2.5rem;
+    font-weight: 600;
+    color: $white;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: $white;
   }
   .app-title,
   .app-byline {
@@ -35,7 +40,10 @@ header {
   @media screen and (min-width: $size-tablet) {
     align-items: stretch;
     .app-title {
-      font-size: 3rem;
+      margin-top: 1rem;
+      font-size: 4rem;
+      font-weight: 800;
+      -webkit-text-stroke-width: 2px;
     }
   }
 }
