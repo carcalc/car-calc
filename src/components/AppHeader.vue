@@ -40,7 +40,6 @@ header {
   @media screen and (min-width: $size-tablet) {
     align-items: stretch;
     .app-title {
-      margin-top: 1rem;
       font-size: 4rem;
       font-weight: 800;
       -webkit-text-stroke-width: 2px;
