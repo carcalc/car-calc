@@ -58,6 +58,7 @@
     font-style: italic;
     font-size: 2.5rem;
     border: 3px solid transparent;
+    outline:none;
 
     &:focus {
       caret-color: $accent-color;
