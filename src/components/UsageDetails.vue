@@ -38,7 +38,7 @@
         type="range"
         class="stat-display"
         min="5000"
-        step="100"
+        step="1000"
         max="50000"
         v-model.number="usage.distance"
         :placeholder="usage.distance"

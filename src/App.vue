@@ -42,5 +42,9 @@ export default {
     'content' 1fr
     'footer' auto
     / minmax(320px, 1100px);
+
+  @media screen and (min-width: $size-tablet) {
+    padding: 1rem;
+  }
 }
 </style>
