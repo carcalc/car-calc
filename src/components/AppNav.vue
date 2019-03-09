@@ -1,6 +1,7 @@
 <template>
   <nav id="nav">
-    <router-link class="app-byline" :to="{ name: 'home' }">Jämför</router-link>
+    <router-link class="app-byline" :to="{ name: 'compare' }">Jämför</router-link>
+    <router-link class="help-link" :to="{ name: 'help' }">Hjälp</router-link>
     <router-link :to="{ name: 'information' }">Om</router-link>
   </nav>
 </template>
@@ -12,7 +13,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css?family=Fredoka+One');
 #nav {
   position: relative;
   padding: 10px;
@@ -21,10 +21,16 @@ export default {
   a {
     padding: 0.5rem;
     font-weight: bold;
-    color: #ffffff;
-
+    color: $white;
+    text-decoration: none;
     &.router-link-exact-active {
       color: $accent-color;
+    }
+  }
+  @media screen and (min-width: $size-tablet) {
+    // Hide help link on non-mobile
+    .help-link {
+      display: none;
     }
   }
 }

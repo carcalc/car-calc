@@ -1,14 +1,15 @@
 // Colors
-$black: #2c3e50;
-$accent-color: rgb(0, 0, 0);
-$main-color: rgb(213, 228, 131);
-$headline-color: $accent-color;
+$black: #232e38;
+$accent-color: rgb(255, 94, 0);
+$main-color: #0a9bdf;
 $input-bg: rgb(203, 227, 228);
 $white: white;
-$card-bg: rgba(255, 255, 255, 0.9);
+$card-bg: rgba(255, 255, 255, 0.95);
 
-// Measurements
-$card-gap: 1.5rem;
+// Other
+$border-radius: 15px;
+$input-focus-border: 3px solid $accent-color;
+$grid-gap: 1.5rem;
 
 // Media queries
 $size-tablet: 650px;

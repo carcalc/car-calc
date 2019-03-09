@@ -27,20 +27,20 @@ export default {
 </script>
 <style lang="scss">
 #app {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(0deg, rgba(0, 0, 0, 1) 0%, rgba(42, 42, 42, 1) 100%);
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $black;
   min-height: 100vh;
-  min-width: 320px;
-  background: $white;
-
-  @media screen and (min-width: $size-tablet) {
-    // Tablet & desktop layout
-    background: url('./assets/winding-road.jpg');
-    background-size: cover;
-    background-position: top;
-    background-attachment: fixed;
-  }
+  display: grid;
+  justify-content: center;
+  grid-template:
+    'header' 120px
+    'nav' auto
+    'content' 1fr
+    'footer' auto
+    / minmax(320px, 1100px);
 }
 </style>

@@ -2,7 +2,7 @@
   <form class="car-details">
     <span :class="co2Index"></span>
 
-    <fieldset class="stat-block car-price">
+    <div class="stat-block car-price">
       <label class="stat-title" for="car-price">Inköpspris</label>
       <input
         lang="sv"
@@ -14,17 +14,17 @@
         v-model.number="car.price"
       />
       <span class="stat-display-unit">kr</span>
-    </fieldset>
+    </div>
 
-    <fieldset class="stat-block fuel-type">
+    <div class="stat-block fuel-type">
       <h3 class="stat-title">Drivmedel</h3>
       <input lang="sv" type="radio" name="electric" v-model="car.type" value="electric" />
       <label for="electric"><i class="fas fa-bolt fa-lg"></i></label>
       <input lang="sv" type="radio" name="gasoline" v-model="car.type" value="gasoline" />
       <label for="gasoline"><i class="fas fa-gas-pump fa-lg"></i></label>
-    </fieldset>
+    </div>
 
-    <fieldset class="stat-block consumption">
+    <div class="stat-block consumption">
       <label class="stat-title" for="consumption">Förbrukning</label>
       <input
         class="stat-display"
@@ -36,7 +36,7 @@
         v-model.number="car.consumption"
       />
       <span class="stat-display-unit">{{ fuelUnit }}</span>
-    </fieldset>
+    </div>
 
     <div class="stat-block operating-cost">
       <h3 class="stat-title">Milkostnad</h3>
@@ -134,29 +134,41 @@ export default {
 .car-details {
   position: relative;
   display: grid;
+  grid-template:
+    'price price' 90px
+    'fuel consumption' 90px
+    'operating total' auto
+    / minmax(0, 1fr) minmax(0, 1fr);
+
   grid-gap: 1rem;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: max-content;
+
   .stat-block {
     position: relative;
 
     &.car-price {
       @include number-stat-block();
-      width: 100%;
-      grid-column: 1 /-1;
+      grid-area: price;
+      .stat-display {
+        font-size: 3.5rem;
+      }
     }
     &.fuel-type {
-      @include stat-block-commons();
+      @include stat-block-base();
+      grid-area: fuel;
       display: flex;
       justify-content: space-evenly;
       align-items: center;
       font-size: 1rem;
+      font-style: italic;
       background-color: $input-bg;
-      border-radius: 15px;
+      border-radius: $border-radius;
+      border: 3px solid transparent;
       min-width: 100px;
 
       input,
       label {
-        margin: 15px 0 0 0;
+        margin: 20px 0 0 0;
       }
       .stat-title {
         position: absolute;
@@ -164,13 +176,21 @@ export default {
         left: 10px;
       }
     }
-
     &.consumption {
       @include number-stat-block();
+      grid-area: consumption;
     }
-    &.operating-cost,
+    &.operating-cost {
+      @include stat-block-base();
+      grid-area: operating;
+
+      word-wrap: break-word;
+      max-width: 300px;
+    }
     &.total-cost {
-      @include stat-block-commons();
+      @include stat-block-base();
+      grid-area: total;
+
       word-wrap: break-word;
       max-width: 300px;
     }
@@ -181,11 +201,12 @@ export default {
 .orange,
 .red {
   position: absolute;
-  top: -117px;
+  top: -160px;
   right: -14px;
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
+  z-index: 5;
 }
 .green {
   background: rgb(42, 192, 92);

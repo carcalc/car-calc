@@ -2,16 +2,17 @@
   grid-gap: 1rem;
   padding: 1.5rem;
   border: none;
+  background-color: $card-bg;
+  backdrop-filter: blur(3px);
   // border: 4px dotted $input-bg;
   @media screen and (min-width: $size-tablet) {
     // Card layout for tablet and desktop
     box-shadow: 1px 1px 2px 0px rgba(0, 0, 80, 0.3);
-    background-color: $card-bg;
-    border-radius: 15px;
+    border-radius: $border-radius;
   }
 }
 
-@mixin stat-block-commons() {
+@mixin stat-block-base() {
   display: block;
   width: 100%;
   height: 100%;
@@ -26,7 +27,7 @@
     color: $black;
     margin: 0;
     border: none;
-    font-size: 2rem;
+    font-size: 1.8rem;
   }
   .stat-display-unit {
     font-size: 0.8rem;
@@ -35,7 +36,7 @@
 }
 
 @mixin number-stat-block() {
-  @include stat-block-commons();
+  @include stat-block-base();
   position: relative;
   font-size: 2rem;
   height: 90px;
@@ -44,19 +45,24 @@
     position: absolute;
     top: 5px;
     left: 10px;
+    font-style: italic;
+
   }
   .stat-display {
     display: block;
-    border-radius: 15px;
+    border-radius: $border-radius;
+
     padding: 17px 15px 3px 10px;
     line-height: 0;
     background-color: $input-bg;
     font-style: italic;
     font-size: 2.5rem;
+    border: 3px solid transparent;
+    outline:none;
 
     &:focus {
       caret-color: $accent-color;
-      box-shadow: 0 0 0 3px $accent-color;
+      border: $input-focus-border;
     }
   }
   .stat-display-unit {
