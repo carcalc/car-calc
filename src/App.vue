@@ -32,14 +32,21 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: $black;
   min-height: 100vh;
-  min-width: 320px;
-  background: $white;
+  background: $black;
+  display: grid;
+  justify-content: center;
+  grid-template:
+    'header' 120px
+    'nav' auto
+    'content' 1fr
+    'footer' auto
+    / minmax(320px, 1100px);
 
   @media screen and (min-width: $size-tablet) {
     // Tablet & desktop layout
-    background: url('./assets/winding-road.jpg');
+    background: url('./assets/dark-cars.jpg');
     background-size: cover;
-    background-position: top;
+    background-position: bottom;
     background-attachment: fixed;
   }
 }

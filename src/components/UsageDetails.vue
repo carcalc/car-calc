@@ -1,6 +1,6 @@
 <template>
   <form class="usage-details" @submit.prevent>
-    <fieldset class="stat-block electricity-price">
+    <div class="stat-block electricity-price">
       <label class="stat-title" for="electricity-price">Elpris</label>
       <input
         class="stat-display"
@@ -13,8 +13,8 @@
         :placeholder="usage.kwhPrice"
       />
       <span class="stat-display-unit">kr/kWh</span>
-    </fieldset>
-    <fieldset class="stat-block gas-price">
+    </div>
+    <div class="stat-block gas-price">
       <label class="stat-title" for="gas-price">Bensin/dieselpris</label>
       <input
         class="stat-display"
@@ -29,8 +29,8 @@
       <span class="stat-display-unit">
         kr/l
       </span>
-    </fieldset>
-    <fieldset class="stat-block distance">
+    </div>
+    <div class="stat-block distance">
       <label class="stat-title" for="distance"> {{ usage.distance / 10 }} mil per år </label>
       <input
         lang="sv"
@@ -43,8 +43,8 @@
         v-model.number="usage.distance"
         :placeholder="usage.distance"
       />
-    </fieldset>
-    <fieldset class="stat-block years">
+    </div>
+    <div class="stat-block years">
       <label class="stat-title" for="years"> {{ usage.ownership }} års ägande </label>
       <input
         lang="sv"
@@ -56,7 +56,7 @@
         v-model.number="usage.ownership"
         :placeholder="usage.ownership"
       />
-    </fieldset>
+    </div>
   </form>
 </template>
 
@@ -78,8 +78,6 @@ export default {
 
   grid-area: usage;
   display: grid;
-  // align-content: flex-start;
-  grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
     'electricity gas'
     'distance years';
