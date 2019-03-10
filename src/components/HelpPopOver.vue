@@ -33,7 +33,7 @@ export default {
   button {
     width: 10rem;
     height: 1.5rem;
-    background: $accent-color;
+    background: $brand-color2;
     z-index: 15;
     border: none;
     border-radius: 10px 10px 0 0;
