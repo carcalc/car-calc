@@ -10,7 +10,6 @@
         step="any"
         min="0"
         v-model.number="usage.kwhPrice"
-        :placeholder="usage.kwhPrice"
       />
       <span class="stat-display-unit">kr/kWh</span>
     </div>
@@ -24,7 +23,6 @@
         step="any"
         min="0"
         v-model.number="usage.gasPrice"
-        :placeholder="usage.gasPrice"
       />
       <span class="stat-display-unit">
         kr/l
@@ -41,7 +39,6 @@
         step="1000"
         max="50000"
         v-model.number="usage.distance"
-        :placeholder="usage.distance"
       />
     </div>
     <div class="stat-block years">
@@ -54,7 +51,6 @@
         min="1"
         max="10"
         v-model.number="usage.ownership"
-        :placeholder="usage.ownership"
       />
     </div>
   </form>
