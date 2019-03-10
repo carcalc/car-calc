@@ -17,8 +17,8 @@ export default {
 .cars-comparison-wrapper {
   display: grid;
   grid-gap: 3px;
-  margin: auto;
   justify-content: center;
+  align-content: baseline;
   grid-template-columns: 1fr;
   grid-template-areas:
     'usage'

@@ -1,6 +1,6 @@
 <template>
   <section class="about-text">
-    <h2>Om</h2>
+    <h2>Om CarCalc</h2>
     <p>
       Vi tror att drivkraften bakom övergången till fossilfria transporter främst kommer att vara
       ekonomiska, även om det finns många andra goda skäl till att köra elektriskt. Därför vill vi
