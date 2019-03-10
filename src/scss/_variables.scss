@@ -1,14 +1,15 @@
 // Colors
 $black: #232e38;
-$accent-color: #ff5e00;
-$main-color: #0a9bdf;
-$input-bg: rgb(203, 227, 228);
 $white: white;
+$brand-color1: #02996c;
+$brand-color2: #ff5e00;
+$brand-color3: #0a9bdf;
+$input-bg: rgb(203, 227, 228);
 $card-bg: rgba(255, 255, 255, 0.95);
 
 // Other
 $border-radius: 15px;
-$input-focus-border: 3px solid $accent-color;
+$input-focus-border: 3px solid $brand-color2;
 $grid-gap: 1.5rem;
 $navheight: 44px;
 

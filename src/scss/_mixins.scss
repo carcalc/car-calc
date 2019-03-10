@@ -61,7 +61,7 @@
     outline:none;
 
     &:focus {
-      caret-color: $accent-color;
+      caret-color: $brand-color2;
       border: $input-focus-border;
     }
   }

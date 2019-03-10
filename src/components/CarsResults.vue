@@ -21,6 +21,12 @@
       {{ fuelSavingsFormatted }} kr billigare i drift över {{ usage.ownership }} år och
       {{ distanceFormatted }} mil.
     </p>
+    <small class="disclaimer">
+      Uträkningen avser bilens inköpspris samt energiförbrukning och tar inte hänsyn till exempelvis
+      skatte- och servicekostnader. Dessa är mycket svåra att estimera och vi har därför för
+      närvarande valt att utelämna dem.
+      <router-link :to="{ name: 'information' }">Läs mer om hur vi har resonerat.</router-link>
+    </small>
   </div>
 </template>
 <script>
@@ -148,7 +154,13 @@ export default {
 .highlight {
   font-size: 1.5rem;
   font-weight: bold;
-  color: $main-color;
+  color: $brand-color3;
   word-wrap: break-word;
+}
+.disclaimer {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.6rem;
+  font-style: italic;
 }
 </style>
