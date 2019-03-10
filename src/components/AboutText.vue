@@ -16,11 +16,11 @@
 
     <h2>Beräkningar</h2>
     <p>
-      Drift-, skatte- och underhållskostnader är ofta betydligt lägre för elbilar än traditionella
-      bilar och mycket pekar på att så även är fallet med värdeminskning, men de är svåra och i
-      bästa fall imprecisa beräkningar som vi för närvarande valt att utelämna. Miljöbilspremien
-      <sup>1</sup> om 60 000 kr som betalas ut till ägare av bilar med låga utsläpp är medräknad när
-      det är relevant.
+      Driftkostnaden är betydligt lägre för elbilar än traditionella bilar och mycket pekar på att
+      så även är fallet med värdeminskning, underhåll och skatt, men detta är svåra och i bästa fall
+      imprecisa beräkningar som vi för närvarande valt att utelämna. Miljöbilspremien
+      <sup>1</sup> om 60 000 kr som betalas ut till köpare av nya elbilar är medräknad där det är
+      relevant.
     </p>
     <h2>Källor</h2>
     <p>

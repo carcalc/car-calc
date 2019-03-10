@@ -8,9 +8,15 @@
         :key="index + '-selected'"
         @selected="setNewCar"
       />
-      <CarDetails :car="car" :key="index + '-details'" :usage="usageDetails" :evBonus="evBonus" />
+      <CarDetails
+        :car="car"
+        :key="index + '-details'"
+        :usage="usageDetails"
+        :evBonus="calcOptions.evBonus"
+        :includeBonus="calcOptions.includeBonus[index]"
+      />
     </div>
-    <CarsResults :usage="usageDetails" :cars="selectedCars" :evBonus="evBonus" />
+    <CarsResults :usage="usageDetails" :cars="selectedCars" :calcOptions="calcOptions" />
     <!-- Find a place to put this fucker -->
     <!-- <input lang="sv" type="button" value="Återställ" @click="resetStoredData" /> -->
   </section>
@@ -37,7 +43,7 @@ export default {
       allCars: [], //Maybe move this to CarSelector; this component does not need to be aware of all cars
       selectedCars: defaultData.cars,
       usageDetails: defaultData.usage,
-      evBonus: defaultData.evBonus,
+      calcOptions: { evBonus: defaultData.evBonus, includeBonus: [null, null] },
     };
   },
   created() {
@@ -77,6 +83,10 @@ export default {
     },
     setNewCar({ car, index }) {
       this.$set(this.selectedCars, index, car);
+      // Put this somewhere else
+      // car.type === 'electric'
+      //   ? (this.calcOptions.includeBonus[index] = true)
+      //   : (this.calcOptions.includeBonus[index] = false);
     },
     resetStoredData() {
       localStorage.clear();

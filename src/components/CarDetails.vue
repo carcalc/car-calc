@@ -17,6 +17,19 @@
       <span class="stat-display-unit">kr</span>
     </div>
 
+    <div class="stat-block">
+      <label class="stat-title-float" for="bonus">
+        <input
+          class=""
+          type="checkbox"
+          name="bonus"
+          v-model="includeBonus"
+          :disabled="car.type !== 'electric'"
+        />
+        Miljöbilspremie
+      </label>
+    </div>
+
     <div class="stat-block fuel-type">
       <h3 class="stat-title">Drivmedel</h3>
       <input lang="sv" type="radio" name="electric" v-model="car.type" value="electric" />
@@ -63,9 +76,13 @@ import { TweenLite } from 'gsap/TweenMax';
 
 export default {
   name: 'CarDetails',
-  props: ['car', 'usage', 'evBonus'],
+  props: ['car', 'usage', 'evBonus', 'includeBonus'],
   data() {
-    return { tweenedTotal: 0, tweenedFuelCost: 0, tweenedOwnership: 0 };
+    return {
+      tweenedTotal: 0,
+      tweenedFuelCost: 0,
+      tweenedOwnership: 0,
+    };
   },
   mounted() {
     // Sets animation starting points
@@ -177,6 +194,9 @@ export default {
         top: 5px;
         left: 10px;
       }
+    }
+    &.bonus {
+      // @include number-stat-block();
     }
     &.consumption {
       @include number-stat-block();

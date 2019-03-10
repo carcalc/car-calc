@@ -7,7 +7,7 @@
     </p>
 
     <p v-if="cars[cheapestTotalIndex].type === 'electric'">
-      Miljöbilspremien på {{ formatNo(evBonus) }} kr är inräknad och
+      Miljöbilspremien på {{ formatNo(calcOptions.evBonus) }} kr är inräknad och
       {{ cars[cheapestTotalIndex].name }} är ett utmärkt miljöval!
     </p>
 
@@ -23,8 +23,8 @@
     </p>
     <small class="disclaimer">
       Uträkningen avser bilens inköpspris samt energiförbrukning och tar inte hänsyn till exempelvis
-      skatte- och servicekostnader. Dessa är mycket svåra att estimera och vi har därför för
-      närvarande valt att utelämna dem.
+      skatt, värdeminskning och servicekostnader. Dessa är mycket svåra att estimera och vi har
+      därför för närvarande valt att utelämna dem.
       <router-link :to="{ name: 'information' }">Läs mer om hur vi har resonerat.</router-link>
     </small>
   </div>
@@ -32,7 +32,7 @@
 <script>
 import { TweenLite } from 'gsap/TweenMax';
 export default {
-  props: ['usage', 'cars', 'evBonus'],
+  props: ['usage', 'cars', 'calcOptions'],
   data() {
     return {
       tweenedSavings: 0,
@@ -73,7 +73,7 @@ export default {
     totalOwnershipCosts: function() {
       return this.cars.map((car, index) => {
         const cost = this.totalFuelCosts[index] + car.price;
-        return car.type === 'electric' ? cost - this.evBonus : cost;
+        return car.type === 'electric' ? cost - this.calcOptions.evBonus : cost;
       });
     },
     totalDistance: function() {
