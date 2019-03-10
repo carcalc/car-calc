@@ -112,7 +112,8 @@ export default {
       return carOne > carTwo ? 0 : 1;
     },
     energySaved: function() {
-      return (this.mostExpensiveToRun.consumption / 100) * this.usage.distance;
+      // Currently not displayed anywhere
+      return (this.cars[this.mostExpensiveToRunIndex].consumption / 100) * this.usage.distance;
     },
     // Below returns formatted and tweened numbers for DOM output
     savingsFormatted: function() {
