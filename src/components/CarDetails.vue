@@ -12,6 +12,7 @@
         min="0"
         max="9999999"
         v-model.number="car.price"
+        placeholder="Ange pris"
       />
       <span class="stat-display-unit">kr</span>
     </div>
@@ -34,6 +35,7 @@
         step="any"
         min="0"
         v-model.number="car.consumption"
+        placeholder="Fyll i"
       />
       <span class="stat-display-unit">{{ fuelUnit }}</span>
     </div>
