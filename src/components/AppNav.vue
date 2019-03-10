@@ -25,6 +25,7 @@ export default {
   text-align: right;
   background: $black;
   min-width: 320px;
+  user-select: none;
 
   @media screen and (min-width: $size-tablet) {
     width: 100%;

@@ -2,7 +2,7 @@
   <footer>
     <p class="copy">© 2019</p>
     <div class="links">
-      <a :href="linkedInAndreas">Andreas<i class="fab fa-linkedin-in"></i></a>&
+      <a :href="linkedInAndreas">Andreas<i class="fab fa-linkedin-in"></i></a> &
       <a :href="linkedInGabriel">Gabriel<i class="fab fa-linkedin-in"></i></a>
     </div>
   </footer>
@@ -19,7 +19,6 @@ export default {
 footer {
   width: 100%;
   height: 10rem;
-  margin: auto;
   color: $white;
   text-align: center;
   display: flex;
@@ -30,7 +29,7 @@ footer {
   i {
     text-decoration: none;
     color: $white;
-    margin: 0.5rem;
+    margin: 4px;
   }
 }
 </style>
