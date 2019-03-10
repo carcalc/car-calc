@@ -159,8 +159,13 @@ export default {
 }
 .disclaimer {
   display: block;
-  margin-top: 1rem;
   font-size: 0.6rem;
   font-style: italic;
+  max-width: 700px;
+  margin: auto;
+  margin-top: 1rem;
+  @media screen and (min-width: $size-tablet) {
+    font-size: 0.7rem;
+  }
 }
 </style>
