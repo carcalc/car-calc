@@ -25,24 +25,45 @@ header {
   justify-content: center;
   align-items: center;
   margin: 0;
+
+  @media screen and (min-width: $size-tablet) {
+    position: initial;
+    align-items: stretch;
+  }
+
   .app-title {
-    font-size: 2.5rem;
-    font-weight: 600;
     color: $white;
+    position: fixed;
+    top: 17px;
+    left: 4px;
+    line-height: 0;
+    z-index: 15;
+    font-style: italic;
+    font-size: 24px;
+    font-weight: 600;
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-width: 1px;
     -webkit-text-stroke-color: $white;
-  }
-  .app-title,
-  .app-byline {
-    color: $white;
-  }
-  @media screen and (min-width: $size-tablet) {
-    align-items: stretch;
-    .app-title {
+    @media screen and (min-width: $size-tablet) {
+      line-height: initial;
+      font-size: 2.5rem;
+      position: initial;
       font-size: 4rem;
       font-weight: 800;
       -webkit-text-stroke-width: 2px;
+    }
+  }
+
+  .app-byline {
+    color: $white;
+    position: fixed;
+    z-index: 15;
+    top: 29px;
+    left: 7px;
+    font-size: 8px;
+    @media screen and (min-width: $size-tablet) {
+      position: initial;
+      font-size: 1rem;
     }
   }
 }
