@@ -36,13 +36,16 @@ export default {
   min-height: 100vh;
   display: grid;
   justify-content: center;
+  position: relative;
+  top: $navheight; /* Fixed nav offset */
   grid-template:
-    'header' 120px
-    'nav' auto
+    'header' auto
+    'nav' $navheight
     'content' 1fr
     'footer' auto
     / minmax(320px, 1100px);
   @media screen and (min-width: $size-tablet) {
+    position: initial;
     padding: 1rem;
   }
 }

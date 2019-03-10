@@ -14,23 +14,45 @@ export default {
 
 <style lang="scss" scoped>
 #nav {
-  position: relative;
+  position: fixed;
+  height: $navheight;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 10;
   padding: 10px;
-  text-align: center;
+  text-align: right;
+  background: $black;
+  min-width: 320px;
 
-  a {
-    padding: 0.5rem;
-    font-weight: bold;
-    color: $white;
-    text-decoration: none;
-    &.router-link-exact-active {
-      color: $accent-color;
-    }
-  }
   @media screen and (min-width: $size-tablet) {
+    text-align: center;
+    position: relative;
+    background: transparent;
     // Hide help link on non-mobile
     .help-link {
       display: none;
+    }
+  }
+
+  a {
+    padding: 0 4px;
+    margin-left: 6px;
+    color: $white;
+    text-decoration: none;
+    border: 1px solid $accent-color;
+    border-radius: 4px;
+
+    @media screen and (min-width: $size-tablet) {
+      font-weight: bold;
+      border: none;
+      margin: auto;
+    }
+
+    &.router-link-exact-active {
+      font-weight: bold;
+      color: $accent-color;
     }
   }
 }
