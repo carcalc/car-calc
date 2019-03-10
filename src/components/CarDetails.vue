@@ -76,19 +76,21 @@ import { TweenLite } from 'gsap/TweenMax';
 
 export default {
   name: 'CarDetails',
-  props: ['car', 'usage', 'evBonus', 'includeBonus'],
+  props: ['car', 'usage', 'evBonus'],
   data() {
     return {
       tweenedTotal: 0,
       tweenedFuelCost: 0,
       tweenedOwnership: 0,
+      includeBonus: null,
     };
   },
   mounted() {
-    // Sets animation starting points
+    // Sets animation starting points; can't be done before mount
     this.tweenedTotal = this.totalOwnershipCost;
     this.tweenedFuelCost = this.fuelCost;
     this.tweenedOwnership = this.usage.ownership;
+    this.car.type === 'electric' ? (this.includeBonus = true) : (this.includeBonus = false);
   },
   computed: {
     fuelCost: function() {

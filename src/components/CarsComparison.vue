@@ -13,7 +13,6 @@
         :key="index + '-details'"
         :usage="usageDetails"
         :evBonus="calcOptions.evBonus"
-        :includeBonus="calcOptions.includeBonus[index]"
       />
     </div>
     <CarsResults :usage="usageDetails" :cars="selectedCars" :calcOptions="calcOptions" />
@@ -83,10 +82,6 @@ export default {
     },
     setNewCar({ car, index }) {
       this.$set(this.selectedCars, index, car);
-      // Put this somewhere else
-      // car.type === 'electric'
-      //   ? (this.calcOptions.includeBonus[index] = true)
-      //   : (this.calcOptions.includeBonus[index] = false);
     },
     resetStoredData() {
       localStorage.clear();
