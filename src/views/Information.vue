@@ -32,14 +32,14 @@ export default {
     color: $white;
   }
   ol {
-    color: $accent-color;
+    color: $brand-color2;
     li {
       font-size: 0.8rem;
       padding: 0.5rem 0;
       margin-left: 1rem;
       a {
         font-weight: bold;
-        color: $accent-color;
+        color: $brand-color2;
       }
     }
   }

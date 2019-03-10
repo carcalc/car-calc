@@ -19,7 +19,7 @@ export default {
   top: 0;
   left: 0;
   right: 0;
-  width: 100%;
+  width: 100vw;
   z-index: 10;
   padding: 10px;
   text-align: right;
@@ -27,6 +27,7 @@ export default {
   min-width: 320px;
 
   @media screen and (min-width: $size-tablet) {
+    width: 100%;
     text-align: center;
     position: relative;
     background: transparent;
@@ -41,7 +42,7 @@ export default {
     margin-left: 6px;
     color: $white;
     text-decoration: none;
-    border: 1px solid $accent-color;
+    border: 1px solid $brand-color2;
     border-radius: 4px;
 
     @media screen and (min-width: $size-tablet) {
@@ -52,7 +53,7 @@ export default {
 
     &.router-link-exact-active {
       font-weight: bold;
-      color: $accent-color;
+      color: $brand-color2;
     }
   }
 }

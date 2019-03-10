@@ -34,18 +34,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   color: $black;
   min-height: 100vh;
-  display: grid;
   justify-content: center;
-  position: relative;
-  top: $navheight; /* Fixed nav offset */
-  grid-template:
-    'header' auto
-    'nav' $navheight
-    'content' 1fr
-    'footer' auto
-    / minmax(320px, 1100px);
+  margin-top: $navheight; /* Fixed nav offset */
+
   @media screen and (min-width: $size-tablet) {
-    position: initial;
+    display: grid;
+    grid-template:
+      'header' auto
+      'nav' auto
+      'content' 1fr
+      'footer' auto
+      / minmax(320px, 1100px);
+    margin-top: 0;
     padding: 1rem;
   }
 }
