@@ -16,7 +16,7 @@ export default {
 <style lang="scss">
 .cars-comparison-wrapper {
   display: grid;
-  grid-gap: 1px;
+  grid-gap: 3px;
   margin: auto;
   justify-content: center;
   grid-template-columns: 1fr;
