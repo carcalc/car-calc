@@ -127,16 +127,16 @@ export default {
     },
     // Below returns formatted and tweened numbers for DOM output
     savingsFormatted: function() {
-      return this.formatNo(this.tweenedNumbers.savings) + 'kr';
+      return this.formatNo(this.tweenedNumbers.savings) + ' kr';
     },
     percentFormatted: function() {
       return this.formatNo(this.tweenedNumbers.percent) + '%';
     },
     fuelSavingsFormatted: function() {
-      return this.formatNo(this.tweenedNumbers.fuelSavings) + 'kr';
+      return this.formatNo(this.tweenedNumbers.fuelSavings) + ' kr';
     },
     distanceFormatted: function() {
-      return this.formatNo(this.tweenedNumbers.distance / 10) + 'mil';
+      return this.formatNo(this.tweenedNumbers.distance / 10) + ' mil';
     },
   },
   watch: {
