@@ -17,10 +17,10 @@
     <h2>Beräkningar</h2>
     <p>
       Driftkostnaden är betydligt lägre för elbilar än traditionella bilar och mycket pekar på att
-      så även är fallet med värdeminskning, underhåll och skatt, men detta är svåra och i bästa fall
-      imprecisa beräkningar som vi för närvarande valt att utelämna. Miljöbilspremien
-      <sup>1</sup> om 60 000 kr som betalas ut till köpare av nya elbilar är medräknad där det är
-      relevant.
+      så även är fallet med värdeminskning, underhåll<sup>1</sup> och skatt, men detta är svåra och
+      i bästa fall imprecisa beräkningar som vi för närvarande valt att utelämna.
+      Miljöbilspremien<sup>2</sup> om 60 000 kr som betalas ut till köpare av nya elbilar är
+      medräknad där det är relevant.
     </p>
     <h2>Källor</h2>
     <p>
@@ -29,16 +29,19 @@
       ifrån, men uppmanar även till att göra justeringar vid behov.
     </p>
     <p>
-      Klimatindex samt övriga specifikationer på bilarna i databasen kommer främst från bilsvar.se
-      <sup>2</sup>. Bilarnas förbrukning avser blandad körning. I beräkningarna antas det att man
-      som bilägare av elbil betalar 100% av bilens laddning.
+      Klimatindex samt övriga specifikationer på bilarna i databasen kommer främst från
+      bilsvar.se<sup>3</sup>. Bilarnas förbrukning avser blandad körning. I beräkningarna antas det
+      att man som bilägare av elbil betalar 100% av bilens laddning.
     </p>
     <ol>
       <li>
-        <a :href="transportstyrelsen">Transportstyrelsen</a>
+        <a target="_blank" :href="elbilsnytt">Elbilsnytt</a>
       </li>
       <li>
-        <a :href="bilsvar">Bilsvar</a>
+        <a target="_blank" :href="transportstyrelsen">Transportstyrelsen</a>
+      </li>
+      <li>
+        <a target="_blank" :href="bilsvar">Bilsvar</a>
       </li>
     </ol>
   </section>
@@ -48,6 +51,7 @@
 export default {
   data() {
     return {
+      elbilsnytt: 'http://elbilsnytt.se/elbilar-mycket-billigare-att-serva/',
       bilsvar: 'http://www.bilsvar.se',
       transportstyrelsen: 'https://transportstyrelsen.se/sv/vagtrafik/Miljo/Klimat/Miljobilar1/',
     };
