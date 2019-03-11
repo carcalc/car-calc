@@ -23,7 +23,7 @@
           class=""
           type="checkbox"
           name="bonus"
-          v-model="includeBonus"
+          v-model="isNewCar"
           @change="$emit('input', $event.target.checked)"
           :disabled="car.type !== 'electric'"
         />
@@ -85,7 +85,7 @@ export default {
         fuelCost: 0,
         ownership: 0,
       },
-      includeBonus: true,
+      isNewCar: true,
     };
   },
   mounted() {
@@ -111,7 +111,7 @@ export default {
     totalOwnershipCost: function() {
       const car = this.car;
       const cost = this.totalFuelCost + car.price;
-      return car.type === 'electric' && this.includeBonus ? cost - this.evBonus : cost;
+      return car.type === 'electric' && this.isNewCar ? cost - this.evBonus : cost;
     },
     fuelUnit: function() {
       return this.car.type === 'electric' ? 'kWh/100 km' : 'l/100 km';

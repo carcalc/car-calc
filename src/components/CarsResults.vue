@@ -6,11 +6,7 @@
       (eller {{ percentFormatted }}%) jämfört med {{ cars[mostExpensiveIntotalIndex].name }}.
     </p>
 
-    <p
-      v-if="
-        cars[cheapestTotalIndex].type === 'electric' && calcOptions.includeBonus[cheapestTotalIndex]
-      "
-    >
+    <p v-if="cars[cheapestTotalIndex].type === 'electric'">
       Miljöbilspremien på {{ formatNo(calcOptions.evBonus) }} kr är inräknad och
       {{ cars[cheapestTotalIndex].name }} är ett utmärkt miljöval!
     </p>
@@ -20,6 +16,7 @@
     </p>
 
     <p>
+      <!-- Rewritet his to include computed props! This is not reactive currently! -->
       {{ cars[cheapestToRunIndex].name }}
       {{ cars[cheapestTotalIndex] === cars[cheapestToRunIndex] ? 'är också' : 'är dock' }}
       {{ fuelSavingsFormatted }} kr billigare i drift över {{ usage.ownership }} år och
@@ -81,7 +78,7 @@ export default {
     totalOwnershipCosts: function() {
       return this.cars.map((car, index) => {
         const cost = this.totalFuelCosts[index] + car.price;
-        const bonus = this.calcOptions.includeBonus[index];
+        const bonus = this.calcOptions.isNewCar[index];
         return car.type === 'electric' && bonus ? cost - this.calcOptions.evBonus : cost;
       });
     },

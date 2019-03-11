@@ -43,7 +43,7 @@ export default {
       allCars: [], //Maybe move this to CarSelector; this component does not need to be aware of all cars
       selectedCars: defaultData.cars,
       usageDetails: defaultData.usage,
-      calcOptions: { evBonus: defaultData.evBonus, includeBonus: [true, true] },
+      calcOptions: { evBonus: defaultData.evBonus, isNewCar: [true, true] },
     };
   },
   created() {
@@ -85,7 +85,7 @@ export default {
       this.$set(this.selectedCars, index, car);
     },
     toggleBonus(index) {
-      this.calcOptions.includeBonus[index] = !this.calcOptions.includeBonus[index];
+      this.calcOptions.isNewCar[index] = !this.calcOptions.isNewCar[index];
     },
     resetStoredData() {
       localStorage.clear();
