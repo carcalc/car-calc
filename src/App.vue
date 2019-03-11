@@ -37,6 +37,7 @@ export default {
   color: $black;
   justify-content: center;
   padding-top: $navheight; /* Fixed nav offset */
+  min-height: 100vh;
   display: grid;
   grid-template:
     'nav' auto
