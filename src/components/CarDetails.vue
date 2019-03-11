@@ -206,8 +206,7 @@ export default {
       }
     }
     &.bonus {
-      display: none;
-      // Hidden until fully developed
+      // We need to place this nicely
     }
     &.consumption {
       @include number-stat-block();
