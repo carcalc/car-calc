@@ -58,7 +58,7 @@
 
 <script>
 export default {
-  props: ['usageDetails'],
+  props: { usageDetails: { type: Object, required: true } },
   data() {
     return { usage: this.usageDetails };
   },
