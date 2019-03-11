@@ -2,7 +2,9 @@
   <div id="app">
     <AppHeader />
     <AppNav />
-    <router-view />
+    <transition appear name="bounce">
+      <router-view />
+    </transition>
     <AppFooter :linkedInAndreas="linkedInAndreas" :linkedInGabriel="linkedInGabriel" />
   </div>
 </template>
@@ -49,6 +51,21 @@ html {
       / minmax(320px, 1100px);
     margin-top: 0;
     padding: 1rem;
+  }
+}
+.bounce-enter-active {
+  animation: bounce-in 0.3s;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 </style>
