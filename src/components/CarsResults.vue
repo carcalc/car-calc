@@ -21,10 +21,10 @@
       </p>
 
       <p>
-        {{ cheapestCarToRun.name }}
+        <span class="highlight"> {{ cheapestCarToRun.name }}</span>
         {{ cheapestCar === cheapestCarToRun ? 'är också' : 'är dock' }}
-        {{ fuelSavingsFormatted }} billigare i drift över {{ usage.ownership }} år och
-        {{ distanceFormatted }}.
+        <span class="highlight">{{ fuelSavingsFormatted }} billigare i drift</span>
+        över {{ usage.ownership }} år och {{ distanceFormatted }}.
       </p>
     </div>
     <small class="disclaimer">
@@ -167,7 +167,7 @@ export default {
       TweenLite.to(this.$data.tweenedNumbers, 0.5, { percent: newValue });
     },
     fuelSavings: function(newValue) {
-      TweenLite.to(this.$data.tweenedNumbers, 0.5, { fuel: newValue });
+      TweenLite.to(this.$data.tweenedNumbers, 0.5, { fuelSavings: newValue });
     },
     totalDistance: function(newValue) {
       TweenLite.to(this.$data.tweenedNumbers, 0.5, { distance: newValue });
