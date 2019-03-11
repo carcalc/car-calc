@@ -1,8 +1,11 @@
 <template>
   <section class="cars-results">
-    <transition name="fade">
-      <p v-if="totalSavings < 100">Båda bilarna kostar lika mycket. Vad är oddsen liksom?</p>
-      <div v-else>
+    <transition-group name="fade">
+      <div key="1" v-if="totalSavings < 100">
+        <p class="highlight">Båda bilarna kostar lika mycket.</p>
+        <p>Vad är oddsen liksom?</p>
+      </div>
+      <div key="2" v-else>
         <p>
           <span class="highlight">{{ cheapestCar.name }}</span> är billigast och utgör en
           <span class="highlight"> total besparing på {{ savingsFormatted }} </span>
@@ -26,13 +29,13 @@
           över {{ yearsFormatted }} och {{ distanceFormatted }}.
         </p>
       </div>
-      <small class="disclaimer">
+      <small key="3" class="disclaimer">
         Uträkningen avser bilens inköpspris samt energiförbrukning och tar inte hänsyn till
         exempelvis skatt, värdeminskning och servicekostnader. Dessa är svåra att estimera korrekt
         och vi har därför för närvarande valt att utelämna dem.
         <router-link :to="{ name: 'information' }">Läs mer om hur vi har resonerat.</router-link>
       </small>
-    </transition>
+    </transition-group>
   </section>
 </template>
 <script>

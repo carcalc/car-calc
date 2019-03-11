@@ -11,7 +11,7 @@
     <h2>Om oss</h2>
     <p>
       Vi som utvecklat denna sajt heter Andreas och Gabriel. Kontakta oss gärna med feedback och
-      idéer!
+      idéer på <a :href="email">hello@carcalc.se</a>!
     </p>
 
     <h2>Beräkningar</h2>
@@ -35,13 +35,13 @@
     </p>
     <ol>
       <li>
-        <a target="_blank" :href="elbilsnytt">Elbilsnytt</a>
+        <a target="_blank" :href="references.elbilsnytt">Elbilsnytt</a>
       </li>
       <li>
-        <a target="_blank" :href="transportstyrelsen">Transportstyrelsen</a>
+        <a target="_blank" :href="references.transportstyrelsen">Transportstyrelsen</a>
       </li>
       <li>
-        <a target="_blank" :href="bilsvar">Bilsvar</a>
+        <a target="_blank" :href="references.bilsvar">Bilsvar</a>
       </li>
     </ol>
   </section>
@@ -51,9 +51,12 @@
 export default {
   data() {
     return {
-      elbilsnytt: 'http://elbilsnytt.se/elbilar-mycket-billigare-att-serva/',
-      bilsvar: 'http://www.bilsvar.se',
-      transportstyrelsen: 'https://transportstyrelsen.se/sv/vagtrafik/Miljo/Klimat/Miljobilar1/',
+      email: 'mailto:hello@carcalc.se',
+      references: {
+        elbilsnytt: 'http://elbilsnytt.se/elbilar-mycket-billigare-att-serva/',
+        bilsvar: 'http://www.bilsvar.se',
+        transportstyrelsen: 'https://transportstyrelsen.se/sv/vagtrafik/Miljo/Klimat/Miljobilar1/',
+      },
     };
   },
 };
