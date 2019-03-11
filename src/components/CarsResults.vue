@@ -24,7 +24,7 @@
         <span class="highlight"> {{ cheapestCarToRun.name }}</span>
         {{ cheapestCar === cheapestCarToRun ? 'är också' : 'är dock' }}
         <span class="highlight">{{ fuelSavingsFormatted }} billigare i drift</span>
-        över {{ usage.ownership }} år och {{ distanceFormatted }}.
+        över {{ yearsFormatted }} och {{ distanceFormatted }}.
       </p>
     </div>
     <small class="disclaimer">
@@ -60,6 +60,7 @@ export default {
       percent: this.totalSavingsPercent,
       fuelSavings: this.fuelSavings,
       distance: this.totalDistance,
+      years: this.usage.ownership,
     };
   },
   methods: {
@@ -100,6 +101,10 @@ export default {
           : cost;
       });
     },
+    yearsOfOwnership: function() {
+      // Needed for tweening watcher
+      return this.usage.ownership;
+    },
     totalDistance: function() {
       return this.usage.distance * this.usage.ownership;
     },
@@ -125,6 +130,7 @@ export default {
         this.usage.distance
       );
     },
+
     // Below makes comparisons
     cheapestCar: function() {
       return this.cars[this.getIndexOfLowest(this.totalOwnershipCosts)];
@@ -154,6 +160,9 @@ export default {
     distanceFormatted: function() {
       return this.formatNo(this.tweenedNumbers.distance / 10) + ' mil';
     },
+    yearsFormatted: function() {
+      return this.formatNo(this.tweenedNumbers.years) + ' år';
+    },
     bonusFormatted: function() {
       return this.formatNo(this.calcOptions.evBonus) + ' kr';
     },
@@ -161,16 +170,19 @@ export default {
   watch: {
     // Animates numbers on change
     totalSavings: function(newValue) {
-      TweenLite.to(this.$data.tweenedNumbers, 0.5, { savings: newValue });
+      TweenLite.to(this.$data.tweenedNumbers, 1, { savings: newValue });
     },
     totalSavingsPercent: function(newValue) {
-      TweenLite.to(this.$data.tweenedNumbers, 0.5, { percent: newValue });
+      TweenLite.to(this.$data.tweenedNumbers, 1, { percent: newValue });
     },
     fuelSavings: function(newValue) {
-      TweenLite.to(this.$data.tweenedNumbers, 0.5, { fuelSavings: newValue });
+      TweenLite.to(this.$data.tweenedNumbers, 1, { fuelSavings: newValue });
     },
     totalDistance: function(newValue) {
       TweenLite.to(this.$data.tweenedNumbers, 0.5, { distance: newValue });
+    },
+    yearsOfOwnership: function(newValue) {
+      TweenLite.to(this.$data.tweenedNumbers, 0.5, { years: newValue });
     },
   },
 };
