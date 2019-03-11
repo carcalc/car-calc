@@ -34,7 +34,7 @@ header {
 
     @media screen and (min-width: $size-tablet) {
       height: 80px;
-      padding: 1rem 0;
+      padding-top: 1rem;
       position: initial;
     }
   }
@@ -48,7 +48,7 @@ header {
     font-size: 9px;
     @media screen and (min-width: $size-tablet) {
       position: initial;
-      font-size: 1rem;
+      font-size: 1.22rem;
     }
   }
 }
