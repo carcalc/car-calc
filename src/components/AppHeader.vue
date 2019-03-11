@@ -1,6 +1,8 @@
 <template>
   <header>
-    <img class="app-logo" src="../assets/logo.svg" alt="CarCalc" />
+    <router-link :to="{ name: 'compare' }">
+      <img class="app-logo" src="../assets/logo.svg" alt="CarCalc" />
+    </router-link>
     <h4 class="app-byline">Jämför snabbt och enkelt kostnaderna</h4>
     <HelpPopOver />
   </header>
@@ -32,7 +34,7 @@ header {
 
     @media screen and (min-width: $size-tablet) {
       height: 80px;
-      padding: 1rem 0;
+      padding-top: 1rem;
       position: initial;
     }
   }
@@ -46,7 +48,7 @@ header {
     font-size: 9px;
     @media screen and (min-width: $size-tablet) {
       position: initial;
-      font-size: 1rem;
+      font-size: 1.22rem;
     }
   }
 }
