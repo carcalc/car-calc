@@ -1,6 +1,8 @@
 <template>
   <header>
-    <img class="app-logo" src="../assets/logo.svg" alt="CarCalc" />
+    <router-link :to="{ name: 'compare' }">
+      <img class="app-logo" src="../assets/logo.svg" alt="CarCalc" />
+    </router-link>
     <h4 class="app-byline">Jämför snabbt och enkelt kostnaderna</h4>
     <HelpPopOver />
   </header>

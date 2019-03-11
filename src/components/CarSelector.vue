@@ -63,7 +63,8 @@ export default {
   background-position: right 6px bottom 10px;
   border: 3px solid transparent;
 
-  &:focus {
+  &:focus,
+  &:hover {
     border: $input-focus-border;
   }
 }

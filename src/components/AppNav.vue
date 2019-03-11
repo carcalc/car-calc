@@ -23,7 +23,8 @@ export default {
   z-index: 10;
   padding: 10px;
   text-align: right;
-  background: $black;
+  background: rgba(48, 48, 59, 0.9);
+  backdrop-filter: blur(5px);
   min-width: 320px;
   user-select: none;
   display: flex;
