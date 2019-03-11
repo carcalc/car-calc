@@ -163,17 +163,25 @@ export default {
 
 <style lang="scss" scoped>
 .car-details {
-  position: relative;
   display: grid;
-  grid-template:
-    'price price' 90px
-    'bonus bonus' auto
-    'fuel consumption' 90px
-    'operating total' auto
-    / minmax(0, 1fr) minmax(0, 1fr);
-
-  grid-gap: 1rem;
   grid-auto-rows: max-content;
+  grid-gap: 0.5rem;
+  grid-template:
+    'price price fuel'
+    'bonus bonus consumption'
+    'operating total consumption'
+    / minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+  @media screen and (min-width: $size-small-tablet) {
+    grid-template:
+      'price price'
+      'bonus bonus'
+      'fuel consumption'
+      'operating total'
+      / minmax(0, 1fr) minmax(0, 1fr);
+  }
+  @media screen and (min-width: $size-tablet) {
+    grid-gap: 1rem;
+  }
 
   .stat-block {
     position: relative;
@@ -182,7 +190,10 @@ export default {
       @include number-stat-block();
       grid-area: price;
       .stat-display {
-        font-size: 3.5rem;
+        font-size: 2.2rem;
+        @media screen and (min-width: $size-tablet) {
+          font-size: 3.5rem;
+        }
       }
     }
     &.fuel-type {
@@ -215,6 +226,10 @@ export default {
       font-weight: bold;
       padding: 0 5px;
       text-align: center;
+      font-size: 0.8rem;
+      @media screen and (min-width: $size-tablet) {
+        font-size: 1rem;
+      }
     }
     &.consumption {
       @include number-stat-block();
@@ -241,8 +256,8 @@ export default {
 .orange,
 .red {
   position: absolute;
-  top: -160px;
-  right: -14px;
+  right: 10px;
+  top: 10px;
   width: 1rem;
   height: 1rem;
   border-radius: 50%;

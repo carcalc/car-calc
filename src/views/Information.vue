@@ -33,16 +33,16 @@ export default {
     margin-bottom: 1rem;
     color: $white;
   }
+  a {
+    font-weight: bold;
+    color: $brand-color2;
+  }
   ol {
     color: $brand-color2;
     li {
       font-size: 0.8rem;
       padding: 0.5rem 0;
       margin-left: 1rem;
-      a {
-        font-weight: bold;
-        color: $brand-color2;
-      }
     }
   }
 }
