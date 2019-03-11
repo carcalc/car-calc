@@ -1,26 +1,26 @@
 <template>
   <div class="cars-results">
     <p>
-      <span class="highlight">{{ cars[cheapestTotalIndex].name }}</span> är billigast och utgör en
-      <span class="highlight"> total besparing på {{ savingsFormatted }} kr </span>
-      (eller {{ percentFormatted }}%) jämfört med {{ cars[mostExpensiveIntotalIndex].name }}.
+      <span class="highlight">{{ cars[getIndexOf('cheap')].name }}</span> är billigast och utgör en
+      <span class="highlight"> total besparing på {{ savingsFormatted }} </span>
+      (eller {{ percentFormatted }}) jämfört med {{ cars[[getIndexOf('expensive')]].name }}.
     </p>
 
-    <p v-if="cars[cheapestTotalIndex].type === 'electric'">
+    <p v-if="cars[getIndexOf('cheap')].type === 'electric'">
       Miljöbilspremien på {{ formatNo(calcOptions.evBonus) }} kr är inräknad och
-      {{ cars[cheapestTotalIndex].name }} är ett utmärkt miljöval!
+      {{ cars[getIndexOf('cheap')].name }} är ett utmärkt miljöval!
     </p>
 
-    <p v-if="cars[cheapestTotalIndex].co2 < 90">
+    <p v-if="cars[getIndexOf('cheap')].co2 < 90">
       Dessvärre är det inget bra miljöval.
     </p>
 
     <p>
       <!-- Rewritet his to include computed props! This is not reactive currently! -->
-      {{ cars[cheapestToRunIndex].name }}
-      {{ cars[cheapestTotalIndex] === cars[cheapestToRunIndex] ? 'är också' : 'är dock' }}
-      {{ fuelSavingsFormatted }} kr billigare i drift över {{ usage.ownership }} år och
-      {{ distanceFormatted }} mil.
+      {{ cars[getIndexOf('cheapRun')].name }}
+      {{ cars[getIndexOf('cheap')] === cars[getIndexOf('cheapRun')] ? 'är också' : 'är dock' }}
+      {{ fuelSavingsFormatted }} billigare i drift över {{ usage.ownership }} år och
+      {{ distanceFormatted }}.
     </p>
     <small class="disclaimer">
       Uträkningen avser bilens inköpspris samt energiförbrukning och tar inte hänsyn till exempelvis
@@ -61,6 +61,24 @@ export default {
     formatNo(num) {
       return Math.round(num).toLocaleString('sv-SE');
     },
+    getIndexOf(stat) {
+      if (stat === 'cheap') {
+        const [carOne, carTwo] = this.totalOwnershipCosts;
+        return carOne < carTwo ? 0 : 1;
+      }
+      if (stat === 'expensive') {
+        const [carOne, carTwo] = this.totalOwnershipCosts;
+        return carOne > carTwo ? 0 : 1;
+      }
+      if (stat === 'cheapRun') {
+        const [carOne, carTwo] = this.totalFuelCosts;
+        return carOne < carTwo ? 0 : 1;
+      }
+      if (stat === 'expensiveRun') {
+        const [carOne, carTwo] = this.totalOwnershipCosts;
+        return carOne > carTwo ? 0 : 1;
+      }
+    },
   },
   computed: {
     fuelCosts: function() {
@@ -82,8 +100,9 @@ export default {
     totalOwnershipCosts: function() {
       return this.cars.map((car, index) => {
         const cost = this.totalFuelCosts[index] + car.price;
-        const bonus = this.calcOptions.isNewCar[index];
-        return car.type === 'electric' && bonus ? cost - this.calcOptions.evBonus : cost;
+        return car.type === 'electric' && this.calcOptions.isNewCar[index]
+          ? cost - this.calcOptions.evBonus
+          : cost;
       });
     },
     totalDistance: function() {
@@ -104,39 +123,22 @@ export default {
       const diff = this.totalSavings;
       return Math.round(carOne > carTwo ? (diff / carOne) * 100 : (diff / carTwo) * 100);
     },
-    // Below returns indexes to select corresponding car from array
-    cheapestToRunIndex: function() {
-      const [carOne, carTwo] = this.totalFuelCosts;
-      return carOne < carTwo ? 0 : 1;
-    },
-    cheapestTotalIndex: function() {
-      const [carOne, carTwo] = this.totalOwnershipCosts;
-      return carOne < carTwo ? 0 : 1;
-    },
-    mostExpensiveToRunIndex: function() {
-      const [carOne, carTwo] = this.totalFuelCosts;
-      return carOne > carTwo ? 0 : 1;
-    },
-    mostExpensiveIntotalIndex: function() {
-      const [carOne, carTwo] = this.totalOwnershipCosts;
-      return carOne > carTwo ? 0 : 1;
-    },
     energySaved: function() {
       // Currently not displayed anywhere
-      return (this.cars[this.mostExpensiveToRunIndex].consumption / 100) * this.usage.distance;
+      return (this.cars[this.getIndexOf('expensiveRun')].consumption / 100) * this.usage.distance;
     },
     // Below returns formatted and tweened numbers for DOM output
     savingsFormatted: function() {
-      return this.formatNo(this.tweenedNumbers.savings);
+      return this.formatNo(this.tweenedNumbers.savings) + 'kr';
     },
     percentFormatted: function() {
-      return this.formatNo(this.tweenedNumbers.percent);
+      return this.formatNo(this.tweenedNumbers.percent) + '%';
     },
     fuelSavingsFormatted: function() {
-      return this.formatNo(this.tweenedNumbers.fuelSavings);
+      return this.formatNo(this.tweenedNumbers.fuelSavings) + 'kr';
     },
     distanceFormatted: function() {
-      return this.formatNo(this.tweenedNumbers.distance / 10);
+      return this.formatNo(this.tweenedNumbers.distance / 10) + 'mil';
     },
   },
   watch: {
