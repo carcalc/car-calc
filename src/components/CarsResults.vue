@@ -190,7 +190,6 @@ export default {
 .disclaimer {
   display: block;
   font-size: 0.6rem;
-  font-style: italic;
   max-width: 700px;
   margin: auto;
   margin-top: 1rem;
