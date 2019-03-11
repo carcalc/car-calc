@@ -7,7 +7,7 @@
       {{ !car.id.includes('generic') ? car.specs : 'Anpassa själv efter önskemål' }}
     </h3>
     <select class="cars-dropdown" v-model="car" @change="handleChange">
-      <option disabled value>Välj en bil</option>
+      <option disabled value>Välj bil (valfritt)</option>
       <option v-for="(car, index) in allCars" :key="index" :value="car">
         {{ car.name }} — {{ car.specs }}
       </option>

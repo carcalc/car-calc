@@ -13,6 +13,7 @@
         :key="index + '-details'"
         :usage="usageDetails"
         :evBonus="calcOptions.evBonus"
+        @input="toggleBonus(index)"
       />
     </div>
     <CarsResults :usage="usageDetails" :cars="selectedCars" :calcOptions="calcOptions" />
@@ -42,7 +43,7 @@ export default {
       allCars: [], //Maybe move this to CarSelector; this component does not need to be aware of all cars
       selectedCars: defaultData.cars,
       usageDetails: defaultData.usage,
-      calcOptions: { evBonus: defaultData.evBonus, includeBonus: [null, null] },
+      calcOptions: { evBonus: defaultData.evBonus, includeBonus: [true, true] },
     };
   },
   created() {
@@ -82,6 +83,9 @@ export default {
     },
     setNewCar({ car, index }) {
       this.$set(this.selectedCars, index, car);
+    },
+    toggleBonus(index) {
+      this.calcOptions.includeBonus[index] = !this.calcOptions.includeBonus[index];
     },
     resetStoredData() {
       localStorage.clear();

@@ -6,7 +6,11 @@
       (eller {{ percentFormatted }}%) jämfört med {{ cars[mostExpensiveIntotalIndex].name }}.
     </p>
 
-    <p v-if="cars[cheapestTotalIndex].type === 'electric'">
+    <p
+      v-if="
+        cars[cheapestTotalIndex].type === 'electric' && calcOptions.includeBonus[cheapestTotalIndex]
+      "
+    >
       Miljöbilspremien på {{ formatNo(calcOptions.evBonus) }} kr är inräknad och
       {{ cars[cheapestTotalIndex].name }} är ett utmärkt miljöval!
     </p>
@@ -23,7 +27,7 @@
     </p>
     <small class="disclaimer">
       Uträkningen avser bilens inköpspris samt energiförbrukning och tar inte hänsyn till exempelvis
-      skatt, värdeminskning och servicekostnader. Dessa är mycket svåra att estimera och vi har
+      skatt, värdeminskning och servicekostnader. Dessa är svåra att estimera korrekt och vi har
       därför för närvarande valt att utelämna dem.
       <router-link :to="{ name: 'information' }">Läs mer om hur vi har resonerat.</router-link>
     </small>
@@ -35,18 +39,22 @@ export default {
   props: ['usage', 'cars', 'calcOptions'],
   data() {
     return {
-      tweenedSavings: 0,
-      tweenedPercent: 0,
-      tweenedFuelSavings: 0,
-      tweenedDistance: 0,
+      tweenedNumbers: {
+        savings: 0,
+        percent: 0,
+        fuelSavings: 0,
+        distance: 0,
+      },
     };
   },
   mounted() {
     // Sets animation starting points
-    this.tweenedSavings = this.totalSavings;
-    this.tweenedPercent = this.totalSavingsPercent;
-    this.tweenedFuelSavings = this.fuelSavings;
-    this.tweenedDistance = this.totalDistance;
+    this.tweenedNumbers = {
+      savings: this.totalSavings,
+      percent: this.totalSavingsPercent,
+      fuelSavings: this.fuelSavings,
+      distance: this.totalDistance,
+    };
   },
   methods: {
     formatNo(num) {
@@ -73,7 +81,8 @@ export default {
     totalOwnershipCosts: function() {
       return this.cars.map((car, index) => {
         const cost = this.totalFuelCosts[index] + car.price;
-        return car.type === 'electric' ? cost - this.calcOptions.evBonus : cost;
+        const bonus = this.calcOptions.includeBonus[index];
+        return car.type === 'electric' && bonus ? cost - this.calcOptions.evBonus : cost;
       });
     },
     totalDistance: function() {
@@ -117,31 +126,31 @@ export default {
     },
     // Below returns formatted and tweened numbers for DOM output
     savingsFormatted: function() {
-      return this.formatNo(this.tweenedSavings);
+      return this.formatNo(this.tweenedNumbers.savings);
     },
     percentFormatted: function() {
-      return this.formatNo(this.tweenedPercent);
+      return this.formatNo(this.tweenedNumbers.percent);
     },
     fuelSavingsFormatted: function() {
-      return this.formatNo(this.tweenedFuelSavings);
+      return this.formatNo(this.tweenedNumbers.fuelSavings);
     },
     distanceFormatted: function() {
-      return this.formatNo(this.tweenedDistance / 10);
+      return this.formatNo(this.tweenedNumbers.distance / 10);
     },
   },
   watch: {
     // Animates numbers on change
     totalSavings: function(newValue) {
-      TweenLite.to(this.$data, 0.5, { tweenedSavings: newValue });
+      TweenLite.to(this.$data.tweenedNumbers, 0.5, { savings: newValue });
     },
     totalSavingsPercent: function(newValue) {
-      TweenLite.to(this.$data, 0.5, { tweenedPercent: newValue });
+      TweenLite.to(this.$data.tweenedNumbers, 0.5, { percent: newValue });
     },
     fuelSavings: function(newValue) {
-      TweenLite.to(this.$data, 0.5, { tweenedFuelSavings: newValue });
+      TweenLite.to(this.$data.tweenedNumbers, 0.5, { fuel: newValue });
     },
     totalDistance: function(newValue) {
-      TweenLite.to(this.$data, 0.5, { tweenedDistance: newValue });
+      TweenLite.to(this.$data.tweenedNumbers, 0.5, { distance: newValue });
     },
   },
 };

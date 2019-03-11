@@ -24,9 +24,10 @@
           type="checkbox"
           name="bonus"
           v-model="includeBonus"
+          @change="$emit('input', $event.target.checked)"
           :disabled="car.type !== 'electric'"
         />
-        Miljöbilspremie
+        Inkludera premie
       </label>
     </div>
 
@@ -79,18 +80,21 @@ export default {
   props: ['car', 'usage', 'evBonus'],
   data() {
     return {
-      tweenedTotal: 0,
-      tweenedFuelCost: 0,
-      tweenedOwnership: 0,
-      includeBonus: null,
+      tweenedNumbers: {
+        total: 0,
+        fuelCost: 0,
+        ownership: 0,
+      },
+      includeBonus: true,
     };
   },
   mounted() {
     // Sets animation starting points; can't be done before mount
-    this.tweenedTotal = this.totalOwnershipCost;
-    this.tweenedFuelCost = this.fuelCost;
-    this.tweenedOwnership = this.usage.ownership;
-    this.car.type === 'electric' ? (this.includeBonus = true) : (this.includeBonus = false);
+    this.tweenedNumbers = {
+      total: this.totalOwnershipCost,
+      fuelCost: this.fuelCost,
+      ownership: this.usage.ownership,
+    };
   },
   computed: {
     fuelCost: function() {
@@ -107,7 +111,7 @@ export default {
     totalOwnershipCost: function() {
       const car = this.car;
       const cost = this.totalFuelCost + car.price;
-      return car.type === 'electric' ? cost - this.evBonus : cost;
+      return car.type === 'electric' && this.includeBonus ? cost - this.evBonus : cost;
     },
     fuelUnit: function() {
       return this.car.type === 'electric' ? 'kWh/100 km' : 'l/100 km';
@@ -116,13 +120,13 @@ export default {
       return this.usage.ownership;
     },
     fuelFormatted: function() {
-      return (this.tweenedFuelCost * 10).toFixed(1).replace('.', ',');
+      return (this.tweenedNumbers.fuelCost * 10).toFixed(1).replace('.', ',');
     },
     totalFormatted: function() {
-      return Math.round(this.tweenedTotal).toLocaleString('sv-SE');
+      return Math.round(this.tweenedNumbers.total).toLocaleString('sv-SE');
     },
     yearsFormatted: function() {
-      return this.tweenedOwnership.toFixed(0);
+      return this.tweenedNumbers.ownership.toFixed(0);
     },
     co2Index: function() {
       if (this.car.co2 > 90) {
@@ -139,13 +143,13 @@ export default {
   watch: {
     // Animates numbers on change
     totalOwnershipCost: function(newValue) {
-      TweenLite.to(this.$data, 0.5, { tweenedTotal: newValue });
+      TweenLite.to(this.$data.tweenedNumbers, 0.5, { total: newValue });
     },
     fuelCost: function(newValue) {
-      TweenLite.to(this.$data, 0.5, { tweenedFuelCost: newValue });
+      TweenLite.to(this.$data.tweenedNumbers, 0.5, { fuelCost: newValue });
     },
     ownershipYears: function(newValue) {
-      TweenLite.to(this.$data, 0.5, { tweenedOwnership: newValue });
+      TweenLite.to(this.$data.tweenedNumbers, 0.5, { ownership: newValue });
     },
   },
 };
