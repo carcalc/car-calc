@@ -25,6 +25,10 @@ footer {
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  background: #232e38;
+  @media screen and (min-width: $size-tablet) {
+    background: transparent;
+  }
   a,
   i {
     text-decoration: none;
