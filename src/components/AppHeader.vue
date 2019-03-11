@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1 class="app-title">CarCalc</h1>
+    <img class="app-logo" src="../assets/logo.svg" alt="CarCalc" />
     <h4 class="app-byline">Jämför snabbt och enkelt kostnaderna</h4>
     <HelpPopOver />
   </header>
@@ -19,38 +19,21 @@ export default {
 
 <style lang="scss" scoped>
 header {
-  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
+  align-items: flex-start;
 
-  @media screen and (min-width: $size-tablet) {
-    position: initial;
-    align-items: stretch;
-  }
-
-  .app-title {
-    color: $white;
+  .app-logo {
     position: fixed;
-    top: 17px;
-    left: 4px;
-    line-height: 0;
+    top: 7px;
+    left: 8px;
     z-index: 15;
-    font-style: italic;
-    font-size: 24px;
-    font-weight: 600;
-    -webkit-text-fill-color: transparent;
-    -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: $white;
+    height: 30px;
+
     @media screen and (min-width: $size-tablet) {
-      line-height: initial;
-      font-size: 2.5rem;
+      height: 80px;
+      padding: 1rem 0;
       position: initial;
-      font-size: 4rem;
-      font-weight: 800;
-      -webkit-text-stroke-width: 2px;
     }
   }
 
@@ -58,9 +41,9 @@ header {
     color: $white;
     position: fixed;
     z-index: 15;
-    top: 29px;
-    left: 7px;
-    font-size: 8px;
+    top: 39px;
+    left: 10px;
+    font-size: 9px;
     @media screen and (min-width: $size-tablet) {
       position: initial;
       font-size: 1rem;
