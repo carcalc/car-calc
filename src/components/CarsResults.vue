@@ -1,30 +1,35 @@
 <template>
   <div class="cars-results">
     <p>
-      <span class="highlight">{{ cars[cheapestTotalIndex].name }}</span> är billigast och utgör en
-      <span class="highlight"> total besparing på {{ savingsFormatted }} kr </span>
-      (eller {{ percentFormatted }}%) jämfört med {{ cars[mostExpensiveIntotalIndex].name }}.
+      <span class="highlight">{{ cars[getIndexOf(totalOwnershipCosts)].name }}</span> är billigast
+      och utgör en
+      <span class="highlight"> total besparing på {{ savingsFormatted }} </span>
+      (eller {{ percentFormatted }}) jämfört med {{ cars[[getIndexOf('expensive')]].name }}.
     </p>
 
-    <p v-if="cars[cheapestTotalIndex].type === 'electric'">
-      Miljöbilspremien på {{ formatNo(evBonus) }} kr är inräknad och
-      {{ cars[cheapestTotalIndex].name }} är ett utmärkt miljöval!
+    <p v-if="cars[getIndexOf(totalOwnershipCosts)].type === 'electric'">
+      Miljöbilspremien på {{ formatNo(calcOptions.evBonus) }} kr är inräknad och
+      {{ cars[getIndexOf(totalOwnershipCosts)].name }} är ett utmärkt miljöval!
     </p>
 
-    <p v-if="cars[cheapestTotalIndex].co2 < 90">
+    <p v-if="cars[getIndexOf(totalOwnershipCosts)].co2 < 90">
       Dessvärre är det inget bra miljöval.
     </p>
 
     <p>
-      {{ cars[cheapestToRunIndex].name }}
-      {{ cars[cheapestTotalIndex] === cars[cheapestToRunIndex] ? 'är också' : 'är dock' }}
-      {{ fuelSavingsFormatted }} kr billigare i drift över {{ usage.ownership }} år och
-      {{ distanceFormatted }} mil.
+      {{ cars[getIndexOf(totalFuelCosts)].name }}
+      {{
+        cars[getIndexOf(totalOwnershipCosts)] === cars[getIndexOf(totalFuelCosts)]
+          ? 'är också'
+          : 'är dock'
+      }}
+      {{ fuelSavingsFormatted }} billigare i drift över {{ usage.ownership }} år och
+      {{ distanceFormatted }}.
     </p>
     <small class="disclaimer">
       Uträkningen avser bilens inköpspris samt energiförbrukning och tar inte hänsyn till exempelvis
-      skatte- och servicekostnader. Dessa är mycket svåra att estimera och vi har därför för
-      närvarande valt att utelämna dem.
+      skatt, värdeminskning och servicekostnader. Dessa är svåra att estimera korrekt och vi har
+      därför för närvarande valt att utelämna dem.
       <router-link :to="{ name: 'information' }">Läs mer om hur vi har resonerat.</router-link>
     </small>
   </div>
@@ -32,25 +37,42 @@
 <script>
 import { TweenLite } from 'gsap/TweenMax';
 export default {
-  props: ['usage', 'cars', 'evBonus'],
+  props: {
+    usage: { type: Object, required: true },
+    cars: { type: Array, required: true },
+    calcOptions: { type: Object, required: true },
+  },
   data() {
     return {
-      tweenedSavings: 0,
-      tweenedPercent: 0,
-      tweenedFuelSavings: 0,
-      tweenedDistance: 0,
+      tweenedNumbers: {
+        savings: 0,
+        percent: 0,
+        fuelSavings: 0,
+        distance: 0,
+      },
     };
   },
   mounted() {
     // Sets animation starting points
-    this.tweenedSavings = this.totalSavings;
-    this.tweenedPercent = this.totalSavingsPercent;
-    this.tweenedFuelSavings = this.fuelSavings;
-    this.tweenedDistance = this.totalDistance;
+    this.tweenedNumbers = {
+      savings: this.totalSavings,
+      percent: this.totalSavingsPercent,
+      fuelSavings: this.fuelSavings,
+      distance: this.totalDistance,
+    };
   },
   methods: {
     formatNo(num) {
       return Math.round(num).toLocaleString('sv-SE');
+    },
+    getIndexOf(arr, cheapest = true) {
+      // Takes an array of computed properties and returns the cheapest (or, optionally, most expensive)
+      const [carOne, carTwo] = arr;
+      if (!cheapest) {
+        return carOne > carTwo ? 0 : 1;
+      } else {
+        return carOne < carTwo ? 0 : 1;
+      }
     },
   },
   computed: {
@@ -73,7 +95,9 @@ export default {
     totalOwnershipCosts: function() {
       return this.cars.map((car, index) => {
         const cost = this.totalFuelCosts[index] + car.price;
-        return car.type === 'electric' ? cost - this.evBonus : cost;
+        return car.type === 'electric' && this.calcOptions.isNewCar[index]
+          ? cost - this.calcOptions.evBonus
+          : cost;
       });
     },
     totalDistance: function() {
@@ -94,53 +118,40 @@ export default {
       const diff = this.totalSavings;
       return Math.round(carOne > carTwo ? (diff / carOne) * 100 : (diff / carTwo) * 100);
     },
-    // Below returns indexes to select corresponding car from array
-    cheapestToRunIndex: function() {
-      const [carOne, carTwo] = this.totalFuelCosts;
-      return carOne < carTwo ? 0 : 1;
-    },
-    cheapestTotalIndex: function() {
-      const [carOne, carTwo] = this.totalOwnershipCosts;
-      return carOne < carTwo ? 0 : 1;
-    },
-    mostExpensiveToRunIndex: function() {
-      const [carOne, carTwo] = this.totalFuelCosts;
-      return carOne > carTwo ? 0 : 1;
-    },
-    mostExpensiveIntotalIndex: function() {
-      const [carOne, carTwo] = this.totalOwnershipCosts;
-      return carOne > carTwo ? 0 : 1;
-    },
     energySaved: function() {
-      return (this.mostExpensiveToRun.consumption / 100) * this.usage.distance;
+      // Currently not displayed anywhere
+      return (
+        (this.cars[this.getIndexOf(this.totalFuelCosts, false)].consumption / 100) *
+        this.usage.distance
+      );
     },
     // Below returns formatted and tweened numbers for DOM output
     savingsFormatted: function() {
-      return this.formatNo(this.tweenedSavings);
+      return this.formatNo(this.tweenedNumbers.savings) + 'kr';
     },
     percentFormatted: function() {
-      return this.formatNo(this.tweenedPercent);
+      return this.formatNo(this.tweenedNumbers.percent) + '%';
     },
     fuelSavingsFormatted: function() {
-      return this.formatNo(this.tweenedFuelSavings);
+      return this.formatNo(this.tweenedNumbers.fuelSavings) + 'kr';
     },
     distanceFormatted: function() {
-      return this.formatNo(this.tweenedDistance / 10);
+      return this.formatNo(this.tweenedNumbers.distance / 10) + 'mil';
     },
   },
   watch: {
     // Animates numbers on change
     totalSavings: function(newValue) {
-      TweenLite.to(this.$data, 0.5, { tweenedSavings: newValue });
+      TweenLite.to(this.$data.tweenedNumbers, 0.5, { savings: newValue });
     },
     totalSavingsPercent: function(newValue) {
-      TweenLite.to(this.$data, 0.5, { tweenedPercent: newValue });
+      TweenLite.to(this.$data.tweenedNumbers, 0.5, { percent: newValue });
     },
     fuelSavings: function(newValue) {
-      TweenLite.to(this.$data, 0.5, { tweenedFuelSavings: newValue });
+      TweenLite.to(this.$data.tweenedNumbers, 0.5, { fuel: newValue });
     },
     totalDistance: function(newValue) {
-      TweenLite.to(this.$data, 0.5, { tweenedDistance: newValue });
+      TweenLite.to(this.$data.tweenedNumbers, 0.5, { distance: newValue });
     },
   },
 };

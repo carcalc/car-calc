@@ -61,7 +61,7 @@ export default {
   }
   .active {
     right: 0;
-    z-index: 10;
+    z-index: 11;
     p {
       z-index: 15;
     }
