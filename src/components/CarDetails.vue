@@ -18,8 +18,8 @@
     </div>
 
     <div class="stat-block bonus">
-      <label class="stat-title" for="bonus">
-        Inkludera premie
+      <label for="bonus">
+        Inkludera miljöbilspremie
       </label>
       <input
         class=""
@@ -165,6 +165,7 @@ export default {
   display: grid;
   grid-template:
     'price price' 90px
+    'bonus bonus' auto
     'fuel consumption' 90px
     'operating total' auto
     / minmax(0, 1fr) minmax(0, 1fr);
@@ -194,11 +195,8 @@ export default {
       border-radius: $border-radius;
       border: 3px solid transparent;
       min-width: 100px;
+      padding-top: 20px;
 
-      input,
-      label {
-        margin: 20px 0 0 0;
-      }
       .stat-title {
         position: absolute;
         top: 5px;
@@ -206,7 +204,14 @@ export default {
       }
     }
     &.bonus {
-      // We need to place this nicely
+      @include stat-block-base();
+      grid-area: bonus;
+      background-color: $input-bg;
+      border-radius: $border-radius / 1.5;
+      border: 3px solid transparent;
+      font-style: italic;
+      font-weight: bold;
+      padding: 0 5px;
     }
     &.consumption {
       @include number-stat-block();

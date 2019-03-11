@@ -1,6 +1,5 @@
 <template>
   <div class="cars-results">
-    {{ cheapestIsBrandNew }}
     <p>
       <span class="highlight">{{ cheapestCar.name }}</span> är billigast och utgör en
       <span class="highlight"> total besparing på {{ savingsFormatted }} </span>
@@ -8,8 +7,8 @@
     </p>
 
     <p v-if="cheapestCar.type === 'electric'">
-      Miljöbilspremien på {{ bonusFormatted }}
-      {{ cheapestIsBrandNew ? 'är inräknad och' : 'är ej inräknad, men' }}
+      Miljöbilspremien
+      {{ cheapestIsBrandNew ? `på ${bonusFormatted} är inräknad och` : 'är ej inräknad, men' }}
       {{ cheapestCar.name }} är ett utmärkt miljöval!
     </p>
 
