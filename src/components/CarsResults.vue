@@ -1,24 +1,28 @@
 <template>
   <div class="cars-results">
     <p>
-      <span class="highlight">{{ cars[getIndexOf('cheap')].name }}</span> är billigast och utgör en
+      <span class="highlight">{{ cars[getIndexOf(totalOwnershipCosts)].name }}</span> är billigast
+      och utgör en
       <span class="highlight"> total besparing på {{ savingsFormatted }} </span>
       (eller {{ percentFormatted }}) jämfört med {{ cars[[getIndexOf('expensive')]].name }}.
     </p>
 
-    <p v-if="cars[getIndexOf('cheap')].type === 'electric'">
+    <p v-if="cars[getIndexOf(totalOwnershipCosts)].type === 'electric'">
       Miljöbilspremien på {{ formatNo(calcOptions.evBonus) }} kr är inräknad och
-      {{ cars[getIndexOf('cheap')].name }} är ett utmärkt miljöval!
+      {{ cars[getIndexOf(totalOwnershipCosts)].name }} är ett utmärkt miljöval!
     </p>
 
-    <p v-if="cars[getIndexOf('cheap')].co2 < 90">
+    <p v-if="cars[getIndexOf(totalOwnershipCosts)].co2 < 90">
       Dessvärre är det inget bra miljöval.
     </p>
 
     <p>
-      <!-- Rewritet his to include computed props! This is not reactive currently! -->
-      {{ cars[getIndexOf('cheapRun')].name }}
-      {{ cars[getIndexOf('cheap')] === cars[getIndexOf('cheapRun')] ? 'är också' : 'är dock' }}
+      {{ cars[getIndexOf(totalFuelCosts)].name }}
+      {{
+        cars[getIndexOf(totalOwnershipCosts)] === cars[getIndexOf(totalFuelCosts)]
+          ? 'är också'
+          : 'är dock'
+      }}
       {{ fuelSavingsFormatted }} billigare i drift över {{ usage.ownership }} år och
       {{ distanceFormatted }}.
     </p>
@@ -61,22 +65,13 @@ export default {
     formatNo(num) {
       return Math.round(num).toLocaleString('sv-SE');
     },
-    getIndexOf(stat) {
-      if (stat === 'cheap') {
-        const [carOne, carTwo] = this.totalOwnershipCosts;
-        return carOne < carTwo ? 0 : 1;
-      }
-      if (stat === 'expensive') {
-        const [carOne, carTwo] = this.totalOwnershipCosts;
+    getIndexOf(arr, cheapest = true) {
+      // Takes an array of computed properties and returns the cheapest (or, optionally, most expensive)
+      const [carOne, carTwo] = arr;
+      if (!cheapest) {
         return carOne > carTwo ? 0 : 1;
-      }
-      if (stat === 'cheapRun') {
-        const [carOne, carTwo] = this.totalFuelCosts;
+      } else {
         return carOne < carTwo ? 0 : 1;
-      }
-      if (stat === 'expensiveRun') {
-        const [carOne, carTwo] = this.totalOwnershipCosts;
-        return carOne > carTwo ? 0 : 1;
       }
     },
   },
@@ -125,7 +120,10 @@ export default {
     },
     energySaved: function() {
       // Currently not displayed anywhere
-      return (this.cars[this.getIndexOf('expensiveRun')].consumption / 100) * this.usage.distance;
+      return (
+        (this.cars[this.getIndexOf(this.totalFuelCosts, false)].consumption / 100) *
+        this.usage.distance
+      );
     },
     // Below returns formatted and tweened numbers for DOM output
     savingsFormatted: function() {
