@@ -1,34 +1,39 @@
 <template>
-  <div class="cars-results">
-    <p>
-      <span class="highlight">{{ cheapestCar.name }}</span> är billigast och utgör en
-      <span class="highlight"> total besparing på {{ savingsFormatted }} </span>
-      (eller {{ percentFormatted }}) jämfört med {{ mostExpensiveCar.name }}.
-    </p>
+  <section class="cars-results">
+    <div v-if="totalSavings < 100">
+      <p>Båda bilarna kostar lika mycket. Vad är oddsen liksom?</p>
+    </div>
+    <div v-else>
+      <p>
+        <span class="highlight">{{ cheapestCar.name }}</span> är billigast och utgör en
+        <span class="highlight"> total besparing på {{ savingsFormatted }} </span>
+        (eller {{ percentFormatted }}) jämfört med {{ mostExpensiveCar.name }}.
+      </p>
 
-    <p v-if="cheapestCar.type === 'electric'">
-      Miljöbilspremien
-      {{ cheapestIsBrandNew ? `på ${bonusFormatted} är inräknad och` : 'är ej inräknad, men' }}
-      {{ cheapestCar.name }} är ett utmärkt miljöval!
-    </p>
+      <p v-if="cheapestCar.type === 'electric'">
+        Miljöbilspremien
+        {{ cheapestIsBrandNew ? `på ${bonusFormatted} är inräknad och` : 'är ej inräknad, men' }}
+        {{ cheapestCar.name }} är ett utmärkt miljöval!
+      </p>
 
-    <p v-else-if="cheapestCar.co2 < 90">
-      Dessvärre är det inget bra miljöval.
-    </p>
+      <p v-else-if="cheapestCar.co2 < 90">
+        Dessvärre är det inget bra miljöval.
+      </p>
 
-    <p>
-      {{ cheapestCarToRun.name }}
-      {{ cheapestCar === cheapestCarToRun ? 'är också' : 'är dock' }}
-      {{ fuelSavingsFormatted }} billigare i drift över {{ usage.ownership }} år och
-      {{ distanceFormatted }}.
-    </p>
+      <p>
+        {{ cheapestCarToRun.name }}
+        {{ cheapestCar === cheapestCarToRun ? 'är också' : 'är dock' }}
+        {{ fuelSavingsFormatted }} billigare i drift över {{ usage.ownership }} år och
+        {{ distanceFormatted }}.
+      </p>
+    </div>
     <small class="disclaimer">
       Uträkningen avser bilens inköpspris samt energiförbrukning och tar inte hänsyn till exempelvis
       skatt, värdeminskning och servicekostnader. Dessa är svåra att estimera korrekt och vi har
       därför för närvarande valt att utelämna dem.
       <router-link :to="{ name: 'information' }">Läs mer om hur vi har resonerat.</router-link>
     </small>
-  </div>
+  </section>
 </template>
 <script>
 import { TweenLite } from 'gsap/TweenMax';
@@ -191,6 +196,9 @@ export default {
   margin-top: 1rem;
   @media screen and (min-width: $size-tablet) {
     font-size: 0.7rem;
+  }
+  a {
+    color: $brand-color3;
   }
 }
 </style>

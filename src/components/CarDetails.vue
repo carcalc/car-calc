@@ -18,17 +18,19 @@
     </div>
 
     <div class="stat-block bonus">
-      <label for="bonus">
-        Inkludera miljöbilspremie
-      </label>
       <input
         class=""
         type="checkbox"
         name="bonus"
         v-model="isNewCar"
         @change="$emit('input', $event.target.checked)"
-        :disabled="car.type !== 'electric'"
+        :hidden="car.type !== 'electric'"
       />
+      <label for="bonus">
+        {{
+          car.type === 'electric' ? 'Inkludera miljöbilspremie' : 'Miljöbilspremie ej tillämplig'
+        }}
+      </label>
     </div>
 
     <div class="stat-block fuel-type">
@@ -212,6 +214,7 @@ export default {
       font-style: italic;
       font-weight: bold;
       padding: 0 5px;
+      text-align: center;
     }
     &.consumption {
       @include number-stat-block();
