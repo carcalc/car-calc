@@ -48,7 +48,7 @@
         lang="sv"
         type="number"
         name="consumption"
-        step="any"
+        step=".1"
         min="0"
         v-model.number="car.consumption"
         placeholder="Fyll i"

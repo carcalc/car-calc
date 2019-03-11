@@ -1,38 +1,38 @@
 <template>
   <section class="cars-results">
-    <div v-if="totalSavings < 100">
-      <p>Båda bilarna kostar lika mycket. Vad är oddsen liksom?</p>
-    </div>
-    <div v-else>
-      <p>
-        <span class="highlight">{{ cheapestCar.name }}</span> är billigast och utgör en
-        <span class="highlight"> total besparing på {{ savingsFormatted }} </span>
-        (eller {{ percentFormatted }}) jämfört med {{ mostExpensiveCar.name }}.
-      </p>
+    <transition name="fade">
+      <p v-if="totalSavings < 100">Båda bilarna kostar lika mycket. Vad är oddsen liksom?</p>
+      <div v-else>
+        <p>
+          <span class="highlight">{{ cheapestCar.name }}</span> är billigast och utgör en
+          <span class="highlight"> total besparing på {{ savingsFormatted }} </span>
+          (eller {{ percentFormatted }}) jämfört med {{ mostExpensiveCar.name }}.
+        </p>
 
-      <p v-if="cheapestCar.type === 'electric'">
-        Miljöbilspremien
-        {{ cheapestIsBrandNew ? `på ${bonusFormatted} är inräknad och` : 'är ej inräknad, men' }}
-        {{ cheapestCar.name }} är ett utmärkt miljöval!
-      </p>
+        <p v-if="cheapestCar.type === 'electric'">
+          Miljöbilspremien
+          {{ cheapestIsBrandNew ? `på ${bonusFormatted} är inräknad och` : 'är ej inräknad, men' }}
+          {{ cheapestCar.name }} är ett utmärkt miljöval!
+        </p>
 
-      <p v-else-if="cheapestCar.co2 < 90">
-        Dessvärre är det inget bra miljöval.
-      </p>
+        <p v-else-if="cheapestCar.co2 < 90">
+          Dessvärre är det inget bra miljöval.
+        </p>
 
-      <p>
-        <span class="highlight"> {{ cheapestCarToRun.name }}</span>
-        {{ cheapestCar === cheapestCarToRun ? 'är också' : 'är dock' }}
-        <span class="highlight">{{ fuelSavingsFormatted }} billigare i drift</span>
-        över {{ yearsFormatted }} och {{ distanceFormatted }}.
-      </p>
-    </div>
-    <small class="disclaimer">
-      Uträkningen avser bilens inköpspris samt energiförbrukning och tar inte hänsyn till exempelvis
-      skatt, värdeminskning och servicekostnader. Dessa är svåra att estimera korrekt och vi har
-      därför för närvarande valt att utelämna dem.
-      <router-link :to="{ name: 'information' }">Läs mer om hur vi har resonerat.</router-link>
-    </small>
+        <p>
+          <span class="highlight"> {{ cheapestCarToRun.name }}</span>
+          {{ cheapestCar === cheapestCarToRun ? 'är också' : 'är dock' }}
+          <span class="highlight">{{ fuelSavingsFormatted }} billigare i drift</span>
+          över {{ yearsFormatted }} och {{ distanceFormatted }}.
+        </p>
+      </div>
+      <small class="disclaimer">
+        Uträkningen avser bilens inköpspris samt energiförbrukning och tar inte hänsyn till
+        exempelvis skatt, värdeminskning och servicekostnader. Dessa är svåra att estimera korrekt
+        och vi har därför för närvarande valt att utelämna dem.
+        <router-link :to="{ name: 'information' }">Läs mer om hur vi har resonerat.</router-link>
+      </small>
+    </transition>
   </section>
 </template>
 <script>
@@ -211,5 +211,11 @@ export default {
   a {
     color: $brand-color3;
   }
+}
+.fade-enter-active {
+  transition: opacity 0.3s;
+}
+.fade-enter {
+  opacity: 0;
 }
 </style>

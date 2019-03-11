@@ -18,7 +18,7 @@ export default {
 .help {
   max-width: 600px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 2rem;
 
   h2,
   p {

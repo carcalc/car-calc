@@ -7,7 +7,7 @@
         lang="sv"
         type="number"
         name="electricity-price"
-        step="any"
+        step=".01"
         min="0"
         v-model.number="usage.kwhPrice"
       />
@@ -20,7 +20,7 @@
         lang="sv"
         type="number"
         name="gas-price"
-        step="any"
+        step=".01"
         min="0"
         v-model.number="usage.gasPrice"
       />

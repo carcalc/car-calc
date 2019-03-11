@@ -18,7 +18,7 @@ export default {
 .information {
   max-width: 600px;
   margin: 0 auto;
-  padding: 1rem;
+  padding: 2rem;
   @media screen and (min-width: $size-tablet) {
     padding: 3rem;
     background-color: rgba(255, 255, 255, 0.1);
