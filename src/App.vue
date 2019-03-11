@@ -28,28 +28,30 @@ export default {
 };
 </script>
 <style lang="scss">
-html {
+#app {
   background: rgb(0, 0, 0);
   background: linear-gradient(0deg, rgb(30, 30, 39) 0%, rgb(48, 48, 59) 100%);
-}
-#app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $black;
-  min-height: 100vh;
   justify-content: center;
-  margin-top: $navheight; /* Fixed nav offset */
+  padding-top: $navheight; /* Fixed nav offset */
+  height: 100vh;
+  display: grid;
+  grid-template:
+    'nav' auto
+    'content' 1fr
+    'footer' auto;
 
   @media screen and (min-width: $size-tablet) {
-    display: grid;
     grid-template:
       'header' auto
       'nav' auto
       'content' 1fr
       'footer' auto
       / minmax(320px, 1100px);
-    margin-top: 0;
+    padding-top: 0;
     padding: 1rem;
   }
 }
