@@ -32,6 +32,7 @@ export default {
   align-items: center;
 
   @media screen and (min-width: $size-tablet) {
+    backdrop-filter: unset;
     display: initial;
     text-align: center;
     width: 100%;
