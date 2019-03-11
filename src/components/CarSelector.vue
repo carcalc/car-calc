@@ -1,11 +1,13 @@
 <template>
   <div class="car-selector">
-    <h1 class="card-title">
-      {{ car.name }}
-    </h1>
-    <h3 class="card-subtitle">
-      {{ !car.id.includes('generic') ? car.specs : 'Anpassa själv efter önskemål' }}
-    </h3>
+    <div class="text-wrapper">
+      <h1 class="card-title">
+        {{ car.name }}
+      </h1>
+      <h3 class="card-subtitle">
+        {{ !car.id.includes('generic') ? car.specs : 'Anpassa själv efter önskemål' }}
+      </h3>
+    </div>
     <select class="cars-dropdown" v-model="car" @change="handleChange">
       <option disabled value>Välj bil (valfritt)</option>
       <option v-for="(car, index) in allCars" :key="index" :value="car">
@@ -39,31 +41,41 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card-title {
-  display: none;
-  font-weight: bold;
-  @media screen and (min-width: $size-tablet) {
-    display: initial;
-  }
-}
-.card-subtitle {
-  font-size: 1rem;
-  @media screen and (min-width: $size-tablet) {
-    display: initial;
-  }
-}
 .car-selector {
   display: grid;
   grid-gap: 0.5rem;
   grid-template:
-    'title subtitle'
-    'selector selector';
+    'title'
+    'selector';
   @media screen and (min-width: $size-tablet) {
-    text-align: center;
-    grid-template: 'title' 'subtitle' 'selector';
     grid-gap: 1rem;
   }
 }
+
+.text-wrapper {
+  grid-area: title;
+  .card-title {
+    display: inline;
+    font-weight: bold;
+    font-size: 1rem;
+    @media screen and (min-width: $size-tablet) {
+      display: block;
+      text-align: center;
+      font-size: 2rem;
+    }
+  }
+  .card-subtitle {
+    display: inline;
+    font-size: 0.8rem;
+    text-align: right;
+    @media screen and (min-width: $size-tablet) {
+      display: block;
+      text-align: center;
+      font-size: 1.2rem;
+    }
+  }
+}
+
 .cars-dropdown {
   grid-area: selector;
   padding: 5px 40px 5px 10px;

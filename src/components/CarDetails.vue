@@ -163,7 +163,6 @@ export default {
 
 <style lang="scss" scoped>
 .car-details {
-  position: relative;
   display: grid;
   grid-auto-rows: max-content;
   grid-gap: 0.5rem;
@@ -257,16 +256,12 @@ export default {
 .orange,
 .red {
   position: absolute;
-  right: -10px;
-  top: -154px;
+  right: 10px;
+  top: 10px;
   width: 1rem;
   height: 1rem;
   border-radius: 50%;
   z-index: 5;
-  @media screen and (min-width: $size-tablet) {
-    right: -14px;
-    top: -165px;
-  }
 }
 .green {
   background: rgb(42, 192, 92);

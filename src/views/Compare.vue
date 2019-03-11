@@ -55,9 +55,9 @@ export default {
 
 .car-wrapper {
   @include card-style();
-
   display: grid;
   grid-template-areas: 'selector' 'details';
+  position: relative;
 
   &:first-of-type {
     grid-area: car1;
