@@ -26,10 +26,14 @@ export default {
   background: $black;
   min-width: 320px;
   user-select: none;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 
   @media screen and (min-width: $size-tablet) {
-    width: 100%;
+    display: initial;
     text-align: center;
+    width: 100%;
     position: relative;
     background: transparent;
     // Hide help link on non-mobile

@@ -18,17 +18,19 @@
     </div>
 
     <div class="stat-block bonus">
-      <label class="stat-title" for="bonus">
-        Inkludera premie
-      </label>
       <input
         class=""
         type="checkbox"
         name="bonus"
         v-model="isNewCar"
         @change="$emit('input', $event.target.checked)"
-        :disabled="car.type !== 'electric'"
+        :hidden="car.type !== 'electric'"
       />
+      <label for="bonus">
+        {{
+          car.type === 'electric' ? 'Inkludera miljöbilspremie' : 'Miljöbilspremie ej tillämplig'
+        }}
+      </label>
     </div>
 
     <div class="stat-block fuel-type">
@@ -165,6 +167,7 @@ export default {
   display: grid;
   grid-template:
     'price price' 90px
+    'bonus bonus' auto
     'fuel consumption' 90px
     'operating total' auto
     / minmax(0, 1fr) minmax(0, 1fr);
@@ -194,11 +197,8 @@ export default {
       border-radius: $border-radius;
       border: 3px solid transparent;
       min-width: 100px;
+      padding-top: 20px;
 
-      input,
-      label {
-        margin: 20px 0 0 0;
-      }
       .stat-title {
         position: absolute;
         top: 5px;
@@ -206,8 +206,15 @@ export default {
       }
     }
     &.bonus {
-      display: none;
-      // Hidden until fully developed
+      @include stat-block-base();
+      grid-area: bonus;
+      background-color: $input-bg;
+      border-radius: $border-radius / 1.5;
+      border: 3px solid transparent;
+      font-style: italic;
+      font-weight: bold;
+      padding: 0 5px;
+      text-align: center;
     }
     &.consumption {
       @include number-stat-block();

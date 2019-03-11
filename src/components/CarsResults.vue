@@ -1,38 +1,39 @@
 <template>
-  <div class="cars-results">
-    <p>
-      <span class="highlight">{{ cars[getIndexOf(totalOwnershipCosts)].name }}</span> är billigast
-      och utgör en
-      <span class="highlight"> total besparing på {{ savingsFormatted }} </span>
-      (eller {{ percentFormatted }}) jämfört med {{ cars[[getIndexOf('expensive')]].name }}.
-    </p>
+  <section class="cars-results">
+    <div v-if="totalSavings < 100">
+      <p>Båda bilarna kostar lika mycket. Vad är oddsen liksom?</p>
+    </div>
+    <div v-else>
+      <p>
+        <span class="highlight">{{ cheapestCar.name }}</span> är billigast och utgör en
+        <span class="highlight"> total besparing på {{ savingsFormatted }} </span>
+        (eller {{ percentFormatted }}) jämfört med {{ mostExpensiveCar.name }}.
+      </p>
 
-    <p v-if="cars[getIndexOf(totalOwnershipCosts)].type === 'electric'">
-      Miljöbilspremien på {{ formatNo(calcOptions.evBonus) }} kr är inräknad och
-      {{ cars[getIndexOf(totalOwnershipCosts)].name }} är ett utmärkt miljöval!
-    </p>
+      <p v-if="cheapestCar.type === 'electric'">
+        Miljöbilspremien
+        {{ cheapestIsBrandNew ? `på ${bonusFormatted} är inräknad och` : 'är ej inräknad, men' }}
+        {{ cheapestCar.name }} är ett utmärkt miljöval!
+      </p>
 
-    <p v-if="cars[getIndexOf(totalOwnershipCosts)].co2 < 90">
-      Dessvärre är det inget bra miljöval.
-    </p>
+      <p v-else-if="cheapestCar.co2 < 90">
+        Dessvärre är det inget bra miljöval.
+      </p>
 
-    <p>
-      {{ cars[getIndexOf(totalFuelCosts)].name }}
-      {{
-        cars[getIndexOf(totalOwnershipCosts)] === cars[getIndexOf(totalFuelCosts)]
-          ? 'är också'
-          : 'är dock'
-      }}
-      {{ fuelSavingsFormatted }} billigare i drift över {{ usage.ownership }} år och
-      {{ distanceFormatted }}.
-    </p>
+      <p>
+        {{ cheapestCarToRun.name }}
+        {{ cheapestCar === cheapestCarToRun ? 'är också' : 'är dock' }}
+        {{ fuelSavingsFormatted }} billigare i drift över {{ usage.ownership }} år och
+        {{ distanceFormatted }}.
+      </p>
+    </div>
     <small class="disclaimer">
       Uträkningen avser bilens inköpspris samt energiförbrukning och tar inte hänsyn till exempelvis
       skatt, värdeminskning och servicekostnader. Dessa är svåra att estimera korrekt och vi har
       därför för närvarande valt att utelämna dem.
       <router-link :to="{ name: 'information' }">Läs mer om hur vi har resonerat.</router-link>
     </small>
-  </div>
+  </section>
 </template>
 <script>
 import { TweenLite } from 'gsap/TweenMax';
@@ -65,14 +66,13 @@ export default {
     formatNo(num) {
       return Math.round(num).toLocaleString('sv-SE');
     },
-    getIndexOf(arr, cheapest = true) {
-      // Takes an array of computed properties and returns the cheapest (or, optionally, most expensive)
+    getIndexOfLowest(arr) {
       const [carOne, carTwo] = arr;
-      if (!cheapest) {
-        return carOne > carTwo ? 0 : 1;
-      } else {
-        return carOne < carTwo ? 0 : 1;
-      }
+      return carOne < carTwo ? 0 : 1;
+    },
+    getIndexOfHighest(arr) {
+      const [carOne, carTwo] = arr;
+      return carOne > carTwo ? 0 : 1;
     },
   },
   computed: {
@@ -121,22 +121,41 @@ export default {
     energySaved: function() {
       // Currently not displayed anywhere
       return (
-        (this.cars[this.getIndexOf(this.totalFuelCosts, false)].consumption / 100) *
+        (this.cars[this.getIndexOfLowest(this.totalFuelCosts)].consumption / 100) *
         this.usage.distance
       );
     },
+    // Below makes comparisons
+    cheapestCar: function() {
+      return this.cars[this.getIndexOfLowest(this.totalOwnershipCosts)];
+    },
+    cheapestCarToRun: function() {
+      return this.cars[this.getIndexOfLowest(this.totalFuelCosts)];
+    },
+    mostExpensiveCar: function() {
+      return this.cars[this.getIndexOfHighest(this.totalOwnershipCosts)];
+    },
+    mostExpensiveCarToRun: function() {
+      return this.cars[this.getIndexOfHighest(this.totalFuelCosts)];
+    },
+    cheapestIsBrandNew: function() {
+      return this.calcOptions.isNewCar[this.getIndexOfLowest(this.totalOwnershipCosts)];
+    },
     // Below returns formatted and tweened numbers for DOM output
     savingsFormatted: function() {
-      return this.formatNo(this.tweenedNumbers.savings) + 'kr';
+      return this.formatNo(this.tweenedNumbers.savings) + ' kr';
     },
     percentFormatted: function() {
       return this.formatNo(this.tweenedNumbers.percent) + '%';
     },
     fuelSavingsFormatted: function() {
-      return this.formatNo(this.tweenedNumbers.fuelSavings) + 'kr';
+      return this.formatNo(this.tweenedNumbers.fuelSavings) + ' kr';
     },
     distanceFormatted: function() {
-      return this.formatNo(this.tweenedNumbers.distance / 10) + 'mil';
+      return this.formatNo(this.tweenedNumbers.distance / 10) + ' mil';
+    },
+    bonusFormatted: function() {
+      return this.formatNo(this.calcOptions.evBonus) + ' kr';
     },
   },
   watch: {
@@ -177,6 +196,9 @@ export default {
   margin-top: 1rem;
   @media screen and (min-width: $size-tablet) {
     font-size: 0.7rem;
+  }
+  a {
+    color: $brand-color3;
   }
 }
 </style>

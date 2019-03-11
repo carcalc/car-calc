@@ -55,7 +55,7 @@ export default {
   height: 40px;
   width: 100%;
   background-color: $input-bg;
-  border-radius: $border-radius / 2;
+  border-radius: $border-radius / 1.5;
   appearance: none;
   background-image: url('../assets/select-arrow.svg');
   background-size: 28px;
