@@ -60,7 +60,7 @@
     border: 3px solid transparent;
     outline:none;
 
-    &:focus {
+    &:focus, &:hover{
       caret-color: $brand-color2;
       border: $input-focus-border;
     }
