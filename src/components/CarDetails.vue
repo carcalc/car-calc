@@ -168,8 +168,8 @@ export default {
   grid-gap: 0.5rem;
   grid-template:
     'price price fuel'
-    'bonus bonus consumption'
-    'operating total consumption'
+    'bonus bonus  consumption'
+    'total operating consumption'
     / minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
   @media screen and (min-width: $size-small-tablet) {
     grid-template:
