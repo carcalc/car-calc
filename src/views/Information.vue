@@ -25,7 +25,9 @@ export default {
     box-shadow: 1px 1px 2px 0px rgba(0, 0, 80, 0.3);
     border-radius: $border-radius;
   }
-
+  sup {
+    color: $brand-color2;
+  }
   h2,
   p {
     margin-bottom: 1rem;
