@@ -85,7 +85,7 @@ export default {
       this.$set(this.selectedCars, index, car);
     },
     toggleBonus(index) {
-      this.calcOptions.isNewCar[index] = !this.calcOptions.isNewCar[index];
+      this.$set(this.calcOptions.isNewCar, index, !this.calcOptions.isNewCar[index]);
     },
     resetStoredData() {
       localStorage.clear();
