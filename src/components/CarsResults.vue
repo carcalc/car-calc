@@ -1,5 +1,6 @@
 <template>
   <div class="cars-results">
+    {{ cheapestIsBrandNew }}
     <p>
       <span class="highlight">{{ cheapestCar.name }}</span> är billigast och utgör en
       <span class="highlight"> total besparing på {{ savingsFormatted }} </span>
@@ -7,16 +8,12 @@
     </p>
 
     <p v-if="cheapestCar.type === 'electric'">
-      Miljöbilspremien på {{ bonusFormatted }} är inräknad och {{ cheapestCar.name }} är ett utmärkt
-      miljöval!
-    </p>
-    <!--
-    <p v-else-if="calcOptions.isNewCar[getCheapest(totalOwnershipCosts)] === false">
-      Miljöbilspremien ingår ej i beräkningen.
+      Miljöbilspremien på {{ bonusFormatted }}
+      {{ cheapestIsBrandNew ? 'är inräknad och' : 'är ej inräknad, men' }}
       {{ cheapestCar.name }} är ett utmärkt miljöval!
-    </p> -->
+    </p>
 
-    <p v-if="cheapestCar.co2 < 90">
+    <p v-else-if="cheapestCar.co2 < 90">
       Dessvärre är det inget bra miljöval.
     </p>
 
@@ -65,14 +62,13 @@ export default {
     formatNo(num) {
       return Math.round(num).toLocaleString('sv-SE');
     },
-    getCheapest(arr, cheapest = true) {
-      // Takes an array of computed properties and returns the cheapest (or, optionally, most expensive)
+    getIndexOfLowest(arr) {
       const [carOne, carTwo] = arr;
-      if (!cheapest) {
-        return carOne > carTwo ? 0 : 1;
-      } else {
-        return carOne < carTwo ? 0 : 1;
-      }
+      return carOne < carTwo ? 0 : 1;
+    },
+    getIndexOfHighest(arr) {
+      const [carOne, carTwo] = arr;
+      return carOne > carTwo ? 0 : 1;
     },
   },
   computed: {
@@ -121,22 +117,25 @@ export default {
     energySaved: function() {
       // Currently not displayed anywhere
       return (
-        (this.cars[this.getCheapest(this.totalFuelCosts, false)].consumption / 100) *
+        (this.cars[this.getIndexOfLowest(this.totalFuelCosts)].consumption / 100) *
         this.usage.distance
       );
     },
     // Below makes comparisons
     cheapestCar: function() {
-      return this.cars[this.getCheapest(this.totalOwnershipCosts)];
+      return this.cars[this.getIndexOfLowest(this.totalOwnershipCosts)];
     },
     cheapestCarToRun: function() {
-      return this.cars[this.getCheapest(this.totalFuelCosts)];
+      return this.cars[this.getIndexOfLowest(this.totalFuelCosts)];
     },
     mostExpensiveCar: function() {
-      return this.cars[this.getCheapest(this.totalOwnershipCosts, false)];
+      return this.cars[this.getIndexOfHighest(this.totalOwnershipCosts)];
     },
     mostExpensiveCarToRun: function() {
-      return this.cars[this.getCheapest(this.totalFuelCosts, false)];
+      return this.cars[this.getIndexOfHighest(this.totalFuelCosts)];
+    },
+    cheapestIsBrandNew: function() {
+      return this.calcOptions.isNewCar[this.getIndexOfLowest(this.totalOwnershipCosts)];
     },
     // Below returns formatted and tweened numbers for DOM output
     savingsFormatted: function() {
