@@ -17,18 +17,18 @@
       <span class="stat-display-unit">kr</span>
     </div>
 
-    <div class="stat-block">
-      <label class="stat-title-float" for="bonus">
-        <input
-          class=""
-          type="checkbox"
-          name="bonus"
-          v-model="isNewCar"
-          @change="$emit('input', $event.target.checked)"
-          :disabled="car.type !== 'electric'"
-        />
+    <div class="stat-block bonus">
+      <label class="stat-title" for="bonus">
         Inkludera premie
       </label>
+      <input
+        class=""
+        type="checkbox"
+        name="bonus"
+        v-model="isNewCar"
+        @change="$emit('input', $event.target.checked)"
+        :disabled="car.type !== 'electric'"
+      />
     </div>
 
     <div class="stat-block fuel-type">
@@ -206,7 +206,8 @@ export default {
       }
     }
     &.bonus {
-      // @include number-stat-block();
+      display: none;
+      // Hidden until fully developed
     }
     &.consumption {
       @include number-stat-block();
