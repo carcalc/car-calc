@@ -71,7 +71,7 @@ export default {
 <style lang="scss" scoped>
 .usage-details {
   @include card-style();
-
+  padding-bottom: 1.5rem;
   grid-area: usage;
   display: grid;
   grid-template-areas:
@@ -101,10 +101,21 @@ export default {
     &.years,
     &.distance {
       @include stat-block-base();
+      position: relative;
       font-style: italic;
       display: block;
       width: 100%;
       height: 100%;
+      .stat-title {
+        position: absolute;
+        top: 20px;
+        @media screen and (min-width: $size-tablet) {
+          position: initial;
+        }
+      }
+      .stat-display {
+        font-size: 1rem;
+      }
     }
     &.gas-price {
       grid-area: gas;

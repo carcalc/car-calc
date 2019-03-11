@@ -16,31 +16,40 @@ export default {
 <style lang="scss">
 .cars-comparison-wrapper {
   display: grid;
-  grid-gap: 3px;
+  grid-gap: $grid-gap / 6;
   justify-content: center;
   align-content: baseline;
-  grid-template-columns: 1fr;
-  grid-template-areas:
+  grid-template:
     'usage'
     'car1'
     'car2'
-    'results';
+    'results'
+    / 1fr;
+  @media screen and (min-width: $size-small-tablet) {
+    grid-gap: $grid-gap / 3;
+    grid-template:
+      'usage usage'
+      'car1 car2'
+      'results results'
+      / 1fr 1fr;
+  }
 
   @media screen and (min-width: $size-tablet) {
     // Tablet layout
-    grid-gap: $grid-gap;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
+    grid-gap: $grid-gap / 2;
+    grid-template:
       'usage usage'
       'car1 car2'
-      'results results';
+      'results results'
+      / 1fr 1fr;
   }
   @media screen and (min-width: $size-desktop) {
     // Desktop layout
-    grid-template-columns: 1fr auto 1fr;
-    grid-template-areas:
+    grid-gap: $grid-gap;
+    grid-template:
       'car1 usage car2'
-      'results results results';
+      'results results results'
+      / 1fr auto 1fr;
   }
 }
 

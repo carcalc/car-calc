@@ -10,9 +10,10 @@ $card-bg: rgba(255, 255, 255, 0.95);
 // Other
 $border-radius: 15px;
 $input-focus-border: 3px solid $brand-color2;
-$grid-gap: 1.5rem;
 $navheight: 54px;
+$grid-gap: 1.5rem;
 
 // Media queries
-$size-tablet: 650px;
+$size-small-tablet: 500px;
+$size-tablet: 750px;
 $size-desktop: 1200px;

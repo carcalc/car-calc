@@ -39,14 +39,33 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.card-title {
+  display: none;
+  font-weight: bold;
+  @media screen and (min-width: $size-tablet) {
+    display: initial;
+  }
+}
+.card-subtitle {
+  font-size: 1rem;
+  @media screen and (min-width: $size-tablet) {
+    display: initial;
+  }
+}
 .car-selector {
-  text-align: center;
   display: grid;
-  grid-template-areas: 'title' 'subtitle' 'selector';
-  grid-gap: 1rem;
+  grid-gap: 0.5rem;
+  grid-template:
+    'title subtitle'
+    'selector selector';
+  @media screen and (min-width: $size-tablet) {
+    text-align: center;
+    grid-template: 'title' 'subtitle' 'selector';
+    grid-gap: 1rem;
+  }
 }
 .cars-dropdown {
-  @include number-stat-block();
+  grid-area: selector;
   padding: 5px 40px 5px 10px;
   font-weight: bold;
   font-style: italic;

@@ -195,12 +195,18 @@ export default {
   @include card-style;
   text-align: center;
   grid-area: results;
+  font-size: 0.8rem;
+  @media screen and (min-width: $size-small-tablet) {
+    font-size: 1rem;
+  }
 }
 .highlight {
-  font-size: 1.5rem;
   font-weight: bold;
   color: $brand-color3;
   word-wrap: break-word;
+  @media screen and (min-width: $size-tablet) {
+    font-size: 1.5rem;
+  }
 }
 .disclaimer {
   display: block;
