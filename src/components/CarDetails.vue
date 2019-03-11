@@ -77,7 +77,11 @@ import { TweenLite } from 'gsap/TweenMax';
 
 export default {
   name: 'CarDetails',
-  props: ['car', 'usage', 'evBonus'],
+  props: {
+    car: { type: Object, required: true },
+    usage: { type: Object, required: true },
+    evBonus: { type: Number, required: true },
+  },
   data() {
     return {
       tweenedNumbers: {

@@ -17,7 +17,10 @@
 
 <script>
 export default {
-  props: ['allCars', 'selectedCar'],
+  props: {
+    selectedCar: { type: Object, required: true },
+    allCars: { type: Array, required: true },
+  },
   data() {
     return {
       car: this.selectedCar,

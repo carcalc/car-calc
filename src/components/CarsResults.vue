@@ -33,7 +33,11 @@
 <script>
 import { TweenLite } from 'gsap/TweenMax';
 export default {
-  props: ['usage', 'cars', 'calcOptions'],
+  props: {
+    usage: { type: Object, required: true },
+    cars: { type: Array, required: true },
+    calcOptions: { type: Object, required: true },
+  },
   data() {
     return {
       tweenedNumbers: {
