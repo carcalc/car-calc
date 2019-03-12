@@ -21,7 +21,10 @@
   height: 100%;
   .stat-title {
     font-weight: bold;
-    font-size: 0.8rem;
+    font-size: 0.6rem;
+    @media screen and (min-width: $size-small-tablet) {
+      font-size: 0.8rem;
+    }
     @media screen and (min-width: $size-tablet) {
       font-size: 1rem;
     }
@@ -33,14 +36,20 @@
     color: $black;
     margin: 0;
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    @media screen and (min-width: $size-small-tablet) {
+      font-size: 1.5rem;
+    }
     @media screen and (min-width: $size-tablet) {
       font-size: 1.8rem;
     }
   }
   .stat-display-unit {
     font-weight: bold;
-    font-size: 0.6rem;
+    font-size: 0.5rem;
+    @media screen and (min-width: $size-small-tablet) {
+      font-size: 0.6rem;
+    }
     @media screen and (min-width: $size-tablet) {
       font-size: 0.8rem;
     }
@@ -50,7 +59,10 @@
 @mixin number-stat-block() {
   @include stat-block-base();
   position: relative;
-  height: 70px;
+  height: 60px;
+  @media screen and (min-width: $size-small-tablet) {
+    height: 70px;
+  }
   @media screen and (min-width: $size-tablet) {
     height: 90px;
   }
@@ -64,17 +76,19 @@
   .stat-display {
     display: block;
     border-radius: $border-radius;
-    padding: 17px 15px 3px 10px;
     line-height: 0;
     background-color: $input-bg;
     font-style: italic;
-    border: 3px solid transparent;
     outline: none;
+    border: 3px solid transparent;
+    padding: 9px 12px 2px 7px;
     font-size: 1.6rem;
+    @media screen and (min-width: $size-small-tablet) {
+      padding: 17px 15px 3px 10px;
+    }
     @media screen and (min-width: $size-tablet) {
       font-size: 2.5rem;
     }
-
     &:focus,
     &:hover {
       caret-color: $brand-color2;

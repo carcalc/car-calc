@@ -78,21 +78,27 @@ export default {
 
 .cars-dropdown {
   grid-area: selector;
-  padding: 5px 40px 5px 10px;
   font-weight: bold;
   font-style: italic;
-  font-size: 1rem;
   border: none;
-  height: 40px;
   width: 100%;
   background-color: $input-bg;
   border-radius: $border-radius / 1.5;
   appearance: none;
   background-image: url('../assets/select-arrow.svg');
-  background-size: 28px;
   background-repeat: no-repeat;
-  background-position: right 6px bottom 10px;
   border: 3px solid transparent;
+  height: 25px;
+  padding: 0px 25px 0px 0px;
+  background-size: 18px;
+  background-position: right 4px bottom 5px;
+  @media screen and (min-width: $size-tablet) {
+    height: 40px;
+    background-size: 28px;
+    background-position: right 6px bottom 10px;
+    padding: 5px 40px 5px 10px;
+    font-size: 1rem;
+  }
 
   &:focus,
   &:hover {
