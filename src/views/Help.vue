@@ -24,6 +24,9 @@ export default {
   p {
     margin-bottom: 1rem;
   }
+  p:nth-child(4) {
+    margin-bottom: 0.5rem;
+  }
   .help-text {
     color: $white;
   }
