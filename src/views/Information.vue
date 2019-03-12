@@ -26,6 +26,9 @@ export default {
     box-shadow: 1px 1px 2px 0px rgba(0, 0, 80, 0.3);
     border-radius: $border-radius;
   }
+  i {
+    margin: 0 3px;
+  }
   sup {
     font-size: 0.7rem;
     color: $brand-color2;
@@ -44,8 +47,16 @@ export default {
       color: $brand-color3;
     }
   }
-  ol {
+  ol,
+  ul {
+    margin-bottom: 1rem;
+    li {
+      color: $white;
+    }
+  }
+  .references {
     color: $brand-color2;
+
     li {
       font-size: 0.8rem;
       padding: 0.5rem 0;
