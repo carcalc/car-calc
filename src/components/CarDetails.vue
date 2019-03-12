@@ -1,6 +1,6 @@
 <template>
   <form class="car-details">
-    <span class="climate-dot" :class="co2Index"></span>
+    <i class="fas fa-leaf climate-dot" :class="co2Index"></i>
 
     <div class="stat-block car-price">
       <label class="stat-title" for="car-price">Inköpspris</label>

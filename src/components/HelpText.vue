@@ -11,14 +11,14 @@
       resultatet av jämförelsen.
     </p>
     <p>
-      Uppe i högra hörnet på respektive bil ser du en färgad prick som visar vilken klimatpåverkan
+      Uppe i högra hörnet på respektive bil ser du en färgad symbol som visar vilken klimatpåverkan
       bilen har:
     </p>
     <p>
-      <span class="climate-dot green"></span>
-      <span class="climate-dot yellow"></span>
-      <span class="climate-dot orange"></span>
-      <span class="climate-dot red"></span>
+      <i class="climate-dot green fas fa-leaf"></i>
+      <i class=" climate-dot yellow fas fa-leaf"></i>
+      <i class="climate-dot green orange fas fa-leaf"></i>
+      <i class="climate-dot green red fas fa-leaf"></i>
     </p>
     <p>
       Där grön betyder minst negativ påverkan och röd är den grupp bilar som gör störst påverkan.
