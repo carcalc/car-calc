@@ -74,4 +74,27 @@ export default {
     }
   }
 }
+.green,
+.yellow,
+.orange,
+.red {
+  display: inline-block;
+  margin: 3px;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  z-index: 5;
+}
+.green {
+  background: rgb(42, 192, 92);
+}
+.yellow {
+  background: rgb(255, 241, 40);
+}
+.orange {
+  background: rgb(255, 174, 0);
+}
+.red {
+  background: rgb(248, 54, 20);
+}
 </style>
