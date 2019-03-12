@@ -134,13 +134,13 @@ export default {
       return this.tweenedNumbers.ownership.toFixed(0);
     },
     co2Index: function() {
-      if (this.car.co2 > 90) {
+      if (this.car.co2 > 90 || this.car.type === 'electric') {
         return 'green';
-      } else if (this.car.co2 > 80) {
+      } else if (this.car.co2 > 75) {
         return 'yellow';
-      } else if (this.car.co2 > 70) {
-        return 'orange';
       } else if (this.car.co2 > 60) {
+        return 'orange';
+      } else if (this.car.co2 > 0) {
         return 'red';
       } else {
         return 'none';
