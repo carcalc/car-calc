@@ -136,12 +136,14 @@ export default {
     co2Index: function() {
       if (this.car.co2 > 90) {
         return 'green';
-      } else if (this.car.co2 > 80 && this.car.co2 < 91) {
+      } else if (this.car.co2 > 80) {
         return 'yellow';
-      } else if (this.car.co2 > 70 && this.car.co2 < 81) {
+      } else if (this.car.co2 > 70) {
         return 'orange';
-      } else {
+      } else if (this.car.co2 > 60) {
         return 'red';
+      } else {
+        return 'none';
       }
     },
   },
@@ -268,5 +270,8 @@ export default {
 }
 .red {
   background: rgb(248, 54, 20);
+}
+.none {
+  display: none;
 }
 </style>
