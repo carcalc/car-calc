@@ -7,12 +7,20 @@
     </p>
     <p>
       Fyll i uppgifter som berör ägande och drift i rutan i mitten. Dessa gäller för båda bilarna
-      och de förifyllda värdena går förstås bra att ändra vid behov.
+      och de förifyllda värdena går förstås bra att ändra vid behov. I rutan längst ned ser du sedan
+      resultatet av jämförelsen.
     </p>
     <p>
       Uppe i högra hörnet på respektive bil ser du en färgad prick som visar vilken klimatpåverkan
-      bilen har. Grön ger minst negativ påverkan och röd mest påverkan. I rutan längst ned ser du
-      sedan resultatet av jämförelsen.
+      bilen har:
+    </p>
+    <div class="green"></div>
+    <div class="yellow"></div>
+    <div class="orange"></div>
+    <div class="red"></div>
+    <p>
+      Där grön betyder minst negativ påverkan och röd är den grupp bilar som gör störst negativ
+      påverkan.
     </p>
   </div>
 </template>
