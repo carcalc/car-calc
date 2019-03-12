@@ -42,9 +42,11 @@ export default {
     font-weight: bold;
     color: $brand-color2;
     text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-      color: $brand-color3;
+    @media screen and (min-width: $size-desktop) {
+      &:hover {
+        text-decoration: underline;
+        color: $brand-color3;
+      }
     }
   }
   ol,

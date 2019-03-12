@@ -222,8 +222,10 @@ export default {
     color: $brand-color3;
     display: block;
     &:hover {
-      text-decoration: underline;
-      color: $brand-color2;
+      @media screen and (min-width: $size-desktop) {
+        text-decoration: underline;
+        color: $brand-color2;
+      }
     }
   }
 }
