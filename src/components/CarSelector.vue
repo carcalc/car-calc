@@ -89,7 +89,7 @@ export default {
   background-repeat: no-repeat;
   border: 3px solid transparent;
   height: 25px;
-  padding: 0px 25px 0px 0px;
+  padding: 2px 25px 2px 5px;
   background-size: 18px;
   background-position: right 4px bottom 5px;
   @media screen and (min-width: $size-tablet) {
