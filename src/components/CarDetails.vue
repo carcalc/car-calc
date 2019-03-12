@@ -1,6 +1,6 @@
 <template>
   <form class="car-details">
-    <span :class="co2Index"></span>
+    <span class="climate-dot" :class="co2Index"></span>
 
     <div class="stat-block car-price">
       <label class="stat-title" for="car-price">Inköpspris</label>
@@ -247,31 +247,10 @@ export default {
     }
   }
 }
-.green,
-.yellow,
-.orange,
-.red {
+.climate-dot {
+  @include climate-dot();
   position: absolute;
   right: 10px;
   top: 10px;
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-  z-index: 5;
-}
-.green {
-  background: rgb(42, 192, 92);
-}
-.yellow {
-  background: rgb(255, 241, 40);
-}
-.orange {
-  background: rgb(255, 174, 0);
-}
-.red {
-  background: rgb(248, 54, 20);
-}
-.none {
-  display: none;
 }
 </style>
