@@ -14,12 +14,21 @@
       Uppe i högra hörnet på respektive bil ser du en färgad prick som visar vilken klimatpåverkan
       bilen har:
     </p>
-    <div class="green"></div>
-    <div class="yellow"></div>
-    <div class="orange"></div>
-    <div class="red"></div>
+    <p>
+      <span class="climate-dot green"></span>
+      <span class="climate-dot yellow"></span>
+      <span class="climate-dot orange"></span>
+      <span class="climate-dot red"></span>
+    </p>
     <p>
       Där grön betyder minst negativ påverkan och röd är den grupp bilar som gör störst påverkan.
     </p>
   </div>
 </template>
+<style lang="scss" scoped>
+.climate-dot {
+  @include climate-dot();
+  display: inline-block;
+  margin: 3px;
+}
+</style>

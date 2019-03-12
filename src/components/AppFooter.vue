@@ -6,17 +6,13 @@
     <p class="links">
       <span class="copy">© 2019 </span>
       <span class="andreas">
-        <a :href="contact.andreas.email">{{ contact.gabriel.name }}</a>
-        <a target="_blank" :href="`mailto:${contact.andreas.linkedIn}`">
-          <i class="fab fa-linkedin-in"></i
-        ></a>
+        <a :href="`mailto:${contact.andreas.email}`">{{ contact.gabriel.name }}</a>
+        <a target="_blank" :href="contact.andreas.linkedIn"> <i class="fab fa-linkedin-in"></i></a>
       </span>
       &
       <span class="gabriel">
-        <a :href="contact.gabriel.email">{{ contact.andreas.name }}</a>
-        <a target="_blank" :href="`mailto:${contact.gabriel.linkedIn}`">
-          <i class="fab fa-linkedin-in"></i
-        ></a>
+        <a :href="`mailto:${contact.gabriel.email}`">{{ contact.andreas.name }}</a>
+        <a target="_blank" :href="contact.gabriel.linkedIn"> <i class="fab fa-linkedin-in"></i></a>
       </span>
     </p>
     <input
@@ -51,6 +47,9 @@ footer {
 i {
   color: $white;
   margin: 4px;
+  &.fa-linkedin-in {
+    display: none; // Disabled to see how it looks
+  }
 }
 
 a,
@@ -73,8 +72,9 @@ i {
   font-size: 1rem;
   font-weight: bold;
 }
+.copy,
 .links {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }
 
 .reset {
