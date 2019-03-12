@@ -6,12 +6,12 @@
     <p class="links">
       <span class="copy">© 2019 </span>
       <span class="andreas">
-        <a :href="`mailto:${contact.andreas.email}`">{{ contact.gabriel.name }}</a>
+        <a :href="`mailto:${contact.andreas.email}`">{{ contact.andreas.name }}</a>
         <a target="_blank" :href="contact.andreas.linkedIn"> <i class="fab fa-linkedin-in"></i></a>
       </span>
       &
       <span class="gabriel">
-        <a :href="`mailto:${contact.gabriel.email}`">{{ contact.andreas.name }}</a>
+        <a :href="`mailto:${contact.gabriel.email}`">{{ contact.gabriel.name }}</a>
         <a target="_blank" :href="contact.gabriel.linkedIn"> <i class="fab fa-linkedin-in"></i></a>
       </span>
     </p>
