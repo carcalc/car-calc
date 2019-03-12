@@ -30,6 +30,9 @@ export default {
     // Hide popover on small screens
     display: initial;
   }
+  p {
+    margin: 0.5rem;
+  }
   button {
     width: 10rem;
     height: 1.5rem;
@@ -55,15 +58,12 @@ export default {
     top: 25px;
     right: -30rem;
     transition: all 300ms;
-    padding: 0.5rem 1.5rem 0.5rem 0.5rem;
+    padding-right: 1.5rem;
     border-radius: 15px 0 0 15px;
     box-shadow: 1px 1px 2px 0px rgba(0, 0, 80, 0.3);
-  }
-  .active {
-    right: 0;
     z-index: 11;
-    p {
-      z-index: 15;
+    &.active {
+      right: 0;
     }
   }
   .help-text {
@@ -73,28 +73,5 @@ export default {
       display: none;
     }
   }
-}
-.green,
-.yellow,
-.orange,
-.red {
-  display: inline-block;
-  margin: 3px;
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-  z-index: 5;
-}
-.green {
-  background: rgb(42, 192, 92);
-}
-.yellow {
-  background: rgb(255, 241, 40);
-}
-.orange {
-  background: rgb(255, 174, 0);
-}
-.red {
-  background: rgb(248, 54, 20);
 }
 </style>
