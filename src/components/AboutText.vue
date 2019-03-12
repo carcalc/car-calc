@@ -10,12 +10,17 @@
     </p>
     <h2>Om oss</h2>
     <p>
-      Vi som utvecklat denna sajt heter
-      <a :href="`mailto:${contact.andreas.email}`">{{ contact.andreas.name }}</a> och
-      <a :href="`mailto:${contact.gabriel.email}`">{{ contact.gabriel.name }}</a
-      >. Kontakta oss gärna med feedback och idéer på
-      <a :href="`mailto:${contact.email}`">{{ contact.email }}</a
-      >!
+      Vi som utvecklat denna sajt heter {{ contact.andreas.name }} och {{ contact.gabriel.name }}.
+      Kontakta oss gärna med feedback och idéer på
+      <a :href="`mailto:${contact.email}`">{{ contact.email }}</a> eller hör av er till
+      {{ contact.andreas.name }}
+      <a :href="`mailto:${contact.andreas.email}`"><i class="far fa-envelope"></i></a>
+      <a target="_blank" :href="contact.andreas.linkedIn"><i class="fab fa-linkedin-in"></i></a>
+      eller
+      {{ contact.gabriel.name }}
+      <a :href="`mailto:${contact.gabriel.email}`"><i class="far fa-envelope"></i></a>
+      <a target="_blank" :href="contact.gabriel.linkedIn"><i class="fab fa-linkedin-in"></i></a>
+      direkt.
     </p>
 
     <h2>Beräkningar</h2>
@@ -37,7 +42,7 @@
       bilsvar.se<sup>3</sup>. Bilarnas förbrukning avser blandad körning. I beräkningarna antas det
       att man som bilägare av elbil betalar 100% av bilens laddning.
     </p>
-    <ol>
+    <ol class="references">
       <li>
         <a target="_blank" :href="references.elbilsnytt">Elbilsnytt</a>
       </li>
