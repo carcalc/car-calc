@@ -191,6 +191,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css?family=Nunito:800');
 .cars-results {
   @include card-style;
   text-align: center;
@@ -201,7 +202,7 @@ export default {
   }
 }
 .highlight {
-  font-weight: bold;
+  font-family: 'Nunito', sans-serif;
   color: $brand-color1;
   word-wrap: break-word;
   @media screen and (min-width: $size-tablet) {

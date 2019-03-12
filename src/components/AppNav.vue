@@ -53,6 +53,9 @@ export default {
       border: none;
       margin: auto;
     }
+    &:hover {
+      text-decoration: underline;
+    }
 
     &.router-link-exact-active {
       font-weight: bold;
