@@ -1,6 +1,6 @@
 <template>
   <nav id="nav">
-    <router-link class="app-byline" :to="{ name: 'compare' }">Jämför</router-link>
+    <router-link class="home-link" :to="{ name: 'compare' }">Jämför</router-link>
     <router-link class="help-link" :to="{ name: 'help' }">Hjälp</router-link>
     <router-link :to="{ name: 'information' }">Om</router-link>
   </nav>
@@ -38,10 +38,6 @@ export default {
     width: 100%;
     position: relative;
     background: transparent;
-    // Hide help link on non-mobile
-    .help-link {
-      display: none;
-    }
   }
 
   a {
@@ -61,6 +57,19 @@ export default {
     &.router-link-exact-active {
       font-weight: bold;
       color: $brand-color2;
+    }
+  }
+  .help-link {
+    // Hide help link on non-mobile
+    @media screen and (min-width: $size-tablet) {
+      display: none;
+    }
+  }
+  .home-link {
+    // Hide home on mobile
+    display: none;
+    @media screen and (min-width: $size-small-tablet) {
+      display: initial;
     }
   }
 }

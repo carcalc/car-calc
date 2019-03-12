@@ -25,7 +25,6 @@ footer {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-
   a,
   i {
     text-decoration: none;
