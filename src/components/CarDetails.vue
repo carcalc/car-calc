@@ -207,7 +207,6 @@ export default {
       background-color: $input-bg;
       border-radius: $border-radius;
       border: 3px solid transparent;
-      min-width: 100px;
       padding-top: 20px;
 
       .stat-title {
@@ -226,7 +225,10 @@ export default {
       font-weight: bold;
       padding: 0 5px;
       text-align: center;
-      font-size: 0.8rem;
+      font-size: 0.6rem;
+      @media screen and (min-width: $size-small-tablet) {
+        font-size: 0.8rem;
+      }
       @media screen and (min-width: $size-tablet) {
         font-size: 1rem;
       }
@@ -238,16 +240,12 @@ export default {
     &.operating-cost {
       @include stat-block-base();
       grid-area: operating;
-
       word-wrap: break-word;
-      max-width: 300px;
     }
     &.total-cost {
       @include stat-block-base();
       grid-area: total;
-
       word-wrap: break-word;
-      max-width: 300px;
     }
   }
 }
