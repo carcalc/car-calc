@@ -191,7 +191,7 @@ export default {
       @include number-stat-block();
       grid-area: price;
       .stat-display {
-        font-size: 2.2rem;
+        font-size: 2rem;
         @media screen and (min-width: $size-tablet) {
           font-size: 3.5rem;
         }
