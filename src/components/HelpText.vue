@@ -19,8 +19,7 @@
     <div class="orange"></div>
     <div class="red"></div>
     <p>
-      Där grön betyder minst negativ påverkan och röd är den grupp bilar som gör störst negativ
-      påverkan.
+      Där grön betyder minst negativ påverkan och röd är den grupp bilar som gör störst påverkan.
     </p>
   </div>
 </template>
