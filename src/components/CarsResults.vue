@@ -202,7 +202,7 @@ export default {
 }
 .highlight {
   font-weight: bold;
-  color: $brand-color3;
+  color: $brand-color1;
   word-wrap: break-word;
   @media screen and (min-width: $size-tablet) {
     font-size: 1.5rem;
@@ -219,6 +219,11 @@ export default {
   }
   a {
     color: $brand-color3;
+    display: block;
+    &:hover {
+      text-decoration: underline;
+      color: $brand-color2;
+    }
   }
 }
 .fade-enter-active {

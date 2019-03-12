@@ -3,9 +3,9 @@
     <AppHeader />
     <AppNav />
     <transition appear name="bounce">
-      <router-view />
+      <router-view :contact="contact" />
     </transition>
-    <AppFooter :linkedInAndreas="linkedInAndreas" :linkedInGabriel="linkedInGabriel" />
+    <AppFooter :contact="contact" @reset="resetApp" />
   </div>
 </template>
 <script>
@@ -21,9 +21,26 @@ export default {
   },
   data() {
     return {
-      linkedInAndreas: 'http://www.linkedin.com/in/andreas-hansson-',
-      linkedInGabriel: 'http://www.linkedin.com/in/gabriellundmark',
+      contact: {
+        email: 'hello@carcalc.se',
+        andreas: {
+          name: 'Andreas',
+          linkedIn: 'http://www.linkedin.com/in/andreas-hansson-',
+          email: 'andreas@carcalc.se',
+        },
+        gabriel: {
+          name: 'Gabriel',
+          linkedIn: 'http://www.linkedin.com/in/gabriellundmark',
+          email: 'gabriel@carcalc.se',
+        },
+      },
     };
+  },
+  methods: {
+    resetApp() {
+      localStorage.clear();
+      location.reload();
+    },
   },
 };
 </script>
