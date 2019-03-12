@@ -19,14 +19,13 @@
 
     <div class="stat-block bonus">
       <input
-        class=""
         type="checkbox"
         name="bonus"
         v-model="isNewCar"
         @change="$emit('input', $event.target.checked)"
         :hidden="car.type !== 'electric'"
       />
-      <label for="bonus">
+      <label for="bonus" class="stat-title">
         {{
           car.type === 'electric' ? 'Inkludera miljöbilspremie' : 'Miljöbilspremie ej tillämplig'
         }}
@@ -137,12 +136,14 @@ export default {
     co2Index: function() {
       if (this.car.co2 > 90) {
         return 'green';
-      } else if (this.car.co2 > 80 && this.car.co2 < 91) {
+      } else if (this.car.co2 > 80) {
         return 'yellow';
-      } else if (this.car.co2 > 70 && this.car.co2 < 81) {
+      } else if (this.car.co2 > 70) {
         return 'orange';
-      } else {
+      } else if (this.car.co2 > 60) {
         return 'red';
+      } else {
+        return 'none';
       }
     },
   },
@@ -224,16 +225,10 @@ export default {
       background-color: $input-bg;
       border-radius: $border-radius / 1.5;
       border: 3px solid transparent;
-      font-style: italic;
-      font-weight: bold;
       padding: 0 5px;
       text-align: center;
-      font-size: 0.6rem;
-      @media screen and (min-width: $size-small-tablet) {
-        font-size: 0.8rem;
-      }
-      @media screen and (min-width: $size-tablet) {
-        font-size: 1rem;
+      .stat-title {
+        font-style: italic;
       }
     }
     &.consumption {
@@ -275,5 +270,8 @@ export default {
 }
 .red {
   background: rgb(248, 54, 20);
+}
+.none {
+  display: none;
 }
 </style>
