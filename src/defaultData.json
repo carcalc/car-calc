@@ -12,7 +12,7 @@
       "id": "generic-1",
       "name": "Bil 1",
       "specs": "Exempel",
-      "price": 320000,
+      "price": 325000,
       "type": "electric",
       "verified": false,
       "co2": null
@@ -22,7 +22,7 @@
       "id": "generic-2",
       "name": "Bil 2",
       "specs": "Exempel",
-      "price": 290000,
+      "price": 245000,
       "type": "gasoline",
       "verified": false,
       "co2": null
