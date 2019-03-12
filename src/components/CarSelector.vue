@@ -93,11 +93,11 @@ export default {
   background-size: 18px;
   background-position: right 4px bottom 5px;
   @media screen and (min-width: $size-tablet) {
+    font-size: 1rem;
     height: 40px;
     background-size: 28px;
     background-position: right 6px bottom 10px;
     padding: 5px 40px 5px 10px;
-    font-size: 1rem;
   }
 
   &:focus,
