@@ -5,7 +5,7 @@
         {{ car.name }}
       </h1>
       <h3 class="card-subtitle">
-        {{ !car.id.includes('generic') ? car.specs : 'Anpassa själv efter önskemål' }}
+        {{ !car.id.includes('generic') ? car.specs : 'Anpassa uppgifterna i rutorna' }}
       </h3>
     </div>
     <select class="cars-dropdown" v-model="car" @change="handleChange">

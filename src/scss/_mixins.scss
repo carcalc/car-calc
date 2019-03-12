@@ -106,8 +106,12 @@
 }
 
 @mixin climate-dot{
-  font-size: 1.5rem;
   z-index: 5;
+  font-size: 1rem;
+  @media screen and (min-width: $size-tablet) {
+    font-size: 1.5rem;
+  }
+
   &.green {
     color: #0ecb92
   }
