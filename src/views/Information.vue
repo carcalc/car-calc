@@ -1,6 +1,6 @@
 <template>
   <div class="information">
-    <AboutText />
+    <AboutText :contact="contact" />
   </div>
 </template>
 <script>
@@ -8,6 +8,7 @@ import AboutText from '@/components/AboutText.vue';
 
 export default {
   name: 'information',
+  props: { contact: { type: Object, required: true } },
   components: {
     AboutText,
   },
@@ -26,6 +27,7 @@ export default {
     border-radius: $border-radius;
   }
   sup {
+    font-size: 0.7rem;
     color: $brand-color2;
   }
   h2,
@@ -36,6 +38,11 @@ export default {
   a {
     font-weight: bold;
     color: $brand-color2;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+      color: $brand-color3;
+    }
   }
   ol {
     color: $brand-color2;

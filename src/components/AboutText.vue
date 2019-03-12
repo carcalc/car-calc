@@ -10,8 +10,12 @@
     </p>
     <h2>Om oss</h2>
     <p>
-      Vi som utvecklat denna sajt heter Andreas och Gabriel. Kontakta oss gärna med feedback och
-      idéer på <a :href="email">hello@carcalc.se</a>!
+      Vi som utvecklat denna sajt heter
+      <a :href="`mailto:${contact.andreas.email}`">{{ contact.andreas.name }}</a> och
+      <a :href="`mailto:${contact.gabriel.email}`">{{ contact.gabriel.name }}</a
+      >. Kontakta oss gärna med feedback och idéer på
+      <a :href="`mailto:${contact.email}`">{{ contact.email }}</a
+      >!
     </p>
 
     <h2>Beräkningar</h2>
@@ -49,9 +53,9 @@
 
 <script>
 export default {
+  props: { contact: { type: Object, required: true } },
   data() {
     return {
-      email: 'mailto:hello@carcalc.se',
       references: {
         elbilsnytt: 'http://elbilsnytt.se/elbilar-mycket-billigare-att-serva/',
         bilsvar: 'http://www.bilsvar.se',
