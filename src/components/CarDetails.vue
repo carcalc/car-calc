@@ -1,7 +1,7 @@
 <template>
   <form class="car-details">
     <i class="fas fa-leaf climate-dot" :class="co2Index"></i>
-    <CarLogos :car="car" />
+    <CarLogos :carName="car.name" />
     <div class="stat-block car-price">
       <label class="stat-title" for="car-price">Inköpspris</label>
       <input
@@ -35,9 +35,13 @@
     <div class="stat-block fuel-type">
       <h3 class="stat-title">Drivmedel</h3>
       <input lang="sv" type="radio" name="electric" v-model="car.type" value="electric" />
-      <label for="electric"><i class="fas fa-bolt fa-lg"></i></label>
+      <label for="electric">
+        <i class="fas fa-bolt fa-lg"></i>
+      </label>
       <input lang="sv" type="radio" name="gasoline" v-model="car.type" value="gasoline" />
-      <label for="gasoline"><i class="fas fa-gas-pump fa-lg"></i></label>
+      <label for="gasoline">
+        <i class="fas fa-gas-pump fa-lg"></i>
+      </label>
     </div>
 
     <div class="stat-block consumption">
