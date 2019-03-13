@@ -105,7 +105,7 @@
   }
 }
 
-@mixin climate-dot{
+@mixin climate-dot {
   z-index: 5;
   font-size: 1rem;
   @media screen and (min-width: $size-tablet) {
@@ -113,7 +113,7 @@
   }
 
   &.green {
-    color: #0ecb92
+    color: #0ecb92;
   }
   &.yellow {
     color: #f3e11d;
