@@ -5,7 +5,7 @@
         {{ car.name }}
       </h1>
       <h3 class="card-subtitle">
-        {{ !car.id.includes('generic') ? car.specs : 'Anpassa själv efter önskemål' }}
+        {{ !car.id.includes('generic') ? car.specs : 'Anpassa uppgifterna i rutorna' }}
       </h3>
     </div>
     <select class="cars-dropdown" v-model="car" @change="handleChange">
@@ -93,11 +93,11 @@ export default {
   background-size: 18px;
   background-position: right 4px bottom 5px;
   @media screen and (min-width: $size-tablet) {
+    font-size: 1rem;
     height: 40px;
     background-size: 28px;
     background-position: right 6px bottom 10px;
     padding: 5px 40px 5px 10px;
-    font-size: 1rem;
   }
 
   &:focus,

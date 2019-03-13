@@ -1,9 +1,11 @@
 {
-  "editor.formatOnPaste": false,
-  "editor.formatOnSave": false, // keep off to avoid conflicts
   "prettier.eslintIntegration": true,
-  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
   "eslint.autoFixOnSave": true,
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.formatOnSave": false // keep off to avoid conflicts with vscode's built in linter
+  },
+  "prettier.disableLanguages": ["js"],
   "eslint.validate": [
     {
       "language": "vue",

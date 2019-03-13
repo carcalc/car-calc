@@ -21,9 +21,9 @@
   height: 100%;
   .stat-title {
     font-weight: bold;
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     @media screen and (min-width: $size-small-tablet) {
-      font-size: 0.8rem;
+      font-size: 0.9rem;
     }
     @media screen and (min-width: $size-tablet) {
       font-size: 1rem;
@@ -38,7 +38,7 @@
     border: none;
     font-size: 1.3rem;
     @media screen and (min-width: $size-small-tablet) {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
     }
     @media screen and (min-width: $size-tablet) {
       font-size: 1.8rem;
@@ -81,9 +81,10 @@
     font-style: italic;
     outline: none;
     border: 3px solid transparent;
-    padding: 9px 12px 2px 7px;
-    font-size: 1.8rem;
+    padding: 9px 12px 0px 7px;
+    font-size: 1.7rem;
     @media screen and (min-width: $size-small-tablet) {
+      font-size: 1.8rem;
       padding: 17px 15px 3px 10px;
     }
     @media screen and (min-width: $size-tablet) {
@@ -104,22 +105,24 @@
   }
 }
 
-@mixin climate-dot{
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
+@mixin climate-dot {
   z-index: 5;
+  font-size: 1rem;
+  @media screen and (min-width: $size-tablet) {
+    font-size: 1.5rem;
+  }
+
   &.green {
-    background: rgb(42, 192, 92);
+    color: #0ecb92;
   }
   &.yellow {
-    background: rgb(255, 241, 40);
+    color: #f3e11d;
   }
   &.orange {
-    background: rgb(255, 174, 0);
+    color: rgb(255, 174, 0);
   }
   &.red {
-    background: rgb(248, 54, 20);
+    color: #d82607;
   }
   &.none {
     display: none;

@@ -61,10 +61,11 @@ input,
 a,
 i {
   text-decoration: none;
-
   &:hover {
-    text-decoration: underline;
-    color: $brand-color2;
+    @media screen and (min-width: $size-desktop) {
+      text-decoration: underline;
+      color: $brand-color2;
+    }
   }
 }
 

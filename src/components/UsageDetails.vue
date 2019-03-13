@@ -108,7 +108,7 @@ export default {
       height: 100%;
       .stat-title {
         position: absolute;
-        top: 20px;
+        top: 24px;
         @media screen and (min-width: $size-tablet) {
           position: initial;
         }

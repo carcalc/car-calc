@@ -54,7 +54,9 @@ export default {
       margin: auto;
     }
     &:hover {
-      text-decoration: underline;
+      @media screen and (min-width: $size-desktop) {
+        text-decoration: underline;
+      }
     }
 
     &.router-link-exact-active {
