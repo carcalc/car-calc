@@ -1,7 +1,7 @@
 <template>
   <form class="car-details">
     <i class="fas fa-leaf climate-dot" :class="co2Index"></i>
-
+    <CarLogos :car="car" />
     <div class="stat-block car-price">
       <label class="stat-title" for="car-price">Inköpspris</label>
       <input
@@ -75,9 +75,11 @@
 
 <script>
 import { TweenLite } from 'gsap/TweenMax';
+import CarLogos from '@/components/CarLogos';
 
 export default {
   name: 'CarDetails',
+  components: { CarLogos },
   props: {
     car: { type: Object, required: true },
     usage: { type: Object, required: true },
