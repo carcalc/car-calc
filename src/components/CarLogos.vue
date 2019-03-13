@@ -1,20 +1,20 @@
 <template>
-  <img :src="carName" alt="Car Logo" />
+  <img :src="setLogo" alt="Car Logo" />
 </template>
 
 <script>
 export default {
   name: 'CarLogos',
   props: {
-    car: { type: Object, required: true },
+    carName: { type: String, required: true },
   },
   data() {
     return {};
   },
   computed: {
-    carName: function() {
-      const name = this.car.name.split(' ')[0].toLowerCase();
-      return require('../assets/' + name + '.svg');
+    setLogo: function() {
+      const name = this.carName.split(' ')[0].toLowerCase();
+      return require(`../assets/${name}.svg`);
     },
   },
 };
