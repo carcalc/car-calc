@@ -1,20 +1,21 @@
 <template>
-  <img :src="setLogo" alt="Car Logo" />
+  <img v-if="setSrc !== null" :src="setSrc" alt="Car Logo" />
 </template>
 
 <script>
 export default {
-  name: 'CarLogos',
+  name: 'CarLogo',
   props: {
     carName: { type: String, required: true },
   },
-  data() {
-    return {};
-  },
   computed: {
-    setLogo: function() {
+    setSrc: function() {
       const name = this.carName.split(' ')[0].toLowerCase();
-      return require(`../assets/${name}.svg`);
+      try {
+        return require(`../assets/carlogos/${name}.png`);
+      } catch (e) {
+        return null;
+      }
     },
   },
 };
