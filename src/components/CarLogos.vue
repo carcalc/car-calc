@@ -8,55 +8,72 @@
 export default {
   name: 'CarLogos',
   props: {
-    car: { type: Object, required: true },
-  },
-  data() {
-    return {};
+    carName: { type: String, required: true },
   },
   methods: {
     carLogo() {
-      const { name } = this.car;
+      const name = this.carName;
+      let src;
 
       switch (true) {
         case name.includes('Mercedes'):
-          return require('../assets/mercedes.svg');
+          src = 'mercedes';
+          break;
         case name.includes('Volvo'):
-          return require('../assets/volvo.svg');
+          src = 'volvo';
+          break;
         case name.includes('Kia'):
-          return require('../assets/kia.svg');
+          src = 'kia';
+          break;
         case name.includes('Nissan'):
-          return require('../assets/nissan.svg');
+          src = 'nissan';
+          break;
         case name.includes('Volkswagen'):
-          return require('../assets/volkswagen.svg');
+          src = 'volkswagen';
+          break;
         case name.includes('Tesla'):
-          return require('../assets/tesla.svg');
+          src = 'tesla';
+          break;
         case name.includes('Citro'):
-          return require('../assets/citroen.svg');
+          src = 'citroen';
+          break;
         case name.includes('Peugeot'):
-          return require('../assets/peugeot.svg');
+          src = 'peugeot';
+          break;
         case name.includes('Renault'):
-          return require('../assets/renault.svg');
+          src = 'renault';
+          break;
         case name.includes('Smart'):
-          return require('../assets/smart-car.svg');
+          src = 'smart-car';
+          break;
         case name.includes('Jeep'):
-          return require('../assets/jeep.svg');
+          src = 'jeep';
+          break;
         case name.includes('Hyundai'):
-          return require('../assets/hyundai.svg');
+          src = 'hyundai';
+          break;
         case name.includes('Opel'):
-          return require('../assets/opel.svg');
+          src = 'opel';
+          break;
         case name.includes('Ford'):
-          return require('../assets/ford.svg');
+          src = 'ford';
+          break;
         case name.includes('Fiat'):
-          return require('../assets/fiat.svg');
+          src = 'fiat';
+          break;
         case name.includes('BMW'):
-          return require('../assets/bmw.svg');
+          src = 'bmw';
+          break;
         case name.includes('Alfa Romeo'):
-          return require('../assets/alfa-romeo.svg');
+          src = 'alfa-romeo';
+          break;
         case name.includes('Audi'):
-          return require('../assets/audi.svg');
+          src = 'audi';
+          break;
         default:
-          return require('../assets/default-car-logo.svg');
+          src = 'default-car-logo';
       }
+      return require(`../assets/${src}.svg`);
     },
   },
 };
