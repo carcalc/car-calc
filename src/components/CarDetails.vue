@@ -1,7 +1,7 @@
 <template>
   <form class="car-details">
     <i class="fas fa-leaf climate-dot" :class="co2Index"></i>
-
+    <CarLogos :car="car" />
     <div class="stat-block car-price">
       <label class="stat-title" for="car-price">Inköpspris</label>
       <input
@@ -75,9 +75,11 @@
 
 <script>
 import { TweenLite } from 'gsap/TweenMax';
+import CarLogos from '@/components/CarLogos';
 
 export default {
   name: 'CarDetails',
+  components: { CarLogos },
   props: {
     car: { type: Object, required: true },
     usage: { type: Object, required: true },
@@ -134,13 +136,14 @@ export default {
       return this.tweenedNumbers.ownership.toFixed(0);
     },
     co2Index: function() {
-      if (this.car.co2 > 90 || this.car.type === 'electric') {
+      const { type, co2, consumption } = this.car;
+      if (co2 > 90 || type === 'electric') {
         return 'green';
-      } else if (this.car.co2 > 75) {
+      } else if (co2 > 75 || consumption < 4.5) {
         return 'yellow';
-      } else if (this.car.co2 > 60) {
+      } else if (co2 > 60 || consumption < 6.5) {
         return 'orange';
-      } else if (this.car.co2 > 0) {
+      } else if (co2 > 0 || consumption >= 6.5) {
         return 'red';
       } else {
         return 'none';
