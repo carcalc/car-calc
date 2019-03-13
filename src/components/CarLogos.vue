@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="car-logo">
     <img :src="carLogo()" alt="Car Logo" />
   </div>
 </template>
@@ -62,10 +62,16 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-img {
-  width: 2.5rem;
-  position: absolute;
-  left: 10px;
-  top: 10px;
+.car-logo {
+  img {
+    height: 1.1rem;
+    position: absolute;
+    right: 35px;
+    top: 10px;
+    @media screen and (min-width: $size-tablet) {
+      height: 2.5rem;
+      left: 10px;
+    }
+  }
 }
 </style>
