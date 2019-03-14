@@ -85,7 +85,7 @@ export default {
   }
   @media screen and (min-width: $size-desktop) {
     // Desktop layout
-    grid-template-columns: 200px;
+    grid-template-columns: 1fr;
     grid-template-areas:
       'electricity'
       'gas'

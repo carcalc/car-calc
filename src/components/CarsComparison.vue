@@ -5,7 +5,7 @@
     <template v-for="(car, index) in selectedCars">
       <CarDetails
         :car="car"
-        :key="index + '-details'"
+        :key="'car' + index"
         :usage="usageDetails"
         :evBonus="calcOptions.evBonus"
         @input="toggleBonus(index)"
@@ -38,7 +38,7 @@ export default {
     };
   },
   created() {
-    // this.getStores();
+    this.getStores();
   },
   methods: {
     getStores() {

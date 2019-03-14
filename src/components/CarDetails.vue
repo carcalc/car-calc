@@ -116,6 +116,9 @@ export default {
       ownership: this.usage.ownership,
     };
   },
+  updated() {
+    localStorage.setItem(this.$vnode.key, JSON.stringify(this.car));
+  },
   computed: {
     fuelCost: function() {
       const { gasPrice, kwhPrice } = this.usage;

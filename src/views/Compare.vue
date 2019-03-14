@@ -50,16 +50,14 @@ export default {
     // Desktop layout
     grid-gap: $grid-gap;
     grid-template:
-      'selector selector selector'
+      'car1 selector car2'
       'car1 usage car2'
       'results results results'
-      / 1fr auto 1fr;
+      / 1fr minmax(auto, 300px) 1fr;
   }
 
   .car-details {
-    &:first-of-type {
-      grid-area: car1;
-    }
+    grid-area: car1;
     &:last-of-type {
       grid-area: car2;
     }

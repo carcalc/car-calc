@@ -1,5 +1,5 @@
 <template>
-  <div class="car-selector-wrapper">
+  <div class="car-selector">
     <button :disabled="selectedCar === null" @click="dispatchCar(0)">
       <i class="fas fa-chevron-circle-left"></i>
     </button>
@@ -17,6 +17,7 @@
 
 <script>
 import db from '@/firebase/init';
+import defaultData from '@/defaultData.json';
 
 export default {
   data() {
@@ -27,9 +28,6 @@ export default {
   },
   created() {
     this.fetchCars();
-  },
-  updated() {
-    // localStorage.setItem(`car${0}`, JSON.stringify(this.car));
   },
   methods: {
     dispatchCar(side) {
@@ -50,7 +48,7 @@ export default {
             cars.push(car);
           });
           this.allCars.push(...this.sortCars(cars));
-          // this.allCars.unshift(...defaultData.cars);
+          this.allCars.unshift(...defaultData.cars);
         });
     },
   },
@@ -58,7 +56,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.car-selector-wrapper {
+.car-selector {
   grid-area: selector;
   @include card-style();
   display: flex;
@@ -114,12 +112,6 @@ button {
   &:not(:disabled):focus,
   &:not(:disabled):hover {
     border: $input-focus-border;
-  }
-  &:first-of-type {
-    grid-area: set-left;
-  }
-  &:last-of-type {
-    grid-area: set-right;
   }
 }
 </style>
