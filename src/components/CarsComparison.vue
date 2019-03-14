@@ -1,13 +1,8 @@
 <template>
   <section class="cars-comparison-wrapper">
     <UsageDetails :usageDetails="usageDetails" />
-    <div class="car-wrapper" v-for="(car, index) in selectedCars" :key="index">
-      <CarSelector
-        :allCars="allCars"
-        :selectedCar="car"
-        :key="index + '-selected'"
-        @selected="setNewCar"
-      />
+    <CarSelector @click="setNewCar" />
+    <template v-for="(car, index) in selectedCars">
       <CarDetails
         :car="car"
         :key="index + '-details'"
@@ -15,7 +10,7 @@
         :evBonus="calcOptions.evBonus"
         @input="toggleBonus(index)"
       />
-    </div>
+    </template>
     <CarsResults :usage="usageDetails" :cars="selectedCars" :calcOptions="calcOptions" />
   </section>
 </template>
@@ -26,7 +21,6 @@ import UsageDetails from '@/components/UsageDetails';
 import CarSelector from '@/components/CarSelector';
 import CarDetails from '@/components/CarDetails';
 import CarsResults from '@/components/CarsResults';
-import db from '@/firebase/init';
 
 export default {
   name: 'CarsComparison',
@@ -38,15 +32,13 @@ export default {
   },
   data() {
     return {
-      allCars: [], //Maybe move this to CarSelector; this component does not need to be aware of all cars
       selectedCars: defaultData.cars,
       usageDetails: defaultData.usage,
       calcOptions: { evBonus: defaultData.evBonus, isNewCar: [true, true] },
     };
   },
   created() {
-    this.getStores();
-    this.fetchCars();
+    // this.getStores();
   },
   methods: {
     getStores() {
@@ -61,23 +53,6 @@ export default {
       if (!selectedCars.includes(null)) {
         this.selectedCars = selectedCars;
       }
-    },
-    fetchCars() {
-      let cars = [];
-      db.collection('cars')
-        .get()
-        .then(snapshot => {
-          snapshot.forEach(doc => {
-            let car = doc.data();
-            car.id = doc.id;
-            cars.push(car);
-          });
-          this.allCars.push(...this.sortCars(cars));
-          this.allCars.unshift(...defaultData.cars);
-        });
-    },
-    sortCars(cars) {
-      return cars.sort((a, b) => a.name.localeCompare(b.name));
     },
     setNewCar({ car, index }) {
       this.$set(this.selectedCars, index, car);

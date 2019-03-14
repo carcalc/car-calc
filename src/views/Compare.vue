@@ -20,6 +20,7 @@ export default {
   justify-content: center;
   align-content: baseline;
   grid-template:
+    'selector'
     'usage'
     'car1'
     'car2'
@@ -28,6 +29,7 @@ export default {
   @media screen and (min-width: $size-small-tablet) {
     grid-gap: $grid-gap / 3;
     grid-template:
+      'selector selector'
       'usage usage'
       'car1 car2'
       'results results'
@@ -38,6 +40,7 @@ export default {
     // Tablet layout
     grid-gap: $grid-gap / 2;
     grid-template:
+      'selector selector'
       'usage usage'
       'car1 car2'
       'results results'
@@ -47,23 +50,19 @@ export default {
     // Desktop layout
     grid-gap: $grid-gap;
     grid-template:
+      'selector selector selector'
       'car1 usage car2'
       'results results results'
       / 1fr auto 1fr;
   }
-}
 
-.car-wrapper {
-  @include card-style();
-  display: grid;
-  grid-template-areas: 'selector' 'details';
-  position: relative;
-
-  &:first-of-type {
-    grid-area: car1;
-  }
-  &:last-of-type {
-    grid-area: car2;
+  .car-details {
+    &:first-of-type {
+      grid-area: car1;
+    }
+    &:last-of-type {
+      grid-area: car2;
+    }
   }
 }
 </style>
