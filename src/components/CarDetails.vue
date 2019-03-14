@@ -187,7 +187,7 @@ export default {
   position: relative;
   display: grid;
   grid-auto-rows: max-content;
-  grid-gap: 0.5rem;
+  gap: 0.5rem;
   grid-template:
     'intro intro intro'
     'price price fuel'
@@ -204,7 +204,7 @@ export default {
       / minmax(0, 1fr) minmax(0, 1fr);
   }
   @media screen and (min-width: $size-tablet) {
-    grid-gap: 1rem;
+    gap: 1rem;
   }
 }
 

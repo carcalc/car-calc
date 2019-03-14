@@ -60,15 +60,17 @@ export default {
   grid-area: selector;
   @include card-style();
   display: flex;
+  gap: 0 !important;
 }
 
 select {
+  width: 100%;
   font-weight: bold;
   font-style: italic;
   border: none;
   flex: 1 1 70%;
   background-color: $input-bg;
-  border-radius: $border-radius / 1.5;
+  // border-radius: $border-radius / 1.5;
   appearance: none;
   background-image: url('../assets/select-arrow.svg');
   background-repeat: no-repeat;
@@ -92,19 +94,39 @@ select {
   }
 }
 button {
+  width: 100%;
   flex: 1;
-  border-radius: $border-radius / 1.5;
   background-color: $input-bg;
   color: $black;
   border: 3px solid transparent;
-  padding: 0;
+  padding: 0 5px;
   margin: 0;
   appearance: none;
   height: 25px;
   font-size: 1rem;
+
   @media screen and (min-width: $size-tablet) {
     height: 40px;
     font-size: 1.5rem;
+  }
+
+  &:first-of-type {
+    border-radius: $border-radius / 1.5 0 0 $border-radius / 1.5;
+    i {
+      transform: rotate(-90deg);
+      @media screen and (min-width: $size-desktop) {
+        transform: rotate(0);
+      }
+    }
+  }
+  &:last-of-type {
+    border-radius: 0 $border-radius / 1.5 $border-radius / 1.5 0;
+    i {
+      transform: rotate(90deg);
+      @media screen and (min-width: $size-desktop) {
+        transform: rotate(0);
+      }
+    }
   }
   &:disabled {
     opacity: 0.5;

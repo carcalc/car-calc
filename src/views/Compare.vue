@@ -16,21 +16,21 @@ export default {
 <style lang="scss">
 .cars-comparison-wrapper {
   display: grid;
-  grid-gap: $grid-gap / 6;
+  gap: $gap / 6;
   justify-content: center;
   align-content: baseline;
   grid-template:
-    'selector'
     'usage'
+    'selector'
     'car1'
     'car2'
     'results'
     / 1fr;
   @media screen and (min-width: $size-small-tablet) {
-    grid-gap: $grid-gap / 3;
+    gap: $gap / 3;
     grid-template:
-      'selector selector'
       'usage usage'
+      'selector selector'
       'car1 car2'
       'results results'
       / 1fr 1fr;
@@ -38,20 +38,14 @@ export default {
 
   @media screen and (min-width: $size-tablet) {
     // Tablet layout
-    grid-gap: $grid-gap / 2;
-    grid-template:
-      'selector selector'
-      'usage usage'
-      'car1 car2'
-      'results results'
-      / 1fr 1fr;
+    gap: $gap / 2;
   }
   @media screen and (min-width: $size-desktop) {
     // Desktop layout
-    grid-gap: $grid-gap;
+    gap: $gap;
     grid-template:
-      'car1 selector car2'
       'car1 usage car2'
+      'car1 selector car2'
       'results results results'
       / 1fr minmax(auto, 300px) 1fr;
   }
