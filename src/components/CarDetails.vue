@@ -1,7 +1,16 @@
 <template>
   <form class="car-details">
     <i class="fas fa-leaf climate-dot" :class="co2Index"></i>
-    <CarLogo :carName="car.name" />
+    <div class="car-intro">
+      <CarLogo :carName="car.name" />
+      <h1 class="card-title">
+        {{ car.name }}
+      </h1>
+      <h3 class="card-subtitle">
+        {{ !car.id.includes('generic') ? car.specs : 'Anpassa uppgifterna i rutorna' }}
+      </h3>
+    </div>
+
     <div class="stat-block car-price">
       <label class="stat-title" for="car-price">Inköpspris</label>
       <input
@@ -107,6 +116,9 @@ export default {
       ownership: this.usage.ownership,
     };
   },
+  updated() {
+    localStorage.setItem(this.$vnode.key, JSON.stringify(this.car));
+  },
   computed: {
     fuelCost: function() {
       const { gasPrice, kwhPrice } = this.usage;
@@ -171,16 +183,20 @@ export default {
 
 <style lang="scss" scoped>
 .car-details {
+  @include card-style();
+  position: relative;
   display: grid;
   grid-auto-rows: max-content;
-  grid-gap: 0.5rem;
+  gap: 0.5rem;
   grid-template:
+    'intro intro intro'
     'price price fuel'
     'bonus bonus  consumption'
     'total operating consumption'
     / minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
   @media screen and (min-width: $size-small-tablet) {
     grid-template:
+      'intro intro'
       'price price'
       'bonus bonus'
       'fuel consumption'
@@ -188,72 +204,97 @@ export default {
       / minmax(0, 1fr) minmax(0, 1fr);
   }
   @media screen and (min-width: $size-tablet) {
-    grid-gap: 1rem;
+    gap: 1rem;
   }
+}
 
-  .stat-block {
-    position: relative;
-
-    &.car-price {
-      @include number-stat-block();
-      grid-area: price;
-      .stat-display {
-        font-size: 2rem;
-        @media screen and (min-width: $size-tablet) {
-          font-size: 3.5rem;
-        }
-      }
-    }
-    &.fuel-type {
-      @include stat-block-base();
-      grid-area: fuel;
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      font-style: italic;
-      background-color: $input-bg;
-      border-radius: $border-radius;
-      border: 3px solid transparent;
-      padding-top: 20px;
-      font-size: 0.8rem;
-      @media screen and (min-width: $size-tablet) {
-        font-size: 1rem;
-      }
-
-      .stat-title {
-        position: absolute;
-        top: 5px;
-        left: 10px;
-      }
-    }
-    &.bonus {
-      @include stat-block-base();
-      grid-area: bonus;
-      background-color: $input-bg;
-      border-radius: $border-radius / 1.5;
-      border: 3px solid transparent;
-      padding: 0 5px;
+.car-intro {
+  grid-area: intro;
+  .card-title {
+    display: inline;
+    font-weight: bold;
+    font-size: 1rem;
+    @media screen and (min-width: $size-tablet) {
+      display: block;
       text-align: center;
-      .stat-title {
-        font-style: italic;
-      }
+      font-size: 2rem;
     }
-    &.consumption {
-      @include number-stat-block();
-      grid-area: consumption;
-    }
-    &.operating-cost {
-      @include stat-block-base();
-      grid-area: operating;
-      word-wrap: break-word;
-    }
-    &.total-cost {
-      @include stat-block-base();
-      grid-area: total;
-      word-wrap: break-word;
+  }
+  .card-subtitle {
+    display: inline;
+    font-size: 0.8rem;
+    text-align: right;
+    @media screen and (min-width: $size-tablet) {
+      display: block;
+      text-align: center;
+      font-size: 1.2rem;
     }
   }
 }
+
+.stat-block {
+  position: relative;
+
+  &.car-price {
+    @include number-stat-block();
+    grid-area: price;
+    .stat-display {
+      font-size: 2rem;
+      @media screen and (min-width: $size-tablet) {
+        font-size: 3.5rem;
+      }
+    }
+  }
+  &.fuel-type {
+    @include stat-block-base();
+    grid-area: fuel;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    font-style: italic;
+    background-color: $input-bg;
+    border-radius: $border-radius;
+    border: 3px solid transparent;
+    padding-top: 20px;
+    font-size: 0.8rem;
+    @media screen and (min-width: $size-tablet) {
+      font-size: 1rem;
+    }
+
+    .stat-title {
+      position: absolute;
+      top: 5px;
+      left: 10px;
+    }
+  }
+  &.bonus {
+    @include stat-block-base();
+    grid-area: bonus;
+    background-color: $input-bg;
+    border-radius: $border-radius / 1.5;
+    border: 3px solid transparent;
+    padding: 0 5px;
+    text-align: center;
+    .stat-title {
+      font-style: italic;
+    }
+  }
+  &.consumption {
+    @include number-stat-block();
+    grid-area: consumption;
+  }
+  &.operating-cost {
+    @include stat-block-base();
+    grid-area: operating;
+    word-wrap: break-word;
+  }
+  &.total-cost {
+    @include stat-block-base();
+    grid-area: total;
+    word-wrap: break-word;
+  }
+}
+
 .climate-dot {
   @include climate-dot();
   position: absolute;
