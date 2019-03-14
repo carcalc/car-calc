@@ -57,10 +57,11 @@ export default {
 
 <style lang="scss" scoped>
 .car-selector {
-  grid-area: selector;
   @include card-style();
-  display: flex;
+  grid-area: selector;
   gap: 0 !important;
+  display: flex;
+  align-items: center;
 }
 
 select {
