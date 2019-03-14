@@ -1,13 +1,17 @@
 <template>
   <div class="car-selector">
-    <select class="cars-dropdown" v-model="selectedCar">
-      <option disabled selected hidden value="null">Välj bil (valfritt)</option>
+    <button :disabled="selectedCar === null" @click="dispatchCar(0)">
+      <i class="fas fa-chevron-circle-left"></i>
+    </button>
+    <select v-model="selectedCar">
+      <option disabled selected hidden value="null">Välj en bil</option>
       <option v-for="(car, index) in allCars" :key="index" :value="car">
         {{ car.name }} — {{ car.specs }}
       </option>
     </select>
-    <button :disabled="selectedCar === null" @click="dispatchCar(0)">Välj vänster</button>
-    <button :disabled="selectedCar === null" @click="dispatchCar(1)">Välj höger</button>
+    <button :disabled="selectedCar === null" @click="dispatchCar(1)">
+      <i class="fas fa-chevron-circle-right"></i>
+    </button>
   </div>
 </template>
 
@@ -55,18 +59,17 @@ export default {
 
 <style lang="scss" scoped>
 .car-selector {
-  display: grid;
   grid-area: selector;
+  @include card-style();
+  display: grid;
   grid-gap: 0.5rem;
-  grid-template:
-    'title'
-    'selector';
+  grid-template: 'set-left selector set-right';
   @media screen and (min-width: $size-tablet) {
     grid-gap: 1rem;
   }
 }
 
-.cars-dropdown {
+select {
   grid-area: selector;
   font-weight: bold;
   font-style: italic;
@@ -82,6 +85,7 @@ export default {
   padding: 2px 25px 2px 5px;
   background-size: 18px;
   background-position: right 4px bottom 5px;
+
   @media screen and (min-width: $size-tablet) {
     font-size: 1rem;
     height: 40px;
@@ -93,6 +97,29 @@ export default {
   &:focus,
   &:hover {
     border: $input-focus-border;
+  }
+}
+button {
+  border-radius: $border-radius / 1.5;
+  background-color: $input-bg;
+  color: $black;
+  border: 3px solid transparent;
+  padding: 0;
+  margin: 0;
+  appearance: none;
+  font-size: 2rem;
+  &:disabled {
+    opacity: 0.5;
+  }
+  &:not(:disabled):focus,
+  &:not(:disabled):hover {
+    border: $input-focus-border;
+  }
+  &:first-of-type {
+    grid-area: set-left;
+  }
+  &:last-of-type {
+    grid-area: set-right;
   }
 }
 </style>
