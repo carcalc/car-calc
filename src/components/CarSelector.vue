@@ -1,5 +1,5 @@
 <template>
-  <div class="car-selector">
+  <div class="car-selector-wrapper">
     <button :disabled="selectedCar === null" @click="dispatchCar(0)">
       <i class="fas fa-chevron-circle-left"></i>
     </button>
@@ -58,23 +58,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.car-selector {
+.car-selector-wrapper {
   grid-area: selector;
   @include card-style();
-  display: grid;
-  grid-gap: 0.5rem;
-  grid-template: 'set-left selector set-right';
-  @media screen and (min-width: $size-tablet) {
-    grid-gap: 1rem;
-  }
+  display: flex;
 }
 
 select {
-  grid-area: selector;
   font-weight: bold;
   font-style: italic;
   border: none;
-  width: 100%;
+  flex: 1 1 70%;
   background-color: $input-bg;
   border-radius: $border-radius / 1.5;
   appearance: none;
@@ -100,6 +94,7 @@ select {
   }
 }
 button {
+  flex: 1;
   border-radius: $border-radius / 1.5;
   background-color: $input-bg;
   color: $black;
@@ -107,7 +102,12 @@ button {
   padding: 0;
   margin: 0;
   appearance: none;
-  font-size: 2rem;
+  height: 25px;
+  font-size: 1rem;
+  @media screen and (min-width: $size-tablet) {
+    height: 40px;
+    font-size: 1.5rem;
+  }
   &:disabled {
     opacity: 0.5;
   }
