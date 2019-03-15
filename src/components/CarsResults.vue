@@ -1,22 +1,32 @@
 <template>
   <section class="cars-results">
-    <AnimatedNumber :value="totalDistance" />
     <transition-group name="fade">
-      <div key="1" v-if="totalSavings < 100">
+      <div key="animation-1" v-if="totalSavings < 100">
         <p class="highlight">Båda bilarna kostar lika mycket.</p>
         <p>Vad är oddsen liksom?</p>
       </div>
-      <div key="2" v-else>
+      <div key="animation-2" v-else>
         <p>
           <span class="highlight">{{ cheapestCar.name }}</span> är billigast och utgör en
-          <span class="highlight"> total besparing på {{ savingsFormatted }} </span>
-          (eller {{ percentFormatted }}) jämfört med {{ mostExpensiveCar.name }}.
+          <span class="highlight">
+            total besparing på
+            <BaseAnimatedNumber :value="totalSavings" />
+            kr
+          </span>
+          (eller
+          <BaseAnimatedNumber :value="totalSavingsPercent" />
+          %) jämfört med {{ mostExpensiveCar.name }}.
         </p>
 
-        <p v-if="cheapestCar.type === 'electric'">
-          Miljöbilspremien
-          {{ cheapestIsBrandNew ? `på ${bonusFormatted} är inräknad och` : 'är ej inräknad, men' }}
-          {{ cheapestCar.name }} är ett utmärkt miljöval!
+        <p v-if="cheapestCar.type === 'electric' && cheapestIsBrandNew">
+          Miljöbilspremien på
+          <BaseAnimatedNumber :value="calcOptions.evBonus" />
+          kr är inräknad och {{ cheapestCar.name }} är ett utmärkt miljöval!
+        </p>
+
+        <p v-else-if="cheapestCar.type === 'electric' && !cheapestIsBrandNew">
+          Miljöbilspremien är inte inräknad, men {{ cheapestCar.name }}
+          är ändå ett utmärkt miljöval!
         </p>
 
         <p v-else-if="cheapestCar.co2 < 90">
@@ -26,11 +36,18 @@
         <p>
           <span class="highlight"> {{ cheapestCarToRun.name }}</span>
           {{ cheapestCar === cheapestCarToRun ? 'är också' : 'är dock' }}
-          <span class="highlight">{{ fuelSavingsFormatted }} billigare i drift</span>
-          över {{ yearsFormatted }} och {{ distanceFormatted }}.
+          <span class="highlight">
+            <BaseAnimatedNumber :value="fuelSavings" /> kr billigare i drift
+          </span>
+          över
+          <BaseAnimatedNumber :value="usage.ownership" />
+          år och
+          <BaseAnimatedNumber :value="totalDistance / 10" />
+          mil
         </p>
       </div>
-      <small key="3" class="disclaimer">
+
+      <small key="animation-3" class="disclaimer">
         Uträkningen avser bilens inköpspris samt energiförbrukning och tar inte hänsyn till
         exempelvis skatt, värdeminskning och servicekostnader. Dessa är svåra att estimera korrekt
         och vi har därför för närvarande valt att utelämna dem.
@@ -39,41 +56,16 @@
     </transition-group>
   </section>
 </template>
+
 <script>
-import { TweenLite } from 'gsap/TweenMax';
-import AnimatedNumber from '@/components/AnimatedNumber.vue';
 export default {
   name: 'CarsResults',
-  components: { AnimatedNumber },
   props: {
     usage: { type: Object, required: true },
     cars: { type: Array, required: true },
     calcOptions: { type: Object, required: true },
   },
-  data() {
-    return {
-      tweenedNumbers: {
-        savings: 0,
-        percent: 0,
-        fuelSavings: 0,
-        distance: 0,
-      },
-    };
-  },
-  mounted() {
-    // Sets animation starting points
-    this.tweenedNumbers = {
-      savings: this.totalSavings,
-      percent: this.totalSavingsPercent,
-      fuelSavings: this.fuelSavings,
-      distance: this.totalDistance,
-      years: this.usage.ownership,
-    };
-  },
   methods: {
-    formatNo(num) {
-      return Math.round(num).toLocaleString('sv-SE');
-    },
     getIndexOfLowest(arr) {
       const [carOne, carTwo] = arr;
       return carOne < carTwo ? 0 : 1;
@@ -108,10 +100,6 @@ export default {
           : cost;
       });
     },
-    yearsOfOwnership: function() {
-      // Needed for tweening watcher
-      return this.usage.ownership;
-    },
     totalDistance: function() {
       return this.usage.distance * this.usage.ownership;
     },
@@ -137,7 +125,6 @@ export default {
         this.usage.distance
       );
     },
-
     // Below makes comparisons
     cheapestCar: function() {
       return this.cars[this.getIndexOfLowest(this.totalOwnershipCosts)];
@@ -154,46 +141,10 @@ export default {
     cheapestIsBrandNew: function() {
       return this.calcOptions.isNewCar[this.getIndexOfLowest(this.totalOwnershipCosts)];
     },
-    // Below returns formatted and tweened numbers for DOM output
-    savingsFormatted: function() {
-      return this.formatNo(this.tweenedNumbers.savings) + ' kr';
-    },
-    percentFormatted: function() {
-      return this.formatNo(this.tweenedNumbers.percent) + '%';
-    },
-    fuelSavingsFormatted: function() {
-      return this.formatNo(this.tweenedNumbers.fuelSavings) + ' kr';
-    },
-    distanceFormatted: function() {
-      return this.formatNo(this.tweenedNumbers.distance / 10) + ' mil';
-    },
-    yearsFormatted: function() {
-      return this.formatNo(this.tweenedNumbers.years) + ' år';
-    },
-    bonusFormatted: function() {
-      return this.formatNo(this.calcOptions.evBonus) + ' kr';
-    },
-  },
-  watch: {
-    // Animates numbers on change
-    totalSavings: function(newValue) {
-      TweenLite.to(this.$data.tweenedNumbers, 0.5, { savings: newValue });
-    },
-    totalSavingsPercent: function(newValue) {
-      TweenLite.to(this.$data.tweenedNumbers, 0.5, { percent: newValue });
-    },
-    fuelSavings: function(newValue) {
-      TweenLite.to(this.$data.tweenedNumbers, 0.5, { fuelSavings: newValue });
-    },
-    totalDistance: function(newValue) {
-      TweenLite.to(this.$data.tweenedNumbers, 0.5, { distance: newValue });
-    },
-    yearsOfOwnership: function(newValue) {
-      TweenLite.to(this.$data.tweenedNumbers, 0.5, { years: newValue });
-    },
   },
 };
 </script>
+
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css?family=Nunito:800');
 .cars-results {
@@ -233,10 +184,10 @@ export default {
     }
   }
 }
-.fade-enter-active {
-  transition: opacity 0.3s;
-}
 .fade-enter {
   opacity: 0;
+  &-active {
+    transition: opacity 0.3s;
+  }
 }
 </style>

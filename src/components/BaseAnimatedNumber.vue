@@ -1,7 +1,7 @@
-// Reusable component for wherever we need animated numbers
+// Use this wherever we need animated numbers
 
 <template>
-  <span>{{ value }} {{ tweeningValue }}</span>
+  <span>{{ formattedvalue }}</span>
 </template>
 
 <script>
@@ -21,6 +21,11 @@ export default {
   },
   mounted: function() {
     this.tweeningValue = this.value;
+  },
+  computed: {
+    formattedvalue: function() {
+      return Math.round(this.tweeningValue).toLocaleString('sv-SE');
+    },
   },
   watch: {
     value: function(newValue) {
