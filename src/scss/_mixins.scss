@@ -15,96 +15,6 @@
   }
 }
 
-@mixin stat-block-base() {
-  display: block;
-  width: 100%;
-  height: 100%;
-  .stat-title {
-    font-weight: bold;
-    font-size: 0.8rem;
-    @media screen and (min-width: $size-small-tablet) {
-      font-size: 0.9rem;
-    }
-    @media screen and (min-width: $size-tablet) {
-      font-size: 1rem;
-    }
-  }
-  .stat-display {
-    width: 100%;
-    height: 100%;
-    font-weight: bold;
-    color: $black;
-    margin: 0;
-    border: none;
-    font-size: 1.3rem;
-    @media screen and (min-width: $size-small-tablet) {
-      font-size: 1.4rem;
-    }
-    @media screen and (min-width: $size-tablet) {
-      font-size: 1.8rem;
-    }
-  }
-  .stat-display-unit {
-    font-weight: bold;
-    font-size: 0.5rem;
-    @media screen and (min-width: $size-small-tablet) {
-      font-size: 0.6rem;
-    }
-    @media screen and (min-width: $size-tablet) {
-      font-size: 0.8rem;
-    }
-  }
-}
-
-@mixin input-stat-block() {
-  @include stat-block-base();
-  position: relative;
-  height: 60px;
-  @media screen and (min-width: $size-small-tablet) {
-    height: 70px;
-  }
-  @media screen and (min-width: $size-tablet) {
-    height: 90px;
-  }
-
-  .stat-title {
-    position: absolute;
-    top: 5px;
-    left: 10px;
-    font-style: italic;
-  }
-  .stat-display {
-    display: block;
-    border-radius: $border-radius;
-    line-height: 0;
-    background-color: $input-bg;
-    font-style: italic;
-    outline: none;
-    border: 3px solid transparent;
-    padding: 9px 12px 0px 7px;
-    font-size: 1.7rem;
-    @media screen and (min-width: $size-small-tablet) {
-      font-size: 1.8rem;
-      padding: 17px 15px 3px 10px;
-    }
-    @media screen and (min-width: $size-tablet) {
-      font-size: 2.5rem;
-    }
-    &:focus,
-    &:hover {
-      caret-color: $brand-color2;
-      border: $input-focus-border;
-    }
-  }
-  .stat-display-unit {
-    font-style: italic;
-    position: absolute;
-    margin: 0;
-    bottom: 3px;
-    right: 10px;
-  }
-}
-
 @mixin climate-dot {
   z-index: 5;
   font-size: 1rem;
@@ -126,5 +36,120 @@
   }
   &.none {
     display: none;
+  }
+}
+
+// Static, non editable blocks
+@mixin stat-title-base() {
+  font-weight: bold;
+  font-size: 0.8rem;
+  @media screen and (min-width: $size-small-tablet) {
+    font-size: 0.9rem;
+  }
+  @media screen and (min-width: $size-tablet) {
+    font-size: 1rem;
+  }
+}
+@mixin stat-display-base() {
+  width: 100%;
+  height: 100%;
+  font-weight: bold;
+  color: $black;
+  margin: 0;
+  border: none;
+  font-size: 1.3rem;
+  @media screen and (min-width: $size-small-tablet) {
+    font-size: 1.4rem;
+  }
+  @media screen and (min-width: $size-tablet) {
+    font-size: 1.8rem;
+  }
+}
+@mixin stat-display-base-unit() {
+  font-weight: bold;
+  font-size: 0.5rem;
+  @media screen and (min-width: $size-small-tablet) {
+    font-size: 0.6rem;
+  }
+  @media screen and (min-width: $size-tablet) {
+    font-size: 0.8rem;
+  }
+}
+
+@mixin stat-block-base() {
+  // Full block that include everything for a non-editable stat block
+  display: block;
+  width: 100%;
+  height: 100%;
+
+  .stat-title {
+    @include stat-title-base();
+  }
+  .stat-display {
+    @include stat-display-base();
+  }
+  .stat-display-unit {
+    @include stat-display-base-unit();
+  }
+}
+
+// User-editable blocks
+@mixin input-stat-block-title() {
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  font-style: italic;
+}
+@mixin input-stat-block-display() {
+  display: block;
+  border-radius: $border-radius;
+  line-height: 0;
+  background-color: $input-bg;
+  font-style: italic;
+  outline: none;
+  border: 3px solid transparent;
+  padding: 9px 12px 0px 7px;
+  font-size: 1.7rem;
+  @media screen and (min-width: $size-small-tablet) {
+    font-size: 1.8rem;
+    padding: 17px 15px 3px 10px;
+  }
+  @media screen and (min-width: $size-tablet) {
+    font-size: 2.5rem;
+  }
+  &:focus,
+  &:hover {
+    caret-color: $brand-color2;
+    border: $input-focus-border;
+  }
+}
+
+@mixin input-stat-block-display-unit() {
+  font-style: italic;
+  position: absolute;
+  margin: 0;
+  bottom: 3px;
+  right: 10px;
+}
+
+@mixin input-stat-block() {
+  // Full block that includes everything
+  @include stat-block-base();
+  position: relative;
+  height: 60px;
+  @media screen and (min-width: $size-small-tablet) {
+    height: 70px;
+  }
+  @media screen and (min-width: $size-tablet) {
+    height: 90px;
+  }
+  .stat-title {
+    @include input-stat-block-title();
+  }
+  .stat-display {
+    @include input-stat-block-display();
+  }
+  .stat-display-unit {
+    @include input-stat-block-display-unit();
   }
 }
