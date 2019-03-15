@@ -1,7 +1,7 @@
 <template>
   <div class="car-selector">
     <button :disabled="selectedCar === null" @click="dispatchCar(0)">
-      <i class="fas fa-chevron-circle-left"></i>
+      <i class="fas fa-chevron-circle-up"></i>
     </button>
     <select v-model="selectedCar">
       <option disabled selected hidden value="null">Välj en bil</option>
@@ -10,7 +10,7 @@
       </option>
     </select>
     <button :disabled="selectedCar === null" @click="dispatchCar(1)">
-      <i class="fas fa-chevron-circle-right"></i>
+      <i class="fas fa-chevron-circle-down"></i>
     </button>
   </div>
 </template>
@@ -114,18 +114,19 @@ button {
   &:first-of-type {
     border-radius: $border-radius / 1.5 0 0 $border-radius / 1.5;
     i {
-      transform: rotate(-90deg);
+      @media screen and (min-width: $size-small-tablet) {
+        transform: rotate(180deg);
+      }
       @media screen and (min-width: $size-desktop) {
-        transform: rotate(0);
+        transform: rotate(-90deg);
       }
     }
   }
   &:last-of-type {
     border-radius: 0 $border-radius / 1.5 $border-radius / 1.5 0;
     i {
-      transform: rotate(90deg);
       @media screen and (min-width: $size-desktop) {
-        transform: rotate(0);
+        transform: rotate(-90deg);
       }
     }
   }
