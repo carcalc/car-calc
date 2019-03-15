@@ -15,16 +15,28 @@
       bilen har:
     </p>
     <p>
-      <BaseClimateIndicator forceColor="green" />
-      <BaseClimateIndicator forceColor="yellow" />
-      <BaseClimateIndicator forceColor="orange" />
-      <BaseClimateIndicator forceColor="red" />
+      <template v-for="(car, index) in fakeCars">
+        <ClimateIndicator :car="car" :key="index" />
+      </template>
     </p>
     <p>
       Där grön betyder minst negativ påverkan och röd är den grupp bilar som gör störst påverkan.
     </p>
   </div>
 </template>
+
+<script>
+import ClimateIndicator from '@/components/ClimateIndicator';
+
+export default {
+  components: { ClimateIndicator },
+  data: function() {
+    return {
+      fakeCars: [{ co2: 100 }, { co2: 70 }, { co2: 50 }, { co2: 0 }],
+    };
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 .climate-dot {

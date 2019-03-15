@@ -1,5 +1,3 @@
-// Use this wherever we need animated numbers
-
 <template>
   <span>{{ formattedvalue }}</span>
 </template>
@@ -9,10 +7,8 @@ import { TweenLite } from 'gsap/TweenMax';
 
 export default {
   props: {
-    value: {
-      type: Number,
-      required: true,
-    },
+    value: { type: Number, required: true },
+    decimals: { type: Number, required: false, default: 0 },
   },
   data: function() {
     return {
@@ -24,7 +20,9 @@ export default {
   },
   computed: {
     formattedvalue: function() {
-      return Math.round(this.tweeningValue).toLocaleString('sv-SE');
+      return this.tweeningValue.toLocaleString('sv-SE', {
+        maximumFractionDigits: this.decimals,
+      });
     },
   },
   watch: {
@@ -34,5 +32,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

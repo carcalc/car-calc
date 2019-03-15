@@ -1,32 +1,19 @@
 <template>
   <form class="car-details">
-    <BaseClimateIndicator :car="car" />
-    <div class="car-intro">
-      <CarLogo :carName="car.name" />
-      <h1 class="card-title">
-        {{ car.name }}
-      </h1>
-      <h3 class="card-subtitle">
-        {{ !car.id.includes('generic') ? car.specs : 'Anpassa uppgifterna i rutorna' }}
-      </h3>
-    </div>
+    <ClimateIndicator :car="car" />
+    <CarIntro :car="car" />
 
-    <div class="input-block car-price">
-      <label class="input-title" for="car-price">Inköpspris</label>
-      <input
-        lang="sv"
-        class="input-display"
-        type="number"
-        name="car-price"
-        min="0"
-        max="9999999"
-        v-model.number="car.price"
-        placeholder="Ange pris"
-        inputmode="numeric"
-        pattern="[0-9]*"
-      />
-      <span class="input-display-unit">kr</span>
-    </div>
+    <InputBlockNumber
+      title="Inköpspris"
+      name="car-price"
+      unit="kr"
+      :min="0"
+      :max="9999999"
+      :maxLength="7"
+      :step="1"
+      v-model.number="car.price"
+      placeholder="Ange pris"
+    />
 
     <div class="input-block bonus">
       <input
@@ -43,65 +30,40 @@
       </label>
     </div>
 
-    <div class="input-block fuel-type">
-      <h3 class="input-title">Drivmedel</h3>
-      <div class="input-display">
-        <input lang="sv" type="radio" name="electric" v-model="car.type" value="electric" />
-        <label for="electric">
-          <i class="fas fa-bolt fa-lg"></i>
-        </label>
-        <input lang="sv" type="radio" name="gasoline" v-model="car.type" value="gasoline" />
-        <label for="gasoline">
-          <i class="fas fa-gas-pump fa-lg"></i>
-        </label>
-      </div>
-    </div>
+    <FuelSelector title="Drivmedel" v-model="car.type" :carType="car.type" />
 
-    <div class="input-block consumption">
-      <label class="input-title" for="consumption">Förbrukning</label>
-      <input
-        class="input-display"
-        lang="sv"
-        type="number"
-        name="consumption"
-        step=".1"
-        min="0"
-        v-model.number="car.consumption"
-        placeholder="Fyll i"
-        inputmode="numeric"
-        pattern="[0-9]*"
-      />
-      <span class="input-display-unit">{{ fuelUnit }}</span>
-    </div>
+    <InputBlockNumber
+      title="Förbrukning"
+      name="consumption"
+      :unit="fuelUnit"
+      :step="0.1"
+      :min="0"
+      :maxLength="4"
+      v-model.number="car.consumption"
+    />
 
-    <div class="stat-block operating-cost">
-      <h3 class="stat-title">Driftkostnad</h3>
-      <span class="stat-display">
-        <BaseAnimatedNumber :value="fuelCost" />
-        <span class="stat-display-unit"> kr/mil</span>
-      </span>
-    </div>
+    <StatisticsBlock
+      title="Driftkostnad"
+      :value="fuelCost * 10"
+      unit="kr/mil"
+      name="operating-cost"
+      :decimals="2"
+    />
 
-    <div class="stat-block total-cost">
-      <h3 class="stat-title">
-        Totalkostnad
-        <BaseAnimatedNumber :value="usage.ownership" />
-        år
-      </h3>
-      <div class="stat-display">
-        <BaseAnimatedNumber :value="totalOwnershipCost" />
-        <span class="stat-display-unit"> kr</span>
-      </div>
-    </div>
+    <StatisticsBlock title="Totalkostnad" :value="totalOwnershipCost" unit="kr" name="total-cost" />
   </form>
 </template>
 
 <script>
-import CarLogo from '@/components/CarLogo';
+import ClimateIndicator from '@/components/ClimateIndicator';
+import CarIntro from '@/components/CarIntro';
+import InputBlockNumber from '@/components/InputBlockNumber';
+import StatisticsBlock from '@/components/StatisticsBlock';
+import FuelSelector from '@/components/FuelSelector';
 
 export default {
   name: 'CarDetails',
-  components: { CarLogo },
+  components: { ClimateIndicator, CarIntro, InputBlockNumber, StatisticsBlock, FuelSelector },
   props: {
     car: { type: Object, required: true },
     usage: { type: Object, required: true },
@@ -136,20 +98,6 @@ export default {
     fuelUnit: function() {
       return this.car.type === 'electric' ? 'kWh/100 km' : 'l/100 km';
     },
-    co2Index: function() {
-      const { type, co2, consumption } = this.car;
-      if (co2 > 90 || type === 'electric') {
-        return 'green';
-      } else if (co2 > 75 || consumption < 4.5) {
-        return 'yellow';
-      } else if (co2 > 60 || consumption < 6.5) {
-        return 'orange';
-      } else if (co2 > 0 || consumption >= 6.5) {
-        return 'red';
-      } else {
-        return 'none';
-      }
-    },
   },
 };
 </script>
@@ -181,34 +129,8 @@ export default {
   }
 }
 
-.car-intro {
-  grid-area: intro;
-  .card-title {
-    display: inline;
-    font-weight: bold;
-    font-size: 1rem;
-    @media screen and (min-width: $size-tablet) {
-      display: block;
-      text-align: center;
-      font-size: 2rem;
-    }
-  }
-  .card-subtitle {
-    display: inline;
-    font-size: 0.8rem;
-    text-align: right;
-    @media screen and (min-width: $size-tablet) {
-      display: block;
-      text-align: center;
-      font-size: 1.2rem;
-    }
-  }
-}
-
 .input-block {
-  position: relative;
   &.car-price {
-    @include full-input-block();
     grid-area: price;
     .input-display {
       font-size: 2rem;
@@ -218,18 +140,7 @@ export default {
     }
   }
   &.fuel-type {
-    @include full-input-block();
     grid-area: fuel;
-    .input-display {
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      padding-top: 20px;
-      font-size: 0.8rem;
-      @media screen and (min-width: $size-tablet) {
-        font-size: 1rem;
-      }
-    }
   }
   &.bonus {
     grid-area: bonus;
@@ -244,21 +155,16 @@ export default {
     }
   }
   &.consumption {
-    @include full-input-block();
     grid-area: consumption;
   }
 }
 
 .stat-block {
   &.operating-cost {
-    @include full-stat-block();
     grid-area: operating;
-    word-wrap: break-word;
   }
   &.total-cost {
-    @include full-stat-block();
     grid-area: total;
-    word-wrap: break-word;
   }
 }
 

@@ -1,23 +1,12 @@
 <template>
-  <i class="climate-dot fas fa-leaf" :class="finalColor"></i>
+  <i class="climate-dot fas fa-leaf" :class="co2Index"></i>
 </template>
 
 <script>
 export default {
-  name: 'BaseClimateIndicator',
-  props: { car: { type: Object, required: false }, forceColor: { type: String, required: false } },
+  name: 'ClimateIndicator',
+  props: { car: { type: Object, required: true } },
   computed: {
-    forcedColor: function() {
-      const color = this.forceColor;
-      switch (color) {
-        case 'green':
-        case 'yellow':
-        case 'orange':
-        case 'red':
-          return color;
-      }
-      return color;
-    },
     co2Index: function() {
       const { type, co2, consumption } = this.car;
 
@@ -32,9 +21,6 @@ export default {
       } else {
         return 'none';
       }
-    },
-    finalColor: function() {
-      return this.car === undefined ? this.forcedColor : this.co2Index;
     },
   },
 };
