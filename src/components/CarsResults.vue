@@ -1,5 +1,6 @@
 <template>
   <section class="cars-results">
+    <AnimatedNumber :value="totalDistance" />
     <transition-group name="fade">
       <div key="1" v-if="totalSavings < 100">
         <p class="highlight">Båda bilarna kostar lika mycket.</p>
@@ -40,7 +41,10 @@
 </template>
 <script>
 import { TweenLite } from 'gsap/TweenMax';
+import AnimatedNumber from '@/components/AnimatedNumber.vue';
 export default {
+  name: 'CarsResults',
+  components: { AnimatedNumber },
   props: {
     usage: { type: Object, required: true },
     cars: { type: Array, required: true },
@@ -173,13 +177,13 @@ export default {
   watch: {
     // Animates numbers on change
     totalSavings: function(newValue) {
-      TweenLite.to(this.$data.tweenedNumbers, 1, { savings: newValue });
+      TweenLite.to(this.$data.tweenedNumbers, 0.5, { savings: newValue });
     },
     totalSavingsPercent: function(newValue) {
-      TweenLite.to(this.$data.tweenedNumbers, 1, { percent: newValue });
+      TweenLite.to(this.$data.tweenedNumbers, 0.5, { percent: newValue });
     },
     fuelSavings: function(newValue) {
-      TweenLite.to(this.$data.tweenedNumbers, 1, { fuelSavings: newValue });
+      TweenLite.to(this.$data.tweenedNumbers, 0.5, { fuelSavings: newValue });
     },
     totalDistance: function(newValue) {
       TweenLite.to(this.$data.tweenedNumbers, 0.5, { distance: newValue });

@@ -22,6 +22,8 @@
         max="9999999"
         v-model.number="car.price"
         placeholder="Ange pris"
+        inputmode="numeric"
+        pattern="[0-9]*"
       />
       <span class="input-display-unit">kr</span>
     </div>
@@ -66,6 +68,8 @@
         min="0"
         v-model.number="car.consumption"
         placeholder="Fyll i"
+        inputmode="numeric"
+        pattern="[0-9]*"
       />
       <span class="input-display-unit">{{ fuelUnit }}</span>
     </div>
