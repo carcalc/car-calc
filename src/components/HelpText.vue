@@ -15,19 +15,19 @@
       bilen har:
     </p>
     <p>
-      <i class="climate-dot green fas fa-leaf"></i>
-      <i class=" climate-dot yellow fas fa-leaf"></i>
-      <i class="climate-dot green orange fas fa-leaf"></i>
-      <i class="climate-dot green red fas fa-leaf"></i>
+      <BaseClimateIndicator forceColor="green" />
+      <BaseClimateIndicator forceColor="yellow" />
+      <BaseClimateIndicator forceColor="orange" />
+      <BaseClimateIndicator forceColor="red" />
     </p>
     <p>
       Där grön betyder minst negativ påverkan och röd är den grupp bilar som gör störst påverkan.
     </p>
   </div>
 </template>
+
 <style lang="scss" scoped>
 .climate-dot {
-  @include climate-dot();
   display: inline-block;
   margin: 3px;
 }
