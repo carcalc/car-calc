@@ -75,25 +75,28 @@
     </div>
 
     <div class="stat-block operating-cost">
-      <h3 class="stat-title">Milkostnad</h3>
+      <h3 class="stat-title">Driftkostnad</h3>
       <span class="stat-display">
-        {{ fuelFormatted }}
-        <span class="stat-display-unit">kr</span>
+        <BaseAnimatedNumber :value="fuelCost" />
+        <span class="stat-display-unit"> kr/mil</span>
       </span>
     </div>
 
     <div class="stat-block total-cost">
-      <h3 class="stat-title">Totalkostnad {{ yearsFormatted }} år</h3>
+      <h3 class="stat-title">
+        Totalkostnad
+        <BaseAnimatedNumber :value="usage.ownership" />
+        år
+      </h3>
       <div class="stat-display">
-        {{ totalFormatted }}
-        <span class="stat-display-unit">kr</span>
+        <BaseAnimatedNumber :value="totalOwnershipCost" />
+        <span class="stat-display-unit"> kr</span>
       </div>
     </div>
   </form>
 </template>
 
 <script>
-import { TweenLite } from 'gsap/TweenMax';
 import CarLogo from '@/components/CarLogo';
 
 export default {
@@ -106,20 +109,7 @@ export default {
   },
   data() {
     return {
-      tweenedNumbers: {
-        total: 0,
-        fuelCost: 0,
-        ownership: 0,
-      },
       isNewCar: true,
-    };
-  },
-  mounted() {
-    // Sets animation starting points; can't be done before mount
-    this.tweenedNumbers = {
-      total: this.totalOwnershipCost,
-      fuelCost: this.fuelCost,
-      ownership: this.usage.ownership,
     };
   },
   updated() {
@@ -127,6 +117,7 @@ export default {
   },
   computed: {
     fuelCost: function() {
+      // per km
       const { gasPrice, kwhPrice } = this.usage;
       const car = this.car;
       return car.type === 'electric'
@@ -145,18 +136,6 @@ export default {
     fuelUnit: function() {
       return this.car.type === 'electric' ? 'kWh/100 km' : 'l/100 km';
     },
-    ownershipYears: function() {
-      return this.usage.ownership;
-    },
-    fuelFormatted: function() {
-      return (this.tweenedNumbers.fuelCost * 10).toFixed(1).replace('.', ',');
-    },
-    totalFormatted: function() {
-      return Math.round(this.tweenedNumbers.total).toLocaleString('sv-SE');
-    },
-    yearsFormatted: function() {
-      return this.tweenedNumbers.ownership.toFixed(0);
-    },
     co2Index: function() {
       const { type, co2, consumption } = this.car;
       if (co2 > 90 || type === 'electric') {
@@ -170,18 +149,6 @@ export default {
       } else {
         return 'none';
       }
-    },
-  },
-  watch: {
-    // Animates numbers on change
-    totalOwnershipCost: function(newValue) {
-      TweenLite.to(this.$data.tweenedNumbers, 0.5, { total: newValue });
-    },
-    fuelCost: function(newValue) {
-      TweenLite.to(this.$data.tweenedNumbers, 0.5, { fuelCost: newValue });
-    },
-    ownershipYears: function(newValue) {
-      TweenLite.to(this.$data.tweenedNumbers, 0.5, { ownership: newValue });
     },
   },
 };
