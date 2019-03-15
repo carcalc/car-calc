@@ -21,8 +21,8 @@ export default {
   align-content: baseline;
   grid-template:
     'usage'
-    'selector'
     'car1'
+    'selector'
     'car2'
     'results'
     / 1fr;

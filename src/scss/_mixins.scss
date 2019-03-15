@@ -56,7 +56,7 @@
   }
 }
 
-@mixin number-stat-block() {
+@mixin input-stat-block() {
   @include stat-block-base();
   position: relative;
   height: 60px;

@@ -236,7 +236,7 @@ export default {
   position: relative;
 
   &.car-price {
-    @include number-stat-block();
+    @include input-stat-block();
     grid-area: price;
     .stat-display {
       font-size: 2rem;
@@ -274,13 +274,15 @@ export default {
     border-radius: $border-radius / 1.5;
     border: 3px solid transparent;
     padding: 0 5px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     .stat-title {
       font-style: italic;
     }
   }
   &.consumption {
-    @include number-stat-block();
+    @include input-stat-block();
     grid-area: consumption;
   }
   &.operating-cost {

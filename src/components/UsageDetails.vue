@@ -96,7 +96,7 @@ export default {
   .stat-block {
     &.electricity-price,
     &.gas-price {
-      @include number-stat-block();
+      @include input-stat-block();
     }
     &.years,
     &.distance {
