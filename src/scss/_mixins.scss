@@ -76,8 +76,8 @@
   }
 }
 
-@mixin stat-block-base() {
-  // Full block that include everything for a non-editable stat block
+@mixin full-stat-block() {
+  // Full block that include everything for a static, non-editable blocks
   display: block;
   width: 100%;
   height: 100%;
@@ -93,21 +93,23 @@
   }
 }
 
-// User-editable blocks
+// User-editable blocks, based on statics blocks above
 @mixin input-title() {
+  @include stat-title();
   position: absolute;
   top: 5px;
   left: 10px;
   font-style: italic;
 }
 @mixin input-display() {
+  @include stat-display();
   display: block;
   border-radius: $border-radius;
-  line-height: 0;
+  border: 3px solid transparent;
   background-color: $input-bg;
+  line-height: 0;
   font-style: italic;
   outline: none;
-  border: 3px solid transparent;
   padding: 9px 12px 0px 7px;
   font-size: 1.7rem;
   @media screen and (min-width: $size-small-tablet) {
@@ -125,6 +127,7 @@
 }
 
 @mixin input-unit() {
+  @include stat-unit();
   font-style: italic;
   position: absolute;
   margin: 0;
@@ -132,9 +135,8 @@
   right: 10px;
 }
 
-@mixin input-stat-block() {
-  // Full block that includes everything
-  @include stat-block-base();
+@mixin full-input-block() {
+  // Full block that includes everything for user-editable blocks
   position: relative;
   height: 60px;
   @media screen and (min-width: $size-small-tablet) {
@@ -143,13 +145,13 @@
   @media screen and (min-width: $size-tablet) {
     height: 90px;
   }
-  .stat-title {
+  .input-title {
     @include input-title();
   }
-  .stat-display {
+  .input-display {
     @include input-display();
   }
-  .stat-display-unit {
+  .input-display-unit {
     @include input-unit();
   }
 }

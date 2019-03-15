@@ -11,11 +11,11 @@
       </h3>
     </div>
 
-    <div class="stat-block car-price">
-      <label class="stat-title" for="car-price">Inköpspris</label>
+    <div class="input-block car-price">
+      <label class="input-title" for="car-price">Inköpspris</label>
       <input
         lang="sv"
-        class="stat-display"
+        class="input-display"
         type="number"
         name="car-price"
         min="0"
@@ -23,10 +23,10 @@
         v-model.number="car.price"
         placeholder="Ange pris"
       />
-      <span class="stat-display-unit">kr</span>
+      <span class="input-display-unit">kr</span>
     </div>
 
-    <div class="stat-block bonus">
+    <div class="input-block bonus">
       <input
         type="checkbox"
         name="bonus"
@@ -34,29 +34,31 @@
         @change="$emit('input', $event.target.checked)"
         :hidden="car.type !== 'electric'"
       />
-      <label for="bonus" class="stat-title">
+      <label for="bonus" class="input-title">
         {{
           car.type === 'electric' ? 'Inkludera miljöbilspremie' : 'Miljöbilspremie ej tillämplig'
         }}
       </label>
     </div>
 
-    <div class="stat-block fuel-type">
-      <h3 class="stat-title">Drivmedel</h3>
-      <input lang="sv" type="radio" name="electric" v-model="car.type" value="electric" />
-      <label for="electric">
-        <i class="fas fa-bolt fa-lg"></i>
-      </label>
-      <input lang="sv" type="radio" name="gasoline" v-model="car.type" value="gasoline" />
-      <label for="gasoline">
-        <i class="fas fa-gas-pump fa-lg"></i>
-      </label>
+    <div class="input-block fuel-type">
+      <h3 class="input-title">Drivmedel</h3>
+      <div class="input-display">
+        <input lang="sv" type="radio" name="electric" v-model="car.type" value="electric" />
+        <label for="electric">
+          <i class="fas fa-bolt fa-lg"></i>
+        </label>
+        <input lang="sv" type="radio" name="gasoline" v-model="car.type" value="gasoline" />
+        <label for="gasoline">
+          <i class="fas fa-gas-pump fa-lg"></i>
+        </label>
+      </div>
     </div>
 
-    <div class="stat-block consumption">
-      <label class="stat-title" for="consumption">Förbrukning</label>
+    <div class="input-block consumption">
+      <label class="input-title" for="consumption">Förbrukning</label>
       <input
-        class="stat-display"
+        class="input-display"
         lang="sv"
         type="number"
         name="consumption"
@@ -65,7 +67,7 @@
         v-model.number="car.consumption"
         placeholder="Fyll i"
       />
-      <span class="stat-display-unit">{{ fuelUnit }}</span>
+      <span class="input-display-unit">{{ fuelUnit }}</span>
     </div>
 
     <div class="stat-block operating-cost">
@@ -232,13 +234,12 @@ export default {
   }
 }
 
-.stat-block {
+.input-block {
   position: relative;
-
   &.car-price {
-    @include input-stat-block();
+    @include full-input-block();
     grid-area: price;
-    .stat-display {
+    .input-display {
       font-size: 2rem;
       @media screen and (min-width: $size-tablet) {
         font-size: 3.5rem;
@@ -246,52 +247,45 @@ export default {
     }
   }
   &.fuel-type {
-    @include stat-block-base();
+    @include full-input-block();
     grid-area: fuel;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    font-style: italic;
-    background-color: $input-bg;
-    border-radius: $border-radius;
-    border: 3px solid transparent;
-    padding-top: 20px;
-    font-size: 0.8rem;
-    @media screen and (min-width: $size-tablet) {
-      font-size: 1rem;
-    }
-
-    .stat-title {
-      position: absolute;
-      top: 5px;
-      left: 10px;
+    .input-display {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      padding-top: 20px;
+      font-size: 0.8rem;
+      @media screen and (min-width: $size-tablet) {
+        font-size: 1rem;
+      }
     }
   }
   &.bonus {
-    @include stat-block-base();
     grid-area: bonus;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid transparent;
     background-color: $input-bg;
     border-radius: $border-radius / 1.5;
-    border: 3px solid transparent;
-    padding: 0 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .stat-title {
-      font-style: italic;
+    .input-title {
+      @include stat-title();
     }
   }
   &.consumption {
-    @include input-stat-block();
+    @include full-input-block();
     grid-area: consumption;
   }
+}
+
+.stat-block {
   &.operating-cost {
-    @include stat-block-base();
+    @include full-stat-block();
     grid-area: operating;
     word-wrap: break-word;
   }
   &.total-cost {
-    @include stat-block-base();
+    @include full-stat-block();
     grid-area: total;
     word-wrap: break-word;
   }
