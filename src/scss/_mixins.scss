@@ -40,7 +40,7 @@
 }
 
 // Static, non editable blocks
-@mixin stat-title-base() {
+@mixin stat-title() {
   font-weight: bold;
   font-size: 0.8rem;
   @media screen and (min-width: $size-small-tablet) {
@@ -50,7 +50,7 @@
     font-size: 1rem;
   }
 }
-@mixin stat-display-base() {
+@mixin stat-display() {
   width: 100%;
   height: 100%;
   font-weight: bold;
@@ -65,7 +65,7 @@
     font-size: 1.8rem;
   }
 }
-@mixin stat-display-base-unit() {
+@mixin stat-unit() {
   font-weight: bold;
   font-size: 0.5rem;
   @media screen and (min-width: $size-small-tablet) {
@@ -83,24 +83,24 @@
   height: 100%;
 
   .stat-title {
-    @include stat-title-base();
+    @include stat-title();
   }
   .stat-display {
-    @include stat-display-base();
+    @include stat-display();
   }
   .stat-display-unit {
-    @include stat-display-base-unit();
+    @include stat-unit();
   }
 }
 
 // User-editable blocks
-@mixin input-stat-block-title() {
+@mixin input-title() {
   position: absolute;
   top: 5px;
   left: 10px;
   font-style: italic;
 }
-@mixin input-stat-block-display() {
+@mixin input-display() {
   display: block;
   border-radius: $border-radius;
   line-height: 0;
@@ -124,7 +124,7 @@
   }
 }
 
-@mixin input-stat-block-display-unit() {
+@mixin input-unit() {
   font-style: italic;
   position: absolute;
   margin: 0;
@@ -144,12 +144,12 @@
     height: 90px;
   }
   .stat-title {
-    @include input-stat-block-title();
+    @include input-title();
   }
   .stat-display {
-    @include input-stat-block-display();
+    @include input-display();
   }
   .stat-display-unit {
-    @include input-stat-block-display-unit();
+    @include input-unit();
   }
 }
