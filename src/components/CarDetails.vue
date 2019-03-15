@@ -1,6 +1,6 @@
 <template>
   <form class="car-details">
-    <i class="fas fa-leaf climate-dot" :class="co2Index"></i>
+    <BaseClimateIndicator :car="car" />
     <div class="car-intro">
       <CarLogo :carName="car.name" />
       <h1 class="card-title">
@@ -263,7 +263,6 @@ export default {
 }
 
 .climate-dot {
-  @include climate-dot();
   position: absolute;
   right: 10px;
   top: 10px;
