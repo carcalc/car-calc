@@ -1,6 +1,5 @@
 <template>
   <form class="car-details">
-    <ClimateIndicator :car="car" />
     <CarIntro :car="car" />
 
     <InputBlockNumber
@@ -28,6 +27,7 @@
           car.type === 'electric' ? 'Inkludera miljöbilspremie' : 'Miljöbilspremie ej tillämplig'
         }}
       </label>
+      <ClimateIndicator :car="car" />
     </div>
 
     <FuelSelector title="Drivmedel" v-model="car.type" :carType="car.type" />
@@ -143,6 +143,7 @@ export default {
     grid-area: fuel;
   }
   &.bonus {
+    // should probably make this a component
     grid-area: bonus;
     display: flex;
     justify-content: center;
@@ -150,8 +151,18 @@ export default {
     border: 3px solid transparent;
     background-color: $input-bg;
     border-radius: $border-radius / 1.5;
+    padding: 0 0.5rem;
+
     .input-title {
-      @include stat-title();
+      flex: 1;
+      font-weight: bold;
+      font-size: 0.8rem;
+      @media screen and (min-width: $size-small-tablet) {
+        font-size: 0.9rem;
+      }
+      @media screen and (min-width: $size-tablet) {
+        font-size: 1rem;
+      }
     }
   }
   &.consumption {
@@ -166,11 +177,5 @@ export default {
   &.total-cost {
     grid-area: total;
   }
-}
-
-.climate-dot {
-  position: absolute;
-  right: 10px;
-  top: 10px;
 }
 </style>
