@@ -29,9 +29,9 @@ export default {
 <style lang="scss" scoped>
 .climate-dot {
   z-index: 5;
-  font-size: 1rem;
+  font-size: 0.8rem;
   @media screen and (min-width: $size-tablet) {
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
 
   &.green {

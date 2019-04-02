@@ -24,7 +24,7 @@ export default {
 img {
   height: 1.1rem;
   position: absolute;
-  right: 35px;
+  right: 10px;
   top: 10px;
   @media screen and (min-width: $size-tablet) {
     height: 2rem;
