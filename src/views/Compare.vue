@@ -44,8 +44,8 @@ export default {
     // Desktop layout
     gap: $gap;
     grid-template:
-      'car1 usage car2' 1fr
-      'car1 selector car2' auto // Todo: make this look less weird. It's too stretched
+      'car1 usage car2'
+      'car1 selector car2'
       'results results results'
       / 1fr minmax(auto, 300px) 1fr;
   }

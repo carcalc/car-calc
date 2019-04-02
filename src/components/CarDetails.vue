@@ -107,7 +107,7 @@ export default {
   @include card-style();
   position: relative;
   display: grid;
-  grid-auto-rows: max-content;
+  align-content: end;
   gap: 0.5rem;
   grid-template:
     'intro intro intro'
