@@ -1,40 +1,55 @@
 <template>
   <div class="car-selector">
-    <div class="text-wrapper">
-      <h1 class="card-title">
-        {{ car.name }}
-      </h1>
-      <h3 class="card-subtitle">
-        {{ !car.id.includes('generic') ? car.specs : 'Anpassa uppgifterna i rutorna' }}
-      </h3>
-    </div>
-    <select class="cars-dropdown" v-model="car" @change="handleChange">
-      <option disabled value>Välj bil (valfritt)</option>
+    <button :disabled="selectedCar === null" @click="dispatchCar(0)">
+      <i class="fas fa-chevron-circle-up"></i>
+    </button>
+    <select v-model="selectedCar">
+      <option disabled selected hidden value="null">Välj en bil</option>
       <option v-for="(car, index) in allCars" :key="index" :value="car">
         {{ car.name }} — {{ car.specs }}
       </option>
     </select>
+    <button :disabled="selectedCar === null" @click="dispatchCar(1)">
+      <i class="fas fa-chevron-circle-down"></i>
+    </button>
   </div>
 </template>
 
 <script>
+import db from '@/firebase/init';
+import defaultData from '@/defaultData.json';
+
 export default {
-  props: {
-    selectedCar: { type: Object, required: true },
-    allCars: { type: Array, required: true },
-  },
   data() {
     return {
-      car: this.selectedCar,
-      carIndex: this.$vnode.key.charAt(0),
+      selectedCar: null,
+      allCars: [],
     };
   },
-  updated() {
-    localStorage.setItem(`car${this.carIndex}`, JSON.stringify(this.car));
+  created() {
+    this.fetchCars();
   },
   methods: {
-    handleChange() {
-      this.$emit('selected', { car: this.car, index: this.carIndex });
+    dispatchCar(side) {
+      this.$emit('click', { car: this.selectedCar, index: side });
+      this.selectedCar = null;
+    },
+    sortCars(cars) {
+      return cars.sort((a, b) => a.name.localeCompare(b.name));
+    },
+    fetchCars() {
+      let cars = [];
+      db.collection('cars')
+        .get()
+        .then(snapshot => {
+          snapshot.forEach(doc => {
+            let car = doc.data();
+            car.id = doc.id;
+            cars.push(car);
+          });
+          this.allCars.push(...this.sortCars(cars));
+          this.allCars.unshift(...defaultData.cars);
+        });
     },
   },
 };
@@ -42,48 +57,21 @@ export default {
 
 <style lang="scss" scoped>
 .car-selector {
-  display: grid;
-  grid-gap: 0.5rem;
-  grid-template:
-    'title'
-    'selector';
-  @media screen and (min-width: $size-tablet) {
-    grid-gap: 1rem;
-  }
-}
-
-.text-wrapper {
-  grid-area: title;
-  .card-title {
-    display: inline;
-    font-weight: bold;
-    font-size: 1rem;
-    @media screen and (min-width: $size-tablet) {
-      display: block;
-      text-align: center;
-      font-size: 2rem;
-    }
-  }
-  .card-subtitle {
-    display: inline;
-    font-size: 0.8rem;
-    text-align: right;
-    @media screen and (min-width: $size-tablet) {
-      display: block;
-      text-align: center;
-      font-size: 1.2rem;
-    }
-  }
-}
-
-.cars-dropdown {
+  @include card-style();
   grid-area: selector;
+  gap: 0 !important;
+  display: flex;
+  align-items: center;
+}
+
+select {
+  width: 100%;
   font-weight: bold;
   font-style: italic;
   border: none;
-  width: 100%;
+  flex: 1 1 70%;
   background-color: $input-bg;
-  border-radius: $border-radius / 1.5;
+  // border-radius: $border-radius / 1.5;
   appearance: none;
   background-image: url('../assets/select-arrow.svg');
   background-repeat: no-repeat;
@@ -92,6 +80,7 @@ export default {
   padding: 2px 25px 2px 5px;
   background-size: 18px;
   background-position: right 4px bottom 5px;
+
   @media screen and (min-width: $size-tablet) {
     font-size: 1rem;
     height: 40px;
@@ -102,6 +91,50 @@ export default {
 
   &:focus,
   &:hover {
+    border: $input-focus-border;
+  }
+}
+button {
+  width: 100%;
+  flex: 1;
+  background-color: $input-bg;
+  color: $black;
+  border: 3px solid transparent;
+  padding: 0 5px;
+  margin: 0;
+  appearance: none;
+  height: 25px;
+  font-size: 1rem;
+
+  @media screen and (min-width: $size-tablet) {
+    height: 40px;
+    font-size: 1.5rem;
+  }
+
+  &:first-of-type {
+    border-radius: $border-radius / 1.5 0 0 $border-radius / 1.5;
+    i {
+      @media screen and (min-width: $size-small-tablet) {
+        transform: rotate(180deg);
+      }
+      @media screen and (min-width: $size-desktop) {
+        transform: rotate(-90deg);
+      }
+    }
+  }
+  &:last-of-type {
+    border-radius: 0 $border-radius / 1.5 $border-radius / 1.5 0;
+    i {
+      @media screen and (min-width: $size-desktop) {
+        transform: rotate(-90deg);
+      }
+    }
+  }
+  &:disabled {
+    opacity: 0.5;
+  }
+  &:not(:disabled):focus,
+  &:not(:disabled):hover {
     border: $input-focus-border;
   }
 }

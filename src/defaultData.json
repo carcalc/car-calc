@@ -1,8 +1,8 @@
 {
   "evBonus": 60000,
   "usage": {
-    "gasPrice": 14.3,
-    "kwhPrice": 1.5,
+    "gasPrice": 16.04,
+    "kwhPrice": 1.55,
     "distance": 15000,
     "ownership": 3
   },

@@ -3,128 +3,14 @@
   background-color: $card-bg;
   backdrop-filter: blur(5px);
   padding: 1rem;
-  grid-gap: 0.5rem;
+  gap: 0.5rem;
   border-radius: $border-radius / 1.5;
 
   @media screen and (min-width: $size-tablet) {
     border-radius: $border-radius;
     padding: 1.5rem;
-    grid-gap: 1rem;
+    gap: 1rem;
     // Card layout for tablet and desktop
     box-shadow: 1px 1px 2px 0px rgba(0, 0, 80, 0.3);
-  }
-}
-
-@mixin stat-block-base() {
-  display: block;
-  width: 100%;
-  height: 100%;
-  .stat-title {
-    font-weight: bold;
-    font-size: 0.8rem;
-    @media screen and (min-width: $size-small-tablet) {
-      font-size: 0.9rem;
-    }
-    @media screen and (min-width: $size-tablet) {
-      font-size: 1rem;
-    }
-  }
-  .stat-display {
-    width: 100%;
-    height: 100%;
-    font-weight: bold;
-    color: $black;
-    margin: 0;
-    border: none;
-    font-size: 1.3rem;
-    @media screen and (min-width: $size-small-tablet) {
-      font-size: 1.4rem;
-    }
-    @media screen and (min-width: $size-tablet) {
-      font-size: 1.8rem;
-    }
-  }
-  .stat-display-unit {
-    font-weight: bold;
-    font-size: 0.5rem;
-    @media screen and (min-width: $size-small-tablet) {
-      font-size: 0.6rem;
-    }
-    @media screen and (min-width: $size-tablet) {
-      font-size: 0.8rem;
-    }
-  }
-}
-
-@mixin number-stat-block() {
-  @include stat-block-base();
-  position: relative;
-  height: 60px;
-  @media screen and (min-width: $size-small-tablet) {
-    height: 70px;
-  }
-  @media screen and (min-width: $size-tablet) {
-    height: 90px;
-  }
-
-  .stat-title {
-    position: absolute;
-    top: 5px;
-    left: 10px;
-    font-style: italic;
-  }
-  .stat-display {
-    display: block;
-    border-radius: $border-radius;
-    line-height: 0;
-    background-color: $input-bg;
-    font-style: italic;
-    outline: none;
-    border: 3px solid transparent;
-    padding: 9px 12px 0px 7px;
-    font-size: 1.7rem;
-    @media screen and (min-width: $size-small-tablet) {
-      font-size: 1.8rem;
-      padding: 17px 15px 3px 10px;
-    }
-    @media screen and (min-width: $size-tablet) {
-      font-size: 2.5rem;
-    }
-    &:focus,
-    &:hover {
-      caret-color: $brand-color2;
-      border: $input-focus-border;
-    }
-  }
-  .stat-display-unit {
-    font-style: italic;
-    position: absolute;
-    margin: 0;
-    bottom: 3px;
-    right: 10px;
-  }
-}
-
-@mixin climate-dot{
-  z-index: 5;
-  font-size: 1rem;
-  @media screen and (min-width: $size-tablet) {
-    font-size: 1.5rem;
-  }
-
-  &.green {
-    color: #0ecb92
-  }
-  &.yellow {
-    color: #f3e11d;
-  }
-  &.orange {
-    color: rgb(255, 174, 0);
-  }
-  &.red {
-    color: #d82607;
-  }
-  &.none {
-    display: none;
   }
 }
