@@ -60,16 +60,14 @@ export default {
   @include card-style();
   grid-area: selector;
   gap: 0 !important;
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
 }
 
 select {
-  width: 100%;
   font-weight: bold;
   font-style: italic;
   border: none;
-  flex: 1 1 70%;
   background-color: $input-bg;
   // border-radius: $border-radius / 1.5;
   appearance: none;
