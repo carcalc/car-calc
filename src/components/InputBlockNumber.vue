@@ -9,10 +9,10 @@
       :step="step"
       :min="min"
       :max="max"
+      :inputmode="noDecimals ? 'numeric' : 'decimal'"
       lang="sv"
       class="input-display"
       type="number"
-      inputmode="numeric"
       pattern="[0-9]*"
     />
     <span class="input-display-unit">{{ unit }}</span>
@@ -20,8 +20,6 @@
 </template>
 
 <script>
-// import { TweenLite } from 'gsap/TweenMax';
-
 export default {
   name: 'InputBlockNumber',
   data: function() {
@@ -37,6 +35,7 @@ export default {
     max: { required: false, type: Number },
     maxLength: { required: false, type: Number },
     placeholder: { required: false, type: String, default: 'Fyll i' },
+    noDecimals: { required: false, type: Boolean, default: false },
   },
   methods: {
     handleInput: function(e) {
@@ -47,14 +46,6 @@ export default {
       const isMax = input.length >= this.maxLength;
       input = isMax ? input.substring(0, this.maxLength) : (this.newValue = input);
       return parseFloat(input);
-    },
-  },
-  watch: {
-    value: function(newValue) {
-      // TweenLite.to(this.$data, 0.5, { newValue });
-      // reenable when decimals have been removed
-
-      this.newValue = newValue;
     },
   },
 };

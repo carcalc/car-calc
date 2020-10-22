@@ -10,6 +10,7 @@
       :max="9999999"
       :maxLength="7"
       :step="1"
+      noDecimals
       v-model.number="car.price"
       placeholder="Ange pris"
     />
