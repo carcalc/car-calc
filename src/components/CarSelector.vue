@@ -61,7 +61,7 @@ export default {
   grid-area: selector;
   gap: 0 !important;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
 }
 
 select {
