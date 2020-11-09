@@ -1,7 +1,7 @@
 <template>
   <nav id="nav">
     <router-link class="home-link" :to="{ name: 'compare' }">Jämför</router-link>
-    <router-link class="help-link" :to="{ name: 'help' }">Hjälp</router-link>
+    <router-link :to="{ name: 'help' }">Hjälp</router-link>
     <router-link :to="{ name: 'information' }">Om</router-link>
   </nav>
 </template>
@@ -64,16 +64,12 @@ export default {
       color: $brand-color2;
     }
   }
-  .help-link {
-    // Hide help link on non-mobile
-    @media screen and (min-width: $size-tablet) {
-      display: none;
-    }
-  }
+
   .home-link {
-    // Hide home on mobile
+    // Hide home by default
     display: none;
     @media screen and (min-width: $size-small-tablet) {
+      // Display home when there's space
       display: initial;
     }
   }
