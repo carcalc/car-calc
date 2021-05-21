@@ -36,7 +36,7 @@
       name="years"
       :step="1"
       :min="1"
-      :max="10"
+      :max="20"
       v-model.number="usage.ownership"
     />
   </form>
