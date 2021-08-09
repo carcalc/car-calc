@@ -2,7 +2,7 @@
   <nav id="nav">
     <router-link class="home-link" :to="{ name: 'compare' }">Jämför</router-link>
     <router-link :to="{ name: 'help' }">Hjälp</router-link>
-    <router-link :to="{ name: 'information' }">Om</router-link>
+    <router-link :to="{ name: 'about' }">Om</router-link>
   </nav>
 </template>
 

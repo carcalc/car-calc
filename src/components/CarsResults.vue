@@ -34,7 +34,7 @@
         Uträkningen avser bilens inköpspris samt energiförbrukning och tar inte hänsyn till
         exempelvis skatt, värdeminskning och servicekostnader. Dessa är svåra att estimera korrekt
         och vi har därför för närvarande valt att utelämna dem.
-        <router-link :to="{ name: 'information' }">Läs mer om hur vi har resonerat.</router-link>
+        <router-link :to="{ name: 'about' }">Läs mer om hur vi har resonerat.</router-link>
       </small>
     </transition-group>
   </section>
