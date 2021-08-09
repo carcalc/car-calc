@@ -59,23 +59,19 @@ export default {
     },
   },
   computed: {
-    fuelCosts: function() {
+    fuelCosts() {
       const { gasPrice, kwhPrice } = this.usage;
       return this.cars.map(car => {
-        const cost =
-          car.type === 'electric'
-            ? (car.consumption * kwhPrice) / 100
-            : (car.consumption * gasPrice) / 100;
-        return cost;
+        return (car.consumption * (car.type === 'electric' ? kwhPrice : gasPrice)) / 100;
       });
     },
-    totalFuelCosts: function() {
+    totalFuelCosts() {
       const { distance, ownership } = this.usage;
       return this.cars.map((car, index) =>
         Math.round(this.fuelCosts[index] * distance * ownership),
       );
     },
-    totalOwnershipCosts: function() {
+    totalOwnershipCosts() {
       return this.cars.map((car, index) => {
         const cost = this.totalFuelCosts[index] + car.price;
         return car.type === 'electric' && this.calcOptions.isNewCar[index]
@@ -83,25 +79,25 @@ export default {
           : cost;
       });
     },
-    totalDistance: function() {
+    totalDistance() {
       return this.usage.distance * this.usage.ownership;
     },
-    fuelSavings: function() {
+    fuelSavings() {
       const [carOne, carTwo] = this.totalFuelCosts;
       if (carOne < carTwo) return carTwo - carOne;
       else return carOne - carTwo;
     },
-    totalSavings: function() {
+    totalSavings() {
       const [carOne, carTwo] = this.totalOwnershipCosts;
       if (carOne < carTwo) return carTwo - carOne;
       else return carOne - carTwo;
     },
-    totalSavingsPercent: function() {
+    totalSavingsPercent() {
       const [carOne, carTwo] = this.totalOwnershipCosts;
       const diff = this.totalSavings;
       return Math.round(carOne > carTwo ? (diff / carOne) * 100 : (diff / carTwo) * 100);
     },
-    energySaved: function() {
+    energySaved() {
       // Currently not displayed anywhere
       return (
         (this.cars[this.getIndexOfLowest(this.totalFuelCosts)].consumption / 100) *
@@ -109,19 +105,19 @@ export default {
       );
     },
     // Below makes comparisons
-    cheapestCar: function() {
+    cheapestCar() {
       return this.cars[this.getIndexOfLowest(this.totalOwnershipCosts)];
     },
-    cheapestCarToRun: function() {
+    cheapestCarToRun() {
       return this.cars[this.getIndexOfLowest(this.totalFuelCosts)];
     },
-    mostExpensiveCar: function() {
+    mostExpensiveCar() {
       return this.cars[this.getIndexOfHighest(this.totalOwnershipCosts)];
     },
-    mostExpensiveCarToRun: function() {
+    mostExpensiveCarToRun() {
       return this.cars[this.getIndexOfHighest(this.totalFuelCosts)];
     },
-    cheapestIsBrandNew: function() {
+    cheapestIsBrandNew() {
       return this.calcOptions.isNewCar[this.getIndexOfLowest(this.totalOwnershipCosts)];
     },
   },
