@@ -13,8 +13,8 @@
             <BaseAnimatedNumber :value="totalSavings" suffix=" kr" />
           </span>
           (eller
-          <BaseAnimatedNumber :value="totalSavingsPercent" suffix="%" />
-          ) jämfört med {{ mostExpensiveCar.name }}.
+          <BaseAnimatedNumber :value="totalSavingsPercent" suffix="%" />) jämfört med
+          {{ mostExpensiveCar.name }}.
         </p>
 
         <p>
@@ -27,7 +27,6 @@
           <BaseAnimatedNumber :value="usage.ownership" suffix=" år" />
           och
           <BaseAnimatedNumber :value="totalDistance / 10" suffix=" mil" />
-          mil
         </p>
       </div>
 
