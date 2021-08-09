@@ -10,10 +10,10 @@
           <span class="highlight">{{ cheapestCar.name }}</span> är billigast och utgör en
           <span class="highlight">
             total besparing på
-            <BaseAnimatedNumber :value="totalSavings" suffix=" kr" />
+            <BaseAnimatedNumber :value="totalSavings" unit=" kr" />
           </span>
           (eller
-          <BaseAnimatedNumber :value="totalSavingsPercent" suffix="%" />) jämfört med
+          <BaseAnimatedNumber :value="totalSavingsPercent" unit="%" />) jämfört med
           {{ mostExpensiveCar.name }}.
         </p>
 
@@ -21,12 +21,12 @@
           <span class="highlight"> {{ cheapestCarToRun.name }}</span>
           {{ cheapestCar === cheapestCarToRun ? 'är också' : 'är dock' }}
           <span class="highlight">
-            <BaseAnimatedNumber :value="fuelSavings" suffix=" kr" /> billigare i drift
+            <BaseAnimatedNumber :value="fuelSavings" unit=" kr" /> billigare i drift
           </span>
           över
-          <BaseAnimatedNumber :value="usage.ownership" suffix=" år" />
+          <BaseAnimatedNumber :value="usage.ownership" unit=" år" />
           och
-          <BaseAnimatedNumber :value="totalDistance / 10" suffix=" mil" />
+          <BaseAnimatedNumber :value="totalDistance / 10" unit=" mil" />
         </p>
       </div>
 

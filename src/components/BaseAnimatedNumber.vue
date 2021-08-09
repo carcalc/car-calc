@@ -1,5 +1,5 @@
 <template>
-  <span>{{ formattedvalue }}{{ suffix }}</span>
+  <span>{{ formattedvalue }}{{ unit }}</span>
 </template>
 
 <script>
@@ -8,7 +8,7 @@ import { TweenLite } from 'gsap/TweenMax';
 export default {
   props: {
     value: { type: Number, required: true },
-    suffix: { type: String, default: '' },
+    unit: { type: String, default: '' },
     decimals: { type: Number, required: false, default: 0 },
   },
   data: function() {
