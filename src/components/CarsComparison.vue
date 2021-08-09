@@ -38,10 +38,11 @@ export default {
     };
   },
   created() {
-    this.getStores();
+    this.getStoredCars();
   },
   methods: {
-    getStores() {
+    // Todo: rewrite this to let CarSelector handle state and storage, remove $set methods
+    getStoredCars() {
       let selectedCars = [];
       const usage = JSON.parse(localStorage.getItem('usage'));
       if (usage !== null) this.usageDetails = usage;
