@@ -5,7 +5,7 @@
       {{ car.name }}
     </h1>
     <h3 class="car-specs">
-      {{ !car.id.includes('generic') ? car.specs : 'Anpassa uppgifterna i rutorna' }}
+      {{ car.specs }}
     </h3>
   </div>
 </template>

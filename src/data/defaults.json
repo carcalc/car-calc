@@ -11,7 +11,7 @@
       "consumption": 18.1,
       "id": "generic-1",
       "name": "Bil 1",
-      "specs": "Exempelbil",
+      "specs": "Anpassa själv",
       "price": 325000,
       "type": "electric",
       "verified": false
@@ -20,7 +20,7 @@
       "consumption": 7.1,
       "id": "generic-2",
       "name": "Bil 2",
-      "specs": "Exempelbil",
+      "specs": "Anpassa själv",
       "price": 245000,
       "type": "gasoline",
       "verified": false
