@@ -17,7 +17,7 @@
 
 <script>
 import db from '@/firebase/init';
-import defaultData from '@/defaultData.json';
+import defaultData from '@/data/defaults';
 
 export default {
   data() {

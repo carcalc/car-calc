@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import defaultData from '@/defaultData.json';
+import defaultData from '@/data/defaults';
 import UsageDetails from '@/components/UsageDetails';
 import CarSelector from '@/components/CarSelector';
 import CarDetails from '@/components/CarDetails';
