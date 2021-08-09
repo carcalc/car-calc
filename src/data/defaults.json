@@ -14,8 +14,7 @@
       "specs": "Exempelbil",
       "price": 325000,
       "type": "electric",
-      "verified": false,
-      "co2": null
+      "verified": false
     },
     {
       "consumption": 7.1,
@@ -24,8 +23,7 @@
       "specs": "Exempelbil",
       "price": 245000,
       "type": "gasoline",
-      "verified": false,
-      "co2": null
+      "verified": false
     }
   ]
 }

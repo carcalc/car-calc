@@ -28,7 +28,6 @@
           car.type === 'electric' ? 'Inkludera miljöbilspremie' : 'Miljöbilspremie ej tillämplig'
         }}
       </label>
-      <ClimateIndicator :car="car" />
     </div>
 
     <FuelSelector title="Drivmedel" v-model="car.type" :carType="car.type" />
@@ -56,7 +55,6 @@
 </template>
 
 <script>
-import ClimateIndicator from '@/components/ClimateIndicator';
 import CarIntro from '@/components/CarIntro';
 import InputBlockNumber from '@/components/InputBlockNumber';
 import StatisticsBlock from '@/components/StatisticsBlock';
@@ -64,7 +62,7 @@ import FuelSelector from '@/components/FuelSelector';
 
 export default {
   name: 'CarDetails',
-  components: { ClimateIndicator, CarIntro, InputBlockNumber, StatisticsBlock, FuelSelector },
+  components: { CarIntro, InputBlockNumber, StatisticsBlock, FuelSelector },
   props: {
     car: { type: Object, required: true },
     usage: { type: Object, required: true },

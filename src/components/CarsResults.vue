@@ -18,21 +18,6 @@
           %) jämfört med {{ mostExpensiveCar.name }}.
         </p>
 
-        <p v-if="cheapestCar.type === 'electric' && cheapestIsBrandNew">
-          Miljöbilspremien på
-          <BaseAnimatedNumber :value="calcOptions.evBonus" />
-          kr är inräknad och {{ cheapestCar.name }} är ett utmärkt miljöval!
-        </p>
-
-        <p v-else-if="cheapestCar.type === 'electric' && !cheapestIsBrandNew">
-          Miljöbilspremien är inte inräknad, men {{ cheapestCar.name }}
-          är ändå ett utmärkt miljöval!
-        </p>
-
-        <p v-else-if="cheapestCar.co2 < 90">
-          Dessvärre är det inget bra miljöval.
-        </p>
-
         <p>
           <span class="highlight"> {{ cheapestCarToRun.name }}</span>
           {{ cheapestCar === cheapestCarToRun ? 'är också' : 'är dock' }}

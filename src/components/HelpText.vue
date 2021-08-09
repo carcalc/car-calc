@@ -10,33 +10,8 @@
       och de förifyllda värdena går förstås bra att ändra vid behov. I rutan längst ned ser du sedan
       resultatet av jämförelsen.
     </p>
-    <p>
-      Uppe i högra hörnet på respektive bil ser du en färgad symbol som visar vilken klimatpåverkan
-      bilen har:
-    </p>
-    <p>
-      <template v-for="(car, index) in fakeCars">
-        <ClimateIndicator :car="car" :key="index" />
-      </template>
-    </p>
-    <p>
-      Där grön betyder minst negativ påverkan och röd är den grupp bilar som gör störst påverkan.
-    </p>
   </div>
 </template>
-
-<script>
-import ClimateIndicator from '@/components/ClimateIndicator';
-
-export default {
-  components: { ClimateIndicator },
-  data: function() {
-    return {
-      fakeCars: [{ co2: 100 }, { co2: 70 }, { co2: 50 }, { co2: 0 }],
-    };
-  },
-};
-</script>
 
 <style lang="scss" scoped>
 .climate-dot {
