@@ -3,18 +3,7 @@
     <a :href="`mailto:${contact.email}`" class="email">
       <i class="far fa-envelope"></i>
     </a>
-    <p class="links">
-      <span class="copy">© 2021 </span>
-      <span class="andreas">
-        <a :href="`mailto:${contact.andreas.email}`">{{ contact.andreas.name }}</a>
-        <a target="_blank" :href="contact.andreas.linkedIn"> <i class="fab fa-linkedin-in"></i></a>
-      </span>
-      &
-      <span class="gabriel">
-        <a :href="`mailto:${contact.gabriel.email}`">{{ contact.gabriel.name }}</a>
-        <a target="_blank" :href="contact.gabriel.linkedIn"> <i class="fab fa-linkedin-in"></i></a>
-      </span>
-    </p>
+    <p class="copyright">{{ copyrightText }}</p>
     <input
       class="reset"
       lang="sv"
@@ -29,6 +18,12 @@
 export default {
   name: 'AppFooter',
   props: { contact: { type: Object, required: true } },
+  computed: {
+    copyrightText() {
+      const { andreas, gabriel } = this.contact;
+      return `© 2021 ${andreas.name} & ${gabriel.name}`;
+    },
+  },
 };
 </script>
 
@@ -44,23 +39,13 @@ footer {
   align-items: center;
 }
 
-i {
-  color: $white;
-  margin: 4px;
-  &.fa-linkedin-in {
-    display: none; // Disabled to see how it looks
-  }
-}
-
-a,
-p {
-  color: $white;
+a {
+  color: inherit;
 }
 
 input,
 a,
 i {
-  text-decoration: none;
   &:hover {
     @media screen and (min-width: $size-desktop) {
       text-decoration: underline;
@@ -69,12 +54,7 @@ i {
   }
 }
 
-.email i {
-  font-size: 1rem;
-  font-weight: bold;
-}
-.copy,
-.links {
+.copyright {
   font-size: 0.8rem;
 }
 

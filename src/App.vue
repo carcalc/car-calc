@@ -8,6 +8,7 @@
     <AppFooter :contact="contact" @reset="resetApp" />
   </div>
 </template>
+
 <script>
 import AppHeader from '@/components/AppHeader';
 import AppFooter from '@/components/AppFooter';
@@ -45,6 +46,7 @@ export default {
   },
 };
 </script>
+
 <style lang="scss">
 #app {
   background: rgb(0, 0, 0);
