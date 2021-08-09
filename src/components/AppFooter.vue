@@ -4,7 +4,7 @@
       <i class="far fa-envelope"></i>
     </a>
     <p class="links">
-      <span class="copy">© 2019 </span>
+      <span class="copy">© 2021 </span>
       <span class="andreas">
         <a :href="`mailto:${contact.andreas.email}`">{{ contact.andreas.name }}</a>
         <a target="_blank" :href="contact.andreas.linkedIn"> <i class="fab fa-linkedin-in"></i></a>
