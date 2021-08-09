@@ -1,6 +1,6 @@
 <template>
   <div class="help-text">
-    <h2>Användarhjälp</h2>
+    <h2>Hjälp</h2>
     <p>
       Jämför enkelt kostnaderna mellan två bilar genom att ändra uppgifterna som vi har förifyllt.
       Du kan också välja en bil från menyn och ändra dess specifikationer.
