@@ -20,6 +20,7 @@ export default {
     AppFooter,
   },
   data() {
+    // Todo: move this to locale file when i18n is installed
     return {
       contact: {
         email: 'hello@carcalc.se',
