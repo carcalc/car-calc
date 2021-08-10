@@ -21,12 +21,13 @@ export default {
   data() {
     return { fuelType: null };
   },
-  mounted() {
-    this.fuelType = this.value ? 'electric' : 'gasoline';
-  },
+
   watch: {
-    value() {
-      this.fuelType = this.value ? 'electric' : 'gasoline';
+    value: {
+      immediate: true,
+      handler(newVal) {
+        this.fuelType = newVal ? 'electric' : 'gasoline';
+      },
     },
     fuelType() {
       this.$emit('input', this.fuelType === 'electric');
