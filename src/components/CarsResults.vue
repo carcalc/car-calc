@@ -67,15 +67,13 @@ export default {
     },
     totalFuelCosts() {
       const { distance, ownership } = this.usage;
-      return this.cars.map((car, index) =>
-        Math.round(this.fuelCosts[index] * distance * ownership),
-      );
+      return this.cars.map((_, index) => Math.round(this.fuelCosts[index] * distance * ownership));
     },
     totalOwnershipCosts() {
       return this.cars.map((car, index) => {
         const cost = this.totalFuelCosts[index] + car.price;
         return car.type === 'electric' && this.calcOptions.isNewCar[index]
-          ? cost - this.calcOptions.evBonus
+          ? cost - this.calcOptions.governmentGrant
           : cost;
       });
     },

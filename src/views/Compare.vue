@@ -7,7 +7,7 @@
         :car="car"
         :key="'car' + index"
         :usage="usageDetails"
-        :evBonus="calcOptions.evBonus"
+        :governmentGrant="calcOptions.governmentGrant"
         @input="toggleBonus(index)"
       />
     </template>
@@ -32,15 +32,24 @@ export default {
   },
   data() {
     return {
-      selectedCars: defaultData.cars,
-      usageDetails: defaultData.usage,
-      calcOptions: { evBonus: defaultData.evBonus, isNewCar: [true, true] },
+      selectedCars: [],
+      usageDetails: {},
+      calcOptions: {
+        governmentGrant: null,
+        isNewCar: [true, true],
+      },
     };
   },
   created() {
+    this.setDefaults();
     this.getStoredCars();
   },
   methods: {
+    setDefaults() {
+      this.selectedCars = defaultData.cars;
+      this.usageDetails = defaultData.usage;
+      this.calcOptions.governmentGrant = defaultData.governmentGrant;
+    },
     // Todo: rewrite this to let CarSelector handle state and storage, remove $set methods
     getStoredCars() {
       let selectedCars = [];

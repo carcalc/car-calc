@@ -1,5 +1,5 @@
 {
-  "evBonus": 70000,
+  "governmentGrant": 70000,
   "usage": {
     "gasPrice": 16.04,
     "kwhPrice": 1.55,

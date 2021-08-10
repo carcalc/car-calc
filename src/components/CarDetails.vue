@@ -66,7 +66,7 @@ export default {
   props: {
     car: { type: Object, required: true },
     usage: { type: Object, required: true },
-    evBonus: { type: Number, required: true },
+    governmentGrant: { type: Number, required: true },
   },
   data() {
     return {
@@ -92,7 +92,7 @@ export default {
     totalOwnershipCost: function() {
       const car = this.car;
       const cost = this.totalFuelCost + car.price;
-      return car.type === 'electric' && this.isNewCar ? cost - this.evBonus : cost;
+      return car.type === 'electric' && this.isNewCar ? cost - this.governmentGrant : cost;
     },
     fuelUnit: function() {
       return this.car.type === 'electric' ? 'kWh/100 km' : 'l/100 km';
