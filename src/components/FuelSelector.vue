@@ -25,6 +25,9 @@ export default {
     this.fuelType = this.value ? 'electric' : 'gasoline';
   },
   watch: {
+    value() {
+      this.fuelType = this.value ? 'electric' : 'gasoline';
+    },
     fuelType() {
       this.$emit('input', this.fuelType === 'electric');
     },
