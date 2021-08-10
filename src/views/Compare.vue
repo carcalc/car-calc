@@ -36,6 +36,7 @@ export default {
       usageDetails: {},
       calcOptions: {
         governmentGrant: null,
+        // Todo: remove below once grant is a number (that can be 0). Not needed anymore
         isNewCar: [true, true],
       },
     };
