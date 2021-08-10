@@ -13,8 +13,7 @@
       "name": "Bil 1",
       "specs": "Anpassa själv",
       "price": 325000,
-      "type": "electric",
-      "verified": false
+      "isEv": true
     },
     {
       "consumption": 7.1,
@@ -22,8 +21,7 @@
       "name": "Bil 2",
       "specs": "Anpassa själv",
       "price": 245000,
-      "type": "gasoline",
-      "verified": false
+      "isEv": false
     }
   ]
 }

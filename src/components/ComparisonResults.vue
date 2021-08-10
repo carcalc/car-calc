@@ -60,7 +60,7 @@ export default {
     fuelCostsPerKm() {
       const { gasPrice, kwhPrice } = this.usage;
       return this.cars.map(car => {
-        return (car.consumption * (car.type === 'electric' ? kwhPrice : gasPrice)) / 100;
+        return (car.consumption * (car.isEv ? kwhPrice : gasPrice)) / 100;
       });
     },
     totalFuelCosts() {
@@ -72,7 +72,7 @@ export default {
     totalOwnershipCosts() {
       return this.cars.map((car, index) => {
         const cost = this.totalFuelCosts[index] + car.price;
-        return car.type === 'electric' && this.calcOptions.isNewCar[index]
+        return car.isEv && this.calcOptions.isNewCar[index]
           ? cost - this.calcOptions.governmentGrant
           : cost;
       });

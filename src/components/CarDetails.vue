@@ -21,16 +21,14 @@
         name="bonus"
         v-model="isNewCar"
         @change="$emit('input', $event.target.checked)"
-        :hidden="car.type !== 'electric'"
+        :hidden="!car.isEv"
       />
       <label for="bonus" class="input-title">
-        {{
-          car.type === 'electric' ? 'Inkludera miljöbilspremie' : 'Miljöbilspremie ej tillämplig'
-        }}
+        {{ car.isEv ? 'Inkludera miljöbilspremie' : 'Miljöbilspremie ej tillämplig' }}
       </label>
     </div>
 
-    <FuelSelector title="Drivmedel" v-model="car.type" :carType="car.type" />
+    <FuelSelector title="Drivmedel" v-model="car.isEv" />
 
     <InputBlockNumber
       title="Förbrukning"
@@ -80,7 +78,7 @@ export default {
     fuelCostPerKm: function() {
       const { gasPrice, kwhPrice } = this.usage;
       const car = this.car;
-      return (car.consumption * (car.type === 'electric' ? kwhPrice : gasPrice)) / 100;
+      return (car.consumption * (car.isEv ? kwhPrice : gasPrice)) / 100;
     },
     totalFuelCost: function() {
       const { distance, ownership } = this.usage;
@@ -89,10 +87,10 @@ export default {
     totalOwnershipCost: function() {
       const car = this.car;
       const cost = this.totalFuelCost + car.price;
-      return car.type === 'electric' && this.isNewCar ? cost - this.governmentGrant : cost;
+      return car.isEv && this.isNewCar ? cost - this.governmentGrant : cost;
     },
     fuelUnit: function() {
-      return this.car.type === 'electric' ? 'kWh/100 km' : 'l/100 km';
+      return this.car.isEv ? 'kWh/100 km' : 'l/100 km';
     },
   },
 };

@@ -2,25 +2,11 @@
   <div class="fuel-selector">
     <h3 class="title">{{ title }}</h3>
     <div class="fuel-display">
-      <input
-        v-on:input="$emit('input', $event.target.value)"
-        lang="sv"
-        type="radio"
-        name="electric"
-        value="electric"
-        v-model="carType"
-      />
+      <input lang="sv" type="radio" name="electric" value="electric" v-model="fuelType" />
       <label for="electric">
         <i class="fas fa-bolt fa-lg"></i>
       </label>
-      <input
-        v-on:input="$emit('input', $event.target.value)"
-        lang="sv"
-        type="radio"
-        name="gasoline"
-        value="gasoline"
-        v-model="carType"
-      />
+      <input lang="sv" type="radio" name="gasoline" value="gasoline" v-model="fuelType" />
       <label for="gasoline">
         <i class="fas fa-gas-pump fa-lg"></i>
       </label>
@@ -31,7 +17,18 @@
 <script>
 export default {
   name: 'FuelSelector',
-  props: { carType: { required: true, type: String }, title: { required: true, type: String } },
+  props: { value: { required: true, type: Boolean }, title: { required: true, type: String } },
+  data() {
+    return { fuelType: null };
+  },
+  mounted() {
+    this.fuelType = this.value ? 'electric' : 'gasoline';
+  },
+  watch: {
+    fuelType() {
+      this.$emit('input', this.fuelType === 'electric');
+    },
+  },
 };
 </script>
 
