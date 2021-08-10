@@ -49,12 +49,10 @@ export default {
     calcOptions: { type: Object, required: true },
   },
   methods: {
-    getIndexOfLowest(arr) {
-      const [carOne, carTwo] = arr;
+    getIndexOfLowest([carOne, carTwo]) {
       return carOne < carTwo ? 0 : 1;
     },
-    getIndexOfHighest(arr) {
-      const [carOne, carTwo] = arr;
+    getIndexOfHighest([carOne, carTwo]) {
       return carOne > carTwo ? 0 : 1;
     },
   },
