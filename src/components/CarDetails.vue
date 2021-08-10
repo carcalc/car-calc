@@ -44,7 +44,7 @@
 
     <StatisticsBlock
       title="Driftkostnad"
-      :value="fuelCost * 10"
+      :value="fuelCostPerKm * 10"
       unit="kr/mil"
       name="operating-cost"
       :decimals="2"
@@ -77,17 +77,14 @@ export default {
     localStorage.setItem(this.$vnode.key, JSON.stringify(this.car));
   },
   computed: {
-    fuelCost: function() {
-      // per km
+    fuelCostPerKm: function() {
       const { gasPrice, kwhPrice } = this.usage;
       const car = this.car;
-      return car.type === 'electric'
-        ? (car.consumption * kwhPrice) / 100
-        : (car.consumption * gasPrice) / 100;
+      return (car.consumption * (car.type === 'electric' ? kwhPrice : gasPrice)) / 100;
     },
     totalFuelCost: function() {
       const { distance, ownership } = this.usage;
-      return Math.round(this.fuelCost * distance * ownership);
+      return Math.round(this.fuelCostPerKm * distance * ownership);
     },
     totalOwnershipCost: function() {
       const car = this.car;

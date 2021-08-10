@@ -57,7 +57,7 @@ export default {
     },
   },
   computed: {
-    fuelCosts() {
+    fuelCostsPerKm() {
       const { gasPrice, kwhPrice } = this.usage;
       return this.cars.map(car => {
         return (car.consumption * (car.type === 'electric' ? kwhPrice : gasPrice)) / 100;
@@ -65,7 +65,9 @@ export default {
     },
     totalFuelCosts() {
       const { distance, ownership } = this.usage;
-      return this.cars.map((_, index) => Math.round(this.fuelCosts[index] * distance * ownership));
+      return this.cars.map((_, index) =>
+        Math.round(this.fuelCostsPerKm[index] * distance * ownership),
+      );
     },
     totalOwnershipCosts() {
       return this.cars.map((car, index) => {
