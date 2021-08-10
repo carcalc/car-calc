@@ -11,7 +11,7 @@
         @input="toggleBonus(index)"
       />
     </template>
-    <CarsResults :usage="usageDetails" :cars="selectedCars" :calcOptions="calcOptions" />
+    <ComparisonResults :usage="usageDetails" :cars="selectedCars" :calcOptions="calcOptions" />
   </section>
 </template>
 
@@ -20,7 +20,7 @@ import defaultData from '@/data/defaults';
 import UsageDetails from '@/components/UsageDetails';
 import CarSelector from '@/components/CarSelector';
 import CarDetails from '@/components/CarDetails';
-import CarsResults from '@/components/CarsResults';
+import ComparisonResults from '@/components/ComparisonResults';
 
 export default {
   name: 'Compare',
@@ -28,7 +28,7 @@ export default {
     UsageDetails,
     CarSelector,
     CarDetails,
-    CarsResults,
+    ComparisonResults,
   },
   data() {
     return {

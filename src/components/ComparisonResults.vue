@@ -42,7 +42,7 @@
 
 <script>
 export default {
-  name: 'CarsResults',
+  name: 'ComparisonResults',
   props: {
     usage: { type: Object, required: true },
     cars: { type: Array, required: true },
