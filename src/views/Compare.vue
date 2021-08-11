@@ -2,7 +2,7 @@
   <section class="cars-comparison">
     <UsageDetails :usageDetails="usageDetails" />
     <CarSelector @click="setNewCar" />
-    <template v-for="(car, index) in selectedCars">
+    <template v-for="(car, index) in cars">
       <CarDetails
         :car="car"
         :key="'car' + index"
@@ -11,7 +11,7 @@
         @input="toggleBonus(index)"
       />
     </template>
-    <ComparisonResults :usage="usageDetails" :cars="selectedCars" :calcOptions="calcOptions" />
+    <ComparisonResults :usage="usageDetails" :cars="cars" :calcOptions="calcOptions" />
   </section>
 </template>
 
@@ -32,7 +32,7 @@ export default {
   },
   data() {
     return {
-      selectedCars: [],
+      cars: [],
       usageDetails: {},
       calcOptions: {
         governmentGrant: null,
@@ -47,26 +47,26 @@ export default {
   },
   methods: {
     setDefaults() {
-      this.selectedCars = defaultData.cars;
+      this.cars = defaultData.cars;
       this.usageDetails = defaultData.usage;
       this.calcOptions.governmentGrant = defaultData.governmentGrant;
     },
     // Todo: rewrite this to let CarSelector handle state and storage, remove $set methods
     getStoredCars() {
-      let selectedCars = [];
+      let cars = [];
       const usage = JSON.parse(localStorage.getItem('usage'));
       if (usage !== null) this.usageDetails = usage;
 
-      this.selectedCars.forEach((car, index) => {
-        selectedCars.push(JSON.parse(localStorage.getItem(`car${index}`)));
+      this.cars.forEach((car, index) => {
+        cars.push(JSON.parse(localStorage.getItem(`car${index}`)));
       });
 
-      if (!selectedCars.includes(null)) {
-        this.selectedCars = selectedCars;
+      if (!cars.includes(null)) {
+        this.cars = cars;
       }
     },
     setNewCar({ car, index }) {
-      this.$set(this.selectedCars, index, car);
+      this.$set(this.cars, index, car);
     },
     toggleBonus(index) {
       this.$set(this.calcOptions.isNewCar, index, !this.calcOptions.isNewCar[index]);
