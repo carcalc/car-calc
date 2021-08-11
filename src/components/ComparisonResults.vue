@@ -59,7 +59,7 @@ export default {
   computed: {
     fuelCostsPerKm() {
       const { gasPrice, kwhPrice } = this.usage;
-      return this.cars.map(car => {
+      return this.cars.map((car) => {
         return (car.consumption * (car.isEv ? kwhPrice : gasPrice)) / 100;
       });
     },

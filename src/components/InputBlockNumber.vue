@@ -22,7 +22,7 @@
 <script>
 export default {
   name: 'InputBlockNumber',
-  data: function() {
+  data() {
     return { newValue: this.value };
   },
   props: {
@@ -38,11 +38,11 @@ export default {
     noDecimals: { required: false, type: Boolean, default: false },
   },
   methods: {
-    handleInput: function(e) {
+    handleInput: function (e) {
       this.newValue = this.sanitizeInput(e.target.value);
       this.$emit('input', this.newValue);
     },
-    sanitizeInput: function(input) {
+    sanitizeInput: function (input) {
       const isMax = input.length >= this.maxLength;
       input = isMax ? input.substring(0, this.maxLength) : (this.newValue = input);
       return parseFloat(input);

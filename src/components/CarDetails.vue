@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint-disable vue/no-mutating-props -->
   <form class="car-details">
     <CarIntro :car="car" />
 
@@ -75,21 +76,21 @@ export default {
     localStorage.setItem(this.$vnode.key, JSON.stringify(this.car));
   },
   computed: {
-    fuelCostPerKm: function() {
+    fuelCostPerKm() {
       const { gasPrice, kwhPrice } = this.usage;
       const car = this.car;
       return (car.consumption * (car.isEv ? kwhPrice : gasPrice)) / 100;
     },
-    totalFuelCost: function() {
+    totalFuelCost() {
       const { distance, ownership } = this.usage;
       return Math.round(this.fuelCostPerKm * distance * ownership);
     },
-    totalOwnershipCost: function() {
+    totalOwnershipCost() {
       const car = this.car;
       const cost = this.totalFuelCost + car.price;
       return car.isEv && this.isNewCar ? cost - this.governmentGrant : cost;
     },
-    fuelUnit: function() {
+    fuelUnit() {
       return this.car.isEv ? 'kWh/100 km' : 'l/100 km';
     },
   },

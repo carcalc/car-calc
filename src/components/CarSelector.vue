@@ -41,8 +41,8 @@ export default {
       let cars = [];
       db.collection('cars')
         .get()
-        .then(snapshot => {
-          snapshot.forEach(doc => {
+        .then((snapshot) => {
+          snapshot.forEach((doc) => {
             let car = doc.data();
             car.id = doc.id;
             cars.push(car);

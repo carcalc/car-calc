@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from './router';
 import upperFirst from 'lodash/upperFirst';
 import camelCase from 'lodash/camelCase';
+import 'core-js';
 
 Vue.config.productionTip = false;
 
@@ -15,7 +16,7 @@ const requireComponent = require.context(
   /Base[A-Z]\w+\.(vue|js)$/,
 );
 
-requireComponent.keys().forEach(fileName => {
+requireComponent.keys().forEach((fileName) => {
   // Get component config
   const componentConfig = requireComponent(fileName);
 
@@ -42,5 +43,5 @@ requireComponent.keys().forEach(fileName => {
 
 new Vue({
   router,
-  render: h => h(App),
+  render: (h) => h(App),
 }).$mount('#app');

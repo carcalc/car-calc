@@ -9,7 +9,7 @@ export default {
     carName: { type: String, required: true },
   },
   computed: {
-    setSrc: function() {
+    setSrc() {
       const name = this.carName.split(' ')[0].toLowerCase();
       try {
         return require(`../assets/carlogos/${name}.png`);

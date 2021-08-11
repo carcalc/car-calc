@@ -66,8 +66,7 @@ export default {
         },
         {
           title: 'Transportstyrelsen',
-          url:
-            'https://www.transportstyrelsen.se/sv/vagtrafik/Fordon/bonus-malus/bonus/berakna-din-preliminara-bonus/',
+          url: 'https://www.transportstyrelsen.se/sv/vagtrafik/Fordon/bonus-malus/bonus/berakna-din-preliminara-bonus/',
         },
       ],
     };
