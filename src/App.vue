@@ -76,6 +76,7 @@ export default {
     padding: 1rem;
   }
 }
+
 .bounce-enter-active {
   animation: bounce-in 0.3s;
 }
