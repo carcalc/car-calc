@@ -3,13 +3,15 @@
     <UsageDetails :usageDetails="usageDetails" />
     <CarSelector @click="setNewCar" />
     <template v-for="(car, index) in cars">
-      <CarDetails
-        :car="car"
-        :key="'car' + index"
-        :usage="usageDetails"
-        :governmentGrant="calcOptions.governmentGrant"
-        @input="toggleBonus(index)"
-      />
+      <transition :key="car.id + index" appear name="bounce">
+        <CarDetails
+          :key="car.id + index"
+          :car="car"
+          :usage="usageDetails"
+          :governmentGrant="calcOptions.governmentGrant"
+          @input="toggleBonus(index)"
+        />
+      </transition>
     </template>
     <ComparisonResults :usage="usageDetails" :cars="cars" :calcOptions="calcOptions" />
   </section>

@@ -1,5 +1,4 @@
 <template>
-  <!-- eslint-disable vue/no-mutating-props -->
   <form class="car-details">
     <CarIntro :car="car" />
 
@@ -12,7 +11,7 @@
       :maxLength="7"
       :step="1"
       noDecimals
-      v-model.number="car.price"
+      v-model.number="editedCar.price"
       placeholder="Ange pris"
     />
 
@@ -22,14 +21,14 @@
         name="bonus"
         v-model="isNewCar"
         @change="$emit('input', $event.target.checked)"
-        :hidden="!car.isEv"
+        :hidden="!editedCar.isEv"
       />
       <label for="bonus" class="input-title">
-        {{ car.isEv ? 'Inkludera miljöbilspremie' : 'Miljöbilspremie ej tillämplig' }}
+        {{ editedCar.isEv ? 'Inkludera miljöbilspremie' : 'Miljöbilspremie ej tillämplig' }}
       </label>
     </div>
 
-    <FuelSelector title="Drivmedel" v-model="car.isEv" />
+    <FuelSelector title="Drivmedel" v-model="editedCar.isEv" />
 
     <InputBlockNumber
       title="Förbrukning"
@@ -38,7 +37,7 @@
       :step="0.1"
       :min="0"
       :maxLength="4"
-      v-model.number="car.consumption"
+      v-model.number="editedCar.consumption"
     />
 
     <StatisticsBlock
@@ -70,10 +69,23 @@ export default {
   data() {
     return {
       isNewCar: true,
+      editedCar: this.car,
     };
+  },
+  car: {
+    immediate: true,
+    handler(newVal) {
+      console.log('körs');
+      this.editedCar = newVal;
+    },
   },
   updated() {
     localStorage.setItem(this.$vnode.key, JSON.stringify(this.car));
+  },
+  methods: {
+    changeCar() {
+      this.$emit('input', editedCar);
+    },
   },
   computed: {
     fuelCostPerKm() {
