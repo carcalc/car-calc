@@ -1,0 +1,15 @@
+.bounce-enter-active {
+    animation: bounce-in 0.3s;
+}
+
+@keyframes bounce-in {
+    0% {
+        transform: scale(0.8);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
