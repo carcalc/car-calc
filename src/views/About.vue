@@ -12,15 +12,8 @@
     <p>
       Vi som utvecklat denna sajt heter {{ contact.andreas.name }} och {{ contact.gabriel.name }}.
       Kontakta oss gärna med feedback och idéer på
-      <a :href="`mailto:${contact.email}`">{{ contact.email }}</a> eller hör av er till
-      {{ contact.andreas.name }}
-      <a :href="`mailto:${contact.andreas.email}`"><i class="far fa-envelope"></i></a>
-      <a target="_blank" :href="contact.andreas.linkedIn"><i class="fab fa-linkedin-in"></i></a>
-      eller
-      {{ contact.gabriel.name }}
-      <a :href="`mailto:${contact.gabriel.email}`"><i class="far fa-envelope"></i></a>
-      <a target="_blank" :href="contact.gabriel.linkedIn"><i class="fab fa-linkedin-in"></i></a>
-      direkt.
+      <a :href="`mailto:${contact.email}`">{{ contact.email }}</a
+      >.
     </p>
 
     <h2>Beräkningar</h2>
