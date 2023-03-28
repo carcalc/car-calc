@@ -75,7 +75,6 @@ export default {
   car: {
     immediate: true,
     handler(newVal) {
-      console.log('körs');
       this.editedCar = newVal;
     },
   },
