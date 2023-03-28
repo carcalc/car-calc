@@ -111,7 +111,8 @@ export default {
 
 <style lang="scss" scoped>
 .car-details {
-  @include card-style();
+  @include card-style;
+
   position: relative;
   display: grid;
   align-content: end;
@@ -122,6 +123,7 @@ export default {
     'bonus bonus  consumption'
     'total operating consumption'
     / minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
+
   @media screen and (min-width: $size-small-tablet) {
     grid-template:
       'intro intro'
@@ -140,34 +142,40 @@ export default {
 .input-block {
   &.car-price {
     grid-area: price;
+
     .input-display {
       font-size: 2rem;
+
       @media screen and (min-width: $size-tablet) {
         font-size: 3.5rem;
       }
     }
   }
+
   &.fuel-type {
     grid-area: fuel;
   }
+
   &.bonus {
     // should probably make this a component
-    grid-area: bonus;
     display: flex;
+    grid-area: bonus;
     justify-content: center;
     align-items: center;
     border: 3px solid transparent;
-    background-color: $input-bg;
     border-radius: $border-radius / 1.5;
+    background-color: $input-bg;
     padding: 0 0.5rem;
 
     .input-title {
       flex: 1;
-      font-weight: bold;
       font-size: 0.8rem;
+      font-weight: bold;
+
       @media screen and (min-width: $size-small-tablet) {
         font-size: 0.9rem;
       }
+
       @media screen and (min-width: $size-tablet) {
         font-size: 1rem;
       }

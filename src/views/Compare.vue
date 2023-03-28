@@ -90,6 +90,7 @@ export default {
     'car2'
     'results'
     / 1fr;
+
   @media screen and (min-width: $size-small-tablet) {
     gap: $gap / 3;
     grid-template:
@@ -104,6 +105,7 @@ export default {
     // Tablet layout
     gap: $gap / 2;
   }
+
   @media screen and (min-width: $size-desktop) {
     // Desktop layout
     gap: $gap;
@@ -116,6 +118,7 @@ export default {
 
   .car-details {
     grid-area: car1;
+
     &:last-of-type {
       grid-area: car2;
     }

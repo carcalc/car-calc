@@ -53,8 +53,8 @@ export default {
 .title {
   font-weight: bold;
   font-size: 0.8rem;
-  position: absolute;
   top: 5px;
+  position: absolute;
   left: 10px;
   font-style: italic;
 
@@ -66,6 +66,7 @@ export default {
     font-size: 1rem;
   }
 }
+
 .fuel-display {
   width: 100%;
   height: 100%;
@@ -78,7 +79,7 @@ export default {
   line-height: 0;
   font-style: italic;
   outline: none;
-  padding: 20px 12px 0px 7px;
+  padding: 20px 12px 0 7px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;

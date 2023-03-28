@@ -26,9 +26,10 @@ export default {
 }
 
 .car-name {
+  font-size: 1rem;
   display: inline;
   font-weight: bold;
-  font-size: 1rem;
+
   @media screen and (min-width: $size-tablet) {
     display: block;
     text-align: center;

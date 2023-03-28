@@ -57,7 +57,8 @@ export default {
 
 <style lang="scss" scoped>
 .car-selector {
-  @include card-style();
+  @include card-style;
+
   grid-area: selector;
   gap: 0 !important;
   display: grid;
@@ -67,15 +68,13 @@ export default {
 select {
   font-weight: bold;
   font-style: italic;
-  border: none;
   background-color: $input-bg;
-  // border-radius: $border-radius / 1.5;
   appearance: none;
-  background-image: url('../assets/select-arrow.svg');
   background-repeat: no-repeat;
   border: 3px solid transparent;
-  height: 25px;
+  background-image: url('../assets/select-arrow.svg');
   padding: 2px 25px 2px 5px;
+  height: 25px;
   background-size: 18px;
   background-position: right 4px bottom 5px;
 
@@ -98,9 +97,9 @@ button {
   flex: 1;
   background-color: $input-bg;
   color: $black;
+  margin: 0;
   border: 3px solid transparent;
   padding: 0 5px;
-  margin: 0;
   appearance: none;
   height: 25px;
   font-size: 1rem;
@@ -112,10 +111,12 @@ button {
 
   &:first-of-type {
     border-radius: $border-radius / 1.5 0 0 $border-radius / 1.5;
+
     i {
       @media screen and (min-width: $size-small-tablet) {
         transform: rotate(180deg);
       }
+
       @media screen and (min-width: $size-desktop) {
         transform: rotate(-90deg);
       }
@@ -124,6 +125,7 @@ button {
 
   &:last-of-type {
     border-radius: 0 $border-radius / 1.5 $border-radius / 1.5 0;
+
     i {
       @media screen and (min-width: $size-desktop) {
         transform: rotate(-90deg);

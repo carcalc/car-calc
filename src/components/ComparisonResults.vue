@@ -123,21 +123,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css?family=Nunito:800');
+@import 'https://fonts.googleapis.com/css?family=Nunito:800';
+
 .cars-results {
   @include card-style;
+
   text-align: center;
   grid-area: results;
   font-size: 0.8rem;
+
   @media screen and (min-width: $size-small-tablet) {
     font-size: 1rem;
   }
 }
 
 .highlight {
-  font-family: 'Nunito', sans-serif;
+  font-family: Nunito, sans-serif;
   color: $brand-color1;
   word-wrap: break-word;
+
   @media screen and (min-width: $size-tablet) {
     font-size: 1.5rem;
   }
@@ -169,6 +173,7 @@ export default {
 
 .fade-enter {
   opacity: 0;
+
   &-active {
     transition: opacity 0.3s;
   }

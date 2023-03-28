@@ -46,12 +46,15 @@ export default {
   top: 24px;
   left: 10px;
   font-style: italic;
+
   @media screen and (min-width: $size-small-tablet) {
     font-size: 0.9rem;
   }
+
   @media screen and (min-width: $size-tablet) {
     font-size: 1rem;
   }
+
   @media screen and (min-width: $size-tablet) {
     position: initial;
   }
@@ -68,7 +71,7 @@ export default {
   line-height: 0;
   font-style: italic;
   outline: none;
-  padding: 9px 12px 0px 7px;
+  padding: 9px 12px 0 7px;
   font-size: 1rem;
 }
 </style>

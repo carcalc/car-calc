@@ -69,6 +69,6 @@ export default {
 
 <style lang="scss" scoped>
 .about-page {
-  @include info-page();
+  @include info-page;
 }
 </style>

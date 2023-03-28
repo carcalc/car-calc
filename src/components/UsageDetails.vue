@@ -61,7 +61,8 @@ export default {
 
 <style lang="scss" scoped>
 .usage-details {
-  @include card-style();
+  @include card-style;
+
   padding-bottom: 1.5rem;
   grid-area: usage;
   display: grid;
@@ -74,6 +75,7 @@ export default {
     grid-template-columns: repeat(4, 1fr);
     grid-template-areas: 'electricity gas distance years';
   }
+
   @media screen and (min-width: $size-desktop) {
     // Desktop layout
     grid-template-columns: 1fr;
@@ -89,12 +91,15 @@ export default {
   &.gas-price {
     grid-area: gas;
   }
+
   &.electricity-price {
     grid-area: electricity;
   }
+
   &.distance {
     grid-area: distance;
   }
+
   &.years {
     grid-area: years;
   }

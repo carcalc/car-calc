@@ -40,6 +40,7 @@ header {
     top: 39px;
     left: 10px;
     font-size: 9px;
+
     @media screen and (min-width: $size-tablet) {
       position: initial;
       font-size: 1.22rem;

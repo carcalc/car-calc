@@ -88,7 +88,6 @@ export default {
   font-weight: bold;
   color: $black;
   margin: 0;
-  border: none;
   display: block;
   border-radius: $border-radius;
   border: 3px solid transparent;
@@ -96,7 +95,7 @@ export default {
   line-height: 0;
   font-style: italic;
   outline: none;
-  padding: 9px 12px 0px 7px;
+  padding: 9px 12px 0 7px;
   font-size: 1.7rem;
 
   @media screen and (min-width: $size-small-tablet) {
@@ -126,6 +125,7 @@ export default {
     @media screen and (min-width: $size-small-tablet) {
       font-size: 0.6rem;
     }
+
     @media screen and (min-width: $size-tablet) {
       font-size: 0.8rem;
     }

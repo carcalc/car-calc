@@ -32,9 +32,11 @@ export default {
 .stat-title {
   font-weight: bold;
   font-size: 0.8rem;
+
   @media screen and (min-width: $size-small-tablet) {
     font-size: 0.9rem;
   }
+
   @media screen and (min-width: $size-tablet) {
     font-size: 1rem;
   }
@@ -52,6 +54,7 @@ export default {
   @media screen and (min-width: $size-small-tablet) {
     font-size: 1.4rem;
   }
+
   @media screen and (min-width: $size-tablet) {
     font-size: 1.8rem;
   }
@@ -63,6 +66,7 @@ export default {
     @media screen and (min-width: $size-small-tablet) {
       font-size: 0.6rem;
     }
+
     @media screen and (min-width: $size-tablet) {
       font-size: 0.8rem;
     }
