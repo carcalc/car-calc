@@ -1,7 +1,7 @@
 <template>
   <form class="usage-details" @submit.prevent>
     <InputBlockNumber
-      v-model.number="usage.kwhPrice"
+      v-model.number="localValue.kwhPrice"
       title="Elpris"
       name="electricity-price"
       unit="kr/kWh"
@@ -11,7 +11,7 @@
     />
 
     <InputBlockNumber
-      v-model.number="usage.gasPrice"
+      v-model.number="localValue.gasPrice"
       title="Bensin/dieselpris"
       name="gas-price"
       unit="kr/l"
@@ -21,8 +21,8 @@
     />
 
     <InputBlockRange
-      v-model.number="usage.distance"
-      :title="usage.distance / 10"
+      v-model.number="localValue.distance"
+      :title="localValue.distance / 10"
       unit="mil per år"
       name="distance"
       :step="1000"
@@ -31,8 +31,8 @@
     />
 
     <InputBlockRange
-      v-model.number="usage.ownership"
-      :title="usage.ownership"
+      v-model.number="localValue.ownership"
+      :title="localValue.ownership"
       unit="års ägande"
       name="years"
       :step="1"
@@ -42,19 +42,24 @@
   </form>
 </template>
 
-<script>
+<script lang="ts">
 import InputBlockNumber from '@/components/InputBlockNumber.vue';
 import InputBlockRange from '@/components/InputBlockRange.vue';
 
 export default {
   name: 'UsageDetails',
   components: { InputBlockRange, InputBlockNumber },
-  props: { usageDetails: { type: Object, required: true } },
+  props: { modelValue: { type: Object, required: true } },
   data() {
-    return { usage: this.usageDetails };
+    return { localValue: { ...this.modelValue } };
   },
-  updated() {
-    localStorage.setItem('usage', JSON.stringify(this.usageDetails));
+  watch: {
+    localValue: {
+      handler() {
+        this.$emit('update:modelValue', this.localValue);
+      },
+      deep: true,
+    },
   },
 };
 </script>

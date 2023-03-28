@@ -49,7 +49,6 @@ export default {
   props: {
     usage: { type: Object, required: true },
     cars: { type: Array, required: true },
-    calcOptions: { type: Object, required: true },
   },
   computed: {
     fuelCostsPerKm() {
@@ -67,9 +66,7 @@ export default {
     totalOwnershipCosts() {
       return this.cars.map((car, index) => {
         const cost = this.totalFuelCosts[index] + car.price;
-        return car.isEv && this.calcOptions.isNewCar[index]
-          ? cost - this.calcOptions.governmentGrant
-          : cost;
+        return cost;
       });
     },
     totalDistance() {
@@ -109,9 +106,6 @@ export default {
     },
     mostExpensiveCarToRun() {
       return this.cars[this.getIndexOfHighest(this.totalFuelCosts)];
-    },
-    cheapestIsBrandNew() {
-      return this.calcOptions.isNewCar[this.getIndexOfLowest(this.totalOwnershipCosts)];
     },
   },
   methods: {

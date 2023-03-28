@@ -3,29 +3,34 @@
     <label class="input-title" :for="name">{{ title }} {{ unit }}</label>
     <input
       :name="name"
-      :value="value"
+      :value="modelValue"
       :min="min"
       :max="max"
       :step="step"
       lang="sv"
       class="input-display"
       type="range"
-      @input="$emit('input', $event.target.value)"
+      @input="handleInput"
     />
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'InputBlockRange',
   props: {
     title: { required: true, type: Number },
     name: { required: true, type: String },
     unit: { required: true, type: String },
-    value: { required: true, type: Number },
+    modelValue: { required: true, type: Number },
     step: { type: Number, default: 1 },
     min: { type: Number, default: 0 },
     max: { type: Number, default: undefined },
+  },
+  methods: {
+    handleInput(e: Event) {
+      this.$emit('update:modelValue', (e.target as HTMLInputElement).value);
+    },
   },
 };
 </script>

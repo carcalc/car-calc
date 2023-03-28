@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <a :href="`mailto:${contact.email}`" class="email">
+    <a :href="`mailto:${email}`" class="email">
       <i class="far fa-envelope"></i>
     </a>
     <p class="copyright">{{ copyrightText }}</p>
@@ -14,14 +14,20 @@
   </footer>
 </template>
 
-<script>
+<script lang="ts">
+import { contacts, email } from '@/data';
+
 export default {
   name: 'AppFooter',
-  props: { contact: { type: Object, required: true } },
+  data() {
+    return {
+      contacts,
+      email,
+    };
+  },
   computed: {
     copyrightText() {
-      const { andreas, gabriel } = this.contact;
-      return `© 2019 ${andreas.name} & ${gabriel.name}`;
+      return `© 2019 ${contacts[0].name} & ${contacts[1].name}`;
     },
   },
 };

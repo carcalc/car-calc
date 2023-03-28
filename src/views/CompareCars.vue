@@ -1,28 +1,23 @@
 <template>
   <section class="cars-comparison">
-    <UsageDetails :usage-details="usageDetails" />
-    <CarSelector @click="setNewCar" />
-    <template v-for="(car, index) in cars">
-      <transition :key="car.id + index" appear name="bounce">
-        <CarDetails
-          :key="car.id + index"
-          :car="car"
-          :usage="usageDetails"
-          :government-grant="calcOptions.governmentGrant"
-          @input="toggleBonus(index)"
-        />
+    <UsageDetails v-model="usageDetails" />
+    <CarSelector @select-car="setCar" />
+    <template :key="car.id + index" v-for="(car, index) in cars">
+      <transition appear name="bounce">
+        <CarDetails :key="car.id + index" :car="car" :usage="usageDetails" />
       </transition>
     </template>
-    <ComparisonResults :usage="usageDetails" :cars="cars" :calc-options="calcOptions" />
+    <ComparisonResults :usage="usageDetails" :cars="cars" />
   </section>
 </template>
 
-<script>
-import defaultData from '@/data/defaults';
+<script lang="ts">
+import { defaultUsage, defaultCars } from '@/data';
 import UsageDetails from '@/components/UsageDetails.vue';
 import CarSelector from '@/components/CarSelector.vue';
 import CarDetails from '@/components/CarDetails.vue';
 import ComparisonResults from '@/components/ComparisonResults.vue';
+import type { Car, Usage } from '@/types';
 
 export default {
   name: 'CompareCars',
@@ -32,46 +27,47 @@ export default {
     CarDetails,
     ComparisonResults,
   },
-  data() {
+  data(): { cars: Car[]; usageDetails: Usage } {
     return {
-      cars: [],
-      usageDetails: {},
-      calcOptions: {
-        governmentGrant: null,
-        // Todo: remove below once grant is a number (that can be 0). Not needed anymore
-        isNewCar: [true, true],
-      },
+      cars: defaultCars,
+      usageDetails: defaultUsage,
     };
   },
-  created() {
-    this.setDefaults();
-    this.getStoredCars();
+  async created() {
+    this.getLocalStorage();
+  },
+  watch: {
+    usageDetails: {
+      handler(newValue) {
+        localStorage.setItem('usage', JSON.stringify(newValue));
+      },
+      deep: true,
+    },
+    cars: {
+      handler() {
+        this.cars.forEach((car, index) => localStorage.setItem(`car${index}`, JSON.stringify(car)));
+      },
+      deep: true,
+    },
   },
   methods: {
-    setDefaults() {
-      this.cars = defaultData.cars;
-      this.usageDetails = defaultData.usage;
-      this.calcOptions.governmentGrant = defaultData.governmentGrant;
-    },
-    // Todo: rewrite this to let CarSelector handle state and storage, remove $set methods
-    getStoredCars() {
-      let cars = [];
-      const usage = JSON.parse(localStorage.getItem('usage'));
-      if (usage !== null) this.usageDetails = usage;
+    getLocalStorage() {
+      const usageDetailsJson = localStorage.getItem('usage');
 
-      this.cars.forEach((car, index) => {
-        cars.push(JSON.parse(localStorage.getItem(`car${index}`)));
-      });
+      if (usageDetailsJson) {
+        this.usageDetails = JSON.parse(usageDetailsJson);
+      }
 
-      if (!cars.includes(null)) {
-        this.cars = cars;
+      for (let index = 0; index < this.cars.length; index++) {
+        const carJson = localStorage.getItem(`car${index}`);
+
+        if (carJson) {
+          this.cars[index] = JSON.parse(carJson);
+        }
       }
     },
-    setNewCar({ car, index }) {
-      this.$set(this.cars, index, car);
-    },
-    toggleBonus(index) {
-      this.$set(this.calcOptions.isNewCar, index, !this.calcOptions.isNewCar[index]);
+    setCar({ car, index }: { car: Car; index: number }) {
+      this.cars.splice(index, 1, car);
     },
   },
 };

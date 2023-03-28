@@ -17,20 +17,20 @@
 <script>
 export default {
   name: 'FuelSelector',
-  props: { value: { required: true, type: Boolean }, title: { required: true, type: String } },
+  props: { modelValue: { required: true, type: Boolean }, title: { required: true, type: String } },
   data() {
     return { fuelType: null };
   },
 
   watch: {
-    value: {
+    modelValue: {
       immediate: true,
       handler(newVal) {
         this.fuelType = newVal ? 'electric' : 'gasoline';
       },
     },
     fuelType() {
-      this.$emit('input', this.fuelType === 'electric');
+      this.$emit('update:modelValue', this.fuelType === 'electric');
     },
   },
 };

@@ -19,14 +19,14 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'InputBlockNumber',
   props: {
     title: { required: true, type: String },
     name: { required: true, type: String },
     unit: { required: true, type: String },
-    value: { required: true, type: Number },
+    modelValue: { required: true, type: Number },
     step: { type: Number, default: 1 },
     min: { type: Number, default: 0 },
     max: { type: Number, default: undefined },
@@ -35,17 +35,19 @@ export default {
     noDecimals: { type: Boolean, default: false },
   },
   data() {
-    return { newValue: this.value };
+    return { newValue: this.modelValue };
   },
   methods: {
-    handleInput: function (e) {
-      this.newValue = this.sanitizeInput(e.target.value);
-      this.$emit('input', this.newValue);
+    handleInput(e: Event) {
+      this.newValue = this.trimInput((e.target as HTMLInputElement).value);
+      this.$emit('update:modelValue', this.newValue);
     },
-    sanitizeInput: function (input) {
-      const isMax = input.length >= this.maxLength;
-      input = isMax ? input.substring(0, this.maxLength) : (this.newValue = input);
-      return parseFloat(input);
+    trimInput(input: string): number {
+      console.log(typeof input);
+      const isMax = this.maxLength && input.length >= this.maxLength;
+      const trimmed = isMax ? input.substring(0, this.maxLength) : input;
+
+      return parseFloat(trimmed);
     },
   },
 };

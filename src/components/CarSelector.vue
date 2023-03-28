@@ -1,55 +1,46 @@
 <template>
   <div class="car-selector">
-    <button :disabled="selectedCar === null" @click="dispatchCar(0)">
+    <button :disabled="isDisabled" @click="handleSelect(0)">
       <i class="fas fa-chevron-circle-up"></i>
     </button>
     <select v-model="selectedCar">
       <option disabled selected hidden value="null">Välj en bil</option>
-      <option v-for="(car, index) in allCars" :key="index" :value="car">
+      <option v-for="(car, index) in cars" :key="index" :value="car">
         {{ car.name }} — {{ car.specs }}
       </option>
     </select>
-    <button :disabled="selectedCar === null" @click="dispatchCar(1)">
+    <button :disabled="isDisabled" @click="handleSelect(1)">
       <i class="fas fa-chevron-circle-down"></i>
     </button>
   </div>
 </template>
 
-<script>
-import db from '@/firebase/init';
-import defaultData from '@/data/defaults';
+<script lang="ts">
+import type { Car } from '@/types';
+import { getCars } from '@/firebase';
+import { defaultCars } from '@/data';
 
 export default {
-  data() {
+  emits: ['select-car'],
+  data(): { cars: Car[]; selectedCar: Car | null } {
     return {
       selectedCar: null,
-      allCars: [],
+      cars: [],
     };
   },
-  created() {
-    this.fetchCars();
+  computed: {
+    isDisabled() {
+      return !this.selectedCar;
+    },
+  },
+  async created() {
+    const cars = await getCars();
+    this.cars = [...defaultCars, ...cars];
   },
   methods: {
-    dispatchCar(side) {
-      this.$emit('click', { car: this.selectedCar, index: side });
+    handleSelect(index: number) {
+      this.$emit('select-car', { car: this.selectedCar, index });
       this.selectedCar = null;
-    },
-    sortCars(cars) {
-      return cars.sort((a, b) => a.name.localeCompare(b.name));
-    },
-    fetchCars() {
-      let cars = [];
-      db.collection('cars')
-        .get()
-        .then((snapshot) => {
-          snapshot.forEach((doc) => {
-            let car = doc.data();
-            car.id = doc.id;
-            cars.push(car);
-          });
-          this.allCars.push(...this.sortCars(cars));
-          this.allCars.unshift(...defaultData.cars);
-        });
     },
   },
 };

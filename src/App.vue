@@ -2,10 +2,14 @@
   <div id="app">
     <AppHeader />
     <AppNav />
-    <transition appear name="bounce">
-      <router-view :contact="contact" />
-    </transition>
-    <AppFooter :contact="contact" @reset="resetApp" />
+
+    <router-view v-slot="{ Component }">
+      <transition appear name="bounce">
+        <component :is="Component"></component>
+      </transition>
+    </router-view>
+
+    <AppFooter @reset="resetApp" />
   </div>
 </template>
 
@@ -19,24 +23,6 @@ export default {
     AppHeader,
     AppNav,
     AppFooter,
-  },
-  data() {
-    // Todo: move this to locale file when i18n is installed
-    return {
-      contact: {
-        email: 'hello@carcalc.se',
-        andreas: {
-          name: 'Andreas',
-          linkedIn: 'http://www.linkedin.com/in/andreas-hansson-',
-          email: 'andreas@carcalc.se',
-        },
-        gabriel: {
-          name: 'Gabriel',
-          linkedIn: 'http://www.linkedin.com/in/gabriellundmark',
-          email: 'gabriel@carcalc.se',
-        },
-      },
-    };
   },
   methods: {
     resetApp() {
@@ -72,8 +58,8 @@ export default {
       'content' 1fr
       'footer' auto
       / minmax(320px, 1100px);
-    padding-top: 0;
     padding: 1rem;
+    padding-top: 0;
   }
 }
 </style>
