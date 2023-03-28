@@ -113,7 +113,7 @@ export default {
     border: $input-focus-border;
   }
 
-  &-display-unit {
+  &-unit {
     font-weight: bold;
     font-size: 0.5rem;
     font-style: italic;

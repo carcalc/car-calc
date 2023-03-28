@@ -21,7 +21,7 @@ export default {
   computed: {
     copyrightText() {
       const { andreas, gabriel } = this.contact;
-      return `© 2021 ${andreas.name} & ${gabriel.name}`;
+      return `© 2019 ${andreas.name} & ${gabriel.name}`;
     },
   },
 };
