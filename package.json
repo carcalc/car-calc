@@ -3,86 +3,34 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "lint:fix": "vue-cli-service lint --fix",
-    "lint:css": "stylelint ./src/**/*.{vue,scss}",
-    "lint:css:fix": "stylelint ./src/**/*.{vue,scss} --fix"
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview",
+    "lint:css": "stylelint ./src/**/*.{vue,scss} --fix"
   },
   "dependencies": {
     "core-js": "^3.16.1",
-    "eslint-plugin-prettier": "^3.4.0",
     "firebase": "^5.8.5",
     "gsap": "^2.1.2",
-    "prettier": "^2.3.2",
     "vue": "^2.6.14",
     "vue-router": "^3.5.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^4.5.13",
-    "@vue/cli-plugin-eslint": "^4.5.13",
-    "@vue/cli-service": "^4.5.13",
+    "@vitejs/plugin-vue": "^1.6.1",
     "@vue/eslint-config-prettier": "^6.0.0",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^7.16.0",
+    "eslint": "^8.36.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-vue": "^8.7.1",
     "postcss-html": "^1.5.0",
+    "prettier": "^2.3.2",
     "sass": "^1.37.5",
-    "sass-loader": "^10.2.0",
     "style-resources-loader": "^1.4.1",
     "stylelint": "^15.3.0",
     "stylelint-config-recommended-scss": "^9.0.1",
     "stylelint-config-recommended-vue": "^1.4.0",
     "stylelint-config-standard-scss": "^7.0.1",
-    "vue-template-compiler": "^2.6.14"
-  },
-  "eslintConfig": {
-    "root": true,
-    "env": {
-      "node": true
-    },
-    "extends": [
-      "plugin:vue/essential",
-      "@vue/prettier"
-    ],
-    "rules": {},
-    "parserOptions": {
-      "parser": "babel-eslint"
-    }
-  },
-  "postcss": {
-    "plugins": {
-      "autoprefixer": {}
-    }
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ],
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "json",
-      "vue"
-    ],
-    "transform": {
-      "^.+\\.vue$": "vue-jest",
-      ".+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$": "jest-transform-stub",
-      "^.+\\.jsx?$": "babel-jest"
-    },
-    "moduleNameMapper": {
-      "^@/(.*)$": "<rootDir>/src/$1"
-    },
-    "snapshotSerializers": [
-      "jest-serializer-vue"
-    ],
-    "testMatch": [
-      "**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)"
-    ],
-    "testURL": "http://localhost/"
+    "vite": "^2.5.4",
+    "vite-plugin-vue2": "1.9.0"
   }
 }

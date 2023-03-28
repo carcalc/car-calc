@@ -16,9 +16,6 @@ export default {
       tweeningValue: 0,
     };
   },
-  mounted() {
-    this.tweeningValue = this.value;
-  },
   computed: {
     formattedvalue() {
       return this.tweeningValue.toLocaleString('sv-SE', {
@@ -30,6 +27,9 @@ export default {
     value(newValue) {
       TweenLite.to(this.$data, 0.5, { tweeningValue: newValue });
     },
+  },
+  mounted() {
+    this.tweeningValue = this.value;
   },
 };
 </script>

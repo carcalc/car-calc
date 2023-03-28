@@ -3,41 +3,41 @@
     <CarIntro :car="car" />
 
     <InputBlockNumber
+      v-model.number="editedCar.price"
       title="Inköpspris"
       name="car-price"
       unit="kr"
       :min="0"
       :max="9999999"
-      :maxLength="7"
+      :max-length="7"
       :step="1"
-      noDecimals
-      v-model.number="editedCar.price"
+      no-decimals
       placeholder="Ange pris"
     />
 
     <div class="input-block bonus">
       <input
+        v-model="isNewCar"
         type="checkbox"
         name="bonus"
-        v-model="isNewCar"
-        @change="$emit('input', $event.target.checked)"
         :hidden="!editedCar.isEv"
+        @change="$emit('input', $event.target.checked)"
       />
       <label for="bonus" class="input-title">
         {{ editedCar.isEv ? 'Inkludera miljöbilspremie' : 'Miljöbilspremie ej tillämplig' }}
       </label>
     </div>
 
-    <FuelSelector title="Drivmedel" v-model="editedCar.isEv" />
+    <FuelSelector v-model="editedCar.isEv" title="Drivmedel" />
 
     <InputBlockNumber
+      v-model.number="editedCar.consumption"
       title="Förbrukning"
       name="consumption"
       :unit="fuelUnit"
       :step="0.1"
       :min="0"
-      :maxLength="4"
-      v-model.number="editedCar.consumption"
+      :max-length="4"
     />
 
     <StatisticsBlock
@@ -53,10 +53,10 @@
 </template>
 
 <script>
-import CarIntro from '@/components/CarIntro';
-import InputBlockNumber from '@/components/InputBlockNumber';
-import StatisticsBlock from '@/components/StatisticsBlock';
-import FuelSelector from '@/components/FuelSelector';
+import CarIntro from '@/components/CarIntro.vue';
+import InputBlockNumber from '@/components/InputBlockNumber.vue';
+import StatisticsBlock from '@/components/StatisticsBlock.vue';
+import FuelSelector from '@/components/FuelSelector.vue';
 
 export default {
   name: 'CarDetails',
@@ -78,14 +78,6 @@ export default {
       this.editedCar = newVal;
     },
   },
-  updated() {
-    localStorage.setItem(this.$vnode.key, JSON.stringify(this.car));
-  },
-  methods: {
-    changeCar() {
-      this.$emit('input', editedCar);
-    },
-  },
   computed: {
     fuelCostPerKm() {
       const { gasPrice, kwhPrice } = this.usage;
@@ -103,6 +95,14 @@ export default {
     },
     fuelUnit() {
       return this.car.isEv ? 'kWh/100 km' : 'l/100 km';
+    },
+  },
+  updated() {
+    localStorage.setItem(this.$vnode.key, JSON.stringify(this.car));
+  },
+  methods: {
+    changeCar() {
+      this.$emit('input', editedCar);
     },
   },
 };
@@ -162,7 +162,7 @@ export default {
     justify-content: center;
     align-items: center;
     border: 3px solid transparent;
-    border-radius: $border-radius / 1.5;
+    border-radius: $border-radius-md;
     background-color: $input-bg;
     padding: 0 0.5rem;
 

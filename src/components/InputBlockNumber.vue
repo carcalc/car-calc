@@ -3,7 +3,6 @@
     <label class="input-title" :for="name">{{ title }}</label>
     <input
       v-model.number="newValue"
-      v-on:input="handleInput"
       :placeholder="placeholder"
       :name="name"
       :step="step"
@@ -14,6 +13,7 @@
       class="input-display"
       type="number"
       pattern="[0-9]*"
+      @input="handleInput"
     />
     <span class="input-display-unit">{{ unit }}</span>
   </div>
@@ -22,20 +22,20 @@
 <script>
 export default {
   name: 'InputBlockNumber',
-  data() {
-    return { newValue: this.value };
-  },
   props: {
     title: { required: true, type: String },
     name: { required: true, type: String },
     unit: { required: true, type: String },
     value: { required: true, type: Number },
-    step: { required: false, type: Number, default: 1 },
-    min: { required: false, type: Number, default: 0 },
-    max: { required: false, type: Number },
-    maxLength: { required: false, type: Number },
-    placeholder: { required: false, type: String, default: 'Fyll i' },
-    noDecimals: { required: false, type: Boolean, default: false },
+    step: { type: Number, default: 1 },
+    min: { type: Number, default: 0 },
+    max: { type: Number, default: undefined },
+    maxLength: { type: Number, default: undefined },
+    placeholder: { type: String, default: 'Fyll i' },
+    noDecimals: { type: Boolean, default: false },
+  },
+  data() {
+    return { newValue: this.value };
   },
   methods: {
     handleInput: function (e) {
@@ -89,7 +89,7 @@ export default {
   color: $black;
   margin: 0;
   display: block;
-  border-radius: $border-radius;
+  border-radius: $border-radius-lg;
   border: 3px solid transparent;
   background-color: $input-bg;
   line-height: 0;

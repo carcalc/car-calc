@@ -110,7 +110,7 @@ button {
   }
 
   &:first-of-type {
-    border-radius: $border-radius / 1.5 0 0 $border-radius / 1.5;
+    border-radius: $border-radius-md 0 0 $border-radius-md;
 
     i {
       @media screen and (min-width: $size-small-tablet) {
@@ -124,7 +124,7 @@ button {
   }
 
   &:last-of-type {
-    border-radius: 0 $border-radius / 1.5 $border-radius / 1.5 0;
+    border-radius: 0 $border-radius-md $border-radius-md 0;
 
     i {
       @media screen and (min-width: $size-desktop) {

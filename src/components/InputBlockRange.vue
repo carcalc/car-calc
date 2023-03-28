@@ -2,7 +2,6 @@
   <div :class="name" class="input-block">
     <label class="input-title" :for="name">{{ title }} {{ unit }}</label>
     <input
-      v-on:input="$emit('input', $event.target.value)"
       :name="name"
       :value="value"
       :min="min"
@@ -11,6 +10,7 @@
       lang="sv"
       class="input-display"
       type="range"
+      @input="$emit('input', $event.target.value)"
     />
   </div>
 </template>
@@ -23,9 +23,9 @@ export default {
     name: { required: true, type: String },
     unit: { required: true, type: String },
     value: { required: true, type: Number },
-    step: { required: false, type: Number, default: 1 },
-    min: { required: false, type: Number, default: 0 },
-    max: { required: false, type: Number },
+    step: { type: Number, default: 1 },
+    min: { type: Number, default: 0 },
+    max: { type: Number, default: undefined },
   },
 };
 </script>

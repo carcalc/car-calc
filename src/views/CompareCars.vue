@@ -1,6 +1,6 @@
 <template>
   <section class="cars-comparison">
-    <UsageDetails :usageDetails="usageDetails" />
+    <UsageDetails :usage-details="usageDetails" />
     <CarSelector @click="setNewCar" />
     <template v-for="(car, index) in cars">
       <transition :key="car.id + index" appear name="bounce">
@@ -8,24 +8,24 @@
           :key="car.id + index"
           :car="car"
           :usage="usageDetails"
-          :governmentGrant="calcOptions.governmentGrant"
+          :government-grant="calcOptions.governmentGrant"
           @input="toggleBonus(index)"
         />
       </transition>
     </template>
-    <ComparisonResults :usage="usageDetails" :cars="cars" :calcOptions="calcOptions" />
+    <ComparisonResults :usage="usageDetails" :cars="cars" :calc-options="calcOptions" />
   </section>
 </template>
 
 <script>
 import defaultData from '@/data/defaults';
-import UsageDetails from '@/components/UsageDetails';
-import CarSelector from '@/components/CarSelector';
-import CarDetails from '@/components/CarDetails';
-import ComparisonResults from '@/components/ComparisonResults';
+import UsageDetails from '@/components/UsageDetails.vue';
+import CarSelector from '@/components/CarSelector.vue';
+import CarDetails from '@/components/CarDetails.vue';
+import ComparisonResults from '@/components/ComparisonResults.vue';
 
 export default {
-  name: 'Compare',
+  name: 'CompareCars',
   components: {
     UsageDetails,
     CarSelector,
@@ -80,7 +80,7 @@ export default {
 <style lang="scss">
 .cars-comparison {
   display: grid;
-  gap: $gap / 6;
+  gap: 4px;
   justify-content: center;
   align-content: baseline;
   grid-template:
@@ -92,7 +92,7 @@ export default {
     / 1fr;
 
   @media screen and (min-width: $size-small-tablet) {
-    gap: $gap / 3;
+    gap: 8px;
     grid-template:
       'usage usage'
       'selector selector'
@@ -102,13 +102,11 @@ export default {
   }
 
   @media screen and (min-width: $size-tablet) {
-    // Tablet layout
-    gap: $gap / 2;
+    gap: 12px;
   }
 
   @media screen and (min-width: $size-desktop) {
-    // Desktop layout
-    gap: $gap;
+    gap: 24px;
     grid-template:
       'car1 usage car2'
       'car1 selector car2'

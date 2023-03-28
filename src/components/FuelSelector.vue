@@ -2,11 +2,11 @@
   <div class="fuel-selector">
     <h3 class="title">{{ title }}</h3>
     <div class="fuel-display">
-      <input lang="sv" type="radio" name="electric" value="electric" v-model="fuelType" />
+      <input v-model="fuelType" lang="sv" type="radio" name="electric" value="electric" />
       <label for="electric">
         <i class="fas fa-bolt fa-lg"></i>
       </label>
-      <input lang="sv" type="radio" name="gasoline" value="gasoline" v-model="fuelType" />
+      <input v-model="fuelType" lang="sv" type="radio" name="gasoline" value="gasoline" />
       <label for="gasoline">
         <i class="fas fa-gas-pump fa-lg"></i>
       </label>
@@ -73,7 +73,7 @@ export default {
   font-weight: bold;
   color: $black;
   margin: 0;
-  border-radius: $border-radius;
+  border-radius: $border-radius-lg;
   border: 3px solid transparent;
   background-color: $input-bg;
   line-height: 0;
@@ -94,23 +94,23 @@ export default {
     caret-color: $brand-color2;
     border: $input-focus-border;
   }
-}
 
-.fuel-display-unit {
-  font-style: italic;
-  position: absolute;
-  margin: 0;
-  bottom: 3px;
-  right: 10px;
-  font-weight: bold;
-  font-size: 0.5rem;
+  &-unit {
+    font-style: italic;
+    position: absolute;
+    margin: 0;
+    bottom: 3px;
+    right: 10px;
+    font-weight: bold;
+    font-size: 0.5rem;
 
-  @media screen and (min-width: $size-small-tablet) {
-    font-size: 0.6rem;
-  }
+    @media screen and (min-width: $size-small-tablet) {
+      font-size: 0.6rem;
+    }
 
-  @media screen and (min-width: $size-tablet) {
-    font-size: 0.8rem;
+    @media screen and (min-width: $size-tablet) {
+      font-size: 0.8rem;
+    }
   }
 }
 </style>

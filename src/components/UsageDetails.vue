@@ -1,50 +1,50 @@
 <template>
   <form class="usage-details" @submit.prevent>
     <InputBlockNumber
+      v-model.number="usage.kwhPrice"
       title="Elpris"
       name="electricity-price"
       unit="kr/kWh"
       :step="0.01"
       :min="0"
-      :maxLength="5"
-      v-model.number="usage.kwhPrice"
+      :max-length="5"
     />
 
     <InputBlockNumber
+      v-model.number="usage.gasPrice"
       title="Bensin/dieselpris"
       name="gas-price"
       unit="kr/l"
       :step="0.01"
       :min="0"
-      :maxLength="5"
-      v-model.number="usage.gasPrice"
+      :max-length="5"
     />
 
     <InputBlockRange
+      v-model.number="usage.distance"
       :title="usage.distance / 10"
       unit="mil per år"
       name="distance"
       :step="1000"
       :min="5000"
       :max="50000"
-      v-model.number="usage.distance"
     />
 
     <InputBlockRange
+      v-model.number="usage.ownership"
       :title="usage.ownership"
       unit="års ägande"
       name="years"
       :step="1"
       :min="1"
       :max="20"
-      v-model.number="usage.ownership"
     />
   </form>
 </template>
 
 <script>
-import InputBlockNumber from '@/components/InputBlockNumber';
-import InputBlockRange from '@/components/InputBlockRange';
+import InputBlockNumber from '@/components/InputBlockNumber.vue';
+import InputBlockRange from '@/components/InputBlockRange.vue';
 
 export default {
   name: 'UsageDetails',

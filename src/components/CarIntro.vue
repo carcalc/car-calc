@@ -1,6 +1,6 @@
 <template>
   <div class="car-intro">
-    <CarLogo :carName="car.name" />
+    <CarLogo :car-name="car.name" />
     <h1 class="car-name">
       {{ car.name }}
     </h1>
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import CarLogo from '@/components/CarLogo';
+import CarLogo from '@/components/CarLogo.vue';
 
 export default {
   name: 'CarIntro',

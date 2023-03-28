@@ -2,7 +2,7 @@ import firebase from 'firebase';
 
 // Initialize Firebase
 var config = {
-  apiKey: process.env.FIREBASE_API_KEY,
+  apiKey: import.meta.env.FIREBASE_API_KEY,
   authDomain: 'cars-ffed2.firebaseapp.com',
   databaseURL: 'https://cars-ffed2.firebaseio.com',
   projectId: 'cars-ffed2',

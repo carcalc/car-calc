@@ -2,15 +2,18 @@
   <div :class="name" class="stat-block">
     <h3 class="stat-title">{{ title }}</h3>
     <span class="stat-display">
-      <BaseAnimatedNumber :value="value" :decimals="decimals" />
+      <TweenedNumber :value="value" :decimals="decimals" />
       <span class="stat-display-unit"> {{ unit }}</span>
     </span>
   </div>
 </template>
 
 <script>
+import TweenedNumber from '@/components/TweenedNumber.vue';
+
 export default {
   name: 'StatisticsBlock',
+  components: { TweenedNumber },
   props: {
     title: { required: true, type: String },
     name: { required: true, type: String },

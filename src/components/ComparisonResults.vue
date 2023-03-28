@@ -1,19 +1,19 @@
 <template>
   <section class="cars-results">
     <transition-group name="fade">
-      <div key="animation-1" v-if="totalSavings < 100">
+      <div v-if="totalSavings < 100" key="animation-1">
         <p class="highlight">Båda bilarna kostar lika mycket.</p>
         <p>Vad är oddsen liksom?</p>
       </div>
-      <div key="animation-2" v-else>
+      <div v-else key="animation-2">
         <p>
           <span class="highlight">{{ cheapestCar.name }}</span> är billigast och utgör en
           <span class="highlight">
             total besparing på
-            <BaseAnimatedNumber :value="totalSavings" unit=" kr" />
+            <TweenedNumber :value="totalSavings" unit=" kr" />
           </span>
           (eller
-          <BaseAnimatedNumber :value="totalSavingsPercent" unit="%" />) jämfört med
+          <TweenedNumber :value="totalSavingsPercent" unit="%" />) jämfört med
           {{ mostExpensiveCar.name }}.
         </p>
 
@@ -21,12 +21,12 @@
           <span class="highlight"> {{ cheapestCarToRun.name }}</span>
           {{ cheapestCar === cheapestCarToRun ? 'är också' : 'är dock' }}
           <span class="highlight">
-            <BaseAnimatedNumber :value="fuelSavings" unit=" kr" /> billigare i drift
+            <TweenedNumber :value="fuelSavings" unit=" kr" /> billigare i drift
           </span>
           över
-          <BaseAnimatedNumber :value="usage.ownership" unit=" år" />
+          <TweenedNumber :value="usage.ownership" unit=" år" />
           och
-          <BaseAnimatedNumber :value="totalDistance / 10" unit=" mil" />
+          <TweenedNumber :value="totalDistance / 10" unit=" mil" />
         </p>
       </div>
 
@@ -41,20 +41,15 @@
 </template>
 
 <script>
+import TweenedNumber from '@/components/TweenedNumber.vue';
+
 export default {
   name: 'ComparisonResults',
+  components: { TweenedNumber },
   props: {
     usage: { type: Object, required: true },
     cars: { type: Array, required: true },
     calcOptions: { type: Object, required: true },
-  },
-  methods: {
-    getIndexOfLowest([carOne, carTwo]) {
-      return carOne < carTwo ? 0 : 1;
-    },
-    getIndexOfHighest([carOne, carTwo]) {
-      return carOne > carTwo ? 0 : 1;
-    },
   },
   computed: {
     fuelCostsPerKm() {
@@ -119,6 +114,14 @@ export default {
       return this.calcOptions.isNewCar[this.getIndexOfLowest(this.totalOwnershipCosts)];
     },
   },
+  methods: {
+    getIndexOfLowest([carOne, carTwo]) {
+      return carOne < carTwo ? 0 : 1;
+    },
+    getIndexOfHighest([carOne, carTwo]) {
+      return carOne > carTwo ? 0 : 1;
+    },
+  },
 };
 </script>
 
@@ -168,14 +171,6 @@ export default {
         color: $brand-color2;
       }
     }
-  }
-}
-
-.fade-enter {
-  opacity: 0;
-
-  &-active {
-    transition: opacity 0.3s;
   }
 }
 </style>

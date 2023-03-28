@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Compare from '@/views/Compare';
-import About from '@/views/About';
-import Help from '@/views/Help';
+import CompareCars from '@/views/CompareCars.vue';
+import AboutUs from '@/views/AboutUs.vue';
+import UserGuide from '@/views/UserGuide.vue';
 
 Vue.use(Router);
 
@@ -11,17 +11,17 @@ export default new Router({
     {
       path: '/',
       name: 'compare',
-      component: Compare,
+      component: CompareCars,
     },
     {
       path: '/hjalp',
       name: 'help',
-      component: Help,
+      component: UserGuide,
     },
     {
       path: '/om',
       name: 'about',
-      component: About,
+      component: AboutUs,
     },
   ],
   mode: 'history',

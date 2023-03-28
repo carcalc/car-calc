@@ -44,7 +44,7 @@
 
 <script>
 export default {
-  name: 'About',
+  name: 'AboutUs',
   props: { contact: { type: Object, required: true } },
   data() {
     return {
