@@ -133,6 +133,7 @@ export default {
     font-size: 1rem;
   }
 }
+
 .highlight {
   font-family: 'Nunito', sans-serif;
   color: $brand-color1;
@@ -141,18 +142,22 @@ export default {
     font-size: 1.5rem;
   }
 }
+
 .disclaimer {
   display: block;
   font-size: 0.6rem;
   max-width: 700px;
   margin: auto;
   margin-top: 1rem;
+
   @media screen and (min-width: $size-tablet) {
     font-size: 0.7rem;
   }
+
   a {
     color: $brand-color3;
     display: block;
+
     &:hover {
       @media screen and (min-width: $size-desktop) {
         text-decoration: underline;
@@ -161,6 +166,7 @@ export default {
     }
   }
 }
+
 .fade-enter {
   opacity: 0;
   &-active {

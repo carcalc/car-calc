@@ -40,9 +40,11 @@ export default {
 .fuel-selector {
   position: relative;
   height: 60px;
+
   @media screen and (min-width: $size-small-tablet) {
     height: 70px;
   }
+
   @media screen and (min-width: $size-tablet) {
     height: 90px;
   }
@@ -55,9 +57,11 @@ export default {
   top: 5px;
   left: 10px;
   font-style: italic;
+
   @media screen and (min-width: $size-small-tablet) {
     font-size: 0.9rem;
   }
+
   @media screen and (min-width: $size-tablet) {
     font-size: 1rem;
   }
@@ -79,15 +83,18 @@ export default {
   justify-content: space-evenly;
   align-items: center;
   font-size: 0.8rem;
+
   @media screen and (min-width: $size-tablet) {
     font-size: 1rem;
   }
+
   &:focus,
   &:hover {
     caret-color: $brand-color2;
     border: $input-focus-border;
   }
 }
+
 .fuel-display-unit {
   font-style: italic;
   position: absolute;
@@ -96,9 +103,11 @@ export default {
   right: 10px;
   font-weight: bold;
   font-size: 0.5rem;
+
   @media screen and (min-width: $size-small-tablet) {
     font-size: 0.6rem;
   }
+
   @media screen and (min-width: $size-tablet) {
     font-size: 0.8rem;
   }

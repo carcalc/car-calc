@@ -24,6 +24,7 @@ export default {
 .car-intro {
   grid-area: intro;
 }
+
 .car-name {
   display: inline;
   font-weight: bold;
@@ -34,10 +35,12 @@ export default {
     font-size: 2rem;
   }
 }
+
 .car-specs {
   display: inline;
   font-size: 0.8rem;
   text-align: right;
+
   @media screen and (min-width: $size-tablet) {
     display: block;
     text-align: center;

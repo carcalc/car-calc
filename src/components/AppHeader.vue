@@ -3,7 +3,7 @@
     <router-link :to="{ name: 'compare' }">
       <img class="app-logo" src="../assets/logo.svg" alt="CarCalc logo" />
     </router-link>
-    <p class="app-byline">Jämför snabbt och enkelt kostnaderna</p>
+    <p class="app-byline">Jämför snabbt och enkelt bilkostnader</p>
   </header>
 </template>
 

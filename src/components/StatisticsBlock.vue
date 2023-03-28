@@ -39,6 +39,7 @@ export default {
     font-size: 1rem;
   }
 }
+
 .stat-display {
   width: 100%;
   height: 100%;
@@ -47,22 +48,24 @@ export default {
   margin: 0;
   border: none;
   font-size: 1.3rem;
+
   @media screen and (min-width: $size-small-tablet) {
     font-size: 1.4rem;
   }
   @media screen and (min-width: $size-tablet) {
     font-size: 1.8rem;
   }
-}
 
-.stat-display-unit {
-  font-weight: bold;
-  font-size: 0.5rem;
-  @media screen and (min-width: $size-small-tablet) {
-    font-size: 0.6rem;
-  }
-  @media screen and (min-width: $size-tablet) {
-    font-size: 0.8rem;
+  &-unit {
+    font-weight: bold;
+    font-size: 0.5rem;
+
+    @media screen and (min-width: $size-small-tablet) {
+      font-size: 0.6rem;
+    }
+    @media screen and (min-width: $size-tablet) {
+      font-size: 0.8rem;
+    }
   }
 }
 </style>

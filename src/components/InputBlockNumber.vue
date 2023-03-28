@@ -55,9 +55,11 @@ export default {
 .input-block {
   position: relative;
   height: 60px;
+
   @media screen and (min-width: $size-small-tablet) {
     height: 70px;
   }
+
   @media screen and (min-width: $size-tablet) {
     height: 90px;
   }
@@ -70,9 +72,11 @@ export default {
   top: 5px;
   left: 10px;
   font-style: italic;
+
   @media screen and (min-width: $size-small-tablet) {
     font-size: 0.9rem;
   }
+
   @media screen and (min-width: $size-tablet) {
     font-size: 1rem;
   }
@@ -94,33 +98,37 @@ export default {
   outline: none;
   padding: 9px 12px 0px 7px;
   font-size: 1.7rem;
+
   @media screen and (min-width: $size-small-tablet) {
     font-size: 1.8rem;
     padding: 17px 15px 3px 10px;
   }
+
   @media screen and (min-width: $size-tablet) {
     font-size: 2.5rem;
   }
+
   &:focus,
   &:hover {
     caret-color: $brand-color2;
     border: $input-focus-border;
   }
-}
 
-.input-display-unit {
-  font-weight: bold;
-  font-size: 0.5rem;
-  font-style: italic;
-  position: absolute;
-  margin: 0;
-  bottom: 3px;
-  right: 10px;
-  @media screen and (min-width: $size-small-tablet) {
-    font-size: 0.6rem;
-  }
-  @media screen and (min-width: $size-tablet) {
-    font-size: 0.8rem;
+  &-display-unit {
+    font-weight: bold;
+    font-size: 0.5rem;
+    font-style: italic;
+    position: absolute;
+    margin: 0;
+    bottom: 3px;
+    right: 10px;
+
+    @media screen and (min-width: $size-small-tablet) {
+      font-size: 0.6rem;
+    }
+    @media screen and (min-width: $size-tablet) {
+      font-size: 0.8rem;
+    }
   }
 }
 </style>

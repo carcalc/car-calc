@@ -26,6 +26,7 @@ img {
   position: absolute;
   right: 10px;
   top: 10px;
+
   @media screen and (min-width: $size-tablet) {
     height: 2rem;
     left: 10px;

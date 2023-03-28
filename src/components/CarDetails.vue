@@ -131,6 +131,7 @@ export default {
       'operating total'
       / minmax(0, 1fr) minmax(0, 1fr);
   }
+
   @media screen and (min-width: $size-tablet) {
     gap: 1rem;
   }
@@ -172,6 +173,7 @@ export default {
       }
     }
   }
+
   &.consumption {
     grid-area: consumption;
   }
@@ -181,6 +183,7 @@ export default {
   &.operating-cost {
     grid-area: operating;
   }
+
   &.total-cost {
     grid-area: total;
   }

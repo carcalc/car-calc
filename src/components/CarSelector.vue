@@ -92,6 +92,7 @@ select {
     border: $input-focus-border;
   }
 }
+
 button {
   width: 100%;
   flex: 1;
@@ -120,6 +121,7 @@ button {
       }
     }
   }
+
   &:last-of-type {
     border-radius: 0 $border-radius / 1.5 $border-radius / 1.5 0;
     i {
@@ -128,9 +130,11 @@ button {
       }
     }
   }
+
   &:disabled {
     opacity: 0.5;
   }
+
   &:not(:disabled):focus,
   &:not(:disabled):hover {
     border: $input-focus-border;
