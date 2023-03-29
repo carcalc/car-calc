@@ -65,18 +65,67 @@ export default {
   }
 }
 
-.input-display {
+/* Range Reset */
+input[type='range'] {
+  @mixin track {
+    background-color: $input-bg;
+    border-radius: 0.5rem;
+    height: 0.5rem;
+  }
+
+  @mixin thumb {
+    background-color: $brand-color2;
+    height: 16px;
+    width: 6px;
+    border-radius: 2px;
+  }
+
+  @mixin thumb-focus {
+    border: 1px solid $input-bg;
+    outline: 3px solid $input-bg;
+    outline-offset: 0.125rem;
+  }
+
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
   width: 100%;
-  height: 100%;
-  font-weight: bold;
-  color: $black;
-  margin: 0;
-  border: none;
-  display: block;
-  line-height: 0;
-  font-style: italic;
-  outline: none;
-  padding: 9px 12px 0 7px;
-  font-size: 1rem;
+
+  // Chrome, Safari, Opera and Edge Chromium styles
+  &::-webkit-slider {
+    &-thumb {
+      appearance: none;
+      margin-top: -4px; /* Centers thumb on the track */
+
+      @include thumb;
+    }
+
+    &-runnable-track {
+      @include track;
+    }
+  }
+
+  // Firefox
+  &::-moz-range {
+    &-thumb {
+      border: none; /* Removes extra border that FF applies */
+      border-radius: 0; /* Removes default border-radius that FF applies */
+
+      @include thumb;
+    }
+
+    &-track {
+      @include track;
+    }
+  }
+
+  &:focus {
+    outline: none;
+
+    &::-webkit-slider-thumb,
+    &::-moz-range-thumb {
+      @include thumb--focus;
+    }
+  }
 }
 </style>
