@@ -16,7 +16,9 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: 'InputBlockRange',
   props: {
     title: { required: true, type: Number },
@@ -27,12 +29,13 @@ export default {
     min: { type: Number, default: 0 },
     max: { type: Number, default: undefined },
   },
+  emits: ['update:modelValue'],
   methods: {
     handleInput(e: Event) {
       this.$emit('update:modelValue', (e.target as HTMLInputElement).value);
     },
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>
@@ -124,7 +127,7 @@ input[type='range'] {
 
     &::-webkit-slider-thumb,
     &::-moz-range-thumb {
-      @include thumb--focus;
+      @include thumb-focus;
     }
   }
 }

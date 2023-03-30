@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { collection, getDocs, getFirestore, QueryDocumentSnapshot } from 'firebase/firestore';
+
 import type { Car } from '@/types';
 
 // Initialize Firebase

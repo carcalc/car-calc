@@ -24,3 +24,5 @@ export type Link = {
   title: string;
   url: string;
 };
+
+export type Fuel = 'electric' | 'gasoline'

@@ -8,10 +8,12 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+
 import TweenedNumber from '@/components/TweenedNumber.vue';
 
-export default {
+export default defineComponent({
   name: 'StatisticsBlock',
   components: { TweenedNumber },
   props: {
@@ -21,7 +23,7 @@ export default {
     value: { required: true, type: Number },
     decimals: { required: false, type: Number, default: 0 },
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>
@@ -46,12 +48,11 @@ export default {
 }
 
 .stat-display {
-  width: 100%;
-  height: 100%;
+  display: flex;
+  align-items: baseline;
   font-weight: bold;
+  gap: 2px;
   color: $black;
-  margin: 0;
-  border: none;
   font-size: 1.3rem;
 
   @media screen and (min-width: $size-small-tablet) {

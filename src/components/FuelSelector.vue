@@ -4,24 +4,28 @@
     <div class="fuel-display">
       <input v-model="fuelType" lang="sv" type="radio" name="electric" value="electric" />
       <label for="electric">
-        <i class="fas fa-bolt fa-lg"></i>
+        <i class="fa-bolt fa-lg fas" />
       </label>
       <input v-model="fuelType" lang="sv" type="radio" name="gasoline" value="gasoline" />
       <label for="gasoline">
-        <i class="fas fa-gas-pump fa-lg"></i>
+        <i class="fa-gas-pump fa-lg fas" />
       </label>
     </div>
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+import type { Fuel } from '@/types';
+
+export default defineComponent({
   name: 'FuelSelector',
   props: { modelValue: { required: true, type: Boolean }, title: { required: true, type: String } },
-  data() {
-    return { fuelType: null };
+  emits: ['update:modelValue'],
+  data(): { fuelType: Fuel } {
+    return { fuelType: 'gasoline' };
   },
-
   watch: {
     modelValue: {
       immediate: true,
@@ -30,10 +34,11 @@ export default {
       },
     },
     fuelType() {
-      this.$emit('update:modelValue', this.fuelType === 'electric');
+      const isEv = this.fuelType === 'electric';
+      this.$emit('update:modelValue', isEv);
     },
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

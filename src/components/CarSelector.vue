@@ -1,26 +1,29 @@
 <template>
   <div class="car-selector">
     <button :disabled="isDisabled" @click="handleSelect(0)">
-      <i class="fas fa-chevron-circle-up"></i>
+      <i class="fa-chevron-circle-up fas" />
     </button>
     <select v-model="selectedCar">
-      <option disabled selected hidden value="null">Välj en bil</option>
+      <option disabled selected hidden value="null">Välj en exempelbil</option>
       <option v-for="(car, index) in cars" :key="index" :value="car">
         {{ car.name }} — {{ car.specs }}
       </option>
     </select>
     <button :disabled="isDisabled" @click="handleSelect(1)">
-      <i class="fas fa-chevron-circle-down"></i>
+      <i class="fa-chevron-circle-down fas" />
     </button>
   </div>
 </template>
 
 <script lang="ts">
-import type { Car } from '@/types';
-import { getCars } from '@/firebase';
-import { defaultCars } from '@/data';
+import { defineComponent } from 'vue';
 
-export default {
+import { defaultCars } from '@/data';
+import { getCars } from '@/firebase';
+import type { Car } from '@/types';
+
+export default defineComponent({
+  name: 'CarSelector',
   emits: ['select-car'],
   data(): { cars: Car[]; selectedCar: Car | null } {
     return {
@@ -43,7 +46,7 @@ export default {
       this.selectedCar = null;
     },
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

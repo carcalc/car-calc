@@ -10,14 +10,16 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+
 import CarLogo from '@/components/CarLogo.vue';
 
-export default {
+export default defineComponent({
   name: 'CarIntro',
   components: { CarLogo },
   props: { car: { type: Object, required: true } },
-};
+});
 </script>
 
 <style lang="scss" scoped>

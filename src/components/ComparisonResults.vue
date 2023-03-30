@@ -40,83 +40,93 @@
   </section>
 </template>
 
-<script>
-import TweenedNumber from '@/components/TweenedNumber.vue';
+<script lang="ts">
+import { defineComponent } from 'vue';
+import type { PropType } from 'vue';
 
-export default {
+import TweenedNumber from '@/components/TweenedNumber.vue';
+import type { Car } from '@/types';
+
+export default defineComponent({
   name: 'ComparisonResults',
   components: { TweenedNumber },
   props: {
     usage: { type: Object, required: true },
-    cars: { type: Array, required: true },
+    cars: { type: Array as PropType<Car[]>, required: true },
   },
   computed: {
-    fuelCostsPerKm() {
+    fuelCostsPerKm(): number[] {
       const { gasPrice, kwhPrice } = this.usage;
       return this.cars.map((car) => {
         return (car.consumption * (car.isEv ? kwhPrice : gasPrice)) / 100;
       });
     },
-    totalFuelCosts() {
+    totalFuelCosts(): number[] {
       const { distance, ownership } = this.usage;
       return this.cars.map((_, index) =>
         Math.round(this.fuelCostsPerKm[index] * distance * ownership),
       );
     },
-    totalOwnershipCosts() {
+    totalOwnershipCosts(): number[] {
       return this.cars.map((car, index) => {
         const cost = this.totalFuelCosts[index] + car.price;
         return cost;
       });
     },
-    totalDistance() {
+    totalDistance(): number {
       return this.usage.distance * this.usage.ownership;
     },
-    fuelSavings() {
+    fuelSavings(): number {
       const [carOne, carTwo] = this.totalFuelCosts;
-      if (carOne < carTwo) return carTwo - carOne;
-      else return carOne - carTwo;
+      if (carOne < carTwo) {
+        return carTwo - carOne;
+      } else {
+        return carOne - carTwo;
+      }
     },
-    totalSavings() {
+    totalSavings(): number {
       const [carOne, carTwo] = this.totalOwnershipCosts;
-      if (carOne < carTwo) return carTwo - carOne;
-      else return carOne - carTwo;
+      if (carOne < carTwo) {
+        return carTwo - carOne;
+      } else {
+        return carOne - carTwo;
+      }
     },
-    totalSavingsPercent() {
+    totalSavingsPercent(): number {
       const [carOne, carTwo] = this.totalOwnershipCosts;
       const diff = this.totalSavings;
       return Math.round(carOne > carTwo ? (diff / carOne) * 100 : (diff / carTwo) * 100);
     },
-    energySaved() {
-      // Currently not displayed anywhere
-      return (
-        (this.cars[this.getIndexOfLowest(this.totalFuelCosts)].consumption / 100) *
-        this.usage.distance
-      );
-    },
+    // energySaved() {
+    //   // Currently not displayed anywhere
+    //   return (
+    //     (this.cars[this.getIndexOfLowest(this.totalFuelCosts)].consumption / 100) *
+    //     this.usage.distance
+    //   );
+    // },
     // Below makes comparisons
-    cheapestCar() {
+    cheapestCar(): Car {
       return this.cars[this.getIndexOfLowest(this.totalOwnershipCosts)];
     },
-    cheapestCarToRun() {
+    cheapestCarToRun(): Car {
       return this.cars[this.getIndexOfLowest(this.totalFuelCosts)];
     },
-    mostExpensiveCar() {
+    mostExpensiveCar(): Car {
       return this.cars[this.getIndexOfHighest(this.totalOwnershipCosts)];
     },
-    mostExpensiveCarToRun() {
-      return this.cars[this.getIndexOfHighest(this.totalFuelCosts)];
-    },
+    // mostExpensiveCarToRun() {
+    //   return this.cars[this.getIndexOfHighest(this.totalFuelCosts)];
+    // },
   },
   methods: {
-    getIndexOfLowest([carOne, carTwo]) {
+    getIndexOfLowest([carOne, carTwo]: number[]) {
       return carOne < carTwo ? 0 : 1;
     },
-    getIndexOfHighest([carOne, carTwo]) {
+    getIndexOfHighest([carOne, carTwo]: number[]) {
       return carOne > carTwo ? 0 : 1;
     },
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

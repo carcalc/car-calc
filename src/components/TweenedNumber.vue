@@ -2,10 +2,12 @@
   <span>{{ formattedvalue }}{{ unit }}</span>
 </template>
 
-<script>
+<script lang="ts">
 import { TweenLite } from 'gsap/TweenMax';
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
+  name: 'TweenedNumber',
   props: {
     value: { type: Number, required: true },
     unit: { type: String, default: '' },
@@ -31,5 +33,5 @@ export default {
   mounted() {
     this.tweeningValue = this.value;
   },
-};
+});
 </script>

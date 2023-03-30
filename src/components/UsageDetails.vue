@@ -43,13 +43,16 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
+
 import InputBlockNumber from '@/components/InputBlockNumber.vue';
 import InputBlockRange from '@/components/InputBlockRange.vue';
 
-export default {
+export default defineComponent({
   name: 'UsageDetails',
   components: { InputBlockRange, InputBlockNumber },
   props: { modelValue: { type: Object, required: true } },
+  emits: ['update:modelValue'],
   data() {
     return { localValue: { ...this.modelValue } };
   },
@@ -61,7 +64,7 @@ export default {
       deep: true,
     },
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

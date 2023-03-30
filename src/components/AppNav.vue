@@ -6,12 +6,6 @@
   </nav>
 </template>
 
-<script>
-export default {
-  name: 'AppNav',
-};
-</script>
-
 <style lang="scss" scoped>
 #nav {
   position: fixed;

@@ -20,7 +20,9 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: 'InputBlockNumber',
   props: {
     title: { required: true, type: String },
@@ -34,6 +36,7 @@ export default {
     placeholder: { type: String, default: 'Fyll i' },
     noDecimals: { type: Boolean, default: false },
   },
+  emits: ['update:modelValue'],
   data() {
     return { newValue: this.modelValue };
   },
@@ -43,14 +46,13 @@ export default {
       this.$emit('update:modelValue', this.newValue);
     },
     trimInput(input: string): number {
-      console.log(typeof input);
       const isMax = this.maxLength && input.length >= this.maxLength;
       const trimmed = isMax ? input.substring(0, this.maxLength) : input;
 
       return parseFloat(trimmed);
     },
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

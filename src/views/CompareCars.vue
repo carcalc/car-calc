@@ -2,7 +2,7 @@
   <section class="cars-comparison">
     <UsageDetails v-model="usageDetails" />
     <CarSelector @select-car="setCar" />
-    <template :key="car.id + index" v-for="(car, index) in cars">
+    <template v-for="(car, index) in cars" :key="car.id + index">
       <transition appear name="bounce">
         <CarDetails :key="car.id + index" :car="car" :usage="usageDetails" />
       </transition>
@@ -12,14 +12,16 @@
 </template>
 
 <script lang="ts">
-import { defaultUsage, defaultCars } from '@/data';
-import UsageDetails from '@/components/UsageDetails.vue';
-import CarSelector from '@/components/CarSelector.vue';
+import { defineComponent } from 'vue';
+
 import CarDetails from '@/components/CarDetails.vue';
+import CarSelector from '@/components/CarSelector.vue';
 import ComparisonResults from '@/components/ComparisonResults.vue';
+import UsageDetails from '@/components/UsageDetails.vue';
+import { defaultUsage, defaultCars } from '@/data';
 import type { Car, Usage } from '@/types';
 
-export default {
+export default defineComponent({
   name: 'CompareCars',
   components: {
     UsageDetails,
@@ -32,9 +34,6 @@ export default {
       cars: defaultCars,
       usageDetails: defaultUsage,
     };
-  },
-  async created() {
-    this.getLocalStorage();
   },
   watch: {
     usageDetails: {
@@ -49,6 +48,9 @@ export default {
       },
       deep: true,
     },
+  },
+  async created() {
+    this.getLocalStorage();
   },
   methods: {
     getLocalStorage() {
@@ -70,7 +72,7 @@ export default {
       this.cars.splice(index, 1, car);
     },
   },
-};
+});
 </script>
 
 <style lang="scss">

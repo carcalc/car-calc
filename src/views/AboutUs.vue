@@ -42,9 +42,11 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from 'vue';
+
 import { contacts, email, sourceLinks } from '@/data';
 
-export default {
+export default defineComponent({
   name: 'AboutUs',
   data() {
     return {
@@ -53,7 +55,7 @@ export default {
       email,
     };
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

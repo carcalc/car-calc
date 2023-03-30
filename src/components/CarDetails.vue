@@ -39,31 +39,27 @@
   </form>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from 'vue';
+import type { PropType } from 'vue';
+
 import CarIntro from '@/components/CarIntro.vue';
+import FuelSelector from '@/components/FuelSelector.vue';
 import InputBlockNumber from '@/components/InputBlockNumber.vue';
 import StatisticsBlock from '@/components/StatisticsBlock.vue';
-import FuelSelector from '@/components/FuelSelector.vue';
+import type { Car } from '@/types';
 
-export default {
+export default defineComponent({
   name: 'CarDetails',
   components: { CarIntro, InputBlockNumber, StatisticsBlock, FuelSelector },
   props: {
-    car: { type: Object, required: true },
+    car: { type: Object as PropType<Car>, required: true },
     usage: { type: Object, required: true },
   },
-  data() {
+  data(): { editedCar: Car } {
     return {
-      editedCar: this.car,
+      editedCar: { ...this.car },
     };
-  },
-  watch: {
-    car: {
-      immediate: true,
-      handler(newVal) {
-        this.editedCar = newVal;
-      },
-    },
   },
   computed: {
     fuelCostPerKm() {
@@ -84,12 +80,16 @@ export default {
       return this.car.isEv ? 'kWh/100 km' : 'l/100 km';
     },
   },
-  methods: {
-    changeCar() {
-      this.$emit('input', this.editedCar);
+  watch: {
+    // Todo: rework as v-model
+    car: {
+      immediate: true,
+      handler(newVal) {
+        this.editedCar = newVal;
+      },
     },
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>
