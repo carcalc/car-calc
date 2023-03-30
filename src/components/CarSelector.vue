@@ -4,7 +4,7 @@
       <i class="fa-chevron-circle-up fas" />
     </button>
     <select v-model="selectedCar">
-      <option disabled selected hidden value="null">Välj en exempelbil</option>
+      <option disabled selected hidden value="null">Exempelbilar</option>
       <option v-for="(car, index) in cars" :key="index" :value="car">
         {{ car.name }} — {{ car.specs }}
       </option>
@@ -51,10 +51,6 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .car-selector {
-  @include card-style;
-
-  grid-area: selector;
-  gap: 0 !important;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
 }

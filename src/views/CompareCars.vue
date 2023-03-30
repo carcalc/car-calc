@@ -1,19 +1,33 @@
 <template>
   <section class="cars-comparison">
-    <UsageDetails v-model="usageDetails" />
-    <CarSelector @select-car="setCar" />
-    <template v-for="(car, index) in cars" :key="car.id + index">
+    <CardContainer style="grid-area: usage">
+      <UsageDetails v-model="usageDetails" />
+    </CardContainer>
+
+    <CardContainer style="grid-area: selector">
+      <CarSelector @select-car="setCar" />
+    </CardContainer>
+
+    <CardContainer
+      v-for="(car, index) in cars"
+      :key="car.id + index"
+      :style="`grid-area: car${index + 1}`"
+    >
       <transition appear name="bounce">
         <CarDetails :key="car.id + index" :car="car" :usage="usageDetails" />
       </transition>
-    </template>
-    <ComparisonResults :usage="usageDetails" :cars="cars" />
+    </CardContainer>
+
+    <CardContainer style="grid-area: results">
+      <ComparisonResults :usage="usageDetails" :cars="cars" />
+    </CardContainer>
   </section>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 
+import CardContainer from '@/components/CardContainer.vue';
 import CarDetails from '@/components/CarDetails.vue';
 import CarSelector from '@/components/CarSelector.vue';
 import ComparisonResults from '@/components/ComparisonResults.vue';
@@ -28,6 +42,7 @@ export default defineComponent({
     CarSelector,
     CarDetails,
     ComparisonResults,
+    CardContainer,
   },
   data(): { cars: Car[]; usageDetails: Usage } {
     return {
@@ -78,7 +93,7 @@ export default defineComponent({
 <style lang="scss">
 .cars-comparison {
   display: grid;
-  gap: 4px;
+  gap: $gutter-xs;
   justify-content: center;
   align-content: baseline;
   grid-template:
@@ -90,7 +105,7 @@ export default defineComponent({
     / 1fr;
 
   @media screen and (min-width: $size-small-tablet) {
-    gap: 8px;
+    gap: $gutter-sm;
     grid-template:
       'usage usage'
       'selector selector'
@@ -100,24 +115,16 @@ export default defineComponent({
   }
 
   @media screen and (min-width: $size-tablet) {
-    gap: 12px;
+    gap: $gutter-md;
   }
 
   @media screen and (min-width: $size-desktop) {
-    gap: 24px;
+    gap: $gutter-xl;
     grid-template:
       'car1 usage car2'
       'car1 selector car2'
       'results results results'
       / 1fr minmax(auto, 300px) 1fr;
-  }
-
-  .car-details {
-    grid-area: car1;
-
-    &:last-of-type {
-      grid-area: car2;
-    }
   }
 }
 </style>

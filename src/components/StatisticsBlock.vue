@@ -1,9 +1,9 @@
 <template>
   <div :class="name" class="stat-block">
-    <h3 class="stat-title">{{ title }}</h3>
-    <span class="stat-display">
+    <h3 class="stat-block__title">{{ title }}</h3>
+    <span class="stat-block__value">
       <TweenedNumber :value="value" :decimals="decimals" />
-      <span class="stat-display-unit"> {{ unit }}</span>
+      <span class="stat-block__unit"> {{ unit }}</span>
     </span>
   </div>
 </template>
@@ -32,38 +32,38 @@ export default defineComponent({
   display: block;
   width: 100%;
   height: 100%;
-}
 
-.stat-title {
-  font-weight: bold;
-  font-size: 0.8rem;
+  &__title {
+    font-weight: bold;
+    font-size: 0.8rem;
 
-  @media screen and (min-width: $size-small-tablet) {
-    font-size: 0.9rem;
+    @media screen and (min-width: $size-small-tablet) {
+      font-size: 0.9rem;
+    }
+
+    @media screen and (min-width: $size-tablet) {
+      font-size: 1rem;
+    }
   }
 
-  @media screen and (min-width: $size-tablet) {
-    font-size: 1rem;
-  }
-}
+  &__value {
+    display: flex;
+    align-items: baseline;
+    font-weight: bold;
+    gap: 2px;
+    color: $black;
+    font-size: 1.3rem;
 
-.stat-display {
-  display: flex;
-  align-items: baseline;
-  font-weight: bold;
-  gap: 2px;
-  color: $black;
-  font-size: 1.3rem;
+    @media screen and (min-width: $size-small-tablet) {
+      font-size: 1.4rem;
+    }
 
-  @media screen and (min-width: $size-small-tablet) {
-    font-size: 1.4rem;
-  }
-
-  @media screen and (min-width: $size-tablet) {
-    font-size: 1.8rem;
+    @media screen and (min-width: $size-tablet) {
+      font-size: 1.8rem;
+    }
   }
 
-  &-unit {
+  &__unit {
     font-weight: bold;
     font-size: 0.5rem;
 

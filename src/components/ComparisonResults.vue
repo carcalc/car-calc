@@ -133,10 +133,7 @@ export default defineComponent({
 @import 'https://fonts.googleapis.com/css?family=Nunito:800';
 
 .cars-results {
-  @include card-style;
-
   text-align: center;
-  grid-area: results;
   font-size: 0.8rem;
 
   @media screen and (min-width: $size-small-tablet) {

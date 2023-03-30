@@ -1,6 +1,6 @@
 <template>
   <form class="car-details">
-    <CarIntro :car="car" />
+    <CarIntro :car="car" style="grid-area: intro" />
 
     <InputBlockNumber
       v-model.number="editedCar.price"
@@ -13,9 +13,10 @@
       :step="1"
       no-decimals
       placeholder="Ange pris"
+      style="grid-area: price"
     />
 
-    <FuelSelector v-model="editedCar.isEv" title="Drivmedel" />
+    <FuelSelector v-model="editedCar.isEv" title="Drivmedel" style="grid-area: fuel" />
 
     <InputBlockNumber
       v-model.number="editedCar.consumption"
@@ -25,6 +26,7 @@
       :step="0.1"
       :min="0"
       :max-length="4"
+      style="grid-area: consumption"
     />
 
     <StatisticsBlock
@@ -33,9 +35,16 @@
       unit="kr/mil"
       name="operating-cost"
       :decimals="2"
+      style="grid-area: operating"
     />
 
-    <StatisticsBlock title="Totalkostnad" :value="totalOwnershipCost" unit="kr" name="total-cost" />
+    <StatisticsBlock
+      title="Totalkostnad"
+      style="grid-area: total"
+      :value="totalOwnershipCost"
+      unit="kr"
+      name="total-cost"
+    />
   </form>
 </template>
 
@@ -94,12 +103,9 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .car-details {
-  @include card-style;
-
-  position: relative;
   display: grid;
   align-content: end;
-  gap: 0.5rem;
+  gap: $gutter-sm;
   grid-template:
     'intro intro intro'
     'price price fuel'
@@ -117,39 +123,7 @@ export default defineComponent({
   }
 
   @media screen and (min-width: $size-tablet) {
-    gap: 1rem;
-  }
-}
-
-.input-block {
-  &.car-price {
-    grid-area: price;
-
-    .input-display {
-      font-size: 2rem;
-
-      @media screen and (min-width: $size-tablet) {
-        font-size: 3.5rem;
-      }
-    }
-  }
-
-  &.fuel-type {
-    grid-area: fuel;
-  }
-
-  &.consumption {
-    grid-area: consumption;
-  }
-}
-
-.stat-block {
-  &.operating-cost {
-    grid-area: operating;
-  }
-
-  &.total-cost {
-    grid-area: total;
+    gap: $gutter-lg;
   }
 }
 </style>
