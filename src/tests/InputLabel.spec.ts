@@ -1,4 +1,4 @@
-import { render } from '@testing-library/vue';
+import { render, screen } from '@testing-library/vue';
 import { describe, expect, it } from 'vitest';
 
 import InputLabel from '@/components/InputLabel.vue';
@@ -11,7 +11,7 @@ describe('InputLabel', () => {
   });
 
   it('renders the correct tag when passed', () => {
-    const screen = render(InputLabel, { props: { text: "I'm a div", tag: 'div' } });
+    render(InputLabel, { props: { text: "I'm a div", tag: 'div' } });
 
     expect(screen.getByText("I'm a div").tagName).toBe('DIV');
   });

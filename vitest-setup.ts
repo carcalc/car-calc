@@ -1,4 +1,3 @@
-import { vi } from 'vitest';
 import matchers from '@testing-library/jest-dom/matchers';
 import type { TestingLibraryMatchers } from '@testing-library/jest-dom/matchers';
 import { expect } from 'vitest';
