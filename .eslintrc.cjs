@@ -23,12 +23,15 @@ const importOrderRuleConfig = {
 module.exports = {
   root: true,
 
+  plugins: ['testing-library'],
+
   extends: [
     'plugin:vue/vue3-recommended',
     'eslint:recommended',
     '@vue/eslint-config-typescript',
     '@vue/eslint-config-prettier/skip-formatting',
     'plugin:import/recommended',
+    'plugin:testing-library/vue',
   ],
 
   rules: {
