@@ -15,6 +15,6 @@
 
 <style lang="scss" scoped>
 .help-page {
-  @include info-page();
+  @include info-page;
 }
 </style>

@@ -1,0 +1,14 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`InputLabel > renders correctly 1`] = `
+<div>
+  <label
+    class="input-label"
+    data-v-4c048e95=""
+  >
+    label text 
+    
+    
+  </label>
+</div>
+`;

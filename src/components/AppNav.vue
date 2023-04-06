@@ -6,12 +6,6 @@
   </nav>
 </template>
 
-<script>
-export default {
-  name: 'AppNav',
-};
-</script>
-
 <style lang="scss" scoped>
 #nav {
   position: fixed;
@@ -23,7 +17,7 @@ export default {
   z-index: 10;
   padding: 10px;
   text-align: right;
-  background: rgba(48, 48, 59, 0.95);
+  background: rgb(48 48 59 / 95%);
   backdrop-filter: blur(5px);
   min-width: 320px;
   user-select: none;
@@ -53,6 +47,7 @@ export default {
       border: none;
       margin: auto;
     }
+
     &:hover {
       @media screen and (min-width: $size-desktop) {
         text-decoration: underline;
@@ -68,6 +63,7 @@ export default {
   .home-link {
     // Hide home by default
     display: none;
+
     @media screen and (min-width: $size-small-tablet) {
       // Display home when there's space
       display: initial;

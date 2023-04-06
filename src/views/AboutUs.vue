@@ -10,9 +10,8 @@
     </p>
     <h2>Om oss</h2>
     <p>
-      Vi som utvecklat denna sajt heter {{ contact.andreas.name }} och {{ contact.gabriel.name }}.
-      Kontakta oss gärna med feedback och idéer på
-      <a :href="`mailto:${contact.email}`">{{ contact.email }}</a
+      Vi som utvecklat denna sajt heter {{ contacts[0].name }} och {{ contacts[1].name }}. Kontakta
+      oss gärna med feedback och idéer på <a :href="`mailto:${email}`">{{ email }}</a
       >.
     </p>
 
@@ -28,47 +27,39 @@
       siffrorna ses som väglendande snarare än en absolut sanning. Vi kan omöjligen veta exakt.
     </p>
     <p>
-      Miljöbilspremien<sup>3</sup>
-      som betalas ut till köpare av nya elbilar är medräknad där det är relevant och så länge boxen
-      är ikryssad.
+      Den statliga miljöbilspremien<sup>3</sup>
+      existerar inte längre och är därör bottagen ur appen. Om du ändå behöver räkna med den så kan
+      du subtrahera premien från totalkostnaden manuellt.
     </p>
     <h2>Källor</h2>
 
     <ol class="references">
-      <li v-for="ref in references" :key="ref.title">
+      <li v-for="ref in sourceLinks" :key="ref.title">
         <a target="_blank" :href="ref.url">{{ ref.title }}</a>
       </li>
     </ol>
   </section>
 </template>
 
-<script>
-export default {
-  name: 'About',
-  props: { contact: { type: Object, required: true } },
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+import { contacts, email, sourceLinks } from '@/data';
+
+export default defineComponent({
+  name: 'AboutUs',
   data() {
     return {
-      references: [
-        {
-          title: 'Bavaria',
-          url: 'https://bavariabil.se/Bilguiden/Infor-bilkopet/bonus-malus/',
-        },
-        {
-          title: 'Elbilsnytt',
-          url: 'http://elbilsnytt.se/elbilar-mycket-billigare-att-serva/',
-        },
-        {
-          title: 'Transportstyrelsen',
-          url: 'https://www.transportstyrelsen.se/sv/vagtrafik/Fordon/bonus-malus/bonus/berakna-din-preliminara-bonus/',
-        },
-      ],
+      sourceLinks,
+      contacts,
+      email,
     };
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>
 .about-page {
-  @include info-page();
+  @include info-page;
 }
 </style>

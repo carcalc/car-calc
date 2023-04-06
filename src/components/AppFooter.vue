@@ -1,7 +1,7 @@
 <template>
   <footer>
-    <a :href="`mailto:${contact.email}`" class="email">
-      <i class="far fa-envelope"></i>
+    <a :href="`mailto:${email}`" class="email">
+      <i class="fa-envelope far" />
     </a>
     <p class="copyright">{{ copyrightText }}</p>
     <input
@@ -14,17 +14,25 @@
   </footer>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+import { contacts, email } from '@/data';
+
+export default defineComponent({
   name: 'AppFooter',
-  props: { contact: { type: Object, required: true } },
+  emits: ['reset'],
+  data() {
+    return {
+      email,
+    };
+  },
   computed: {
     copyrightText() {
-      const { andreas, gabriel } = this.contact;
-      return `© 2021 ${andreas.name} & ${gabriel.name}`;
+      return `© 2019 ${contacts[0].name} & ${contacts[1].name}`;
     },
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

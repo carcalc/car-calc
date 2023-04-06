@@ -2,16 +2,23 @@
 $black: #232e38;
 $white: white;
 $brand-color1: #0abc87;
-$brand-color2: #ff5e00;
 $brand-color3: #0a9bdf;
-$input-bg: rgb(203, 227, 228);
-$card-bg: rgba(255, 255, 255, 0.95);
+$brand-color2: #ff5e00;
+$input-bg: rgb(203 227 228);
+$card-bg: rgb(255 255 255 / 95%);
 
 // Other
-$border-radius: 15px;
+$border-radius-md: 10px;
+$border-radius-lg: 15px;
 $input-focus-border: 3px solid $brand-color2;
 $navheight: 54px;
-$gap: 1.5rem;
+
+// Spacing
+$gutter-xs: 4px;
+$gutter-sm: 8px;
+$gutter-md: 12px;
+$gutter-lg: 16px;
+$gutter-xl: 24px;
 
 // Media queries
 $size-small-tablet: 500px;

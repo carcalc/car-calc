@@ -1,6 +1,6 @@
 <template>
   <div class="car-intro">
-    <CarLogo :carName="car.name" />
+    <CarLogo :car-name="car.name" />
     <h1 class="car-name">
       {{ car.name }}
     </h1>
@@ -10,34 +10,40 @@
   </div>
 </template>
 
-<script>
-import CarLogo from '@/components/CarLogo';
+<script lang="ts">
+import { defineComponent } from 'vue';
 
-export default {
+import CarLogo from '@/components/CarLogo.vue';
+
+export default defineComponent({
   name: 'CarIntro',
   components: { CarLogo },
   props: { car: { type: Object, required: true } },
-};
+});
 </script>
 
 <style lang="scss" scoped>
 .car-intro {
   grid-area: intro;
 }
+
 .car-name {
+  font-size: 1rem;
   display: inline;
   font-weight: bold;
-  font-size: 1rem;
+
   @media screen and (min-width: $size-tablet) {
     display: block;
     text-align: center;
     font-size: 2rem;
   }
 }
+
 .car-specs {
   display: inline;
   font-size: 0.8rem;
   text-align: right;
+
   @media screen and (min-width: $size-tablet) {
     display: block;
     text-align: center;

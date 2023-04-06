@@ -2,41 +2,28 @@
   <div id="app">
     <AppHeader />
     <AppNav />
-    <transition appear name="bounce">
-      <router-view :contact="contact" />
-    </transition>
-    <AppFooter :contact="contact" @reset="resetApp" />
+
+    <router-view v-slot="{ Component }">
+      <transition appear name="bounce">
+        <component :is="Component" />
+      </transition>
+    </router-view>
+
+    <AppFooter @reset="resetApp" />
   </div>
 </template>
 
-<script>
-import AppHeader from '@/components/AppHeader';
-import AppFooter from '@/components/AppFooter';
-import AppNav from '@/components/AppNav';
+<script lang="ts">
+import AppFooter from '@/components/AppFooter.vue';
+import AppHeader from '@/components/AppHeader.vue';
+import AppNav from '@/components/AppNav.vue';
+
 export default {
   name: 'App',
   components: {
     AppHeader,
     AppNav,
     AppFooter,
-  },
-  data() {
-    // Todo: move this to locale file when i18n is installed
-    return {
-      contact: {
-        email: 'hello@carcalc.se',
-        andreas: {
-          name: 'Andreas',
-          linkedIn: 'http://www.linkedin.com/in/andreas-hansson-',
-          email: 'andreas@carcalc.se',
-        },
-        gabriel: {
-          name: 'Gabriel',
-          linkedIn: 'http://www.linkedin.com/in/gabriellundmark',
-          email: 'gabriel@carcalc.se',
-        },
-      },
-    };
   },
   methods: {
     resetApp() {
@@ -49,9 +36,9 @@ export default {
 
 <style lang="scss">
 #app {
-  background: rgb(0, 0, 0);
-  background: linear-gradient(0deg, rgb(30, 30, 39) 0%, rgb(48, 48, 59) 100%);
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  background: rgb(0 0 0);
+  background: linear-gradient(0deg, rgb(30 30 39) 0%, rgb(48 48 59) 100%);
+  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $black;
@@ -72,8 +59,8 @@ export default {
       'content' 1fr
       'footer' auto
       / minmax(320px, 1100px);
-    padding-top: 0;
     padding: 1rem;
+    padding-top: 0;
   }
 }
 </style>

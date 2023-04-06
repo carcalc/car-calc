@@ -1,31 +1,37 @@
 <template>
-  <img v-if="setSrc !== null" :src="setSrc" alt="Car Logo" />
+  <img v-if="imageSource" :src="imageSource" :alt="carBrand + 'logotyp'" />
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: 'CarLogo',
   props: {
     carName: { type: String, required: true },
   },
   computed: {
-    setSrc() {
-      const name = this.carName.split(' ')[0].toLowerCase();
+    carBrand() {
+      return this.carName.split(' ')[0].toLowerCase();
+    },
+    imageSource() {
       try {
-        return require(`../assets/carlogos/${name}.png`);
+        return new URL(`../assets/carlogos/${this.carBrand}.png`, import.meta.url).href;
       } catch (e) {
         return null;
       }
     },
   },
-};
+});
 </script>
+
 <style lang="scss" scoped>
 img {
   height: 1.1rem;
   position: absolute;
   right: 10px;
   top: 10px;
+
   @media screen and (min-width: $size-tablet) {
     height: 2rem;
     left: 10px;

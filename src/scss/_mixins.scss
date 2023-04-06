@@ -1,20 +1,3 @@
-@mixin card-style {
-  border: none;
-  background-color: $card-bg;
-  backdrop-filter: blur(5px);
-  padding: 1rem;
-  gap: 0.5rem;
-  border-radius: $border-radius / 1.5;
-
-  @media screen and (min-width: $size-tablet) {
-    border-radius: $border-radius;
-    padding: 1.5rem;
-    gap: 1rem;
-    // Card layout for tablet and desktop
-    box-shadow: 1px 1px 2px 0px rgba(0, 0, 80, 0.3);
-  }
-}
-
 @mixin info-page {
   color: $white;
   max-width: 600px;
@@ -23,9 +6,9 @@
 
   @media screen and (min-width: $size-tablet) {
     padding: 3rem;
-    background-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 1px 1px 2px 0px rgba(0, 0, 80, 0.3);
-    border-radius: $border-radius;
+    background-color: rgb(255 255 255 / 10%);
+    box-shadow: 1px 1px 2px 0 rgb(0 0 80 / 30%);
+    border-radius: $border-radius-lg;
   }
 
   i {
@@ -47,6 +30,7 @@
     font-weight: bold;
     color: $brand-color2;
     text-decoration: none;
+
     @media screen and (min-width: $size-desktop) {
       &:hover {
         text-decoration: underline;

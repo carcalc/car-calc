@@ -1,65 +1,56 @@
 <template>
   <div class="car-selector">
-    <button :disabled="selectedCar === null" @click="dispatchCar(0)">
-      <i class="fas fa-chevron-circle-up"></i>
+    <button :disabled="isDisabled" @click="handleSelect(0)">
+      <i class="fa-chevron-circle-up fas" />
     </button>
     <select v-model="selectedCar">
-      <option disabled selected hidden value="null">Välj en bil</option>
-      <option v-for="(car, index) in allCars" :key="index" :value="car">
+      <option disabled selected hidden value="null">Exempelbilar</option>
+      <option v-for="(car, index) in cars" :key="index" :value="car">
         {{ car.name }} — {{ car.specs }}
       </option>
     </select>
-    <button :disabled="selectedCar === null" @click="dispatchCar(1)">
-      <i class="fas fa-chevron-circle-down"></i>
+    <button :disabled="isDisabled" @click="handleSelect(1)">
+      <i class="fa-chevron-circle-down fas" />
     </button>
   </div>
 </template>
 
-<script>
-import db from '@/firebase/init';
-import defaultData from '@/data/defaults';
+<script lang="ts">
+import { defineComponent } from 'vue';
 
-export default {
-  data() {
+import { defaultCars } from '@/data';
+import { getCars } from '@/firebase';
+import type { Car } from '@/types';
+
+export default defineComponent({
+  name: 'CarSelector',
+  emits: ['select-car'],
+  data(): { cars: Car[]; selectedCar: Car | null } {
     return {
       selectedCar: null,
-      allCars: [],
+      cars: [],
     };
   },
-  created() {
-    this.fetchCars();
+  computed: {
+    isDisabled() {
+      return !this.selectedCar;
+    },
+  },
+  async created() {
+    const cars = await getCars();
+    this.cars = [...defaultCars, ...cars];
   },
   methods: {
-    dispatchCar(side) {
-      this.$emit('click', { car: this.selectedCar, index: side });
+    handleSelect(index: number) {
+      this.$emit('select-car', { car: this.selectedCar, index });
       this.selectedCar = null;
     },
-    sortCars(cars) {
-      return cars.sort((a, b) => a.name.localeCompare(b.name));
-    },
-    fetchCars() {
-      let cars = [];
-      db.collection('cars')
-        .get()
-        .then((snapshot) => {
-          snapshot.forEach((doc) => {
-            let car = doc.data();
-            car.id = doc.id;
-            cars.push(car);
-          });
-          this.allCars.push(...this.sortCars(cars));
-          this.allCars.unshift(...defaultData.cars);
-        });
-    },
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>
 .car-selector {
-  @include card-style();
-  grid-area: selector;
-  gap: 0 !important;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
 }
@@ -67,15 +58,13 @@ export default {
 select {
   font-weight: bold;
   font-style: italic;
-  border: none;
   background-color: $input-bg;
-  // border-radius: $border-radius / 1.5;
   appearance: none;
-  background-image: url('../assets/select-arrow.svg');
   background-repeat: no-repeat;
   border: 3px solid transparent;
-  height: 25px;
+  background-image: url('../assets/select-arrow.svg');
   padding: 2px 25px 2px 5px;
+  height: 25px;
   background-size: 18px;
   background-position: right 4px bottom 5px;
 
@@ -92,14 +81,15 @@ select {
     border: $input-focus-border;
   }
 }
+
 button {
   width: 100%;
   flex: 1;
   background-color: $input-bg;
   color: $black;
+  margin: 0;
   border: 3px solid transparent;
   padding: 0 5px;
-  margin: 0;
   appearance: none;
   height: 25px;
   font-size: 1rem;
@@ -110,27 +100,33 @@ button {
   }
 
   &:first-of-type {
-    border-radius: $border-radius / 1.5 0 0 $border-radius / 1.5;
+    border-radius: $border-radius-md 0 0 $border-radius-md;
+
     i {
       @media screen and (min-width: $size-small-tablet) {
         transform: rotate(180deg);
       }
+
       @media screen and (min-width: $size-desktop) {
         transform: rotate(-90deg);
       }
     }
   }
+
   &:last-of-type {
-    border-radius: 0 $border-radius / 1.5 $border-radius / 1.5 0;
+    border-radius: 0 $border-radius-md $border-radius-md 0;
+
     i {
       @media screen and (min-width: $size-desktop) {
         transform: rotate(-90deg);
       }
     }
   }
+
   &:disabled {
     opacity: 0.5;
   }
+
   &:not(:disabled):focus,
   &:not(:disabled):hover {
     border: $input-focus-border;

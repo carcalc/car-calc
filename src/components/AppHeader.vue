@@ -3,15 +3,9 @@
     <router-link :to="{ name: 'compare' }">
       <img class="app-logo" src="../assets/logo.svg" alt="CarCalc logo" />
     </router-link>
-    <p class="app-byline">Jämför snabbt och enkelt kostnaderna</p>
+    <p class="app-byline">Jämför snabbt och enkelt bilkostnader</p>
   </header>
 </template>
-
-<script>
-export default {
-  name: 'AppHeader',
-};
-</script>
 
 <style lang="scss" scoped>
 header {
@@ -40,6 +34,7 @@ header {
     top: 39px;
     left: 10px;
     font-size: 9px;
+
     @media screen and (min-width: $size-tablet) {
       position: initial;
       font-size: 1.22rem;

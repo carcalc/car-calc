@@ -1,102 +1,82 @@
 <template>
   <form class="usage-details" @submit.prevent>
     <InputBlockNumber
+      v-model.number="localValue.kwhPrice"
       title="Elpris"
       name="electricity-price"
       unit="kr/kWh"
       :step="0.01"
       :min="0"
-      :maxLength="5"
-      v-model.number="usage.kwhPrice"
+      :max-length="5"
     />
 
     <InputBlockNumber
+      v-model.number="localValue.gasPrice"
       title="Bensin/dieselpris"
       name="gas-price"
       unit="kr/l"
       :step="0.01"
       :min="0"
-      :maxLength="5"
-      v-model.number="usage.gasPrice"
+      :max-length="5"
     />
 
-    <InputBlockRange
-      :title="usage.distance / 10"
-      unit="mil per år"
-      name="distance"
-      :step="1000"
-      :min="5000"
-      :max="50000"
-      v-model.number="usage.distance"
-    />
+    <InputLabel :text="`${localValue.distance / 10} mil per år`">
+      <InputSlider v-model.number="localValue.distance" :step="1000" :min="5000" :max="50000" />
+    </InputLabel>
 
-    <InputBlockRange
-      :title="usage.ownership"
-      unit="års ägande"
-      name="years"
-      :step="1"
-      :min="1"
-      :max="20"
-      v-model.number="usage.ownership"
-    />
+    <InputLabel :text="`${localValue.ownership} års ägande`">
+      <InputSlider v-model.number="localValue.ownership" :step="1" :min="1" :max="20" />
+    </InputLabel>
   </form>
 </template>
 
-<script>
-import InputBlockNumber from '@/components/InputBlockNumber';
-import InputBlockRange from '@/components/InputBlockRange';
+<script lang="ts">
+import { defineComponent } from 'vue';
 
-export default {
+import InputBlockNumber from '@/components/InputBlockNumber.vue';
+import InputLabel from '@/components/InputLabel.vue';
+import InputSlider from '@/components/InputSlider.vue';
+
+export default defineComponent({
   name: 'UsageDetails',
-  components: { InputBlockRange, InputBlockNumber },
-  props: { usageDetails: { type: Object, required: true } },
+  components: { InputLabel, InputSlider, InputBlockNumber },
+  props: { modelValue: { type: Object, required: true } },
+  emits: ['update:modelValue'],
   data() {
-    return { usage: this.usageDetails };
+    return { localValue: { ...this.modelValue } };
   },
-  updated() {
-    localStorage.setItem('usage', JSON.stringify(this.usageDetails));
+  watch: {
+    localValue: {
+      handler() {
+        this.$emit('update:modelValue', this.localValue);
+      },
+      deep: true,
+    },
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>
 .usage-details {
-  @include card-style();
-  padding-bottom: 1.5rem;
-  grid-area: usage;
   display: grid;
+  gap: $gutter-sm;
   grid-template-areas:
     'electricity gas'
     'distance years';
 
   @media screen and (min-width: $size-tablet) {
-    // Tablet layout
+    gap: $gutter-lg;
     grid-template-columns: repeat(4, 1fr);
     grid-template-areas: 'electricity gas distance years';
   }
+
   @media screen and (min-width: $size-desktop) {
-    // Desktop layout
     grid-template-columns: 1fr;
     grid-template-areas:
       'electricity'
       'gas'
       'distance'
       'years';
-  }
-}
-
-.input-block {
-  &.gas-price {
-    grid-area: gas;
-  }
-  &.electricity-price {
-    grid-area: electricity;
-  }
-  &.distance {
-    grid-area: distance;
-  }
-  &.years {
-    grid-area: years;
   }
 }
 </style>

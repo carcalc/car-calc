@@ -4,8 +4,8 @@ html {
 }
 
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: inherit;
 }
 
@@ -20,6 +20,6 @@ p,
 ol,
 ul {
   margin: 0;
-  padding: 0;
   line-height: 1.5;
+  padding: 0;
 }
