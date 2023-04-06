@@ -5,7 +5,7 @@
 
     <router-view v-slot="{ Component }">
       <transition appear name="bounce">
-        <component :is="Component"/>
+        <component :is="Component" />
       </transition>
     </router-view>
 
@@ -13,7 +13,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import AppFooter from '@/components/AppFooter.vue';
 import AppHeader from '@/components/AppHeader.vue';
 import AppNav from '@/components/AppNav.vue';
